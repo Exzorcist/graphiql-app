@@ -18,12 +18,11 @@
     "noImplicitAny": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"]
+    "types": ["node", "vitest/globals"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": [
-    ".eslintrc.cjs",
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
+  "include": [".eslintrc.cjs", "src/**/*.ts", "src/**/*.tsx", "./setupTests.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
