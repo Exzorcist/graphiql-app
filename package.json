@@ -13,20 +13,26 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
+  "lint-staged": {
+    "**/*.{ts,tsx}": "eslint --fix",
+    "**/*.{tsx,ts,css,json,md,svg}": "prettier --write"
+  },
   "dependencies": {
-    "@types/codemirror": "^5.60.15",
+    "@uiw/react-codemirror": "^4.21.21",
+    "clsx": "^2.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
+    "@types/codemirror": "^5.60.15",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
-    "@uiw/react-codemirror": "^4.21.21",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.0.3",
     "autoprefixer": "^10.4.16",
@@ -42,6 +48,7 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "husky": "^8.0.3",
     "jsdom": "^23.0.1",
+    "lint-staged": "^15.2.0",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
     "react-query": "^3.39.3",
