@@ -6,7 +6,6 @@ const config = {
   trailingComma: 'es5',
   printWidth: 100,
   arrowParens: 'always',
-  plugins: ['prettier-plugin-tailwindcss'],
 };
 
 module.exports = config;
