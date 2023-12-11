@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --theme-border-color: #40414d;
+  --focus-border: #bcbdbd;
+  --separator-border: var(--theme-border-color);
+}
