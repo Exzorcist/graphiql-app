@@ -1,20 +1,29 @@
-import CodeMirror from '@uiw/react-codemirror';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
+
+import Root from './layout/Root';
+import Welcome from './pages/Welcome';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
+import NotFound from './pages/NotFound';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route path="/welcome" element={<Welcome />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/registration" element={<Registration />} />
+      <Route path="*" element={<NotFound />} />
+    </Route>
+  )
+);
 
 function App() {
-  return (
-    <>
-      <h1 className="block text-xl text-red-600">Empty base page</h1>
-      <div className="absolute bottom-40 left-20 right-20 top-20 text-left">
-        <CodeMirror
-          value="Test code mirror text"
-          onChange={() => {
-            // editor, data - these are function parameters
-            // console.log(editor, data);
-          }}
-        />
-      </div>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
