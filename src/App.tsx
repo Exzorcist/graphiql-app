@@ -1,20 +1,26 @@
-import CodeMirror from '@uiw/react-codemirror';
+/* eslint-disable import/no-extraneous-dependencies */
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
+import MainPage from './components/Main/MainPage';
+import SignUp from './components/Login/SignUp';
+import SignIn from './components/Login/SignIn';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signin" element={<SignIn />} />
+    </Route>
+  )
+);
 
 function App() {
-  return (
-    <>
-      <h1 className="block text-xl text-red-600">Empty base page</h1>
-      <div className="absolute bottom-40 left-20 right-20 top-20 text-left">
-        <CodeMirror
-          value="Test code mirror text"
-          onChange={() => {
-            // editor, data - these are function parameters
-            // console.log(editor, data);
-          }}
-        />
-      </div>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
