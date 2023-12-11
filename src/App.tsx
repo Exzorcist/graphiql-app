@@ -5,11 +5,11 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import Root from './layout/Root';
-import Welcome from './pages/Welcome';
-import Login from './pages/Login';
-import Registration from './pages/Registration';
-import NotFound from './pages/NotFound';
+import Root from '@/layout/Root';
+import Welcome from '@/pages/Welcome';
+import Login from '@/pages/Login';
+import Registration from '@/pages/Registration';
+import NotFound from '@/pages/NotFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
