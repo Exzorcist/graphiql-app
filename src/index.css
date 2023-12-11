@@ -4,6 +4,9 @@
 
 :root {
   --theme-border-color: #40414d;
-  --focus-border: #bcbdbd;
-  --separator-border: var(--theme-border-color);
+}
+
+body {
+  color: white;
+  font-family: 'Roboto', sans-serif;
 }

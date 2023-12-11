@@ -1,0 +1,28 @@
+import { ComponentProps, useEffect } from 'react';
+import { cn } from '@/utils';
+import { useEditorContext, useEditorContainerContext } from './hooks';
+import { DEFAULT_HEADER_HEIGHT } from './constants';
+
+type Props = {
+  size?: number;
+} & ComponentProps<'div'>;
+
+function EditorHeader({ children, size = DEFAULT_HEADER_HEIGHT, className }: Props) {
+  const { background } = useEditorContext();
+  const { header } = useEditorContainerContext();
+
+  useEffect(() => {
+    header.set(true);
+  }, [header]);
+
+  return (
+    <div
+      className={cn('w-full absolute top-0 left-0 px-4 flex items-center', className)}
+      style={{ backgroundColor: background, height: size }}
+    >
+      {children}
+    </div>
+  );
+}
+
+export default EditorHeader;
