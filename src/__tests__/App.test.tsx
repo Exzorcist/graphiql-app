@@ -3,5 +3,5 @@ import App from '@/App';
 
 test('App', () => {
   render(<App />);
-  expect(screen.getByText('Empty base page')).toBeInTheDocument();
+  expect(screen.getByText('This is a header')).toBeInTheDocument();
 });
