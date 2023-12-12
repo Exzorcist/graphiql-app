@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --theme-border-color: #40414d;
+@layer base {
+  :root {
+    --editor-primary-color: #282a36;
+    --editor-border-color: #40414d;
+    --editor-right-pane-color: #303240;
+    --splitter-hover-color: #bcbdbd;
+  }
 }
 
 body {

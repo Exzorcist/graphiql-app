@@ -1,6 +1,7 @@
 import LeftPane from './LeftPane/LeftPane';
 import RightPane from './RightPane/RightPane';
 import Splitter from '../Splitter';
+import { twConfig } from '@/utils';
 
 const commmonPaneThemeSettings = {
   fontFamily: 'Fira Code, monospace',
@@ -11,14 +12,14 @@ const commmonPaneThemeSettings = {
 
 const leftPaneThemeSettings = {
   ...commmonPaneThemeSettings,
-  background: '#282A36',
+  background: twConfig.theme.colors['editor-primary'],
   gutterBackground: '#2C2E3B',
 };
 
 const rightPaneThemeSettings = {
   ...commmonPaneThemeSettings,
-  background: '#303240',
-  gutterBackground: '#303240',
+  background: twConfig.theme.colors['editor-right-pane'],
+  gutterBackground: twConfig.theme.colors['editor-right-pane'],
 };
 
 function QueryEditor() {

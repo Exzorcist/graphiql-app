@@ -6,7 +6,8 @@ import Splitter from '@/components/Splitter';
 import ToolsPanel from '../ToolsPanel/ToolsPanel';
 
 const headerHight = DEFAULT_EDITOR_HEADER_HEIGHT;
-const DEFAULT_SPLITTER_SIZES = [730, 200];
+const DEFAULT_SPLITTER_SIZES = [100, 30];
+const SPLITTER_DRAG_RESET_THRESHOLD = 10;
 
 type Props = {
   themeSettings?: Settings;
@@ -39,7 +40,9 @@ function LeftPane({ themeSettings }: Props) {
   );
 
   const handleSplitterDragEnd = useCallback((sizes: number[]) => {
-    setSplitterSavedSizes(sizes[1] > headerHight + 10 ? sizes : DEFAULT_SPLITTER_SIZES);
+    setSplitterSavedSizes(
+      sizes[1] > headerHight + SPLITTER_DRAG_RESET_THRESHOLD ? sizes : DEFAULT_SPLITTER_SIZES
+    );
   }, []);
 
   return (
