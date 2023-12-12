@@ -1,13 +1,13 @@
 import { ComponentProps, useEffect } from 'react';
 import { cn } from '@/utils';
 import { useEditorContext, useEditorContainerContext } from './hooks';
-import { DEFAULT_HEADER_HEIGHT } from './constants';
+import { DEFAULT_EDITOR_HEADER_HEIGHT } from './constants';
 
 type Props = {
   size?: number;
 } & ComponentProps<'div'>;
 
-function EditorHeader({ children, size = DEFAULT_HEADER_HEIGHT, className }: Props) {
+function EditorHeader({ children, size = DEFAULT_EDITOR_HEADER_HEIGHT, className }: Props) {
   const { background } = useEditorContext();
   const { header } = useEditorContainerContext();
 

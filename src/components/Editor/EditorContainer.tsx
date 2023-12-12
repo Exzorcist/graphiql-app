@@ -1,6 +1,6 @@
 import { ComponentProps, createContext, useMemo, useState } from 'react';
 import { cn } from '@/utils';
-import { DEFAULT_HEADER_HEIGHT } from './constants';
+import { DEFAULT_EDITOR_HEADER_HEIGHT } from './constants';
 
 type Props = ComponentProps<'div'>;
 
@@ -17,17 +17,17 @@ export type EditorContainerContextType = {
 export const EditorContainerContext = createContext<EditorContainerContextType>({
   header: {
     visible: false,
-    height: DEFAULT_HEADER_HEIGHT,
+    height: DEFAULT_EDITOR_HEADER_HEIGHT,
     set: () => null,
   },
 });
 
 function EditorContainer({ children, className }: Props) {
   const [state, setState] = useState({
-    header: { visible: false, height: DEFAULT_HEADER_HEIGHT },
+    header: { visible: false, height: DEFAULT_EDITOR_HEADER_HEIGHT },
   });
 
-  const setHeader: SetHeader = (visible, height = DEFAULT_HEADER_HEIGHT) => {
+  const setHeader: SetHeader = (visible, height = DEFAULT_EDITOR_HEADER_HEIGHT) => {
     setState((prev) => ({ ...prev, header: { visible, height } }));
   };
 
