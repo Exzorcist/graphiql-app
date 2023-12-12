@@ -1,7 +1,7 @@
-import { useLocalizationtContext } from '@/provider/LocalizationProvider';
+import { useLocalizationContext } from '@/provider/LocalizationProvider';
 
 function NotFound() {
-  const { i18nQL, lang, setLang } = useLocalizationtContext();
+  const { i18nQL, lang, setLang } = useLocalizationContext();
 
   return (
     <div className="flex flex-col justify-center px-5 py-20 min-h-[85vh] text-center text-[#d60590]">
