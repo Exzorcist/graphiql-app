@@ -6,7 +6,7 @@ type Props = {
 };
 
 function RightPane({ themeSettings }: Props) {
-  return <Editor themeSettings={themeSettings} />;
+  return <Editor themeSettings={themeSettings} className="border-editor-border border-t" />;
 }
 
 export default RightPane;

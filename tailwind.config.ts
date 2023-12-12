@@ -5,8 +5,8 @@ export default {
     extend: {
       colors: {
         'editor-primary': 'var(--editor-primary-color)',
+        'editor-secondary': 'var(--editor-secondary-color)',
         'editor-border': 'var(--editor-border-color)',
-        'editor-right-pane': 'var(--editor-right-pane-color)',
       },
     },
   },

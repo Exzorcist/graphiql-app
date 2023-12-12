@@ -5,8 +5,8 @@
 @layer base {
   :root {
     --editor-primary-color: #282a36;
+    --editor-secondary-color: #303240;
     --editor-border-color: #40414d;
-    --editor-right-pane-color: #303240;
     --splitter-hover-color: #bcbdbd;
   }
 }

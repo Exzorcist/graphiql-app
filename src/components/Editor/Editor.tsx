@@ -3,15 +3,20 @@ import { Settings } from '@uiw/codemirror-themes';
 import EditorArea from './EditorArea';
 import EditorHeader from './EditorHeader';
 import EditorContainer from './EditorContainer';
+import { cn } from '@/utils';
 
 type Props = PropsWithChildren<ComponentProps<typeof EditorArea>>;
 
 export const EditorContext = createContext<Settings | null>(null);
 
-function Editor({ children, themeSettings = {}, ...delegated }: Props) {
+function Editor({ children, className, themeSettings = {}, ...delegated }: Props) {
   return (
     <EditorContext.Provider value={themeSettings ?? null}>
-      {children ?? <EditorArea themeSettings={themeSettings} {...delegated} />}
+      {children ? (
+        <div className={cn('h-full w-full', className)}>{children}</div>
+      ) : (
+        <EditorArea themeSettings={themeSettings} className={className} {...delegated} />
+      )}
     </EditorContext.Provider>
   );
 }

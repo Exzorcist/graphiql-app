@@ -2,6 +2,7 @@ import LeftPane from './LeftPane/LeftPane';
 import RightPane from './RightPane/RightPane';
 import Splitter from '../Splitter';
 import { twConfig } from '@/utils';
+import EndpointField from './EndpointField';
 
 const commmonPaneThemeSettings = {
   fontFamily: 'Fira Code, monospace',
@@ -18,13 +19,16 @@ const leftPaneThemeSettings = {
 
 const rightPaneThemeSettings = {
   ...commmonPaneThemeSettings,
-  background: twConfig.theme.colors['editor-right-pane'],
-  gutterBackground: twConfig.theme.colors['editor-right-pane'],
+  background: twConfig.theme.colors['editor-secondary'],
+  gutterBackground: twConfig.theme.colors['editor-secondary'],
 };
 
 function QueryEditor() {
   return (
-    <div className="h-screen">
+    <div className="h-screen flex flex-col">
+      <div className="bg-editor-primary px-4 py-5">
+        <EndpointField />
+      </div>
       <Splitter>
         <LeftPane themeSettings={leftPaneThemeSettings} />
         <RightPane themeSettings={rightPaneThemeSettings} />
