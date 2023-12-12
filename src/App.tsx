@@ -1,20 +1,23 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import MainPage from './components/Main/MainPage';
-import SignUp from './components/Login/SignUp';
-import SignIn from './components/Login/SignIn';
+
+import Root from '@/layout/Root';
+import Welcome from '@/pages/Welcome';
+import Login from '@/pages/Login';
+import Registration from '@/pages/Registration';
+import NotFound from '@/pages/NotFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signin" element={<SignIn />} />
+    <Route path="/" element={<Root />}>
+      <Route path="/welcome" element={<Welcome />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/registration" element={<Registration />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
