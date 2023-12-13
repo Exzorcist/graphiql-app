@@ -55,6 +55,7 @@ module.exports = {
       'never',
       {
         json: 'always',
+        svg: 'always',
       },
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
