@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react';
 import { cn } from '@/utils';
+import Button from '../Button';
 
 type Props = ComponentProps<'form'>;
 
@@ -13,12 +14,9 @@ function EndpointField({ className, ...delegated }: Props) {
       {...delegated}
     >
       <input className="w-full h-full bg-transparent outline-none pl-4" placeholder="Enter URL" />
-      <button
-        type="submit"
-        className="bg-editor-accent hover:bg-editor-accent-light min-w-fit px-5 rounded-r transition"
-      >
+      <Button type="submit" variant="solid" className="px-5 rounded-none rounded-r">
         Send Request
-      </button>
+      </Button>
     </form>
   );
 }

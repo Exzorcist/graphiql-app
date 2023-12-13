@@ -11,7 +11,7 @@ type Props = {
 } & ComponentPropsWithRef<typeof CodeMirror>;
 
 const styleOverrides = EditorView.theme({
-  '&': { fontSize: '16px' },
+  '&': { fontSize: 'var(--editor-code-font-size)' },
   '&.cm-focused': { outline: '2px solid transparent', outlineOffset: '2px' },
   '.cm-lineNumbers': { minWidth: '28px' },
 });
