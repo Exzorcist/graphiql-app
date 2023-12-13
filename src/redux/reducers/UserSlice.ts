@@ -1,14 +1,15 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { createSlice } from '@reduxjs/toolkit';
 
 type IUser = {
   email: string | null;
   id: string | null;
+  isAuth: boolean;
 };
 
 const initialState: IUser = {
   email: null,
   id: null,
+  isAuth: false,
 };
 
 const userSlice = createSlice({
@@ -18,10 +19,12 @@ const userSlice = createSlice({
     setUser(state, action) {
       state.email = action.payload.email;
       state.id = action.payload.id;
+      state.isAuth = action.payload.isAuth;
     },
     removeUser(state) {
       state.email = null;
       state.id = null;
+      state.isAuth = false;
     },
   },
 });

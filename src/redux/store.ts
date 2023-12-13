@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './reducers/UserSlice.ts';
+import userReducer from './reducers/UserSlice';
 
 const rootReducer = combineReducers({ userReducer });
 
