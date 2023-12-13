@@ -54,7 +54,6 @@ module.exports = {
       'error',
       'never',
       {
-        ts: 'always',
         json: 'always',
       },
     ],
