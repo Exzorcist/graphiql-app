@@ -1,10 +1,14 @@
+import engJson from '@/json/eng.json';
+import ruJson from '@/json/ru.json';
+import byJson from '@/json/by.json';
+
 export interface ILocalizationProvider {
   lang: Language;
   setLang: (lang: Language) => void;
   i18nQL: {
-    eng: { [key: string]: { [key: string]: { [key: string]: string } } };
-    ru: { [key: string]: { [key: string]: { [key: string]: string } } };
-    by: { [key: string]: { [key: string]: { [key: string]: string } } };
+    eng: typeof engJson;
+    ru: typeof ruJson;
+    by: typeof byJson;
   };
 }
 
