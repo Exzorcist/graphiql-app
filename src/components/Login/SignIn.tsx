@@ -3,7 +3,7 @@ import SignForm from './SignForm';
 
 function SignIn() {
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="flex items-center justify-center align-center mt-20">
       <SignForm
         questionForLink="Don`t have an account? 👉"
         textForLink="Create an account"
