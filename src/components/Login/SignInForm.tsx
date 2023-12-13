@@ -2,24 +2,24 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { Inputs } from '@/types/types';
 import { schema } from '@/utils/schemas/schema';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { setUser } from '@/redux/reducers/UserSlice';
 
-function SignUpForm() {
+function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  function handleRegister(emailUser: string, passwordUser: string) {
+  function handleLogin(emailUser: string, passwordUser: string) {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, emailUser, passwordUser)
+    signInWithEmailAndPassword(auth, emailUser, passwordUser)
       .then(({ user }) => {
-        console.log('Registration was done with success');
+        console.log('login was done with success');
         dispatch(
           setUser({
             email: user.email,
@@ -41,7 +41,7 @@ function SignUpForm() {
   });
 
   const onSubmit: SubmitHandler<Inputs> = () => {
-    handleRegister(email, password);
+    handleLogin(email, password);
     console.log('submit done');
   };
 
@@ -49,7 +49,7 @@ function SignUpForm() {
     <div>
       <section id="content" className="flex w-auto text-center">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590]">SignUp</h1>
+          <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590]">SignIn</h1>
           <div className="w-96">
             <label htmlFor="useremail" />
             <input
@@ -103,17 +103,17 @@ function SignUpForm() {
           <div className="mb-5">
             <span className="text-sm">
               {' '}
-              Do you have an account? 👉{' '}
-              <Link to="/login" className="text-sm underline">
+              Don`t have an account? 👉{' '}
+              <Link to="/registration" className="text-sm underline">
                 {' '}
-                Sign In{' '}
+                Create an account{' '}
               </Link>
             </span>
           </div>
           <input
             type="submit"
             disabled={!isValid}
-            value="Create an account"
+            value="Login"
             className="focus:outline-none disabled:bg-slate-300 text-white bg-[#d60590]  hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
           />
         </form>
@@ -121,4 +121,4 @@ function SignUpForm() {
     </div>
   );
 }
-export default SignUpForm;
+export default SignInForm;

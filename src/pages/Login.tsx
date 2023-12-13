@@ -1,11 +1,7 @@
-import SignUp from '@/components/Login/SignUp';
+import SignIn from '@/components/Login/SignIn';
 
 function Login() {
-  return (
-    <div>
-      <SignUp />
-    </div>
-  );
+  return <SignIn />;
 }
 
 export default Login;
