@@ -1,7 +1,7 @@
-import QueryEditor from './components/QueryEditor/QueryEditor';
+import GraphQLEditor from './components/GraphQLEditor/GraphQLEditor';
 
 function App() {
-  return <QueryEditor />;
+  return <GraphQLEditor />;
 }
 
 export default App;

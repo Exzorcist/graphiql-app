@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'editor-primary': 'var(--editor-primary-color)',
-        'editor-secondary': 'var(--editor-secondary-color)',
-        'editor-border': 'var(--editor-border-color)',
-        'editor-accent': 'var(--editor-accent-color)',
-        'editor-accent-light': 'var(--editor-accent-light-color)',
+        'editor-primary': 'rgb(var(--editor-primary-color) / <alpha-value>)',
+        'editor-secondary': 'rgb(var(--editor-secondary-color) / <alpha-value>)',
+        'editor-border': 'rgb(var(--editor-border-color) / <alpha-value>)',
+        'editor-accent': 'rgb(var(--editor-accent-color) / <alpha-value>)',
+        'editor-accent-light': 'rgb(var(--editor-accent-light-color) / <alpha-value>)',
       },
     },
   },

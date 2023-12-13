@@ -5,8 +5,8 @@ type Props = {
   themeSettings?: Settings;
 };
 
-function RightPane({ themeSettings }: Props) {
+function ResponsePanel({ themeSettings }: Props) {
   return <Editor themeSettings={themeSettings} />;
 }
 
-export default RightPane;
+export default ResponsePanel;

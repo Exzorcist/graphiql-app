@@ -8,6 +8,7 @@ type Props = {
 const buttonStyle = {
   base: 'py-[5px] px-2 hover:bg-editor-secondary hover:text-editor-accent transition rounded min-w-fit',
   variant: {
+    accented: 'hover:bg-editor-accent/[.15]',
     active: 'bg-editor-secondary text-editor-accent',
     solid: 'bg-editor-accent hover:bg-editor-accent-light hover:text-inherit',
   },

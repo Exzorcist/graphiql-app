@@ -16,7 +16,7 @@ const Splitter = forwardRef<AllotmentHandle, Props>(({ className, ...delegated }
   return (
     <Allotment
       className={cn(
-        '[--focus-border:--splitter-hover-color] [--separator-border:--editor-border-color] [--sash-hover-size:2px]',
+        '[--focus-border:--splitter-hover-color] [--separator-border:rgb(var(--editor-border-color))] [--sash-hover-size:2px]',
         className
       )}
       ref={ref}

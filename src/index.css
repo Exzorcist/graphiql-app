@@ -4,21 +4,34 @@
 
 @layer base {
   :root {
-    --editor-primary-color: rgb(40, 42, 54);
-    --editor-secondary-color: rgb(48, 50, 64);
-    --editor-border-color: rgb(65, 66, 78);
-    --editor-accent-color: rgb(100, 203, 41);
-    --editor-accent-light-color: rgb(131, 213, 84);
-    --editor-text-color: rgb(248, 248, 242);
+    --editor-primary-color: 40 42 54;
+    --editor-secondary-color: 48 50 64;
+    --editor-border-color: 65 66 78;
+    --editor-accent-color: 100 203 41;
+    --editor-accent-light-color: 131 213 84;
+    --editor-text-color: 248 248 242;
+    --editor-line-numbers-color: 108 108 108;
+    --editor-gutter-color: 44 46 59;
     --editor-font-family: 'Roboto', sans-serif;
-    --editor-code-font-size: 16px;
     --editor-code-font-family: 'Fira Code', monospace;
-    --splitter-hover-color: var(--editor-accent-color);
-    --editor-pane-header-height: 0px;
+    --editor-code-font-size: 16px;
+    --editor-code-selection-color: 215 212 240;
+    --splitter-hover-color: rgb(var(--editor-accent-color));
   }
 
   body {
-    color: var(--editor-text-color);
+    color: rgb(var(--editor-text-color));
     font-family: var(--editor-font-family);
+  }
+
+  .split-view.split-view-sash-dragging .animated-pane {
+    transition: none;
+  }
+}
+
+@layer components {
+  .animated-pane {
+    transition: all 0.15s ease-in-out;
+    will-change: width;
   }
 }
