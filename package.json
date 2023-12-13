@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": "eslint --fix",
-    "**/*.{tsx,ts,css,json,md,svg}": "prettier --write"
+    "**/*.{tsx,ts,css,json,md}": "prettier --write"
   },
   "dependencies": {
     "@uiw/react-codemirror": "^4.21.21",
