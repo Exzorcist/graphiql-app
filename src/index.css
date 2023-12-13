@@ -4,10 +4,12 @@
 
 @layer base {
   :root {
-    --editor-primary-color: #282a36;
-    --editor-secondary-color: #303240;
-    --editor-border-color: #40414d;
-    --splitter-hover-color: #bcbdbd;
+    --editor-primary-color: rgb(40, 42, 54);
+    --editor-secondary-color: rgb(48, 50, 64);
+    --editor-border-color: rgb(65, 66, 78);
+    --editor-accent-color: rgb(100, 203, 41);
+    --editor-accent-light-color: rgb(131, 213, 84);
+    --splitter-hover-color: var(--editor-accent-color);
   }
 }
 

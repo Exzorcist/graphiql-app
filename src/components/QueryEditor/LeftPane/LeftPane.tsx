@@ -46,7 +46,7 @@ function LeftPane({ themeSettings }: Props) {
   }, []);
 
   return (
-    <Editor themeSettings={themeSettings} className="border-editor-border border-t">
+    <Editor themeSettings={themeSettings}>
       <Splitter
         onDragEnd={handleSplitterDragEnd}
         onChange={handleSplitterChange}

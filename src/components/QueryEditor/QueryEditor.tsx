@@ -3,6 +3,7 @@ import RightPane from './RightPane/RightPane';
 import Splitter from '../Splitter';
 import { twConfig } from '@/utils';
 import EndpointField from './EndpointField';
+import SideBar from './SideBar';
 
 const commmonPaneThemeSettings = {
   fontFamily: 'Fira Code, monospace',
@@ -25,14 +26,17 @@ const rightPaneThemeSettings = {
 
 function QueryEditor() {
   return (
-    <div className="h-screen flex flex-col">
-      <div className="bg-editor-primary px-4 py-5">
-        <EndpointField />
+    <div className="flex h-screen">
+      <SideBar />
+      <div className="h-full flex w-full flex-col">
+        <div className="bg-editor-primary px-4 py-5 border-editor-border border-b">
+          <EndpointField />
+        </div>
+        <Splitter>
+          <LeftPane themeSettings={leftPaneThemeSettings} />
+          <RightPane themeSettings={rightPaneThemeSettings} />
+        </Splitter>
       </div>
-      <Splitter>
-        <LeftPane themeSettings={leftPaneThemeSettings} />
-        <RightPane themeSettings={rightPaneThemeSettings} />
-      </Splitter>
     </div>
   );
 }

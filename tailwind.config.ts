@@ -7,6 +7,8 @@ export default {
         'editor-primary': 'var(--editor-primary-color)',
         'editor-secondary': 'var(--editor-secondary-color)',
         'editor-border': 'var(--editor-border-color)',
+        'editor-accent': 'var(--editor-accent-color)',
+        'editor-accent-light': 'var(--editor-accent-light-color)',
       },
     },
   },
