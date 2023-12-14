@@ -8,6 +8,7 @@ import { InfoForm, Inputs } from '@/types/Form';
 import { schema } from '@/utils/schemas/schema';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { setUser } from '@/redux/reducers/UserSlice';
+import { useLocalizationContext } from '@/provider/LocalizationProvider';
 
 function SignUpForm({
   questionForLink,
@@ -47,7 +48,7 @@ function SignUpForm({
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Inputs>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(useLocalizationContext())),
     mode: 'onBlur',
   });
 

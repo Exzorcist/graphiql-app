@@ -3,5 +3,24 @@
     "notfound": {
       "text": "Sorry, page not found!"
     }
+  },
+
+  "validation": {
+    "email": {
+      "format": "Invalid email format",
+      "required": "This field is required"
+    },
+    "password": {
+      "required": "This field is required",
+      "number": "Password must contain at least 1 number",
+      "uppercase": "Password must contain at least 1 uppercase letter",
+      "lowercase": "Password must contain at least 1 lowercase letter",
+      "special": "Password must contain at least 1 special character",
+      "minlength": "Password must be at least 8 characters long"
+    },
+    "confirmPassword": {
+      "required": "Please confirm your password",
+      "match": "Passwords must match"
+    }
   }
 }

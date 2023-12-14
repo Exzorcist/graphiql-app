@@ -1,26 +1,25 @@
 import * as yup from 'yup';
+import { ILocalizationProvider } from '@/types/Provider';
 
-export const schema = yup
-  .object()
-  .shape({
+export const schema = ({ i18nQL, lang }: ILocalizationProvider) => {
+  return yup.object().shape({
     email: yup
       .string()
-      .email("email should be correct (use '@')")
-      .required('This field is required'),
+      .email(i18nQL[lang].validation.email.format)
+      .required(i18nQL[lang].validation.email.required),
+
     password: yup
       .string()
-      .required('This field is required')
-      .min(8, 'minimum 8 symbols')
-      .matches(
-        /[.:,;?!@#$%^&*_\-+=]/,
-        "The password must contain at least one special character ('.:,;?!@#$%^&*_-+=')!"
-      )
-      .matches(/[A-ZА-Я]/, 'The password must contain at least one Сapital letter!')
-      .matches(/[a-zа-я]/, 'The password must contain at least one lowercase letter!')
-      .matches(/\d/, 'The password must contain at least one number!'),
+      .required(i18nQL[lang].validation.password.required)
+      .matches(/\d/, i18nQL[lang].validation.password.number)
+      .matches(/[A-ZА-Я]/, i18nQL[lang].validation.password.uppercase)
+      .matches(/[a-zа-я]/, i18nQL[lang].validation.password.lowercase)
+      .matches(/[.:,;?!@#$%^&*_\-+=]/, i18nQL[lang].validation.password.special)
+      .min(8, i18nQL[lang].validation.password.minlength),
+
     confirmPassword: yup
       .string()
-      .required('Please confirm your password')
-      .oneOf([yup.ref('password'), ''], 'Passwords must match'),
-  })
-  .required();
+      .required(i18nQL[lang].validation.confirmPassword.required)
+      .oneOf([yup.ref('password'), ''], i18nQL[lang].validation.confirmPassword.match),
+  });
+};
