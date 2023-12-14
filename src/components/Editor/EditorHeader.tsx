@@ -1,4 +1,4 @@
-import { ComponentProps, useEffect } from 'react';
+import { ComponentProps, memo, useEffect } from 'react';
 import { cn } from '@/utils';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from './constants';
@@ -25,4 +25,4 @@ function EditorHeader({ children, size = DEFAULT_EDITOR_HEADER_HEIGHT, className
   );
 }
 
-export default EditorHeader;
+export default memo(EditorHeader);

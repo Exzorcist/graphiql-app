@@ -1,4 +1,4 @@
-import { ComponentProps, createContext, useMemo, useState } from 'react';
+import { ComponentProps, createContext, memo, useMemo, useState } from 'react';
 import { cn } from '@/utils';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from './constants';
 
@@ -44,4 +44,4 @@ function EditorContainer({ children, className }: Props) {
   );
 }
 
-export default EditorContainer;
+export default memo(EditorContainer);

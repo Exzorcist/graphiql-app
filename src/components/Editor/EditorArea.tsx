@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, forwardRef } from 'react';
+import { ComponentPropsWithRef, forwardRef, memo } from 'react';
 import CodeMirror, { EditorView, ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { Settings } from '@uiw/codemirror-themes';
 import { draculaInit } from '@uiw/codemirror-theme-dracula';
@@ -35,4 +35,4 @@ const EditorArea = forwardRef<ReactCodeMirrorRef, Props>(
   }
 );
 
-export default EditorArea;
+export default memo(EditorArea);

@@ -22,6 +22,7 @@
   body {
     color: rgb(var(--editor-text-color));
     font-family: var(--editor-font-family);
+    background-color: rgb(var(--editor-primary-color));
   }
 
   .split-view.split-view-sash-dragging .animated-pane {
@@ -34,4 +35,8 @@
     transition: all 0.15s ease-in-out;
     will-change: width;
   }
+}
+
+.docs-sash.sash-maximum {
+  display: none !important;
 }
