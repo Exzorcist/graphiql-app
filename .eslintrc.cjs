@@ -60,14 +60,14 @@ module.exports = {
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/prefer-default-export': 'off',
-    //////// Without it I can't redefine state ///////////////////////////////////////////////////////
+    // TODO: Without it I can't redefine state
     'no-param-reassign': ['error', {
       props: true,
       ignorePropertyModificationsFor: [
         'state',
       ]
     }],
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================
   },
   ignorePatterns: ['dist', 'vite.config.ts'],
 };
