@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {

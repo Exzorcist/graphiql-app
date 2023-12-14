@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-type IUser = {
-  email: string | null;
-  id: string | null;
-  isAuth: boolean;
-};
+import { IUser } from '@/types/Form';
 
 const initialState: IUser = {
   email: null,

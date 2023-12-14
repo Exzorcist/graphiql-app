@@ -60,7 +60,7 @@ module.exports = {
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/prefer-default-export': 'off',
-    //////// Без этого я не могла переопределить стейт ///////////////////////////////////////////////////////
+    //////// Without it I can't redefine state ///////////////////////////////////////////////////////
     'no-param-reassign': ['error', {
       props: true,
       ignorePropertyModificationsFor: [
