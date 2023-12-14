@@ -22,7 +22,7 @@ function GraphQLToolsHeader({
     <div className={cn('flex gap-6 w-full', className)}>
       <Button onClick={onVariablesClick}>Variables</Button>
       <Button onClick={onHeadersclick}>Headers</Button>
-      <Button className="ml-auto" onClick={onChevronClick}>
+      <Button className="ml-auto" onClick={onChevronClick} as="div">
         <ChevronUpIcon className={cn('h-6 w-6', isOpen && 'rotate-180')} />
       </Button>
     </div>

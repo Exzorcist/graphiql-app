@@ -8,7 +8,8 @@ import ToolsPanel from '../ToolsPanel/ToolsPanel';
 import { cn } from '@/utils';
 
 const headerHight = DEFAULT_EDITOR_HEADER_HEIGHT;
-const DEFAULT_SPLITTER_SIZES = [100, 30];
+const DEFAULT_PANES_CLOSED_SIZES = [100, 0];
+const DEFAULT_PANES_OPEN_SIZES = [200, 100];
 const SPLITTER_DRAG_RESET_THRESHOLD = 10;
 
 type Props = {
@@ -17,16 +18,20 @@ type Props = {
 
 function QueryEditor({ themeSettings }: Props) {
   const splitterRef = useRef<AllotmentHandle | null>(null);
-  const [splitterSavedSizes, setSplitterSavedSizes] = useState(DEFAULT_SPLITTER_SIZES);
+  const savedSizesRef = useRef(DEFAULT_PANES_OPEN_SIZES);
   const [toolsPanelIsOpen, setToolsPaneIsOpen] = useState(false);
+  const [shouldAnimatePanes, setShouldAnimatePanes] = useState(false);
+  const nodeRef = useRef<HTMLDivElement | null>(null);
 
   const handleChevronClick = useCallback(() => {
+    setShouldAnimatePanes(true);
+
     if (toolsPanelIsOpen) {
       splitterRef.current?.reset();
     } else {
-      splitterRef.current?.resize(splitterSavedSizes);
+      splitterRef.current?.resize(savedSizesRef.current);
     }
-  }, [toolsPanelIsOpen, splitterSavedSizes]);
+  }, [toolsPanelIsOpen]);
 
   const handleSplitterChange = useCallback(
     (sizes: number[]) => {
@@ -42,36 +47,44 @@ function QueryEditor({ themeSettings }: Props) {
   );
 
   const handleSplitterDragEnd = useCallback((sizes: number[]) => {
-    setSplitterSavedSizes(
-      sizes[1] > headerHight + SPLITTER_DRAG_RESET_THRESHOLD ? sizes : DEFAULT_SPLITTER_SIZES
-    );
+    savedSizesRef.current =
+      sizes[1] > headerHight + SPLITTER_DRAG_RESET_THRESHOLD ? sizes : DEFAULT_PANES_OPEN_SIZES;
+  }, []);
+
+  const handleOnEntered = useCallback(() => {
+    setShouldAnimatePanes(false);
   }, []);
 
   return (
     <Editor themeSettings={themeSettings}>
-      <CSSTransition in={toolsPanelIsOpen} timeout={150}>
+      <CSSTransition
+        in={shouldAnimatePanes}
+        timeout={150}
+        onEntered={handleOnEntered}
+        nodeRef={nodeRef}
+      >
         {(state) => {
           return (
-            <Splitter
-              onDragEnd={handleSplitterDragEnd}
-              onChange={handleSplitterChange}
-              vertical
-              defaultSizes={[100, 0]}
-              ref={splitterRef}
-            >
-              <Splitter.Pane
-                className={cn(['entered', 'entering', 'exited'].includes(state) && 'animated-pane')}
+            <div className="w-full h-full" ref={nodeRef}>
+              <Splitter
+                defaultSizes={DEFAULT_PANES_CLOSED_SIZES}
+                onDragEnd={handleSplitterDragEnd}
+                onChange={handleSplitterChange}
+                ref={splitterRef}
+                vertical
               >
-                <Editor.Area />
-              </Splitter.Pane>
-              <Splitter.Pane
-                className={cn(['entered', 'entering', 'exited'].includes(state) && 'animated-pane')}
-                minSize={headerHight}
-                preferredSize={headerHight}
-              >
-                <ToolsPanel isOpen={toolsPanelIsOpen} onChevronClick={handleChevronClick} />
-              </Splitter.Pane>
-            </Splitter>
+                <Splitter.Pane className={cn(state === 'entering' && 'animated-pane')}>
+                  <Editor.Area />
+                </Splitter.Pane>
+                <Splitter.Pane
+                  className={cn(state === 'entering' && 'animated-pane')}
+                  minSize={headerHight}
+                  preferredSize={headerHight}
+                >
+                  <ToolsPanel isOpen={toolsPanelIsOpen} onChevronClick={handleChevronClick} />
+                </Splitter.Pane>
+              </Splitter>
+            </div>
           );
         }}
       </CSSTransition>
