@@ -12,14 +12,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action) {
-      state.email = action.payload.email;
-      state.id = action.payload.id;
-      state.isAuth = action.payload.isAuth;
+      return { ...state, ...action.payload };
     },
     removeUser(state) {
-      state.email = null;
-      state.id = null;
-      state.isAuth = false;
+      return { ...state, ...initialState };
     },
   },
 });
