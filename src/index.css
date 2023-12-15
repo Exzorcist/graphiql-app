@@ -25,18 +25,28 @@
     background-color: rgb(var(--editor-primary-color));
   }
 
-  .split-view.split-view-sash-dragging .animated-pane {
+  [data-panel-group]:has(> [data-resize-handle-active]) > .animated-panel {
     transition: none;
   }
 }
 
 @layer components {
-  .animated-pane {
-    transition: all 0.15s ease-in-out;
-    will-change: width;
+  .animated-panel {
+    transition: flex 0.15s ease-in-out;
+    will-change: flex;
   }
 }
 
-.docs-sash.sash-maximum {
-  display: none !important;
+@layer utilities {
+  .absolute-y-center {
+    @apply absolute top-1/2 -translate-y-1/2;
+  }
+
+  .absolute-x-center {
+    @apply absolute left-1/2 -translate-x-1/2;
+  }
+
+  .absolute-center {
+    @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
+  }
 }
