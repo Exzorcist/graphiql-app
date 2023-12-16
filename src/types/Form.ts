@@ -18,6 +18,7 @@ export type InfoForm = {
   title: string;
   buttonValue: string;
   path: string;
+  isLogin: boolean;
   functionForUserWithEmailAndPassword: (
     auth: Auth,
     emailUser: string,

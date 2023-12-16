@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { InfoForm, Inputs } from '@/types/Form';
 import { schema } from '@/utils/schemas/schema';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
@@ -16,6 +17,7 @@ function SignUpForm({
   title,
   buttonValue,
   path,
+  isLogin,
   functionForUserWithEmailAndPassword,
 }: InfoForm) {
   const [email, setEmail] = useState('');
@@ -23,6 +25,14 @@ function SignUpForm({
   const [isError, setIsError] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState({ isToggle: true });
+  const doTogglePassword = () => {
+    setShowPassword({ isToggle: !showPassword.isToggle });
+  };
+  const [showConfirmPassword, setShowConfirmPassword] = useState({ isToggle: true });
+  const doToggleConfirmPassword = () => {
+    setShowConfirmPassword({ isToggle: !showConfirmPassword.isToggle });
+  };
 
   function handleRegister(emailUser: string, passwordUser: string) {
     const auth = getAuth();
@@ -42,14 +52,13 @@ function SignUpForm({
         setIsError(true);
       });
   }
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Inputs>({
     resolver: yupResolver(schema(useLocalizationContext())),
-    mode: 'onBlur',
+    mode: 'onTouched',
   });
 
   const onSubmit: SubmitHandler<Inputs> = () => {
@@ -58,10 +67,12 @@ function SignUpForm({
 
   return (
     <div>
-      <section id="content" className="flex w-auto text-center">
+      <section id="content" className="flex text-center">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590]">{title}</h1>
-          <div className="w-96">
+          <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590] sm:text-center">
+            {title}
+          </h1>
+          <div className="sm:w-96">
             <input
               className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="email"
@@ -76,31 +87,76 @@ function SignUpForm({
               {errors.email && <span className="text-red-500"> {errors.email.message} </span>}
             </div>
           </div>
-          <div className="w-96">
+          <div className="sm:w-96 relative">
             <input
               className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               {...register('password')}
               placeholder="password"
+              type={showPassword.isToggle ? 'text' : 'password'}
               name="password"
               onChange={(e) => {
                 setPassword(e.currentTarget.value);
               }}
             />
+            {showPassword.isToggle && (
+              <button
+                type="button"
+                aria-label="button"
+                className="absolute bottom-12 right-3"
+                onClick={doTogglePassword}
+              >
+                <EyeIcon className="h-6 w-6 mx-1" />
+              </button>
+            )}
+            {!showPassword.isToggle && (
+              <button
+                type="button"
+                aria-label="button"
+                className="absolute bottom-12 right-3"
+                onClick={doTogglePassword}
+              >
+                <EyeSlashIcon className="h-6 w-6 mx-1" />
+              </button>
+            )}
+
             <div className="h-10 text-sm text-red-500">
               {errors.password && <span> {errors.password.message} </span>}
             </div>
           </div>
-          <div className="w-96">
-            <input
-              className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              {...register('confirmPassword')}
-              placeholder="confirm your password"
-              name="confirmPassword"
-            />
-            <div className="h-8 text-sm text-red-500">
-              {errors.confirmPassword && <span> {errors.confirmPassword.message} </span>}
+          {isLogin && (
+            <div className="sm:w-96 relative">
+              <input
+                className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                {...register('confirmPassword')}
+                placeholder="confirm your password"
+                type={showConfirmPassword.isToggle ? 'text' : 'password'}
+                name="confirmPassword"
+              />
+              {showConfirmPassword.isToggle && (
+                <button
+                  type="button"
+                  aria-label="button"
+                  className="absolute bottom-10 right-3"
+                  onClick={doToggleConfirmPassword}
+                >
+                  <EyeIcon className="h-6 w-6 mx-1" />
+                </button>
+              )}
+              {!showConfirmPassword.isToggle && (
+                <button
+                  type="button"
+                  aria-label="button"
+                  className="absolute bottom-10 right-3"
+                  onClick={doToggleConfirmPassword}
+                >
+                  <EyeSlashIcon className="h-6 w-6 mx-1" />
+                </button>
+              )}
+              <div className="h-8 text-sm text-red-500">
+                {errors.confirmPassword && <span> {errors.confirmPassword.message} </span>}
+              </div>
             </div>
-          </div>
+          )}
           <div className="mb-5">
             <span className="text-sm">
               {questionForLink}

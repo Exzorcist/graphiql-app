@@ -10,6 +10,7 @@ function SignUp() {
         title="SignUp"
         buttonValue="Create an account"
         path="/login"
+        isLogin
         functionForUserWithEmailAndPassword={createUserWithEmailAndPassword}
       />
     </div>

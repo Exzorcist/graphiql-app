@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '@/types/Form';
 
 const initialState: IUser = {
-  email: null,
-  id: null,
+  email: '',
+  id: '',
   isAuth: false,
 };
 

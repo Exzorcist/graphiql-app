@@ -10,6 +10,7 @@ function SignIn() {
         title="SignIn"
         buttonValue="Login"
         path="/registration"
+        isLogin={false}
         functionForUserWithEmailAndPassword={signInWithEmailAndPassword}
       />
     </div>
