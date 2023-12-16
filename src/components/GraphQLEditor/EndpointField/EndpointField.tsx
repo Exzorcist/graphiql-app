@@ -1,6 +1,7 @@
 import { ComponentProps } from 'react';
 import { cn } from '@/utils';
-import Button from '../Button';
+import Button from '../../Button';
+import SendRequestButton from './SendRequestButton';
 
 type Props = { onDocsClick?(): void } & ComponentProps<'form'>;
 
@@ -13,17 +14,15 @@ function EndpointField({ onDocsClick, className, ...delegated }: Props) {
       )}
       {...delegated}
     >
-      <div className="w-full h-full relative">
+      <div className="w-full h-full flex ">
         <input className="w-full h-full bg-transparent outline-none pl-4" placeholder="Enter URL" />
-        <div className="absolute bottom-0 right-4 h-full flex items-center">
+        <div className="bottom-0 right-4 h-full flex items-center pr-4 pl-4">
           <Button variant="accented" onClick={onDocsClick}>
             Docs
           </Button>
         </div>
       </div>
-      <Button type="submit" variant="solid" className="px-5 rounded-none rounded-r">
-        Send Request
-      </Button>
+      <SendRequestButton />
     </form>
   );
 }

@@ -12,6 +12,8 @@
     --editor-text-color: 248 248 242;
     --editor-line-numbers-color: 108 108 108;
     --editor-gutter-color: 44 46 59;
+    --editor-scroll-thumb-color: 235 235 235 / 20%;
+    --editor-scroll-thumb-hover-color: 153, 153, 153;
     --editor-font-family: 'Roboto', sans-serif;
     --editor-code-font-family: 'Fira Code', monospace;
     --editor-code-font-size: 16px;
@@ -35,6 +37,24 @@
     transition: flex 0.15s ease-in-out;
     will-change: flex;
   }
+
+  @media (hover: hover) {
+    .fancy-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgb(var(--editor-scroll-thumb-color));
+      border: 4px solid transparent;
+      border-radius: 4px;
+      background-clip: padding-box;
+    }
+
+    .fancy-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: rgb(var(--editor-scroll-thumb-hover-color));
+      transition: background-color 1s ease-in-out;
+    }
+
+    .fancy-scrollbar::-webkit-scrollbar {
+      width: 16px;
+    }
+  }
 }
 
 @layer utilities {
@@ -50,3 +70,18 @@
     @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
   }
 }
+
+.cm-scroller {
+  @apply fancy-scrollbar;
+}
+
+/* .ͼ1g.cm-focused .cm-selectionBackground,
+.ͼ1g .cm-selectionLayer .cm-selectionBackground {
+  background: red !important;
+}
+
+.ͼ1g .cm-line::selection,
+.ͼ1g .cm-content ::selection {
+  background: transparent !important;
+}
+ */

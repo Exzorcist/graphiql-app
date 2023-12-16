@@ -1,17 +1,20 @@
 import { ComponentProps, memo } from 'react';
+import { Settings } from '@uiw/codemirror-themes';
 import { Editor } from '@/components/Editor';
 import ToolsPanelHeader from './ToolsPanelHeader';
 
-type Props = ComponentProps<typeof ToolsPanelHeader>;
+type Props = { themeSettings?: Settings } & ComponentProps<typeof ToolsPanelHeader>;
 
-function ToolsPanel(props: Props) {
+function ToolsPanel({ themeSettings, ...delegated }: Props) {
   return (
-    <Editor.Container>
-      <Editor.Header>
-        <ToolsPanelHeader {...props} />
-      </Editor.Header>
-      <Editor.Area />
-    </Editor.Container>
+    <Editor themeSettings={themeSettings}>
+      <Editor.Container>
+        <Editor.Header>
+          <ToolsPanelHeader {...delegated} />
+        </Editor.Header>
+        <Editor.Area />
+      </Editor.Container>
+    </Editor>
   );
 }
 
