@@ -1,5 +1,5 @@
-import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { useState, useEffect, useRef } from 'react';
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { useLocalizationContext } from '@/provider/LocalizationProvider';
 import { cn } from '@/utils';
 import { Language } from '@/types/Provider';
@@ -28,13 +28,13 @@ function SwitchLang() {
         onClick={() => isShow(!show)}
         aria-hidden
       >
-        <span>{lang}</span>
-        <GlobeAltIcon className="w-6 h-6" />
+        <span className="hidden sm:block">{lang}</span>
+        <GlobeAltIcon className="w-8 h-8 sm:w-6 sm:h-6" />
       </div>
 
       <div
         className={cn(
-          `absolute top-10 left-0 z-10 grid bg-white text-main text-base duration-300 sm:left-auto sm:right-0
+          `absolute top-12 right-0 z-10 grid bg-white text-main text-base duration-300 sm:top-10
            w-32 shadow rounded-md text-right overflow-hidden transition-all opacity-0 invisible`,
           show && '-translate-y-2 opacity-100 visible'
         )}
