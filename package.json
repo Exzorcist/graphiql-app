@@ -18,11 +18,13 @@
     "**/*.{tsx,ts,css,json,md}": "prettier --write"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@uiw/react-codemirror": "^4.21.21",
     "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
+    "react-svg": "^16.1.32",
     "tailwind-merge": "^2.1.0"
   },
   "devDependencies": {

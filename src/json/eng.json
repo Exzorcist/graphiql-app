@@ -3,5 +3,12 @@
     "notfound": {
       "text": "Sorry, page not found!"
     }
+  },
+  "header": {
+    "links": {
+      "about": "About us",
+      "login": "Login",
+      "logout": "Sign out"
+    }
   }
 }
