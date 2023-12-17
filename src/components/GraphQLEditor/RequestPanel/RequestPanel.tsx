@@ -6,7 +6,7 @@ import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle'
 import { cn } from '@/utils';
 import ToolsPanelNew from '../ToolsPanel/ToolsPanelNew';
 import { Editor } from '@/components/Editor';
-import { useBreakpoint } from '@/hooks/breakpoints-hooks';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 type Props = {
   themeSettings?: Settings;

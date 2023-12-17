@@ -11,7 +11,7 @@ import { requestPanelThemeSettings, responsePanelThemeSettings } from './themeSe
 import { useCollapsePanelInit, useDefaultExpandSize } from '../../hooks/panel-resize-hooks';
 import { cn } from '@/utils';
 import ToolsPanelNew from './ToolsPanel/ToolsPanelNew';
-import { useBreakpoint } from '@/hooks/breakpoints-hooks';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 import SwipeableDrawer from '../ui/SwipableDrawer';
 
 const PANEL_GROUP_ID = 'graphql-editor-panel-group';
@@ -67,7 +67,7 @@ function GraphQLEditor() {
       )}
       <div className="h-full flex w-full flex-col">
         <div className="bg-editor-primary px-4 py-5 border-editor-border border-b">
-          <EndpointField onDocsClick={handleDocsClick} />
+          <EndpointField onDocsClick={handleDocsClick} isDocsOpen={showDocs} />
         </div>
         <Transition in={isLaptop ? showDocs : showTools} timeout={150} nodeRef={nodeRef}>
           {(state) => {

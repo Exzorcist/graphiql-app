@@ -3,9 +3,9 @@ import { cn } from '@/utils';
 import Button from '@/components/ui/Button';
 import SendRequestButton from './SendRequestButton';
 
-type Props = { onDocsClick?(): void } & ComponentProps<'form'>;
+type Props = { onDocsClick?(): void; isDocsOpen?: boolean } & ComponentProps<'form'>;
 
-function EndpointField({ onDocsClick, className, ...delegated }: Props) {
+function EndpointField({ onDocsClick, className, isDocsOpen = false, ...delegated }: Props) {
   return (
     <form
       className={cn(
@@ -17,7 +17,7 @@ function EndpointField({ onDocsClick, className, ...delegated }: Props) {
       <div className="w-full h-full flex ">
         <input className="w-full h-full bg-transparent outline-none pl-4" placeholder="Enter URL" />
         <div className="bottom-0 right-4 h-full flex items-center pr-4 pl-4">
-          <Button variant="accented" onClick={onDocsClick}>
+          <Button variant="ghost-accented" onClick={onDocsClick} active={isDocsOpen}>
             Docs
           </Button>
         </div>

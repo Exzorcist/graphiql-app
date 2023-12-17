@@ -1,6 +1,6 @@
 import { PlayIcon } from '@heroicons/react/24/outline';
 import Button from '@/components/ui/Button';
-import { useBreakpoint } from '@/hooks/breakpoints-hooks';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 function SendRequestButton() {
   const isMobileL = useBreakpoint('min-mobile-lg');
