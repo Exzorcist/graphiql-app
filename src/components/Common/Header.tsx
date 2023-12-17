@@ -32,7 +32,7 @@ function Header() {
   return (
     <header
       className={cn(
-        'bg-main py-4 text-white sticky top-0 transition-colors duration-500',
+        'bg-main py-3 md:py-4 text-white sticky top-0 transition-colors duration-500',
         scrolled && 'bg-purple-600'
       )}
     >

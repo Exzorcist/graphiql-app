@@ -2,6 +2,38 @@
   "page": {
     "notfound": {
       "text": "Sorry, page not found!"
+    },
+    "welcome": {
+      "title": "Welcome to the GraphQL sandbox!",
+      "description": {
+        "project": "No matter if you are an experienced developer or just starting out, our application will not leave you indifferent. Intuitive interface, localization and navigation, everything is done in the best traditions of React. Our application allows you to make GraphQL queries for any API. But before you start, don't forget to register. Also, for your convenience, we have added support for three languages: English, Belarusian, and Russian.",
+        "rsschool": "This application was created as part of the RS School React course. These are free online courses where everyone can learn and comprehend new technologies, regardless of age, professional employment and place of residence, everything is in your hands. You can find a link to the course below.",
+        "team": "'Just Do It' is not just a team, it is a call to action that forms our own coding path."
+      },
+      "teams": [
+        {
+          "name": "Ivan",
+          "github": "https://github.com/Exzorcist",
+          "position": "Team leader, frontend developer",
+          "workOn": "He was involved in managing the team, creating navigation, basic elements and localization, and was on hand in difficult moments."
+        },
+        {
+          "name": "Polina",
+          "github": "https://github.com/PolinaPolina94",
+          "position": "Frontend developer, the soul of the team",
+          "workOn": "She was engaged in the development of login and registration pages, firebase integration into the project, form validation. She also became the inspiration for the design of the application."
+        },
+        {
+          "name": "Marat",
+          "github": "https://github.com/nowaylifer",
+          "position": "Frontend developer, the main sage of the team",
+          "workOn": "Took responsibility for the most difficult part, namely GraphQL Editor. He helped to implement many useful and interesting solutions for simplifying life on the project."
+        }
+      ],
+      "button": {
+        "login": "Sign In",
+        "registration": "Sign Up"
+      }
     }
   },
   "header": {
