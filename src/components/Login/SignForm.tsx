@@ -49,7 +49,7 @@ function SignUpForm({
             isAuth: true,
           })
         );
-        navigate('/welcome');
+        navigate('/');
       })
       .catch(() => {
         setIsError(true);
@@ -70,7 +70,7 @@ function SignUpForm({
 
   return (
     <div>
-      <section id="content" className="flex text-center overflow-x-hidden">
+      <section id="content" className="flex text-center overflow-hidden">
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590] sm:text-center">
             {title}
@@ -178,10 +178,11 @@ function SignUpForm({
           >
             {buttonValue}
           </button>
+          {/* {isError && <div> lala </div>} */}
           <div
             className={clsx(
               'translate-x-96 w-41 text-sm',
-              isError && 'transition delay-150 duration-500 ease-in-out translate-x-0'
+              isError && 'transition delay-150 duration-500 ease-in-out translate-x-1'
             )}
           >
             {' '}
