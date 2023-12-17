@@ -32,12 +32,6 @@
     --editor-text-color: 0 0 0;
   }
 
-  body {
-    color: rgb(var(--editor-text-color));
-    font-family: var(--editor-font-family);
-    background-color: rgb(var(--editor-primary-color));
-  }
-
   [data-panel-group]:has(> [data-resize-handle-active]) > .animated-panel {
     transition: none;
   }

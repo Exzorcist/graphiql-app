@@ -26,7 +26,7 @@ const DrawerOverlay = forwardRef<
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  'fixed z-50 gap-4 bg-editor-primary p-6 shadow-lg border-editor-border transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
+  'fixed z-50 gap-4 bg-editor-primary p-6 shadow-lg border-editor-border transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500 text-editor-text-color',
   {
     variants: {
       side: {
@@ -58,7 +58,7 @@ const DrawerContent = forwardRef<ElementRef<typeof DrawerPrimitive.Content>, Dra
         {...props}
       >
         {children}
-        <DrawerPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-editor-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+        <DrawerPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-secondary text-editor-text-color">
           <XMarkIcon className="h-6 w-6" />
           <span className="sr-only">Close</span>
         </DrawerPrimitive.Close>

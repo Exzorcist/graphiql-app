@@ -12,7 +12,7 @@ import { useCollapsePanelInit, useDefaultExpandSize } from '../../hooks/panel-re
 import { cn } from '@/utils';
 import ToolsPanelNew from './ToolsPanel/ToolsPanelNew';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import SwipeableDrawer from '../ui/SwipableDrawer';
+import SwipeableDrawer from '../ui/SwipeableDrawer';
 
 const PANEL_GROUP_ID = 'graphql-editor-panel-group';
 const QUERY_EDITOR_PANEL_MIN_SIZE = 20;
@@ -20,7 +20,7 @@ const RESPONSE_PANEL_MIN_SIZE = 20;
 const DOCS_PANEL_MIN_SIZE = 20;
 const DOCS_PANEL_DEFAULT_SIZE = 25;
 
-function GraphQLEditor() {
+function GraphqlEditor() {
   const [showDocs, setShowDocs] = useState(false);
   const [showTools, setShowTools] = useState(false);
   const nodeRef = useRef<HTMLDivElement | null>(null);
@@ -58,7 +58,7 @@ function GraphQLEditor() {
   }, [onCollapse]);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family">
       {isLaptop && <SideBar />}
       {!isLaptop && (
         <SwipeableDrawer open={showDocs} onOpenChange={setShowDocs}>
@@ -142,4 +142,4 @@ function GraphQLEditor() {
   );
 }
 
-export default GraphQLEditor;
+export default GraphqlEditor;

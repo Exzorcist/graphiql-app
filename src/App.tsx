@@ -1,12 +1,31 @@
-import GraphQLEditor from './components/GraphQLEditor/GraphQLEditor';
-import ThemeProvider from './providers/ThemeProvider';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
+
+import Root from '@/layout/Root';
+import Welcome from '@/pages/Welcome';
+import Login from '@/pages/Login';
+import Registration from '@/pages/Registration';
+import NotFound from '@/pages/NotFound';
+import GraphqlEditorPage from '@/pages/GraphqlEditorPage';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route path="/" element={<GraphqlEditorPage />} />
+      <Route path="/welcome" element={<Welcome />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/registration" element={<Registration />} />
+      <Route path="*" element={<NotFound />} />
+    </Route>
+  )
+);
 
 function App() {
-  return (
-    <ThemeProvider>
-      <GraphQLEditor />
-    </ThemeProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
