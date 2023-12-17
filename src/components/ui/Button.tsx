@@ -11,7 +11,7 @@ const buttonVariants = cva('py-[5px] px-2 transition rounded min-w-fit cursor-po
     variant: {
       ghost: 'hover:bg-editor-secondary',
       'ghost-accented': 'hover:bg-editor-accent/[.15]',
-      solid: 'bg-editor-accent hover:bg-editor-accent-light',
+      solid: 'bg-editor-accent hover:bg-editor-accent-light text-white',
     },
   },
   compoundVariants: [

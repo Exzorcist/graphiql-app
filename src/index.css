@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  :root,
+  :root[data-theme='dracula'] {
     --editor-primary-color: 40 42 54;
     --editor-secondary-color: 48 50 64;
     --editor-border-color: 65 66 78;
@@ -22,6 +23,15 @@
     --splitter-hover-color: rgb(var(--editor-accent-color));
   }
 
+  :root[data-theme='light'] {
+    --editor-primary-color: 255 255 255;
+    --editor-secondary-color: 240 240 240;
+    --editor-border-color: 234 234 234;
+    --editor-line-numbers-color: 108 108 108;
+    --editor-gutter-color: 240 240 240;
+    --editor-text-color: 0 0 0;
+  }
+
   body {
     color: rgb(var(--editor-text-color));
     font-family: var(--editor-font-family);
@@ -30,10 +40,6 @@
 
   [data-panel-group]:has(> [data-resize-handle-active]) > .animated-panel {
     transition: none;
-  }
-
-  .cm-scroller {
-    @apply fancy-scrollbar;
   }
 }
 
@@ -74,4 +80,8 @@
   .absolute-center {
     @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
   }
+}
+
+.cm-scroller {
+  @apply fancy-scrollbar;
 }
