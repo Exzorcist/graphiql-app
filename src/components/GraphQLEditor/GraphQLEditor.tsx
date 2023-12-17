@@ -12,6 +12,7 @@ import { useCollapsePanelInit, useDefaultExpandSize } from '../../hooks/panel-re
 import { cn } from '@/utils';
 import ToolsPanelNew from './ToolsPanel/ToolsPanelNew';
 import { useBreakpoint } from '@/hooks/breakpoints-hooks';
+import SwipeableDrawer from '../ui/SwipableDrawer';
 
 const PANEL_GROUP_ID = 'graphql-editor-panel-group';
 const QUERY_EDITOR_PANEL_MIN_SIZE = 20;
@@ -34,12 +35,17 @@ function GraphQLEditor() {
   );
 
   const handleDocsClick = useCallback(() => {
+    if (!isLaptop) {
+      setShowDocs((prev) => !prev);
+      return;
+    }
+
     if (showDocs) {
       collapse();
     } else {
       expand();
     }
-  }, [showDocs, collapse, expand]);
+  }, [showDocs, collapse, expand, isLaptop]);
 
   const handleDocsExpand = useCallback(() => {
     onExpand();
@@ -54,6 +60,11 @@ function GraphQLEditor() {
   return (
     <div className="flex h-screen">
       {isLaptop && <SideBar />}
+      {!isLaptop && (
+        <SwipeableDrawer open={showDocs} onOpenChange={setShowDocs}>
+          <DocsPanel />
+        </SwipeableDrawer>
+      )}
       <div className="h-full flex w-full flex-col">
         <div className="bg-editor-primary px-4 py-5 border-editor-border border-b">
           <EndpointField onDocsClick={handleDocsClick} />

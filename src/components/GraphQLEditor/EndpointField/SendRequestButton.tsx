@@ -1,5 +1,5 @@
 import { PlayIcon } from '@heroicons/react/24/outline';
-import Button from '@/components/Button';
+import Button from '@/components/ui/Button';
 import { useBreakpoint } from '@/hooks/breakpoints-hooks';
 
 function SendRequestButton() {

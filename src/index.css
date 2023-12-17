@@ -18,6 +18,7 @@
     --editor-code-font-family: 'Fira Code', monospace;
     --editor-code-font-size: 16px;
     --editor-code-selection-color: 215 212 240;
+    --editor-ring: 203 213 225;
     --splitter-hover-color: rgb(var(--editor-accent-color));
   }
 
@@ -29,6 +30,10 @@
 
   [data-panel-group]:has(> [data-resize-handle-active]) > .animated-panel {
     transition: none;
+  }
+
+  .cm-scroller {
+    @apply fancy-scrollbar;
   }
 }
 
@@ -70,18 +75,3 @@
     @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
   }
 }
-
-.cm-scroller {
-  @apply fancy-scrollbar;
-}
-
-/* .ͼ1g.cm-focused .cm-selectionBackground,
-.ͼ1g .cm-selectionLayer .cm-selectionBackground {
-  background: red !important;
-}
-
-.ͼ1g .cm-line::selection,
-.ͼ1g .cm-content ::selection {
-  background: transparent !important;
-}
- */

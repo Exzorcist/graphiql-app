@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 import { cn } from '@/utils';
-import Button from '../../Button';
+import Button from '@/components/ui/Button';
 import SendRequestButton from './SendRequestButton';
 
 type Props = { onDocsClick?(): void } & ComponentProps<'form'>;
