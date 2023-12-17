@@ -60,9 +60,8 @@ function SignUpForm({
     formState: { errors, isValid },
   } = useForm<Inputs>({
     resolver: yupResolver(schema(useLocalizationContext())),
-    mode: 'onTouched',
+    mode: 'onChange',
   });
-
   const onSubmit: SubmitHandler<Inputs> = () => {
     handleRegister(email, password);
   };
@@ -78,12 +77,13 @@ function SignUpForm({
             <input
               className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder={i18nQL[lang].inputData.email}
-              {...register('email')}
+              {...register('email', {
+                onChange: (e) => {
+                  setEmail(e.currentTarget.value);
+                },
+              })}
               type="email"
               name="email"
-              onChange={(e) => {
-                setEmail(e.currentTarget.value);
-              }}
             />
             <div className="h-10 text-sm">
               {errors.email && <span className="text-red-500"> {errors.email.message} </span>}
@@ -92,13 +92,14 @@ function SignUpForm({
           <div className="sm:w-96 relative">
             <input
               className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              {...register('password')}
+              {...register('password', {
+                onChange: (e) => {
+                  setPassword(e.currentTarget.value);
+                },
+              })}
               placeholder={i18nQL[lang].inputData.password}
               type={showPassword.isToggle ? 'text' : 'password'}
               name="password"
-              onChange={(e) => {
-                setPassword(e.currentTarget.value);
-              }}
             />
             {showPassword.isToggle && (
               <button
