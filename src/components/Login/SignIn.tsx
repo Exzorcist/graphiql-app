@@ -10,7 +10,6 @@ function SignIn() {
       <SignForm
         questionForLink={i18nQL[lang].page.login.questionForLink}
         textForLink={i18nQL[lang].page.login.textForLink}
-        // title="SignIn"
         title={i18nQL[lang].page.login.article}
         buttonValue={i18nQL[lang].page.login.text}
         path="/registration"

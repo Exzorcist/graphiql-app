@@ -6,10 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { InfoForm, Inputs } from '@/types/Form';
-import { schema } from '@/utils/schemas/schema';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { setUser } from '@/redux/reducers/UserSlice';
 import { useLocalizationContext } from '@/provider/LocalizationProvider';
+import { SingUpSchema } from '@/utils/schemas/signup-schema';
+import { SingInSchema } from '@/utils/schemas/signin-schema';
 
 function SignUpForm({
   questionForLink,
@@ -48,18 +49,19 @@ function SignUpForm({
             isAuth: true,
           })
         );
-        navigate('/');
+        navigate('/welcome');
       })
       .catch(() => {
         setIsError(true);
       });
   }
+  const useLoc = useLocalizationContext();
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Inputs>({
-    resolver: yupResolver(schema(useLocalizationContext())),
+    resolver: yupResolver(isLogin ? SingUpSchema(useLoc) : SingInSchema(useLoc)),
     mode: 'onChange',
   });
   const onSubmit: SubmitHandler<Inputs> = () => {
@@ -68,7 +70,7 @@ function SignUpForm({
 
   return (
     <div>
-      <section id="content" className="flex text-center">
+      <section id="content" className="flex text-center overflow-x-hidden">
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590] sm:text-center">
             {title}
@@ -168,12 +170,23 @@ function SignUpForm({
               </Link>
             </span>
           </div>
-          <input
+          <button
             type="submit"
+            aria-label="button"
             disabled={!isValid}
-            value={buttonValue}
             className="focus:outline-none disabled:bg-slate-300 text-white bg-[#d60590]  hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
-          />
+          >
+            {buttonValue}
+          </button>
+          <div
+            className={clsx(
+              'translate-x-96 w-41 text-sm',
+              isError && 'transition delay-150 duration-500 ease-in-out translate-x-0'
+            )}
+          >
+            {' '}
+            Something went wrong! You need to <span className="underline">{textForLink}</span>{' '}
+          </div>
         </form>
       </section>
     </div>

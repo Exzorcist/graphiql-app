@@ -3,7 +3,12 @@ import { Auth, UserCredential } from 'firebase/auth';
 export type Inputs = {
   email: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
+};
+
+export type Input = {
+  email: string;
+  password: string;
 };
 
 export type IUser = {

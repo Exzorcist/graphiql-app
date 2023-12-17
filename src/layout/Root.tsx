@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { LocalizationProvider } from '@/provider/LocalizationProvider';
 
 import Header from '@/components/Common/Header';
@@ -29,13 +29,6 @@ function Root() {
     >
       <Header />
       <Outlet />
-      {/* TODO: remove after testing -> add test route */}
-      <div className="flex gap-3">
-        <Link to="/login">To login</Link>
-        <Link to="/registration">To registrtion</Link>
-        <Link to="/welcome">To welcome</Link>
-        <Link to="/notfound">To 404</Link>
-      </div>
       <Footer />
     </LocalizationProvider>
   );

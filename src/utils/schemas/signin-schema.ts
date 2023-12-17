@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { ILocalizationProvider } from '@/types/Provider';
 
-export const schema = ({ i18nQL, lang }: ILocalizationProvider) => {
+export const SingInSchema = ({ i18nQL, lang }: ILocalizationProvider) => {
   return yup.object().shape({
     email: yup
       .string()
@@ -16,10 +16,5 @@ export const schema = ({ i18nQL, lang }: ILocalizationProvider) => {
       .matches(/[a-zа-я]/, i18nQL[lang].validation.password.lowercase)
       .matches(/[.:,;?!@#$%^&*_\-+=]/, i18nQL[lang].validation.password.special)
       .min(8, i18nQL[lang].validation.password.minlength),
-
-    confirmPassword: yup
-      .string()
-      .required(i18nQL[lang].validation.confirmPassword.required)
-      .oneOf([yup.ref('password'), ''], i18nQL[lang].validation.confirmPassword.match),
   });
 };
