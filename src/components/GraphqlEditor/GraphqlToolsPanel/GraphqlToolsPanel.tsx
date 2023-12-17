@@ -1,7 +1,7 @@
 import { ImperativePanelHandle, Panel } from 'react-resizable-panels';
 import { ComponentProps, useCallback, useRef, useState } from 'react';
 import { Settings } from '@uiw/codemirror-themes';
-import ToolsPanel from './ToolsPanel';
+import GraphqlTools from './GraphqlTools';
 import {
   useKeepPanelCollapsed,
   useCollapsePanelInit,
@@ -70,7 +70,7 @@ function ToolsPanelNew({
       className={panelClassName}
       {...panelProps}
     >
-      <ToolsPanel
+      <GraphqlTools
         isOpen={showTools}
         onChevronClick={handleChevronClick}
         themeSettings={themeSettings}

@@ -4,7 +4,7 @@ import { Transition } from 'react-transition-group';
 import { Settings } from '@uiw/codemirror-themes';
 import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle';
 import { cn } from '@/utils';
-import ToolsPanelNew from '../ToolsPanel/ToolsPanelNew';
+import ToolsPanelNew from '../GraphqlToolsPanel/GraphqlToolsPanel';
 import { Editor } from '@/components/Editor';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 

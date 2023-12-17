@@ -1,11 +1,11 @@
 import { ComponentProps, memo } from 'react';
 import { Settings } from '@uiw/codemirror-themes';
 import { Editor } from '@/components/Editor';
-import ToolsPanelHeader from './ToolsPanelHeader';
+import ToolsPanelHeader from './GraphqlToolsHeader';
 
 type Props = { themeSettings?: Settings } & ComponentProps<typeof ToolsPanelHeader>;
 
-function ToolsPanel({ themeSettings, ...delegated }: Props) {
+function GraphqlTools({ themeSettings, ...delegated }: Props) {
   return (
     <Editor themeSettings={themeSettings}>
       <Editor.Container>
@@ -18,4 +18,4 @@ function ToolsPanel({ themeSettings, ...delegated }: Props) {
   );
 }
 
-export default memo(ToolsPanel);
+export default memo(GraphqlTools);

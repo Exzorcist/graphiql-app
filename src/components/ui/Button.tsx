@@ -45,13 +45,13 @@ const buttonVariants = cva('py-[5px] px-2 transition rounded min-w-fit cursor-po
   },
 });
 
-type Props = {
+export type ButtonProps = {
   className?: string;
 } & VariantProps<typeof buttonVariants>;
 
 const defaultElement = 'button';
 
-const Button = polyRef<typeof defaultElement, Props>(
+const Button = polyRef<typeof defaultElement, ButtonProps>(
   ({ as: As = defaultElement, variant, active, className, ...props }, ref) => {
     return (
       <As

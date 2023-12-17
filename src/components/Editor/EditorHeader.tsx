@@ -3,11 +3,15 @@ import { cn } from '@/utils';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from './constants';
 
-type Props = {
+export type EditorHeaderProps = {
   size?: number;
 } & ComponentProps<'div'>;
 
-function EditorHeader({ children, size = DEFAULT_EDITOR_HEADER_HEIGHT, className }: Props) {
+function EditorHeader({
+  children,
+  size = DEFAULT_EDITOR_HEADER_HEIGHT,
+  className,
+}: EditorHeaderProps) {
   const { background } = useEditorContext();
   const { header } = useEditorContainerContext();
 

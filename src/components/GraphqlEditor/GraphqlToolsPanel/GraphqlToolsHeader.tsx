@@ -3,7 +3,7 @@ import { memo } from 'react';
 import Button from '@/components/ui/Button';
 import { cn } from '@/utils';
 
-type Props = {
+export type GraphqlToolsHeaderProps = {
   onVariablesClick?(): void;
   onHeadersclick?(): void;
   onChevronClick?(): void;
@@ -11,13 +11,13 @@ type Props = {
   className?: string;
 };
 
-function GraphQLToolsHeader({
+function GraphqlToolsHeader({
   isOpen = false,
   onChevronClick,
   onHeadersclick,
   onVariablesClick,
   className,
-}: Props) {
+}: GraphqlToolsHeaderProps) {
   return (
     <div className={cn('flex gap-6 w-full', className)}>
       <Button onClick={onVariablesClick}>Variables</Button>
@@ -29,4 +29,4 @@ function GraphQLToolsHeader({
   );
 }
 
-export default memo(GraphQLToolsHeader);
+export default memo(GraphqlToolsHeader);

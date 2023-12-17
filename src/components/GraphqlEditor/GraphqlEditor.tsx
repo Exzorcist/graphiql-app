@@ -10,7 +10,7 @@ import PanelResizeHandle from '../PanelResizeHandle/PanelResizeHandle';
 import { requestPanelThemeSettings, responsePanelThemeSettings } from './themeSettings';
 import { useCollapsePanelInit, useDefaultExpandSize } from '../../hooks/panel-resize-hooks';
 import { cn } from '@/utils';
-import ToolsPanelNew from './ToolsPanel/ToolsPanelNew';
+import GraphqlToolsPanel from './GraphqlToolsPanel/GraphqlToolsPanel';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import SwipeableDrawer from '../ui/SwipeableDrawer';
 
@@ -95,7 +95,7 @@ function GraphqlEditor() {
               );
             } else {
               currentPanel = (
-                <ToolsPanelNew
+                <GraphqlToolsPanel
                   id="toolsPanel"
                   panelGroupId={PANEL_GROUP_ID}
                   className={panelClassName}

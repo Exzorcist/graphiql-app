@@ -3,7 +3,7 @@ import { useSwipeable } from 'react-swipeable';
 import Drawer, { DrawerContentProps } from './Drawer';
 import { capitalize, cn } from '@/utils';
 
-type SwipableDrawerProps = {
+export type SwipableDrawerProps = {
   trigger?: ReactNode;
   contentClassName?: string;
   side?: NonNullable<DrawerContentProps['side']>;

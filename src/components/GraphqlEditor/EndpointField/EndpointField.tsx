@@ -3,9 +3,17 @@ import { cn } from '@/utils';
 import Button from '@/components/ui/Button';
 import SendRequestButton from './SendRequestButton';
 
-type Props = { onDocsClick?(): void; isDocsOpen?: boolean } & ComponentProps<'form'>;
+export type EndpointFieldProps = {
+  onDocsClick?(): void;
+  isDocsOpen?: boolean;
+} & ComponentProps<'form'>;
 
-function EndpointField({ onDocsClick, className, isDocsOpen = false, ...delegated }: Props) {
+function EndpointField({
+  onDocsClick,
+  className,
+  isDocsOpen = false,
+  ...delegated
+}: EndpointFieldProps) {
   return (
     <form
       className={cn(
