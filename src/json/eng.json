@@ -45,5 +45,13 @@
     "email": "email",
     "password": "password",
     "confirmPassword": "confirm your password"
+  },
+
+  "header": {
+    "links": {
+      "about": "About us",
+      "login": "Login",
+      "logout": "Sign out"
+    }
   }
 }
