@@ -2,6 +2,23 @@
   "page": {
     "notfound": {
       "text": "Sorry, page not found!"
+    },
+    "registration": {
+      "article": "SignUp",
+      "text": "Create an account",
+      "email": "email",
+      "password": "password",
+      "confirm": "Confirm password",
+      "questionForLink": "Do you have an account? 👉",
+      "textForLink": "Sign In"
+    },
+    "login": {
+      "article": "SignIn",
+      "text": "Login",
+      "email": "email",
+      "password": "password",
+      "questionForLink": "Don`t have an account? 👉",
+      "textForLink": "Create an account"
     }
   },
 
@@ -22,5 +39,11 @@
       "required": "Please confirm your password",
       "match": "Passwords must match"
     }
+  },
+
+  "inputData": {
+    "email": "email",
+    "password": "password",
+    "confirmPassword": "confirm your password"
   }
 }

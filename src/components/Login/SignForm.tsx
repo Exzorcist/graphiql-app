@@ -20,6 +20,8 @@ function SignUpForm({
   isLogin,
   functionForUserWithEmailAndPassword,
 }: InfoForm) {
+  const { i18nQL, lang } = useLocalizationContext();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false);
@@ -75,7 +77,7 @@ function SignUpForm({
           <div className="sm:w-96">
             <input
               className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="email"
+              placeholder={i18nQL[lang].inputData.email}
               {...register('email')}
               type="email"
               name="email"
@@ -91,7 +93,7 @@ function SignUpForm({
             <input
               className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               {...register('password')}
-              placeholder="password"
+              placeholder={i18nQL[lang].inputData.password}
               type={showPassword.isToggle ? 'text' : 'password'}
               name="password"
               onChange={(e) => {
@@ -128,7 +130,7 @@ function SignUpForm({
               <input
                 className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register('confirmPassword')}
-                placeholder="confirm your password"
+                placeholder={i18nQL[lang].inputData.confirmPassword}
                 type={showConfirmPassword.isToggle ? 'text' : 'password'}
                 name="confirmPassword"
               />
