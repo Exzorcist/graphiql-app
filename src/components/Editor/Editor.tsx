@@ -13,7 +13,7 @@ function Editor({ children, className, themeSettings = {}, ...delegated }: Props
   return (
     <EditorContext.Provider value={themeSettings ?? null}>
       {children ? (
-        <div className={cn('h-full w-full fancy-scrollbar', className)}>{children}</div>
+        <div className={cn('h-full w-full', className)}>{children}</div>
       ) : (
         <EditorArea themeSettings={themeSettings} className={className} {...delegated} />
       )}

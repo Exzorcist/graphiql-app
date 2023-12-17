@@ -13,7 +13,11 @@ type Props = {
 } & ComponentPropsWithRef<typeof CodeMirror>;
 
 const styleOverrides = EditorView.theme({
-  '&': { fontSize: 'var(--editor-code-font-size)' },
+  '&.cm-editor': {
+    fontSize: 'var(--editor-code-font-size)',
+    flex: '1 1 0px',
+    overflow: 'hidden',
+  },
   '&.cm-focused': { outline: '2px solid transparent', outlineOffset: '2px' },
   '.cm-lineNumbers': { minWidth: '28px' },
 });
@@ -35,7 +39,7 @@ const EditorArea = forwardRef<ReactCodeMirrorRef, Props>(
         ref={ref}
         theme={themeInit[theme]({ settings: themeSettings ?? themeSettingsContext })}
         height="100%"
-        className={cn('h-full', className)}
+        className={cn('h-full flex flex-col', className)}
         extensions={[styleOverrides, javascript({ jsx: true })]}
         style={{ paddingTop: header.visible ? header.height : undefined }}
         {...rest}
