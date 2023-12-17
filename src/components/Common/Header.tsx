@@ -9,7 +9,7 @@ import Logo from '@/assets/logo-graphql.svg';
 import SwitchLang from './Header/SwitchLang';
 
 function Header() {
-  const { i18nQL, lang } = useLocalizationContext();
+  const { t } = useLocalizationContext();
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [show, isShow] = useState<boolean>(false);
   const menu = useRef<HTMLDivElement | null>(null);
@@ -32,7 +32,7 @@ function Header() {
   return (
     <header
       className={cn(
-        'bg-main py-4 text-white sticky top-0 transition-colors duration-500',
+        'bg-main py-4 text-white sticky top-0 transition-colors duration-500 z-10',
         scrolled && 'bg-purple-600'
       )}
     >
@@ -74,7 +74,7 @@ function Header() {
                          border-b border-neutral-200 sm:border-b-0 sm:p-0 sm:hover:bg-transparent
                          sm:hover:text-orange-200"
             >
-              {i18nQL[lang].header.links.about}
+              {t.header.links.about}
             </NavLink>
             <span className="hidden sm:block">|</span>
 
@@ -84,14 +84,14 @@ function Header() {
                 className="py-2 px-3.5 cursor-pointer transition-colors duration-300 hover:bg-main/10
                            sm:p-0 sm:hover:bg-transparent sm:hover:text-orange-200"
               >
-                {i18nQL[lang].header.links.login}
+                {t.header.links.login}
               </NavLink>
             ) : (
               <span
                 className="py-2 px-3.5 cursor-pointer transition-colors duration-300 hover:bg-main/10
                            sm:p-0 sm:hover:bg-transparent sm:hover:text-orange-200"
               >
-                {i18nQL[lang].header.links.logout}
+                {t.header.links.logout}
               </span>
             )}
           </div>

@@ -1,7 +1,8 @@
 import { ComponentProps } from 'react';
 import { cn } from '@/utils';
-import Button from '@/components/ui/Button';
 import SendRequestButton from './SendRequestButton';
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import SchemaButton from './SchemaButton';
 
 export type EndpointFieldProps = {
   onDocsClick?(): void;
@@ -14,6 +15,8 @@ function EndpointField({
   isDocsOpen = false,
   ...delegated
 }: EndpointFieldProps) {
+  const { t } = useLocalizationContext();
+
   return (
     <form
       className={cn(
@@ -23,11 +26,12 @@ function EndpointField({
       {...delegated}
     >
       <div className="w-full h-full flex ">
-        <input className="w-full h-full bg-transparent outline-none pl-4" placeholder="Enter URL" />
+        <input
+          className="w-full h-full bg-transparent outline-none pl-4"
+          placeholder={t.page.editor['Enter URL']}
+        />
         <div className="bottom-0 right-4 h-full flex items-center pr-4 pl-4">
-          <Button variant="ghost-accented" onClick={onDocsClick} active={isDocsOpen}>
-            Docs
-          </Button>
+          <SchemaButton variant="ghost-accented" onClick={onDocsClick} active={isDocsOpen} />
         </div>
       </div>
       <SendRequestButton />

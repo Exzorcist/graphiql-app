@@ -5,11 +5,7 @@ import byJson from '@/json/by.json';
 export interface ILocalizationProvider {
   lang: Language;
   setLang: (lang: Language) => void;
-  i18nQL: {
-    eng: typeof engJson;
-    ru: typeof ruJson;
-    by: typeof byJson;
-  };
+  get t(): typeof engJson | typeof ruJson | typeof byJson;
 }
 
 export type Language = 'eng' | 'ru' | 'by';

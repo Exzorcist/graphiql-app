@@ -1,15 +1,42 @@
-import { createContext, useContext } from 'react';
-import { ILocalizationProvider } from '@/types/Provider';
+import { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
+import { ILocalizationProvider, Language } from '@/types/Provider';
+
+import EngJSON from '@/json/eng.json';
+import RuJSON from '@/json/ru.json';
+import ByJSON from '@/json/by.json';
 
 const LocalizationContext = createContext<ILocalizationProvider | null>(null);
-export const LocalizationProvider = LocalizationContext.Provider;
+
+const translations = {
+  eng: EngJSON,
+  ru: RuJSON,
+  by: ByJSON,
+};
+
+function LocalizationProvider({ children }: PropsWithChildren) {
+  const [lang, setLang] = useState<Language>('eng');
+
+  const value = useMemo(() => {
+    return {
+      lang,
+      setLang,
+      get t() {
+        return translations[lang];
+      },
+    };
+  }, [lang]);
+
+  return <LocalizationContext.Provider value={value}>{children}</LocalizationContext.Provider>;
+}
 
 export const useLocalizationContext = () => {
-  const data = useContext(LocalizationContext);
+  const value = useContext(LocalizationContext);
 
-  if (!data) {
+  if (!value) {
     throw new Error('Can not "useLocalizationContext" outside of the "LocalizationProvider"');
-  } else {
-    return data;
   }
+
+  return value;
 };
+
+export default LocalizationProvider;

@@ -1,11 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import SwitchLang from '@/components/Common/Header/SwitchLang';
-import { LocalizationProvider } from '@/providers/LocalizationProvider';
-import { testProviderData } from '@/__tests__/data/provider';
+import LocalizationProvider from '@/providers/LocalizationProvider';
 
 test('[ SwitchLang ]: base test', () => {
   render(
-    <LocalizationProvider value={testProviderData}>
+    <LocalizationProvider>
       <SwitchLang />
     </LocalizationProvider>
   );

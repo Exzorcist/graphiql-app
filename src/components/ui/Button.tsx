@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import { PolyRefFunction } from 'react-polymorphed';
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils';
@@ -45,13 +45,13 @@ const buttonVariants = cva('py-[5px] px-2 transition rounded min-w-fit cursor-po
   },
 });
 
-export type ButtonProps = {
+type Props = {
   className?: string;
 } & VariantProps<typeof buttonVariants>;
 
 const defaultElement = 'button';
 
-const Button = polyRef<typeof defaultElement, ButtonProps>(
+const Button = polyRef<typeof defaultElement, Props>(
   ({ as: As = defaultElement, variant, active, className, ...props }, ref) => {
     return (
       <As
@@ -65,5 +65,7 @@ const Button = polyRef<typeof defaultElement, ButtonProps>(
     );
   }
 );
+
+export type ButtonProps = ComponentProps<typeof Button>;
 
 export default Button;
