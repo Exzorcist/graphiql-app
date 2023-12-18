@@ -4,7 +4,6 @@ import { Settings } from '@uiw/codemirror-themes';
 import GraphqlTools from './GraphqlTools';
 import {
   useKeepPanelCollapsed,
-  useCollapsePanelInit,
   useDefaultExpandSize,
   usePanelSizeState,
 } from '@/hooks/panel-resize-hooks';
@@ -20,7 +19,7 @@ type Props = {
 const TOOLS_PANEL_DEFAULT_SIZE = 30;
 const TOOLS_PANEL_MIN_SIZE = 20;
 
-function ToolsPanelNew({
+function GraphqlToolsPanel({
   panelGroupId,
   panelClassName,
   onToolsShow,
@@ -32,7 +31,6 @@ function ToolsPanelNew({
   const toolsPanelRef = useRef<ImperativePanelHandle | null>(null);
 
   useKeepPanelCollapsed(toolsPanelRef, TOOLS_PANEL_MIN_SIZE, [toolsPanelCollapseSize]);
-  useCollapsePanelInit(toolsPanelRef, panelGroupId);
 
   const { collapse, expand, onCollapse, onExpand } = useDefaultExpandSize(
     toolsPanelRef,
@@ -63,6 +61,7 @@ function ToolsPanelNew({
     <Panel
       ref={toolsPanelRef}
       minSize={TOOLS_PANEL_MIN_SIZE}
+      defaultSize={toolsPanelCollapseSize}
       collapsible
       collapsedSize={toolsPanelCollapseSize}
       onCollapse={handleCollapse}
@@ -79,4 +78,4 @@ function ToolsPanelNew({
   );
 }
 
-export default ToolsPanelNew;
+export default GraphqlToolsPanel;

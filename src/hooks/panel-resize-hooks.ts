@@ -84,7 +84,7 @@ export function useCollapsePanelInit(
   panelRef: React.MutableRefObject<ImperativePanelHandle | null>,
   autoSaveId: string
 ) {
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!localStorage.getItem(`PanelGroup:sizes:${autoSaveId}`)) {
       panelRef.current?.collapse();
     }

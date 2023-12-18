@@ -4,7 +4,7 @@ import { Transition } from 'react-transition-group';
 import { Settings } from '@uiw/codemirror-themes';
 import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle';
 import { cn } from '@/utils';
-import ToolsPanelNew from '../GraphqlToolsPanel/GraphqlToolsPanel';
+import GraphqlToolsPanel from '../GraphqlToolsPanel/GraphqlToolsPanel';
 import { Editor } from '@/components/Editor';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
@@ -42,7 +42,7 @@ function RequestPanel({ themeSettings }: Props) {
                 {isLaptop && (
                   <>
                     <PanelResizeHandle />
-                    <ToolsPanelNew
+                    <GraphqlToolsPanel
                       id="toolsPanel"
                       order={2}
                       panelGroupId={PANEL_GROUP_ID}

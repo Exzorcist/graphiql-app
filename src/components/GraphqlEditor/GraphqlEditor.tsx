@@ -8,11 +8,11 @@ import SideBar from './SideBar';
 import DocsPanel from './DocsPanel';
 import PanelResizeHandle from '../PanelResizeHandle/PanelResizeHandle';
 import { requestPanelThemeSettings, responsePanelThemeSettings } from './themeSettings';
-import { useCollapsePanelInit, useDefaultExpandSize } from '../../hooks/panel-resize-hooks';
 import { cn } from '@/utils';
 import GraphqlToolsPanel from './GraphqlToolsPanel/GraphqlToolsPanel';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import SwipeableDrawer from '../ui/SwipeableDrawer';
+import { useDefaultExpandSize } from '@/hooks/panel-resize-hooks';
 
 const PANEL_GROUP_ID = 'graphql-editor-panel-group';
 const QUERY_EDITOR_PANEL_MIN_SIZE = 20;
@@ -26,8 +26,6 @@ function GraphqlEditor() {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const docsPanelRef = useRef<ImperativePanelHandle | null>(null);
   const isLaptop = useBreakpoint('min-laptop');
-
-  useCollapsePanelInit(docsPanelRef, PANEL_GROUP_ID);
 
   const { collapse, expand, onExpand, onCollapse } = useDefaultExpandSize(
     docsPanelRef,
@@ -86,6 +84,7 @@ function GraphqlEditor() {
                   collapsible
                   collapsedSize={0}
                   minSize={DOCS_PANEL_MIN_SIZE}
+                  defaultSize={0}
                   onCollapse={handleDocsCollapse}
                   onExpand={handleDocsExpand}
                   className={panelClassName}
