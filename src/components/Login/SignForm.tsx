@@ -68,7 +68,6 @@ function SignUpForm({
   const onSubmit: SubmitHandler<Inputs> = () => {
     handleRegister(email, password);
   };
-
   useEffect(() => {
     if (isDirty) {
       Object.keys(dirtyFields).forEach((field) => trigger(field as keyof Inputs));
@@ -77,10 +76,14 @@ function SignUpForm({
 
   return (
     <section
-      className="flex items-center justify-center h-full py-10 px-5 grow text-center overflow-hidden"
+      className="flex items-center justify-center h-full py-10 px-5 grow text-center"
       data-element="app-form"
     >
-      <form className="w-full max-w-md" onSubmit={handleSubmit(onSubmit)} aria-label="form">
+      <form
+        className="w-full max-w-md overflow-hidden"
+        onSubmit={handleSubmit(onSubmit)}
+        aria-label="form"
+      >
         <h1 className="mb-12 text-center text-2xl font-semibold text-main sm:text-center">
           {title}
         </h1>
@@ -204,7 +207,7 @@ function SignUpForm({
 
         <div
           className={cn(
-            'text-sm',
+            'text-sm translate-x-96 ml-5',
             isError === true &&
               'transition delay-150 duration-500 ease-in-out translate-x-0 bg-red-500'
           )}
