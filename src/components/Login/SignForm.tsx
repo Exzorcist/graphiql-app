@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import clsx from 'clsx';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { InfoForm, Inputs } from '@/types/Form';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
@@ -11,6 +10,7 @@ import { setUser } from '@/redux/reducers/UserSlice';
 import { useLocalizationContext } from '@/provider/LocalizationProvider';
 import { SingUpSchema } from '@/utils/schemas/signup-schema';
 import { SingInSchema } from '@/utils/schemas/signin-schema';
+import { cn } from '@/utils';
 
 function SignUpForm({
   questionForLink,
@@ -71,7 +71,7 @@ function SignUpForm({
   return (
     <div>
       <section id="content" className="flex text-center overflow-hidden">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} aria-label="form">
           <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590] sm:text-center">
             {title}
           </h1>
@@ -86,6 +86,7 @@ function SignUpForm({
               })}
               type="email"
               name="email"
+              aria-label="emailIput"
             />
             <div className="h-10 text-sm">
               {errors.email && <span className="text-red-500"> {errors.email.message} </span>}
@@ -102,11 +103,12 @@ function SignUpForm({
               placeholder={i18nQL[lang].inputData.password}
               type={showPassword.isToggle ? 'text' : 'password'}
               name="password"
+              aria-label="passwordIput"
             />
             {showPassword.isToggle && (
               <button
                 type="button"
-                aria-label="button"
+                aria-label="buttonEye"
                 className="absolute bottom-12 right-3"
                 onClick={doTogglePassword}
               >
@@ -116,7 +118,7 @@ function SignUpForm({
             {!showPassword.isToggle && (
               <button
                 type="button"
-                aria-label="button"
+                aria-label="buttonEyeSlash"
                 className="absolute bottom-12 right-3"
                 onClick={doTogglePassword}
               >
@@ -136,11 +138,12 @@ function SignUpForm({
                 placeholder={i18nQL[lang].inputData.confirmPassword}
                 type={showConfirmPassword.isToggle ? 'text' : 'password'}
                 name="confirmPassword"
+                aria-label="confirmPasswordlIput"
               />
               {showConfirmPassword.isToggle && (
                 <button
                   type="button"
-                  aria-label="button"
+                  aria-label="buttonEye"
                   className="absolute bottom-10 right-3"
                   onClick={doToggleConfirmPassword}
                 >
@@ -150,7 +153,7 @@ function SignUpForm({
               {!showConfirmPassword.isToggle && (
                 <button
                   type="button"
-                  aria-label="button"
+                  aria-label="buttonEyeSlash"
                   className="absolute bottom-10 right-3"
                   onClick={doToggleConfirmPassword}
                 >
@@ -165,23 +168,23 @@ function SignUpForm({
           <div className="mb-5">
             <span className="text-sm">
               {questionForLink}
-              <Link to={path} className={clsx('text-sm underline', isError && 'text-red-400')}>
+              <Link to={path} className={cn('text-sm underline', isError && 'text-red-400')}>
                 {textForLink}
               </Link>
             </span>
           </div>
           <button
             type="submit"
-            aria-label="button"
+            aria-label="buttonLink"
             disabled={!isValid}
             className="focus:outline-none disabled:bg-slate-300 text-white bg-[#d60590]  hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
           >
             {buttonValue}
           </button>
           <div
-            className={clsx(
+            className={cn(
               'translate-x-96 w-41 text-sm',
-              isError && 'transition delay-150 duration-500 ease-in-out translate-x-1'
+              isError === true && 'transition delay-150 duration-500 ease-in-out translate-x-0'
             )}
           >
             {' '}
