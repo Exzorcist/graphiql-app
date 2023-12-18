@@ -3,6 +3,13 @@
     "notfound": {
       "text": "Выбачайце, старонка не знойдзена!"
     },
+    "editor": {
+      "Variables": "Пераменныя",
+      "Headers": "Загалоўкі",
+      "Enter URL": "Увядзіце URL",
+      "Schema": "Схема",
+      "Send Request": "Aдправіць запыт"
+    },
     "registration": {
       "article": "Зарэгістравацца",
       "text": "Стварыць акаўнт",

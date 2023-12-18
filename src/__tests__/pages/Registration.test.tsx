@@ -3,14 +3,13 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import Registration from '@/pages/Registration';
-import { LocalizationProvider } from '@/provider/LocalizationProvider';
-import { testProviderData } from '@/__tests__/data/provider';
+import LocalizationProvider from '@/providers/LocalizationProvider';
 
 test('[ Registration ]: base test', () => {
   render(
     <MemoryRouter initialEntries={['/registration/']}>
       <Provider store={store}>
-        <LocalizationProvider value={testProviderData}>
+        <LocalizationProvider>
           <Registration />
         </LocalizationProvider>
       </Provider>

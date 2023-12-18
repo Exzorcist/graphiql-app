@@ -3,6 +3,13 @@
     "notfound": {
       "text": "Sorry, page not found!"
     },
+    "editor": {
+      "Variables": "Variables",
+      "Headers": "Headers",
+      "Enter URL": "Enter URL",
+      "Schema": "Schema",
+      "Send Request": "Send request"
+    },
     "registration": {
       "article": "SignUp",
       "text": "Create an account",

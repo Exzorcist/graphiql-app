@@ -3,6 +3,13 @@
     "notfound": {
       "text": "Извините, страница не найдена!"
     },
+    "editor": {
+      "Variables": "Переменные",
+      "Headers": "Заголовки",
+      "Enter URL": "Введите URL",
+      "Schema": "Схема",
+      "Send Request": "Отправить запрос"
+    },
     "registration": {
       "article": "Зарегистрироваться",
       "text": "Создать аккаунт",

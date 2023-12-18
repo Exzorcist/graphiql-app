@@ -7,10 +7,10 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { InfoForm, Inputs } from '@/types/Form';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { setUser } from '@/redux/reducers/UserSlice';
-import { useLocalizationContext } from '@/provider/LocalizationProvider';
-import { SingUpSchema } from '@/utils/schemas/signup-schema';
-import { SingInSchema } from '@/utils/schemas/signin-schema';
-import { cn } from '@/utils';
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import { signUpSchema } from '@/utils/schemas/signup-schema';
+import { signInSchema } from '@/utils/schemas/signin-schema';
+import { cn } from '@/utils/cn';
 
 function SignUpForm({
   questionForLink,
@@ -21,7 +21,7 @@ function SignUpForm({
   isLogin,
   functionForUserWithEmailAndPassword,
 }: InfoForm) {
-  const { i18nQL, lang } = useLocalizationContext();
+  const { t, lang } = useLocalizationContext();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -55,19 +55,21 @@ function SignUpForm({
         setIsError(true);
       });
   }
-  const useLoc = useLocalizationContext();
+
   const {
     trigger,
     register,
     handleSubmit,
     formState: { errors, isValid, dirtyFields, isDirty },
   } = useForm<Inputs>({
-    resolver: yupResolver(isLogin ? SingUpSchema(useLoc) : SingInSchema(useLoc)),
+    resolver: yupResolver(isLogin ? signUpSchema(t) : signInSchema(t)),
     mode: 'onChange',
   });
+
   const onSubmit: SubmitHandler<Inputs> = () => {
     handleRegister(email, password);
   };
+
   useEffect(() => {
     if (isDirty) {
       Object.keys(dirtyFields).forEach((field) => trigger(field as keyof Inputs));
@@ -90,10 +92,8 @@ function SignUpForm({
 
         <div>
           <input
-            className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                      focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
-                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder={i18nQL[lang].inputData.email}
+            className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder={t.inputData.email}
             {...register('email', {
               onChange: (e) => {
                 setEmail(e.currentTarget.value);
@@ -110,15 +110,13 @@ function SignUpForm({
 
         <div className="relative">
           <input
-            className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                       focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
-                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             {...register('password', {
               onChange: (e) => {
                 setPassword(e.currentTarget.value);
               },
             })}
-            placeholder={i18nQL[lang].inputData.password}
+            placeholder={t.inputData.password}
             type={showPassword.isToggle ? 'text' : 'password'}
             name="password"
             aria-label="passwordIput"
@@ -152,11 +150,9 @@ function SignUpForm({
         {isLogin && (
           <div className="relative">
             <input
-              className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
-                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               {...register('confirmPassword')}
-              placeholder={i18nQL[lang].inputData.confirmPassword}
+              placeholder={t.inputData.confirmPassword}
               type={showConfirmPassword.isToggle ? 'text' : 'password'}
               name="confirmPassword"
               aria-label="confirmPasswordlIput"
@@ -199,8 +195,7 @@ function SignUpForm({
           type="submit"
           aria-label="buttonLink"
           disabled={!isValid}
-          className="focus:outline-none disabled:bg-slate-300 text-white bg-main  hover:bg-main/80 
-                     focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+          className="focus:outline-none disabled:bg-slate-300text-white bg-main hover:bg-main/80 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 text-white"
         >
           {buttonValue}
         </button>
@@ -208,15 +203,15 @@ function SignUpForm({
         <div
           className={cn(
             'text-sm translate-x-96 ml-5',
-            isError === true &&
-              'transition delay-150 duration-500 ease-in-out translate-x-0 bg-red-500'
+            isError && 'transition delay-150 duration-500 ease-in-out translate-x-0 bg-red-500'
           )}
         >
           {' '}
-          {i18nQL[lang].errors.error} <span className="underline">{textForLink}</span>{' '}
+          {t.errors.error} <span className="underline">{textForLink}</span>{' '}
         </div>
       </form>
     </section>
   );
 }
+
 export default SignUpForm;

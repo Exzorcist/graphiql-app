@@ -1,0 +1,35 @@
+.ResizeHandleGutter {
+  @apply relative bg-editor-border;
+}
+
+[data-panel-group-direction='vertical'] > .ResizeHandleGutter {
+  @apply h-[1px];
+}
+
+[data-panel-group-direction='horizontal'] > .ResizeHandleGutter {
+  @apply w-[1px] h-full;
+}
+
+.ResizeHandleDragArea {
+  @apply absolute-center cursor-[inherit];
+}
+
+[data-panel-group-direction='vertical'] > .ResizeHandleGutter > .ResizeHandleDragArea {
+  @apply w-full h-2;
+}
+
+[data-panel-group-direction='horizontal'] > .ResizeHandleGutter > .ResizeHandleDragArea {
+  @apply w-2 h-full;
+}
+
+.ResizeHandleHoverArea {
+  @apply absolute-center opacity-0 bg-editor-accent transition ease-in-out pointer-events-none;
+}
+
+[data-panel-group-direction='vertical'] > .ResizeHandleGutter > .ResizeHandleHoverArea {
+  @apply w-full h-[2px];
+}
+
+[data-panel-group-direction='horizontal'] > .ResizeHandleGutter > .ResizeHandleHoverArea {
+  @apply w-[2px] h-full;
+}

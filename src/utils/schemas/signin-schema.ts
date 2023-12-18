@@ -1,20 +1,17 @@
 import * as yup from 'yup';
-import { ILocalizationProvider } from '@/types/Provider';
+import { Localization } from '@/types/Provider';
 
-export const SingInSchema = ({ i18nQL, lang }: ILocalizationProvider) => {
+export const signInSchema = (t: Localization) => {
   return yup.object().shape({
-    email: yup
-      .string()
-      .email(i18nQL[lang].validation.email.format)
-      .required(i18nQL[lang].validation.email.required),
+    email: yup.string().email(t.validation.email.format).required(t.validation.email.required),
 
     password: yup
       .string()
-      .required(i18nQL[lang].validation.password.required)
-      .matches(/\d/, i18nQL[lang].validation.password.number)
-      .matches(/[A-ZА-Я]/, i18nQL[lang].validation.password.uppercase)
-      .matches(/[a-zа-я]/, i18nQL[lang].validation.password.lowercase)
-      .matches(/[.:,;?!@#$%^&*_\-+=]/, i18nQL[lang].validation.password.special)
-      .min(8, i18nQL[lang].validation.password.minlength),
+      .required(t.validation.password.required)
+      .matches(/\d/, t.validation.password.number)
+      .matches(/[A-ZА-Я]/, t.validation.password.uppercase)
+      .matches(/[a-zа-я]/, t.validation.password.lowercase)
+      .matches(/[.:,;?!@#$%^&*_\-+=]/, t.validation.password.special)
+      .min(8, t.validation.password.minlength),
   });
 };

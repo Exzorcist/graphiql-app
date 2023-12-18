@@ -1,16 +1,16 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import SignForm from './SignForm';
-import { useLocalizationContext } from '@/provider/LocalizationProvider';
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 function SignIn() {
-  const { i18nQL, lang } = useLocalizationContext();
+  const { t } = useLocalizationContext();
 
   return (
     <SignForm
-      questionForLink={i18nQL[lang].page.login.questionForLink}
-      textForLink={i18nQL[lang].page.login.textForLink}
-      title={i18nQL[lang].page.login.article}
-      buttonValue={i18nQL[lang].page.login.text}
+      questionForLink={t.page.login.questionForLink}
+      textForLink={t.page.login.textForLink}
+      title={t.page.login.article}
+      buttonValue={t.page.login.text}
       path="/registration"
       isLogin={false}
       functionForUserWithEmailAndPassword={signInWithEmailAndPassword}
