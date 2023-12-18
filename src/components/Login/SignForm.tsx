@@ -69,130 +69,144 @@ function SignUpForm({
   };
 
   return (
-    <div>
-      <section id="content" className="flex text-center overflow-hidden">
-        <form onSubmit={handleSubmit(onSubmit)} aria-label="form">
-          <h1 className="mb-5 text-center text-2xl font-semibold text-[#d60590] sm:text-center">
-            {title}
-          </h1>
-          <div className="sm:w-96">
-            <input
-              className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder={i18nQL[lang].inputData.email}
-              {...register('email', {
-                onChange: (e) => {
-                  setEmail(e.currentTarget.value);
-                },
-              })}
-              type="email"
-              name="email"
-              aria-label="emailIput"
-            />
-            <div className="h-10 text-sm">
-              {errors.email && <span className="text-red-500"> {errors.email.message} </span>}
-            </div>
+    <section
+      className="flex items-center justify-center h-full py-10 px-5 grow text-center overflow-hidden"
+      data-element="app-form"
+    >
+      <form className="w-full max-w-md" onSubmit={handleSubmit(onSubmit)} aria-label="form">
+        <h1 className="mb-12 text-center text-2xl font-semibold text-main sm:text-center">
+          {title}
+        </h1>
+
+        <div>
+          <input
+            className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+                      focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
+                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder={i18nQL[lang].inputData.email}
+            {...register('email', {
+              onChange: (e) => {
+                setEmail(e.currentTarget.value);
+              },
+            })}
+            type="email"
+            name="email"
+            aria-label="emailIput"
+          />
+          <div className="h-10 text-sm">
+            {errors.email && <span className="text-red-500"> {errors.email.message} </span>}
           </div>
-          <div className="sm:w-96 relative">
+        </div>
+
+        <div className="relative">
+          <input
+            className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+                       focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
+                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            {...register('password', {
+              onChange: (e) => {
+                setPassword(e.currentTarget.value);
+              },
+            })}
+            placeholder={i18nQL[lang].inputData.password}
+            type={showPassword.isToggle ? 'text' : 'password'}
+            name="password"
+            aria-label="passwordIput"
+          />
+          {showPassword.isToggle && (
+            <button
+              type="button"
+              aria-label="buttonEye"
+              className="absolute bottom-12 right-3"
+              onClick={doTogglePassword}
+            >
+              <EyeIcon className="h-6 w-6 mx-1" />
+            </button>
+          )}
+          {!showPassword.isToggle && (
+            <button
+              type="button"
+              aria-label="buttonEyeSlash"
+              className="absolute bottom-12 right-3"
+              onClick={doTogglePassword}
+            >
+              <EyeSlashIcon className="h-6 w-6 mx-1" />
+            </button>
+          )}
+
+          <div className="h-10 text-sm text-red-500">
+            {errors.password && <span> {errors.password.message} </span>}
+          </div>
+        </div>
+
+        {isLogin && (
+          <div className="relative">
             <input
-              className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              {...register('password', {
-                onChange: (e) => {
-                  setPassword(e.currentTarget.value);
-                },
-              })}
-              placeholder={i18nQL[lang].inputData.password}
-              type={showPassword.isToggle ? 'text' : 'password'}
-              name="password"
-              aria-label="passwordIput"
+              className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
+                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              {...register('confirmPassword')}
+              placeholder={i18nQL[lang].inputData.confirmPassword}
+              type={showConfirmPassword.isToggle ? 'text' : 'password'}
+              name="confirmPassword"
+              aria-label="confirmPasswordlIput"
             />
-            {showPassword.isToggle && (
+            {showConfirmPassword.isToggle && (
               <button
                 type="button"
                 aria-label="buttonEye"
-                className="absolute bottom-12 right-3"
-                onClick={doTogglePassword}
+                className="absolute bottom-10 right-3"
+                onClick={doToggleConfirmPassword}
               >
                 <EyeIcon className="h-6 w-6 mx-1" />
               </button>
             )}
-            {!showPassword.isToggle && (
+            {!showConfirmPassword.isToggle && (
               <button
                 type="button"
                 aria-label="buttonEyeSlash"
-                className="absolute bottom-12 right-3"
-                onClick={doTogglePassword}
+                className="absolute bottom-10 right-3"
+                onClick={doToggleConfirmPassword}
               >
                 <EyeSlashIcon className="h-6 w-6 mx-1" />
               </button>
             )}
+            <div className="h-8 text-sm text-red-500">
+              {errors.confirmPassword && <span> {errors.confirmPassword.message} </span>}
+            </div>
+          </div>
+        )}
 
-            <div className="h-10 text-sm text-red-500">
-              {errors.password && <span> {errors.password.message} </span>}
-            </div>
-          </div>
-          {isLogin && (
-            <div className="sm:w-96 relative">
-              <input
-                className="bg-violet-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                {...register('confirmPassword')}
-                placeholder={i18nQL[lang].inputData.confirmPassword}
-                type={showConfirmPassword.isToggle ? 'text' : 'password'}
-                name="confirmPassword"
-                aria-label="confirmPasswordlIput"
-              />
-              {showConfirmPassword.isToggle && (
-                <button
-                  type="button"
-                  aria-label="buttonEye"
-                  className="absolute bottom-10 right-3"
-                  onClick={doToggleConfirmPassword}
-                >
-                  <EyeIcon className="h-6 w-6 mx-1" />
-                </button>
-              )}
-              {!showConfirmPassword.isToggle && (
-                <button
-                  type="button"
-                  aria-label="buttonEyeSlash"
-                  className="absolute bottom-10 right-3"
-                  onClick={doToggleConfirmPassword}
-                >
-                  <EyeSlashIcon className="h-6 w-6 mx-1" />
-                </button>
-              )}
-              <div className="h-8 text-sm text-red-500">
-                {errors.confirmPassword && <span> {errors.confirmPassword.message} </span>}
-              </div>
-            </div>
+        <div className="mb-5">
+          <span className="text-sm">
+            {questionForLink}
+            <Link to={path} className={cn('text-sm underline', isError && 'text-red-400')}>
+              {textForLink}
+            </Link>
+          </span>
+        </div>
+        <button
+          type="submit"
+          aria-label="buttonLink"
+          disabled={!isValid}
+          className="focus:outline-none disabled:bg-slate-300 text-white bg-main  hover:bg-main/80 
+                     focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+        >
+          {buttonValue}
+        </button>
+
+        <div
+          className={cn(
+            'text-sm',
+            isError === true &&
+              'transition delay-150 duration-500 ease-in-out translate-x-0 bg-red-500'
           )}
-          <div className="mb-5">
-            <span className="text-sm">
-              {questionForLink}
-              <Link to={path} className={cn('text-sm underline', isError && 'text-red-400')}>
-                {textForLink}
-              </Link>
-            </span>
-          </div>
-          <button
-            type="submit"
-            aria-label="buttonLink"
-            disabled={!isValid}
-            className="focus:outline-none disabled:bg-slate-300 text-white bg-[#d60590]  hover:bg-pink-500 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
-          >
-            {buttonValue}
-          </button>
-          <div
-            className={cn(
-              'translate-x-96 w-41 text-sm',
-              isError === true && 'transition delay-150 duration-500 ease-in-out translate-x-0'
-            )}
-          >
-            {' '}
-            {i18nQL[lang].errors.error} <span className="underline">{textForLink}</span>{' '}
-          </div>
-        </form>
-      </section>
-    </div>
+        >
+          {' '}
+          {i18nQL[lang].errors.error} <span className="underline">{textForLink}</span>{' '}
+        </div>
+      </form>
+    </section>
   );
 }
 export default SignUpForm;
