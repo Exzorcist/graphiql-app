@@ -1,7 +1,8 @@
 import { ComponentProps, ReactNode, useCallback, useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import Drawer, { DrawerContentProps } from './Drawer';
-import { capitalize, cn } from '@/utils';
+import { cn } from '@/utils/cn';
+import { capitalize } from '@/utils/capitalize';
 
 export type SwipableDrawerProps = {
   trigger?: ReactNode;

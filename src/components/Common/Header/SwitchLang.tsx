@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 import { Language } from '@/types/Provider';
 
 function SwitchLang() {

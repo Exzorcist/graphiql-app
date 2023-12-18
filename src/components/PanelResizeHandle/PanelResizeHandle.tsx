@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, memo } from 'react';
 import { PanelResizeHandle as PanelResizeHandleLib } from 'react-resizable-panels';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 import styles from './PanelResizeHandle.module.css';
 
 function PanelResizeHandle({

@@ -4,7 +4,7 @@ import { CreateThemeOptions, Settings } from '@uiw/codemirror-themes';
 import { draculaInit } from '@uiw/codemirror-theme-dracula';
 import { materialDarkInit, materialLightInit } from '@uiw/codemirror-theme-material';
 import { javascript } from '@codemirror/lang-javascript';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { Theme, useTheme } from '@/providers/ThemeProvider';
 

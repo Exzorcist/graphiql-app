@@ -1,5 +1,5 @@
 import { ComponentProps, memo, useEffect } from 'react';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from './constants';
 

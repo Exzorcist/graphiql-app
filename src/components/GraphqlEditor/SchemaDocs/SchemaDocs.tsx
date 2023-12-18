@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 
 function SchemaDocs({ className, ...delegated }: ComponentProps<'div'>) {
   return (

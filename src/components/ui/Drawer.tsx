@@ -2,7 +2,7 @@ import * as DrawerPrimitive from '@radix-ui/react-dialog';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, HTMLAttributes } from 'react';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 
 const DrawerTrigger = DrawerPrimitive.Trigger;
 

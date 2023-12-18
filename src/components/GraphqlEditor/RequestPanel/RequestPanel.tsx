@@ -6,7 +6,7 @@ import GraphqlToolsPanel from '../GraphqlToolsPanel/GraphqlToolsPanel';
 import { requestPanelThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Editor } from '@/components/Editor';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 
 const PANEL_GROUP_ID = 'request-panel-group';
 const QUERY_PANEL_MIN_SIZE = 20;

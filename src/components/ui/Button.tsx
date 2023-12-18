@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef } from 'react';
 import { PolyRefFunction } from 'react-polymorphed';
 import { cva, VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 
 const polyRef = forwardRef as PolyRefFunction;
 

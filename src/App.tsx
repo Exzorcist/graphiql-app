@@ -5,12 +5,15 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import Root from '@/layout/Root';
 import Welcome from '@/pages/Welcome';
 import Login from '@/pages/Login';
 import Registration from '@/pages/Registration';
 import NotFound from '@/pages/NotFound';
 import GraphqlEditorPage from '@/pages/GraphqlEditorPage';
+import { store, persistor } from './redux/store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +28,13 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
+  );
 }
 
 export default App;

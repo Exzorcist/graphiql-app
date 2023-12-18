@@ -1,7 +1,7 @@
 import { ChevronUpIcon } from '@heroicons/react/24/solid';
 import { memo } from 'react';
 import Button from '@/components/ui/Button';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 export type GraphqlToolsHeaderProps = {

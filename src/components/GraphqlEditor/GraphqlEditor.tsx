@@ -10,7 +10,7 @@ import ResponsePanel from './ResponsePanel/ResponsePanel';
 import RequestPanel from './RequestPanel/RequestPanel';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import SideBar from './SideBar';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 
 const PANEL_GROUP_ID = 'graphql-editor-panel-group';
 const QUERY_EDITOR_PANEL_MIN_SIZE = 20;

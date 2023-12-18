@@ -1,5 +1,5 @@
 import { ComponentProps, createContext, memo, useMemo, useState } from 'react';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from './constants';
 
 type Props = ComponentProps<'div'>;

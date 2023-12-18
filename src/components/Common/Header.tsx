@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
 
 import { Bars3BottomRightIcon } from '@heroicons/react/24/outline';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import Logo from '@/assets/logo-graphql.svg';
 import SwitchLang from './Header/SwitchLang';
