@@ -32,7 +32,7 @@ function SchemaDocsPanel({
     } else {
       collapse();
     }
-  }, [show, collapse, expand]);
+  }, [show, expand, collapse]);
 
   const handleDocsExpand = useCallback(() => {
     onExpand();

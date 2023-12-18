@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import SwipeableDrawer, { SwipableDrawerProps } from '@/components/ui/SwipeableDrawer';
 import SchemaDocs from './SchemaDocs';
 
@@ -9,4 +10,4 @@ function SchemaDocsDrawer(props: SwipableDrawerProps) {
   );
 }
 
-export default SchemaDocsDrawer;
+export default memo(SchemaDocsDrawer);

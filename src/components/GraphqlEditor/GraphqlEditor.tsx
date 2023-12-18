@@ -26,13 +26,10 @@ function GraphqlEditor() {
     setShowDocs((prev) => !prev);
   }, []);
 
-  const setShowDocsMemo = useCallback((state: boolean) => setShowDocs(state), []);
-  const setShowToolsMemo = useCallback((state: boolean) => setShowTools(state), []);
-
   return (
     <div className="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family">
       {isLaptop && <SideBar />}
-      {!isLaptop && <SchemaDocsDrawer open={showDocs} onOpenChange={setShowDocsMemo} />}
+      {!isLaptop && <SchemaDocsDrawer open={showDocs} onOpenChange={setShowDocs} />}
       <div className="h-full flex w-full flex-col">
         <div className="bg-editor-primary px-4 py-5 border-editor-border border-b">
           <EndpointField onSchemaClick={handleDocsClick} isSchemaOpen={showDocs} />
@@ -48,14 +45,14 @@ function GraphqlEditor() {
                 id="docsPanel"
                 order={3}
                 show={showDocs}
-                onShowChange={setShowDocsMemo}
+                onShowChange={setShowDocs}
                 panelClassName={panelClassName}
               />
             ) : (
               <GraphqlToolsPanel
                 id="toolsPanel"
                 order={3}
-                onShowChange={setShowToolsMemo}
+                onShowChange={setShowTools}
                 panelGroupId={PANEL_GROUP_ID}
                 panelClassName={panelClassName}
               />

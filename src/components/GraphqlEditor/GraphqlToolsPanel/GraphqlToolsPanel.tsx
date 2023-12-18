@@ -1,5 +1,5 @@
 import { ImperativePanelHandle, Panel } from 'react-resizable-panels';
-import { ComponentProps, useCallback, useRef, useState } from 'react';
+import { ComponentProps, memo, useCallback, useRef, useState } from 'react';
 import GraphqlTools from './GraphqlTools';
 import {
   useKeepPanelCollapsed,
@@ -71,4 +71,4 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
   );
 }
 
-export default GraphqlToolsPanel;
+export default memo(GraphqlToolsPanel);

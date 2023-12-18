@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, memo } from 'react';
 import { cn } from '@/utils';
 import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
@@ -39,4 +39,4 @@ function EndpointField({
   );
 }
 
-export default EndpointField;
+export default memo(EndpointField);

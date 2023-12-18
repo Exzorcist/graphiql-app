@@ -14,7 +14,7 @@ function PanelResizeHandle({
         <div
           className={cn(
             styles.ResizeHandleHoverArea,
-            'peer-hover:delay-[130ms] peer-hover:opacity-100 group-data-[resize-handle-active]:opacity-100'
+            'peer-hover:delay-150 peer-hover:opacity-100 group-data-[resize-handle-active]:opacity-100'
           )}
         />
       </div>
