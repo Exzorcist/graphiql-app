@@ -1,6 +1,5 @@
 import { ImperativePanelHandle, Panel } from 'react-resizable-panels';
 import { ComponentProps, useCallback, useRef, useState } from 'react';
-import { Settings } from '@uiw/codemirror-themes';
 import GraphqlTools from './GraphqlTools';
 import {
   useKeepPanelCollapsed,
@@ -8,24 +7,18 @@ import {
   usePanelSizeState,
 } from '@/hooks/panel-resize-hooks';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from '@/components/Editor';
+import { requestPanelThemeSettings } from '../themeSettings';
 
 type Props = {
   panelGroupId: string;
   panelClassName?: string;
-  onToolsShow?(isShowing: boolean): void;
-  themeSettings?: Settings;
+  onShowChange?(isShowing: boolean): void;
 } & ComponentProps<typeof Panel>;
 
 const TOOLS_PANEL_DEFAULT_SIZE = 30;
 const TOOLS_PANEL_MIN_SIZE = 20;
 
-function GraphqlToolsPanel({
-  panelGroupId,
-  panelClassName,
-  onToolsShow,
-  themeSettings,
-  ...panelProps
-}: Props) {
+function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...panelProps }: Props) {
   const [showTools, setShowTools] = useState(false);
   const [toolsPanelCollapseSize] = usePanelSizeState(panelGroupId, DEFAULT_EDITOR_HEADER_HEIGHT);
   const toolsPanelRef = useRef<ImperativePanelHandle | null>(null);
@@ -48,14 +41,14 @@ function GraphqlToolsPanel({
   const handleCollapse = useCallback(() => {
     onCollapse();
     setShowTools(false);
-    onToolsShow?.(false);
-  }, [onCollapse, onToolsShow]);
+    onShowChange?.(false);
+  }, [onCollapse, onShowChange]);
 
   const handleExpand = useCallback(() => {
     onExpand();
     setShowTools(true);
-    onToolsShow?.(true);
-  }, [onExpand, onToolsShow]);
+    onShowChange?.(true);
+  }, [onExpand, onShowChange]);
 
   return (
     <Panel
@@ -72,7 +65,7 @@ function GraphqlToolsPanel({
       <GraphqlTools
         isOpen={showTools}
         onChevronClick={handleChevronClick}
-        themeSettings={themeSettings}
+        themeSettings={requestPanelThemeSettings}
       />
     </Panel>
   );

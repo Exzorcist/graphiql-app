@@ -65,6 +65,7 @@ const Button = polyRef<typeof defaultElement, Props>(
     );
   }
 );
+Button.displayName = 'Button';
 
 export type ButtonProps = ComponentProps<typeof Button>;
 

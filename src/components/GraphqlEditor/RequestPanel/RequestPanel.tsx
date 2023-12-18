@@ -1,21 +1,17 @@
 import { Panel, PanelGroup } from 'react-resizable-panels';
-import { memo, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import { Settings } from '@uiw/codemirror-themes';
+import { memo, useRef, useState } from 'react';
 import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle';
-import { cn } from '@/utils';
 import GraphqlToolsPanel from '../GraphqlToolsPanel/GraphqlToolsPanel';
-import { Editor } from '@/components/Editor';
+import { requestPanelThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-
-type Props = {
-  themeSettings?: Settings;
-};
+import { Editor } from '@/components/Editor';
+import { cn } from '@/utils';
 
 const PANEL_GROUP_ID = 'request-panel-group';
 const QUERY_PANEL_MIN_SIZE = 20;
 
-function RequestPanel({ themeSettings }: Props) {
+function RequestPanel() {
   const [showTools, setShowTools] = useState(false);
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const isLaptop = useBreakpoint('min-laptop');
@@ -29,7 +25,7 @@ function RequestPanel({ themeSettings }: Props) {
 
         return (
           <div className="w-full h-full" ref={nodeRef}>
-            <Editor themeSettings={themeSettings}>
+            <Editor themeSettings={requestPanelThemeSettings}>
               <PanelGroup id={PANEL_GROUP_ID} autoSaveId={PANEL_GROUP_ID} direction="vertical">
                 <Panel
                   id="queryPanel"
@@ -46,9 +42,8 @@ function RequestPanel({ themeSettings }: Props) {
                       id="toolsPanel"
                       order={2}
                       panelGroupId={PANEL_GROUP_ID}
-                      onToolsShow={setShowTools}
+                      onShowChange={setShowTools}
                       className={panelClassName}
-                      themeSettings={themeSettings}
                     />
                   </>
                 )}

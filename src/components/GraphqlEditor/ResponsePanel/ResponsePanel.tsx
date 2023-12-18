@@ -1,13 +1,9 @@
-import { Settings } from '@uiw/codemirror-themes';
 import { memo } from 'react';
 import { Editor } from '@/components/Editor';
+import { responsePanelThemeSettings } from '../themeSettings';
 
-type Props = {
-  themeSettings?: Settings;
-};
-
-function ResponsePanel({ themeSettings }: Props) {
-  return <Editor themeSettings={themeSettings} />;
+function ResponsePanel() {
+  return <Editor themeSettings={responsePanelThemeSettings} />;
 }
 
 export default memo(ResponsePanel);

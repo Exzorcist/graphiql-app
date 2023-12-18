@@ -5,14 +5,14 @@ import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
 
 export type EndpointFieldProps = {
-  onDocsClick?(): void;
-  isDocsOpen?: boolean;
+  onSchemaClick?(): void;
+  isSchemaOpen?: boolean;
 } & ComponentProps<'form'>;
 
 function EndpointField({
-  onDocsClick,
+  onSchemaClick,
+  isSchemaOpen = false,
   className,
-  isDocsOpen = false,
   ...delegated
 }: EndpointFieldProps) {
   const { t } = useLocalizationContext();
@@ -31,7 +31,7 @@ function EndpointField({
           placeholder={t.page.editor['Enter URL']}
         />
         <div className="bottom-0 right-4 h-full flex items-center pr-4 pl-4">
-          <SchemaButton variant="ghost-accented" onClick={onDocsClick} active={isDocsOpen} />
+          <SchemaButton variant="ghost-accented" onClick={onSchemaClick} active={isSchemaOpen} />
         </div>
       </div>
       <SendRequestButton />

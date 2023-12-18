@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { cn } from '@/utils';
 
-function DocsPanel({ className, ...delegated }: ComponentProps<'div'>) {
+function SchemaDocs({ className, ...delegated }: ComponentProps<'div'>) {
   return (
     <div
       className={cn('bg-editor-primary flex items-center justify-center h-full w-full', className)}
@@ -12,4 +12,4 @@ function DocsPanel({ className, ...delegated }: ComponentProps<'div'>) {
   );
 }
 
-export default DocsPanel;
+export default SchemaDocs;
