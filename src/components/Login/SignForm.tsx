@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
@@ -57,9 +57,10 @@ function SignUpForm({
   }
   const useLoc = useLocalizationContext();
   const {
+    trigger,
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, dirtyFields, isDirty },
   } = useForm<Inputs>({
     resolver: yupResolver(isLogin ? SingUpSchema(useLoc) : SingInSchema(useLoc)),
     mode: 'onChange',
@@ -67,6 +68,12 @@ function SignUpForm({
   const onSubmit: SubmitHandler<Inputs> = () => {
     handleRegister(email, password);
   };
+
+  useEffect(() => {
+    if (isDirty) {
+      Object.keys(dirtyFields).forEach((field) => trigger(field as keyof Inputs));
+    }
+  }, [lang, dirtyFields, isDirty, trigger]);
 
   return (
     <div>
