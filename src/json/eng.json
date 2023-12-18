@@ -2,8 +2,55 @@
   "page": {
     "notfound": {
       "text": "Sorry, page not found!"
+    },
+    "registration": {
+      "article": "SignUp",
+      "text": "Create an account",
+      "email": "email",
+      "password": "password",
+      "confirm": "Confirm password",
+      "questionForLink": "Do you have an account? 👉",
+      "textForLink": "Sign In"
+    },
+    "login": {
+      "article": "SignIn",
+      "text": "Login",
+      "email": "email",
+      "password": "password",
+      "questionForLink": "Don`t have an account? 👉",
+      "textForLink": "Create an account"
     }
   },
+
+  "validation": {
+    "email": {
+      "format": "Invalid email format",
+      "required": "This field is required"
+    },
+    "password": {
+      "required": "This field is required",
+      "number": "Password must contain at least 1 number",
+      "uppercase": "Password must contain at least 1 uppercase letter",
+      "lowercase": "Password must contain at least 1 lowercase letter",
+      "special": "Password must contain at least 1 special character",
+      "minlength": "Password must be at least 8 characters long"
+    },
+    "confirmPassword": {
+      "required": "Please confirm your password",
+      "match": "Passwords must match"
+    }
+  },
+
+  "inputData": {
+    "email": "email",
+    "password": "password",
+    "confirmPassword": "confirm your password"
+  },
+
+  "errors": {
+    "error": "Something went wrong! You need to "
+  },
+
   "header": {
     "links": {
       "about": "About us",
