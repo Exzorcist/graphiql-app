@@ -47,6 +47,10 @@
     "confirmPassword": "confirm your password"
   },
 
+  "errors": {
+    "error": "Something went wrong! You need to "
+  },
+
   "header": {
     "links": {
       "about": "About us",

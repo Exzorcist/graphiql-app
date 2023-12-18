@@ -178,7 +178,6 @@ function SignUpForm({
           >
             {buttonValue}
           </button>
-          {/* {isError && <div> lala </div>} */}
           <div
             className={clsx(
               'translate-x-96 w-41 text-sm',
@@ -186,7 +185,7 @@ function SignUpForm({
             )}
           >
             {' '}
-            Something went wrong! You need to <span className="underline">{textForLink}</span>{' '}
+            {i18nQL[lang].errors.error} <span className="underline">{textForLink}</span>{' '}
           </div>
         </form>
       </section>
