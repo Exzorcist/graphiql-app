@@ -42,6 +42,7 @@ const EditorArea = forwardRef<ReactCodeMirrorRef, Props>(
         className={cn('h-full flex flex-col', className)}
         extensions={[styleOverrides, javascript({ jsx: true })]}
         style={{ paddingTop: header.visible ? header.height : undefined }}
+        data-testid="editor-area"
         {...rest}
       />
     );

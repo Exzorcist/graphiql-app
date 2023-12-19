@@ -1,0 +1,479 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GraphqlEditor 1`] = `
+<body>
+  <div>
+    <div
+      class="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family"
+    >
+      <div
+        class="h-full flex w-full flex-col"
+      >
+        <div
+          class="bg-editor-primary px-4 py-5 border-editor-border border-b"
+        >
+          <form
+            class="h-[45px] flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent"
+          >
+            <div
+              class="w-full h-full flex "
+            >
+              <input
+                class="w-full h-full bg-transparent outline-none pl-4"
+                placeholder="Enter URL"
+              />
+              <div
+                class="bottom-0 right-4 h-full flex items-center pr-4 pl-4"
+              >
+                <button
+                  class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-accent/[.15] hover:text-editor-accent"
+                  role="button"
+                  tabindex="0"
+                  type="button"
+                >
+                  Schema
+                </button>
+              </div>
+            </div>
+            <button
+              class="py-[5px] transition min-w-fit cursor-pointer bg-editor-accent hover:bg-editor-accent-light text-white px-5 rounded-none rounded-r"
+              role="button"
+              tabindex="0"
+              type="submit"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+        <div
+          class="w-full h-full"
+        >
+          <div
+            class=""
+            data-panel-group=""
+            data-panel-group-direction="vertical"
+            data-panel-group-id="graphql-editor-panel-group"
+            style="display: flex; flex-direction: column; height: 100%; overflow: hidden; width: 100%;"
+          >
+            <div
+              class=""
+              data-panel=""
+              data-panel-group-id="graphql-editor-panel-group"
+              data-panel-id="requestPanel"
+              data-panel-size="1.0"
+              style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
+            >
+              <div
+                class="w-full h-full"
+              >
+                <div
+                  class=""
+                  data-panel-group=""
+                  data-panel-group-direction="vertical"
+                  data-panel-group-id="request-panel-group"
+                  style="display: flex; flex-direction: column; height: 100%; overflow: hidden; width: 100%;"
+                >
+                  <div
+                    class=""
+                    data-panel=""
+                    data-panel-group-id="request-panel-group"
+                    data-panel-id="queryPanel"
+                    data-panel-size="1.0"
+                    style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
+                  >
+                    <div
+                      class="cm-theme h-full flex flex-col"
+                      data-testid="editor-area"
+                    >
+                      <div
+                        class="cm-editor ͼ1 ͼ3 ͼ4 ͼ60 ͼ4q ͼ4p ͼ4z"
+                      >
+                        <div
+                          aria-live="polite"
+                          class="cm-announced"
+                        />
+                        <div
+                          class="cm-scroller"
+                          tabindex="-1"
+                        >
+                          <div
+                            aria-hidden="true"
+                            class="cm-gutters"
+                            style="min-height: 14px; position: sticky;"
+                          >
+                            <div
+                              class="cm-gutter cm-lineNumbers"
+                            >
+                              <div
+                                class="cm-gutterElement"
+                                style="height: 0px; visibility: hidden; pointer-events: none;"
+                              >
+                                9
+                              </div>
+                              <div
+                                class="cm-gutterElement cm-activeLineGutter"
+                                style="height: 14px;"
+                              >
+                                1
+                              </div>
+                            </div>
+                            <div
+                              class="cm-gutter cm-foldGutter"
+                            >
+                              <div
+                                class="cm-gutterElement"
+                                style="height: 0px; visibility: hidden; pointer-events: none;"
+                              >
+                                <span
+                                  title="Unfold line"
+                                >
+                                  ›
+                                </span>
+                              </div>
+                              <div
+                                class="cm-gutterElement cm-activeLineGutter"
+                                style="height: 14px;"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            aria-autocomplete="list"
+                            aria-multiline="true"
+                            autocapitalize="off"
+                            autocorrect="off"
+                            class="cm-content"
+                            contenteditable="true"
+                            role="textbox"
+                            spellcheck="false"
+                            style="tab-size: 4;"
+                            translate="no"
+                          >
+                            <div
+                              class="cm-activeLine cm-line"
+                            >
+                              <br />
+                            </div>
+                          </div>
+                          <div
+                            aria-hidden="true"
+                            class="cm-layer cm-layer-above cm-cursorLayer"
+                            style="z-index: 150; animation-duration: 1200ms;"
+                          />
+                          <div
+                            aria-hidden="true"
+                            class="cm-layer cm-selectionLayer"
+                            style="z-index: -2;"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="z-50 group"
+              data-panel-group-direction="vertical"
+              data-panel-group-id="graphql-editor-panel-group"
+              data-panel-resize-handle-enabled="true"
+              data-panel-resize-handle-id=":r7:"
+              data-resize-handle=""
+              role="separator"
+              style="cursor: ns-resize; user-select: none;"
+              tabindex="0"
+            >
+              <div
+                class="_ResizeHandleGutter_dd249a"
+              >
+                <div
+                  class="_ResizeHandleDragArea_dd249a peer"
+                />
+                <div
+                  class="_ResizeHandleHoverArea_dd249a peer-hover:delay-150 peer-hover:opacity-100 group-data-[resize-handle-active]:opacity-100"
+                />
+              </div>
+            </div>
+            <div
+              class=""
+              data-panel=""
+              data-panel-group-id="graphql-editor-panel-group"
+              data-panel-id="responsePanel"
+              data-panel-size="1.0"
+              style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
+            >
+              <div
+                class="cm-theme h-full flex flex-col"
+                data-testid="editor-area"
+              >
+                <div
+                  class="cm-editor ͼ1 ͼ3 ͼ4 ͼ61 ͼ51 ͼ4p ͼ5a"
+                >
+                  <div
+                    aria-live="polite"
+                    class="cm-announced"
+                  />
+                  <div
+                    class="cm-scroller"
+                    tabindex="-1"
+                  >
+                    <div
+                      aria-hidden="true"
+                      class="cm-gutters"
+                      style="min-height: 14px; position: sticky;"
+                    >
+                      <div
+                        class="cm-gutter cm-lineNumbers"
+                      >
+                        <div
+                          class="cm-gutterElement"
+                          style="height: 0px; visibility: hidden; pointer-events: none;"
+                        >
+                          9
+                        </div>
+                        <div
+                          class="cm-gutterElement cm-activeLineGutter"
+                          style="height: 14px;"
+                        >
+                          1
+                        </div>
+                      </div>
+                      <div
+                        class="cm-gutter cm-foldGutter"
+                      >
+                        <div
+                          class="cm-gutterElement"
+                          style="height: 0px; visibility: hidden; pointer-events: none;"
+                        >
+                          <span
+                            title="Unfold line"
+                          >
+                            ›
+                          </span>
+                        </div>
+                        <div
+                          class="cm-gutterElement cm-activeLineGutter"
+                          style="height: 14px;"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      aria-autocomplete="list"
+                      aria-multiline="true"
+                      autocapitalize="off"
+                      autocorrect="off"
+                      class="cm-content"
+                      contenteditable="true"
+                      role="textbox"
+                      spellcheck="false"
+                      style="tab-size: 4;"
+                      translate="no"
+                    >
+                      <div
+                        class="cm-activeLine cm-line"
+                      >
+                        <br />
+                      </div>
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      class="cm-layer cm-layer-above cm-cursorLayer"
+                      style="z-index: 150; animation-duration: 1200ms;"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class="cm-layer cm-selectionLayer"
+                      style="z-index: -2;"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="z-50 group"
+              data-panel-group-direction="vertical"
+              data-panel-group-id="graphql-editor-panel-group"
+              data-panel-resize-handle-enabled="true"
+              data-panel-resize-handle-id=":r9:"
+              data-resize-handle=""
+              role="separator"
+              style="cursor: ns-resize; user-select: none;"
+              tabindex="0"
+            >
+              <div
+                class="_ResizeHandleGutter_dd249a"
+              >
+                <div
+                  class="_ResizeHandleDragArea_dd249a peer"
+                />
+                <div
+                  class="_ResizeHandleHoverArea_dd249a peer-hover:delay-150 peer-hover:opacity-100 group-data-[resize-handle-active]:opacity-100"
+                />
+              </div>
+            </div>
+            <div
+              class=""
+              data-panel=""
+              data-panel-collapsible="true"
+              data-panel-group-id="graphql-editor-panel-group"
+              data-panel-id="toolsPanel"
+              data-panel-size="1.0"
+              style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
+            >
+              <div
+                class="h-full relative"
+              >
+                <div
+                  class="w-full absolute top-0 left-0 px-4 flex items-center"
+                  style="height: 50px;"
+                >
+                  <div
+                    class="flex gap-6 w-full"
+                  >
+                    <button
+                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+                      role="button"
+                      tabindex="0"
+                      type="button"
+                    >
+                      Variables
+                    </button>
+                    <button
+                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+                      role="button"
+                      tabindex="0"
+                      type="button"
+                    >
+                      Headers
+                    </button>
+                    <button
+                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent ml-auto"
+                      role="button"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="h-6 w-6"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          clip-rule="evenodd"
+                          d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="cm-theme h-full flex flex-col"
+                  data-testid="editor-area"
+                  style="padding-top: 50px;"
+                >
+                  <div
+                    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ62 ͼ5p ͼ4p ͼ5y"
+                  >
+                    <div
+                      aria-live="polite"
+                      class="cm-announced"
+                    />
+                    <div
+                      class="cm-scroller"
+                      tabindex="-1"
+                    >
+                      <div
+                        aria-hidden="true"
+                        class="cm-gutters"
+                        style="min-height: 14px; position: sticky;"
+                      >
+                        <div
+                          class="cm-gutter cm-lineNumbers"
+                        >
+                          <div
+                            class="cm-gutterElement"
+                            style="height: 0px; visibility: hidden; pointer-events: none;"
+                          >
+                            9
+                          </div>
+                          <div
+                            class="cm-gutterElement cm-activeLineGutter"
+                            style="height: 14px;"
+                          >
+                            1
+                          </div>
+                        </div>
+                        <div
+                          class="cm-gutter cm-foldGutter"
+                        >
+                          <div
+                            class="cm-gutterElement"
+                            style="height: 0px; visibility: hidden; pointer-events: none;"
+                          >
+                            <span
+                              title="Unfold line"
+                            >
+                              ›
+                            </span>
+                          </div>
+                          <div
+                            class="cm-gutterElement cm-activeLineGutter"
+                            style="height: 14px;"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        aria-autocomplete="list"
+                        aria-multiline="true"
+                        autocapitalize="off"
+                        autocorrect="off"
+                        class="cm-content"
+                        contenteditable="true"
+                        role="textbox"
+                        spellcheck="false"
+                        style="tab-size: 4;"
+                        translate="no"
+                      >
+                        <div
+                          class="cm-activeLine cm-line"
+                        >
+                          <br />
+                        </div>
+                      </div>
+                      <div
+                        aria-hidden="true"
+                        class="cm-layer cm-layer-above cm-cursorLayer"
+                        style="z-index: 150; animation-duration: 1200ms;"
+                      />
+                      <div
+                        aria-hidden="true"
+                        class="cm-layer cm-selectionLayer"
+                        style="z-index: -2;"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
