@@ -3,7 +3,7 @@ import CodeMirror, { EditorView, Extension, ReactCodeMirrorRef } from '@uiw/reac
 import { CreateThemeOptions, Settings } from '@uiw/codemirror-themes';
 import { draculaInit } from '@uiw/codemirror-theme-dracula';
 import { materialDarkInit, materialLightInit } from '@uiw/codemirror-theme-material';
-import { javascript } from '@codemirror/lang-javascript';
+import { graphql } from 'cm6-graphql';
 import { cn } from '@/utils/cn';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { Theme, useTheme } from '@/providers/ThemeProvider';
@@ -40,9 +40,15 @@ const EditorArea = forwardRef<ReactCodeMirrorRef, Props>(
         theme={themeInit[theme]({ settings: themeSettings ?? themeSettingsContext })}
         height="100%"
         className={cn('h-full flex flex-col', className)}
-        extensions={[styleOverrides, javascript({ jsx: true })]}
+        extensions={[styleOverrides, graphql()]}
         style={{ paddingTop: header.visible ? header.height : undefined }}
         data-testid="editor-area"
+        basicSetup={{
+          tabSize: 4,
+          highlightActiveLine: false,
+          highlightActiveLineGutter: false,
+          autocompletion: true,
+        }}
         {...rest}
       />
     );

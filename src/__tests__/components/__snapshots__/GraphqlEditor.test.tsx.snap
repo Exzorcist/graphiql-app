@@ -104,7 +104,7 @@ exports[`GraphqlEditor 1`] = `
                       >
                         <div
                           aria-live="polite"
-                          class="cm-announced"
+                          style="position: absolute; top: -10000px;"
                         />
                         <div
                           class="cm-scroller"
@@ -125,7 +125,7 @@ exports[`GraphqlEditor 1`] = `
                                 9
                               </div>
                               <div
-                                class="cm-gutterElement cm-activeLineGutter"
+                                class="cm-gutterElement"
                                 style="height: 14px;"
                               >
                                 1
@@ -144,10 +144,6 @@ exports[`GraphqlEditor 1`] = `
                                   ›
                                 </span>
                               </div>
-                              <div
-                                class="cm-gutterElement cm-activeLineGutter"
-                                style="height: 14px;"
-                              />
                             </div>
                           </div>
                           <div
@@ -159,24 +155,23 @@ exports[`GraphqlEditor 1`] = `
                             contenteditable="true"
                             role="textbox"
                             spellcheck="false"
-                            style="tab-size: 4;"
+                            style="tab-size: 4"
                             translate="no"
                           >
                             <div
-                              class="cm-activeLine cm-line"
+                              class="cm-line"
                             >
                               <br />
                             </div>
                           </div>
                           <div
                             aria-hidden="true"
-                            class="cm-layer cm-layer-above cm-cursorLayer"
-                            style="z-index: 150; animation-duration: 1200ms;"
+                            class="cm-selectionLayer"
                           />
                           <div
                             aria-hidden="true"
-                            class="cm-layer cm-selectionLayer"
-                            style="z-index: -2;"
+                            class="cm-cursorLayer"
+                            style="animation-duration: 1200ms;"
                           />
                         </div>
                       </div>
@@ -224,7 +219,7 @@ exports[`GraphqlEditor 1`] = `
                 >
                   <div
                     aria-live="polite"
-                    class="cm-announced"
+                    style="position: absolute; top: -10000px;"
                   />
                   <div
                     class="cm-scroller"
@@ -245,7 +240,7 @@ exports[`GraphqlEditor 1`] = `
                           9
                         </div>
                         <div
-                          class="cm-gutterElement cm-activeLineGutter"
+                          class="cm-gutterElement"
                           style="height: 14px;"
                         >
                           1
@@ -264,10 +259,6 @@ exports[`GraphqlEditor 1`] = `
                             ›
                           </span>
                         </div>
-                        <div
-                          class="cm-gutterElement cm-activeLineGutter"
-                          style="height: 14px;"
-                        />
                       </div>
                     </div>
                     <div
@@ -279,24 +270,23 @@ exports[`GraphqlEditor 1`] = `
                       contenteditable="true"
                       role="textbox"
                       spellcheck="false"
-                      style="tab-size: 4;"
+                      style="tab-size: 4"
                       translate="no"
                     >
                       <div
-                        class="cm-activeLine cm-line"
+                        class="cm-line"
                       >
                         <br />
                       </div>
                     </div>
                     <div
                       aria-hidden="true"
-                      class="cm-layer cm-layer-above cm-cursorLayer"
-                      style="z-index: 150; animation-duration: 1200ms;"
+                      class="cm-selectionLayer"
                     />
                     <div
                       aria-hidden="true"
-                      class="cm-layer cm-selectionLayer"
-                      style="z-index: -2;"
+                      class="cm-cursorLayer"
+                      style="animation-duration: 1200ms;"
                     />
                   </div>
                 </div>
@@ -391,7 +381,7 @@ exports[`GraphqlEditor 1`] = `
                   >
                     <div
                       aria-live="polite"
-                      class="cm-announced"
+                      style="position: absolute; top: -10000px;"
                     />
                     <div
                       class="cm-scroller"
@@ -412,7 +402,7 @@ exports[`GraphqlEditor 1`] = `
                             9
                           </div>
                           <div
-                            class="cm-gutterElement cm-activeLineGutter"
+                            class="cm-gutterElement"
                             style="height: 14px;"
                           >
                             1
@@ -431,10 +421,6 @@ exports[`GraphqlEditor 1`] = `
                               ›
                             </span>
                           </div>
-                          <div
-                            class="cm-gutterElement cm-activeLineGutter"
-                            style="height: 14px;"
-                          />
                         </div>
                       </div>
                       <div
@@ -446,24 +432,23 @@ exports[`GraphqlEditor 1`] = `
                         contenteditable="true"
                         role="textbox"
                         spellcheck="false"
-                        style="tab-size: 4;"
+                        style="tab-size: 4"
                         translate="no"
                       >
                         <div
-                          class="cm-activeLine cm-line"
+                          class="cm-line"
                         >
                           <br />
                         </div>
                       </div>
                       <div
                         aria-hidden="true"
-                        class="cm-layer cm-layer-above cm-cursorLayer"
-                        style="z-index: 150; animation-duration: 1200ms;"
+                        class="cm-selectionLayer"
                       />
                       <div
                         aria-hidden="true"
-                        class="cm-layer cm-selectionLayer"
-                        style="z-index: -2;"
+                        class="cm-cursorLayer"
+                        style="animation-duration: 1200ms;"
                       />
                     </div>
                   </div>
