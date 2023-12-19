@@ -1,15 +1,6 @@
 import { screen } from '@testing-library/react';
-import { EditorView } from '@uiw/react-codemirror';
 import { user, customRender as render } from '@/__tests__/test-utils';
 import { Editor } from '@/components/Editor';
-
-vi.mock('@codemirror/lang-javascript', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('@codemirror/lang-javascript')>();
-  return {
-    ...mod,
-    javascript: vi.fn(() => EditorView.theme({})),
-  };
-});
 
 vi.spyOn(document, 'createRange').mockReturnValue({
   ...document.createRange(),
