@@ -12,7 +12,7 @@ function Root() {
       <LocalizationProvider>
         <div className="min-h-screen flex flex-col">
           <Header />
-          <div className="flex-grow">
+          <div className="flex-grow grid">
             <Outlet />
           </div>
           <Footer />
