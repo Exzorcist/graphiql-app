@@ -11,8 +11,12 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from './reducers/UserSlice';
+import LocalizationReducer from './reducers/LocalizationSlice';
 
-const rootReducer = combineReducers({ userReducer });
+const rootReducer = combineReducers({
+  userReducer,
+  language: LocalizationReducer,
+});
 
 const persistConfig = {
   key: 'root',
