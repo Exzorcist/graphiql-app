@@ -1,6 +1,6 @@
 import { RenderOptions, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ThemeProvider from '@/providers/ThemeProvider';
@@ -17,7 +17,7 @@ export const customRender = (
   ui: ReactElement,
   options?: Omit<ExtendedRenderOptions, 'wrapper'>
 ) => {
-  function Wrapper({ children }: { children: React.ReactNode }) {
+  function Wrapper({ children }: { children: ReactNode }) {
     return (
       <Provider store={store}>
         <ThemeProvider>
