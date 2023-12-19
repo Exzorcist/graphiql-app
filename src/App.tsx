@@ -5,17 +5,20 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import Root from '@/layout/Root';
 import Welcome from '@/pages/Welcome';
 import Login from '@/pages/Login';
 import Registration from '@/pages/Registration';
 import NotFound from '@/pages/NotFound';
-import GraphqlEditor from '@/pages/GraphqlEditor';
+import GraphqlEditorPage from '@/pages/GraphqlEditorPage';
+import { store, persistor } from './redux/store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route path="/" element={<GraphqlEditor />} />
+      <Route path="/" element={<GraphqlEditorPage />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registration" element={<Registration />} />
@@ -25,7 +28,13 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
+  );
 }
 
 export default App;

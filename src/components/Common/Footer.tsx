@@ -6,7 +6,7 @@ import LogoGithub from '@/assets/logo-github.svg';
 
 function Footer() {
   return (
-    <footer className="mt-auto pt-9">
+    <footer>
       <div className="bg-main text-white">
         <div className="flex gap-5 py-3 px-5 justify-between items-center max-w-7xl mx-auto md:py-5">
           <div className="flex gap-4 items-center">
