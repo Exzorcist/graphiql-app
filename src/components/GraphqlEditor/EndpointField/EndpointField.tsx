@@ -1,19 +1,21 @@
-import { ComponentProps, memo } from 'react';
+import { memo } from 'react';
 import { cn } from '@/utils/cn';
 import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
+import { PropsWithClassName } from '@/types/PropsWithClassName';
 
 export type EndpointFieldProps = {
   onSchemaClick?(): void;
+  onSubmitRequest?(): void;
   isSchemaOpen?: boolean;
-} & ComponentProps<'form'>;
+} & PropsWithClassName;
 
 function EndpointField({
   onSchemaClick,
+  onSubmitRequest,
   isSchemaOpen = false,
   className,
-  ...delegated
 }: EndpointFieldProps) {
   const { t } = useLocalizationContext();
 
@@ -23,7 +25,7 @@ function EndpointField({
         'h-[45px] flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent',
         className
       )}
-      {...delegated}
+      onSubmit={onSubmitRequest}
     >
       <div className="w-full h-full flex ">
         <input

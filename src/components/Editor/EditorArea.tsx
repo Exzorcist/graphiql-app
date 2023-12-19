@@ -18,7 +18,7 @@ const styleOverrides = EditorView.theme({
     flex: '1 1 0px',
     overflow: 'hidden',
   },
-  '&.cm-focused': { outline: '2px solid transparent', outlineOffset: '2px' },
+  '&.cm-editor.cm-focused': { outline: '2px solid transparent', outlineOffset: '2px' },
   '.cm-lineNumbers': { minWidth: '28px' },
 });
 
