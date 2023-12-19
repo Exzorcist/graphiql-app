@@ -15,19 +15,19 @@
         {
           "name": "Ivan",
           "github": "https://github.com/Exzorcist",
-          "position": "Team leader, frontend developer",
+          "position": "Team leader | Frontend developer",
           "workOn": "He was involved in managing the team, creating navigation, basic elements and localization, and was on hand in difficult moments."
         },
         {
           "name": "Polina",
           "github": "https://github.com/PolinaPolina94",
-          "position": "Frontend developer, the soul of the team",
+          "position": "Frontend developer | The soul of the team",
           "workOn": "She was engaged in the development of login and registration pages, firebase integration into the project, form validation. She also became the inspiration for the design of the application."
         },
         {
           "name": "Marat",
           "github": "https://github.com/nowaylifer",
-          "position": "Frontend developer, the main sage of the team",
+          "position": "Frontend developer | The main sage of the team",
           "workOn": "Took responsibility for the most difficult part, namely GraphQL Editor. He helped to implement many useful and interesting solutions for simplifying life on the project."
         }
       ],
