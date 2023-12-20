@@ -10,13 +10,19 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import userReducer from './reducers/UserSlice';
+import userSlice from './userSlice';
+import { graphqlApi, graphqlSlice } from './graphqlSlice';
 
-const rootReducer = combineReducers({ userReducer });
+const rootReducer = combineReducers({
+  [userSlice.reducerPath]: userSlice.reducer,
+  [graphqlApi.reducerPath]: graphqlApi.reducer,
+  [graphqlSlice.reducerPath]: graphqlSlice.reducer,
+});
 
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: [userSlice.reducerPath],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -29,7 +35,7 @@ const setupStore = () => {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }),
+      }).concat(graphqlApi.middleware),
   });
 };
 

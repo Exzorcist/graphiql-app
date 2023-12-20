@@ -1,9 +1,9 @@
 import { ComponentProps, useCallback, useEffect, useRef } from 'react';
 import { ImperativePanelHandle, Panel } from 'react-resizable-panels';
 import { useDefaultExpandSize } from '@/hooks/panel-resize-hooks';
-import SchemaDocs from './SchemaDocs';
+import DocsExplorer from './DocsExplorer';
 
-export type SchemaDocsPanelProps = {
+export type DocsExplorerPanelProps = {
   show?: boolean;
   onShowChange?: (isShowing: boolean) => void;
   panelClassName?: string;
@@ -13,12 +13,12 @@ const DOCS_PANEL_MIN_SIZE = 20;
 const DOCS_PANEL_DEFAULT_SIZE = 25;
 const DOCS_PANEL_COLLAPSE_SIZE = 0;
 
-function SchemaDocsPanel({
+function DocsExplorerPanel({
   show,
   onShowChange,
   panelClassName,
   ...panelProps
-}: SchemaDocsPanelProps) {
+}: DocsExplorerPanelProps) {
   const docsPanelRef = useRef<ImperativePanelHandle | null>(null);
 
   const { collapse, expand, onExpand, onCollapse } = useDefaultExpandSize(
@@ -56,9 +56,9 @@ function SchemaDocsPanel({
       className={panelClassName}
       {...panelProps}
     >
-      <SchemaDocs />
+      <DocsExplorer />
     </Panel>
   );
 }
 
-export default SchemaDocsPanel;
+export default DocsExplorerPanel;

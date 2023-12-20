@@ -3,8 +3,8 @@ import { useCallback, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import PanelResizeHandle from '../PanelResizeHandle/PanelResizeHandle';
 import GraphqlToolsPanel from './GraphqlToolsPanel/GraphqlToolsPanel';
-import SchemaDocsDrawer from './SchemaDocs/SchemaDocsDrawer';
-import SchemaDocsPanel from './SchemaDocs/SchemaDocsPanel';
+import DocsExplorerDrawer from './DocsEplorer/DocsExplorerDrawer';
+import DocsExplorerPanel from './DocsEplorer/DocsExplorerPanel';
 import EndpointField from './EndpointField/EndpointField';
 import ResponsePanel from './ResponsePanel/ResponsePanel';
 import RequestPanel from './RequestPanel/RequestPanel';
@@ -29,7 +29,7 @@ function GraphqlEditor() {
   return (
     <div className="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family">
       {isLaptop && <SideBar />}
-      {!isLaptop && <SchemaDocsDrawer open={showDocs} onOpenChange={setShowDocs} />}
+      {!isLaptop && <DocsExplorerDrawer open={showDocs} onOpenChange={setShowDocs} />}
       <div className="h-full flex w-full flex-col">
         <div className="bg-editor-primary px-4 py-5 border-editor-border border-b">
           <EndpointField onSchemaClick={handleDocsClick} isSchemaOpen={showDocs} />
@@ -41,7 +41,7 @@ function GraphqlEditor() {
             );
 
             const currentPanel = isLaptop ? (
-              <SchemaDocsPanel
+              <DocsExplorerPanel
                 id="docsPanel"
                 order={3}
                 show={showDocs}

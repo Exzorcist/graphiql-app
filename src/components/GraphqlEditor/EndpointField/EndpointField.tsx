@@ -1,23 +1,28 @@
-import { memo } from 'react';
+import { FormEvent, memo, useCallback, useRef } from 'react';
 import { cn } from '@/utils/cn';
 import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
+import { useLazyFetchIntrospectionQuery } from '@/redux/graphqlSlice';
 
 export type EndpointFieldProps = {
   onSchemaClick?(): void;
-  onSubmitRequest?(): void;
   isSchemaOpen?: boolean;
 } & PropsWithClassName;
 
-function EndpointField({
-  onSchemaClick,
-  onSubmitRequest,
-  isSchemaOpen = false,
-  className,
-}: EndpointFieldProps) {
+function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: EndpointFieldProps) {
   const { t } = useLocalizationContext();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [fetchIntrospection] = useLazyFetchIntrospectionQuery();
+
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      fetchIntrospection?.(inputRef.current!.value);
+    },
+    [fetchIntrospection]
+  );
 
   return (
     <form
@@ -25,12 +30,13 @@ function EndpointField({
         'h-[45px] flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent',
         className
       )}
-      onSubmit={onSubmitRequest}
+      onSubmit={handleSubmit}
     >
       <div className="w-full h-full flex ">
         <input
           className="w-full h-full bg-transparent outline-none pl-4"
           placeholder={t.page.editor['Enter URL']}
+          ref={inputRef}
         />
         <div className="bottom-0 right-4 h-full flex items-center pr-4 pl-4">
           <SchemaButton variant="ghost-accented" onClick={onSchemaClick} active={isSchemaOpen} />

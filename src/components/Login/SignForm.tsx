@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { InfoForm, Inputs } from '@/types/Form';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
-import { setUser } from '@/redux/reducers/UserSlice';
+import { setUser } from '@/redux/userSlice';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import { signUpSchema } from '@/utils/schemas/signup-schema';
 import { signInSchema } from '@/utils/schemas/signin-schema';
