@@ -22,5 +22,6 @@ const userSlice = createSlice({
 });
 
 export const { setUser, removeUser } = userSlice.actions;
+export const selectIsAuth = (state: { userReducer: IUser }) => state.userReducer.isAuth;
 
 export default userSlice.reducer;
