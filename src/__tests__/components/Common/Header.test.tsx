@@ -1,20 +1,9 @@
-import { screen, render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import LocalizationProvider from '@/providers/LocalizationProvider';
+import { screen } from '@testing-library/react';
 import Header from '@/components/Common/Header';
-import { store } from '@/redux/store';
+import { customRender as render } from '@/__tests__/test-utils';
 
 test('[ Header ]: base test', () => {
-  render(
-    <MemoryRouter>
-      <Provider store={store}>
-        <LocalizationProvider>
-          <Header />
-        </LocalizationProvider>
-      </Provider>
-    </MemoryRouter>
-  );
+  render(<Header />);
 
   expect(screen.getByText('GQL sandbox')).toBeInTheDocument();
 });

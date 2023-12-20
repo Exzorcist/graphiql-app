@@ -1,17 +1,9 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { screen, fireEvent } from '@testing-library/react';
 import SwitchLang from '@/components/Common/Header/SwitchLang';
-import LocalizationProvider from '@/providers/LocalizationProvider';
-import { store } from '@/redux/store';
+import { customRender as render } from '@/__tests__/test-utils';
 
 test('[ SwitchLang ]: base test', () => {
-  render(
-    <Provider store={store}>
-      <LocalizationProvider>
-        <SwitchLang />
-      </LocalizationProvider>
-    </Provider>
-  );
+  render(<SwitchLang />);
 
   expect(screen.getByText('eng')).toBeInTheDocument();
   expect(screen.getByText('English')).toBeInTheDocument();

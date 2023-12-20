@@ -1,17 +1,9 @@
-import { screen, render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import LocalizationProvider from '@/providers/LocalizationProvider';
+import { screen } from '@testing-library/react';
 import NotFound from '@/pages/NotFound';
-import { store } from '@/redux/store';
+import { customRender as render } from '@/__tests__/test-utils';
 
 test('[ NotFound ]: base test', () => {
-  render(
-    <Provider store={store}>
-      <LocalizationProvider>
-        <NotFound />
-      </LocalizationProvider>
-    </Provider>
-  );
+  render(<NotFound />);
 
   expect(screen.getByText('404')).toBeInTheDocument();
   expect(screen.getByText('Sorry, page not found!')).toBeInTheDocument();
