@@ -4,6 +4,7 @@ import { IUser } from '@/types/Form';
 const initialState: IUser = {
   email: '',
   id: '',
+  token: '',
   isAuth: false,
 };
 

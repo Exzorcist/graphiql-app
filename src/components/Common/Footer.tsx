@@ -3,6 +3,7 @@ import { ReactSVG } from 'react-svg';
 
 import LogoRS from '@/assets/logo-rsschool.svg';
 import LogoGithub from '@/assets/logo-github.svg';
+import TargetButton from '../Login/Logout/TargetButton';
 
 function Footer() {
   return (
@@ -27,7 +28,8 @@ function Footer() {
               <span className="hidden sm:block">Q4</span>
             </span>
           </div>
-
+          {/* {TODO: Example button for changing login-logout} */}
+          <TargetButton />
           <a
             className="transition-transform duration-300 hover:scale-110"
             href="https://rs.school/react/"

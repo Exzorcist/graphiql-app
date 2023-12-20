@@ -46,6 +46,7 @@ function SignUpForm({
           setUser({
             email: user.email,
             id: user.uid,
+            token: user.refreshToken,
             isAuth: true,
           })
         );
