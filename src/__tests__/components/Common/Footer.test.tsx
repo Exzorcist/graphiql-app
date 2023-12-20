@@ -1,17 +1,9 @@
-import { screen, render } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { screen } from '@testing-library/react';
 import Footer from '@/components/Common/Footer';
-import { store } from '@/redux/store';
-import LocalizationProvider from '@/providers/LocalizationProvider';
+import { customRender as render } from '@/__tests__/test-utils';
 
 test('[ Footer ]: base test', async () => {
-  render(
-    <Provider store={store}>
-      <LocalizationProvider>
-        <Footer />
-      </LocalizationProvider>
-    </Provider>
-  );
+  render(<Footer />);
 
   expect(screen.getByText('"Just Do It" team')).toBeInTheDocument();
   expect(screen.getByText('2023')).toBeInTheDocument();
