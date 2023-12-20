@@ -1,12 +1,21 @@
-import { ComponentPropsWithRef, forwardRef, memo } from 'react';
+import {
+  ComponentPropsWithRef,
+  forwardRef,
+  memo,
+  useImperativeHandle,
+  useRef,
+  useEffect,
+} from 'react';
 import CodeMirror, { EditorView, Extension, ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { CreateThemeOptions, Settings } from '@uiw/codemirror-themes';
 import { draculaInit } from '@uiw/codemirror-theme-dracula';
 import { materialDarkInit, materialLightInit } from '@uiw/codemirror-theme-material';
-import { graphql } from 'cm6-graphql';
+import { graphql, updateSchema } from 'cm6-graphql';
 import { cn } from '@/utils/cn';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { Theme, useTheme } from '@/providers/ThemeProvider';
+import { useAppSelector } from '@/utils/hooks/redux-hooks';
+import { selectGraphqlSchema } from '@/redux/graphqlSlice';
 
 type Props = {
   themeSettings?: Settings;
@@ -33,10 +42,20 @@ const EditorArea = forwardRef<ReactCodeMirrorRef, Props>(
     const themeSettingsContext = useEditorContext();
     const { header } = useEditorContainerContext();
     const [theme] = useTheme();
+    const codeMirrorRef = useRef<ReactCodeMirrorRef | null>(null);
+    const graphqlSchema = useAppSelector(selectGraphqlSchema);
+
+    useImperativeHandle(ref, () => codeMirrorRef.current as ReactCodeMirrorRef);
+
+    useEffect(() => {
+      if (graphqlSchema) {
+        updateSchema(codeMirrorRef.current!.view!, graphqlSchema);
+      }
+    }, [graphqlSchema]);
 
     return (
       <CodeMirror
-        ref={ref}
+        ref={codeMirrorRef}
         theme={themeInit[theme]({ settings: themeSettings ?? themeSettingsContext })}
         height="100%"
         className={cn('h-full flex flex-col', className)}

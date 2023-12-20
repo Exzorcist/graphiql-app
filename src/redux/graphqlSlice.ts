@@ -43,5 +43,5 @@ export const graphqlSlice = createSlice({
 
 export const selectGraphqlSchema = createSelector(
   (state: RootState) => state.graphql.introspection,
-  (introspection) => introspection && buildClientSchema(introspection).toConfig()
+  (introspection) => introspection && buildClientSchema(introspection)
 );
