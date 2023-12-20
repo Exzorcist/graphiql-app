@@ -22,6 +22,7 @@
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-separator": "^1.0.3",
     "@reduxjs/toolkit": "^2.0.1",
     "@uiw/codemirror-theme-dracula": "^4.21.21",
     "@uiw/codemirror-theme-material": "^4.21.21",
