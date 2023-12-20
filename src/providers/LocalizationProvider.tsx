@@ -1,5 +1,7 @@
+import { useSelector } from 'react-redux';
 import { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 import { ILocalizationProvider, Language } from '@/types/Provider';
+import { selectLocalization } from '@/redux/reducers/LocalizationSlice';
 
 import EngJSON from '@/json/eng.json';
 import RuJSON from '@/json/ru.json';
@@ -14,7 +16,7 @@ const translations = {
 };
 
 function LocalizationProvider({ children }: PropsWithChildren) {
-  const [lang, setLang] = useState<Language>('eng');
+  const [lang, setLang] = useState<Language>(useSelector(selectLocalization));
 
   const value = useMemo(() => {
     return {
