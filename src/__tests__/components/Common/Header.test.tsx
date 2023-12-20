@@ -1,16 +1,9 @@
-import { screen, render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import LocalizationProvider from '@/providers/LocalizationProvider';
+import { screen } from '@testing-library/react';
 import Header from '@/components/Common/Header';
+import { customRender as render } from '@/__tests__/test-utils';
 
 test('[ Header ]: base test', () => {
-  render(
-    <MemoryRouter>
-      <LocalizationProvider>
-        <Header />
-      </LocalizationProvider>
-    </MemoryRouter>
-  );
+  render(<Header />);
 
   expect(screen.getByText('GQL sandbox')).toBeInTheDocument();
 });
