@@ -41,9 +41,9 @@ const EditorArea = forwardRef<ReactCodeMirrorRef, Props>(
   ({ className, themeSettings, ...rest }, ref) => {
     const themeSettingsContext = useEditorContext();
     const { header } = useEditorContainerContext();
-    const [theme] = useTheme();
     const codeMirrorRef = useRef<ReactCodeMirrorRef | null>(null);
     const graphqlSchema = useAppSelector(selectGraphqlSchema);
+    const [theme] = useTheme();
 
     useImperativeHandle(ref, () => codeMirrorRef.current as ReactCodeMirrorRef);
 

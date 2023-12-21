@@ -7,6 +7,8 @@ export default {
     extend: {
       fontFamily: {
         'editor-font-family': 'var(--editor-font-family)',
+        mono: 'var(--font-mono)',
+        sans: 'var(--font-sans)',
       },
       colors: {
         main: {

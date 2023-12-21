@@ -1,17 +1,22 @@
-import { GraphQLField, GraphQLType } from 'graphql';
+import {
+  GraphQLArgument,
+  GraphQLField,
+  GraphQLInputObjectType,
+  GraphQLInterfaceType,
+  GraphQLObjectType,
+  GraphQLType,
+} from 'graphql';
 
 export type GraphQLAnyField = GraphQLField<unknown, unknown>;
 
-export type GraphQLDocsEntry = GraphQLType | GraphQLAnyField;
+export type GraphQLDocsEntry = GraphQLObjectType | GraphQLAnyField | GraphQLArgument;
 
-export function isGraphQLField(object: object): object is GraphQLAnyField {
-  return [
-    'name',
-    'description',
-    'type',
-    'args',
-    'deprecationReason',
-    'extensions',
-    'astNode',
-  ].every((key) => key in object);
+export function isTypeWithFields(
+  type: GraphQLType
+): type is GraphQLInterfaceType | GraphQLInputObjectType | GraphQLObjectType {
+  return 'getFields' in type;
+}
+
+export function isGraphQLField(type: GraphQLDocsEntry): type is GraphQLAnyField {
+  return 'args' in type;
 }

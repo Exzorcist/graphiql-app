@@ -1,4 +1,10 @@
-import { getIntrospectionQuery, IntrospectionQuery, buildClientSchema } from 'graphql';
+import {
+  getIntrospectionQuery,
+  IntrospectionQuery,
+  buildClientSchema,
+  buildSchema,
+  printSchema,
+} from 'graphql';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { type RootState } from './store';
@@ -43,5 +49,5 @@ export const graphqlSlice = createSlice({
 
 export const selectGraphqlSchema = createSelector(
   (state: RootState) => state.graphql.introspection,
-  (introspection) => introspection && buildClientSchema(introspection)
+  (introspection) => introspection && buildSchema(printSchema(buildClientSchema(introspection)))
 );

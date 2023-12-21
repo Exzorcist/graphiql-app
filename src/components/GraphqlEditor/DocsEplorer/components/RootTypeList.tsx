@@ -3,15 +3,15 @@ import { useAppSelector } from '@/utils/hooks/redux-hooks';
 import { selectGraphqlSchema } from '@/redux/graphqlSlice';
 import Separator from '@/components/ui/Separator';
 import RootEntry from './Entry/RootEntry';
-import { useDocsExplorer } from './DocsExplorer';
+import { useDocsExplorer } from '../DocsExplorer';
 
-function RootTypesScreen() {
+function RootTypeList() {
   const graphqlSchema = useAppSelector(selectGraphqlSchema);
   const { openEntry } = useDocsExplorer();
 
   return (
     <div>
-      <h4 className="text-lg">Root types</h4>
+      <h4 className="text-lg font-semibold">Root types</h4>
       <Separator />
       {Object.values(OperationTypeNode).map((operationType) => {
         const type = graphqlSchema?.getRootType(operationType as OperationTypeNode);
@@ -30,4 +30,4 @@ function RootTypesScreen() {
   );
 }
 
-export default RootTypesScreen;
+export default RootTypeList;
