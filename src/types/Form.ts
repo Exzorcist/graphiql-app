@@ -14,6 +14,7 @@ export type Input = {
 export type IUser = {
   email: string | null;
   id: string | null;
+  token: string | null;
   isAuth: boolean;
 };
 
