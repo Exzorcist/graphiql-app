@@ -1,5 +1,8 @@
 import { ReactSVG } from 'react-svg';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import { selectIsAuth } from '@/redux/reducers/UserSlice';
 
 import IvanImage from '@/assets/team/Ivan.jpg';
 import PolinaImage from '@/assets/team/Polina.jpg';
@@ -8,11 +11,44 @@ import LogoGithub from '@/assets/logo-github.svg';
 
 function Welcome() {
   const { t } = useLocalizationContext();
+  const isLogin = useSelector(selectIsAuth);
   const avatars = [IvanImage, PolinaImage, MaratImage];
 
   return (
     <section className="max-w-7xl mx-auto px-5 py-10 grid gap-8">
-      <h1 className="text-4xl font-medium text-center mt-8 mb-5">{t.page.welcome.title}</h1>
+      <h1 className="text-4xl font-medium mt-8 mb-5 grid sm:flex justify-between gap-10 items-start">
+        {t.page.welcome.title}
+
+        <div className="flex gap-2 items-start flex-wrap text-center lg:flex-nowrap sm:whitespace-nowrap">
+          {!isLogin ? (
+            <>
+              <NavLink
+                to="/login"
+                className="bg-main hover:bg-main/80 font-medium rounded-lg text-sm w-full
+                             px-8 py-2 text-white transition-colors duration-300 lg:w-auto"
+              >
+                {t.page.welcome.button.login}
+              </NavLink>
+              <NavLink
+                to="/registration"
+                className="bg-main hover:bg-main/80 font-medium rounded-lg text-sm w-full
+                             px-8 py-2 text-white transition-colors duration-300 lg:w-auto"
+              >
+                {t.page.welcome.button.registration}
+              </NavLink>
+            </>
+          ) : (
+            <NavLink
+              to="/registration"
+              className="bg-main hover:bg-main/80 font-medium rounded-lg text-sm w-full
+                           px-8 py-2 text-white transition-colors duration-300 lg:w-auto"
+            >
+              {t.page.welcome.button.toMainPage}
+            </NavLink>
+          )}
+        </div>
+      </h1>
+
       <div
         className="text-center leading-8 text-neutral-700 italic border-2 border-main rounded-2xl 
                    py-6 px-4 bg-main/10 mb-8"

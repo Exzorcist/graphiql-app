@@ -33,7 +33,8 @@
       ],
       "button": {
         "login": "Sign In",
-        "registration": "Sign Up"
+        "registration": "Sign Up",
+        "toMainPage": "To main page"
       }
     },
 
