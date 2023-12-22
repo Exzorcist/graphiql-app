@@ -1,4 +1,4 @@
-import { ComponentProps, createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import * as GraphQL from 'graphql';
 import { selectGraphqlSchema } from '@/redux/graphqlSlice';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
@@ -7,17 +7,26 @@ import { GraphQLDocsEntry } from '@/types/graphqlTypes';
 import Separator from '@/components/ui/Separator';
 import { cn } from '@/utils/cn';
 import EntryScreen from './components/EntryScreen';
+import { PropsWithClassName } from '@/types/PropsWithClassName';
+import DocsBreadcrumb from './components/DocsBreadcrumb';
 
 type DocsExlorerContextType = {
   openEntry(entry: GraphQLDocsEntry): void;
   leaveEntry(): void;
+  goToIndex(index: number): void;
 };
 
 const DocsExplorerContext = createContext<DocsExlorerContextType | null>(null);
 
-function DocsExplorer({ className, ...delegated }: ComponentProps<'div'>) {
+function DocsExplorer({ className }: PropsWithClassName) {
   const graphqlSchema = useAppSelector(selectGraphqlSchema);
   const [navStack, setNavStack] = useState<GraphQLDocsEntry[]>([]);
+  const prevSchema = useRef(graphqlSchema);
+
+  if (prevSchema.current !== graphqlSchema) {
+    prevSchema.current = graphqlSchema;
+    setNavStack([]);
+  }
 
   useEffect(() => {
     Object.assign(window, { GraphQL });
@@ -36,6 +45,9 @@ function DocsExplorer({ className, ...delegated }: ComponentProps<'div'>) {
       leaveEntry() {
         setNavStack((prev) => prev.slice(0, -1));
       },
+      goToIndex(index: number) {
+        setNavStack((prev) => prev.slice(0, index + 1));
+      },
     };
   }, []);
 
@@ -44,13 +56,17 @@ function DocsExplorer({ className, ...delegated }: ComponentProps<'div'>) {
       <div className="h-full flex flex-col">
         <div
           className={cn(
-            'bg-editor-primary p-4 h-full w-full font-sans min-h-0 flex-[1_1_0px] overflow-auto fancy-scrollbar',
+            'bg-editor-primary p-5 h-full w-full font-sans min-h-0 flex-[1_1_0px] overflow-auto fancy-scrollbar',
             className
           )}
-          {...delegated}
         >
           <h3 className="text-lg font-semibold">Documentation</h3>
-          <Separator />
+          <Separator className="mb-4" />
+          <DocsBreadcrumb
+            navStack={navStack}
+            onItemClick={contextValue.goToIndex}
+            className="mb-4"
+          />
           {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
         </div>
       </div>

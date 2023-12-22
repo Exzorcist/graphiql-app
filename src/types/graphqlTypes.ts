@@ -12,7 +12,7 @@ export type GraphQLAnyField = GraphQLField<unknown, unknown>;
 export type GraphQLDocsEntry = GraphQLObjectType | GraphQLAnyField | GraphQLArgument;
 
 export function isTypeWithFields(
-  type: GraphQLType
+  type: GraphQLType | GraphQLDocsEntry
 ): type is GraphQLInterfaceType | GraphQLInputObjectType | GraphQLObjectType {
   return 'getFields' in type;
 }

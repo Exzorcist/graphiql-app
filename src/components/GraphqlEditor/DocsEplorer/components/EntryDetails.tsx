@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLInputObjectType, getNamedType, isEnumType } from 'graphql';
-import { PropsWithClassName } from '@/types/PropsWithClassName';
 import { GraphQLDocsEntry, isGraphQLField, isTypeWithFields } from '@/types/graphqlTypes';
+import { PropsWithClassName } from '@/types/PropsWithClassName';
 import EntryList from './EntryList';
 
 type Props = {
@@ -12,7 +12,7 @@ function EntryDetails({ entry, className }: Props) {
 
   return (
     <div className={className}>
-      <p className="mb-4">{entry?.description}</p>
+      <p className="mb-4 text-sm">{entry?.description}</p>
       {isGraphQLField(entry) && !!entry.args.length && (
         <EntryList entries={entry.args} header="Arguments" className="mb-4" />
       )}
@@ -20,6 +20,7 @@ function EntryDetails({ entry, className }: Props) {
         <EntryList
           entries={Object.values(entryType.getFields())}
           header={entryType instanceof GraphQLInputObjectType ? 'Input Fields' : 'Fields'}
+          className="mb-4"
         />
       )}
       {entryType.description && (

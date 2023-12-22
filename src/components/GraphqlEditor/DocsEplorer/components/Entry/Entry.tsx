@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { GraphQLArgument } from 'graphql';
 import { GraphQLAnyField } from '@/types/graphqlTypes';
 import EntryContainer, { EntryContainerProps } from './EntryContainer';
-import GraphQLType from '../GraphQLType';
+import TypeLabel from '../TypeLabel';
 
 type Props<T extends GraphQLAnyField | GraphQLArgument> = {
   entry: T;
@@ -20,7 +20,7 @@ function Entry<T extends GraphQLAnyField | GraphQLArgument>({
 
   return (
     <EntryContainer onClick={handleClick} {...delegated}>
-      {entry.name}: <GraphQLType>{entry.type.toString()}</GraphQLType>
+      {entry.name}: <TypeLabel>{entry.type.toString()}</TypeLabel>
     </EntryContainer>
   );
 }

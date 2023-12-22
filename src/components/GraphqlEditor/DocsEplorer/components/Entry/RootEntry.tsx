@@ -1,6 +1,6 @@
 import { GraphQLObjectType, OperationTypeNode } from 'graphql';
 import EntryContainer, { EntryContainerProps } from './EntryContainer';
-import GraphQLType from '../GraphQLType';
+import TypeLabel from '../TypeLabel';
 
 type Props = {
   operation: OperationTypeNode;
@@ -10,7 +10,7 @@ type Props = {
 function RootEntry({ operation, type, ...delegated }: Props) {
   return (
     <EntryContainer {...delegated}>
-      {operation}: <GraphQLType>{type.name}</GraphQLType>
+      {operation}: <TypeLabel>{type.name}</TypeLabel>
     </EntryContainer>
   );
 }

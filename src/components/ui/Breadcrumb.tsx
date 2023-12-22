@@ -1,22 +1,27 @@
-import { PropsWithChildren, ReactElement, Children } from 'react';
+import { PropsWithChildren, Children, ReactNode } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
+import { PropsWithClassName } from '@/types/PropsWithClassName';
+import { cn } from '@/utils/cn';
 
 function BreadcrumbItem({ children }: PropsWithChildren) {
   return <li className="inline-flex items-center">{children}</li>;
 }
 
 type BreadcrumbProps = {
-  children: ReactElement<typeof BreadcrumbItem>;
-};
+  children: ReactNode;
+  separatorClassName?: string;
+} & PropsWithClassName;
 
-function Breadcrumb({ children }: BreadcrumbProps) {
+function Breadcrumb({ children, className, separatorClassName }: BreadcrumbProps) {
   return (
-    <nav className="flex" aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-2">
+    <nav className={cn('flex', className)} aria-label="Breadcrumb">
+      <ol className="flex flex-wrap items-center gap-x-2">
         {Children.map(children, (child, index) => {
           return (
             <>
-              {index && <ChevronRightIcon className="h-6 w-6 ml-2 mr-2" />}
+              {!!index && (
+                <ChevronRightIcon className={cn('h-[1em] w-[1em]', separatorClassName)} />
+              )}
               {child}
             </>
           );

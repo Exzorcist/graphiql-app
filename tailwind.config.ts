@@ -21,6 +21,7 @@ export default {
         'editor-accent-light': 'rgb(var(--editor-accent-light-color) / <alpha-value>)',
         'editor-ring': 'rgb(var(--editor-ring) / <alpha-value>)',
         'editor-text-color': 'rgb(var(--editor-text-color) / <alpha-value>)',
+        'editor-line-numbers-color': 'rgb(var(--editor-line-numbers-color) / <alpha-value>)',
       },
     },
   },
