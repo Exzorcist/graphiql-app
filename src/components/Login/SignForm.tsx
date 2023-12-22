@@ -7,10 +7,12 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { InfoForm, Inputs } from '@/types/Form';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { setUser } from '@/redux/reducers/UserSlice';
+import { setMessage } from '@/redux/reducers/GlobalMessageSlice';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import { signUpSchema } from '@/utils/schemas/signup-schema';
 import { signInSchema } from '@/utils/schemas/signin-schema';
 import { cn } from '@/utils/cn';
+import { IGlobalMessage } from '@/types/Message';
 
 function SignUpForm({
   questionForLink,
@@ -22,7 +24,6 @@ function SignUpForm({
   functionForUserWithEmailAndPassword,
 }: InfoForm) {
   const { t, lang } = useLocalizationContext();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false);
@@ -68,7 +69,18 @@ function SignUpForm({
   });
 
   const onSubmit: SubmitHandler<Inputs> = () => {
+    const delay = 1500;
+    const loginSuccessMessage: IGlobalMessage = {
+      type: 'success',
+      text: t.globalMessage.success.login,
+      isShown: true,
+    };
+
     handleRegister(email, password);
+
+    setTimeout(() => {
+      dispatch(setMessage(loginSuccessMessage));
+    }, delay);
   };
 
   useEffect(() => {
@@ -76,6 +88,20 @@ function SignUpForm({
       Object.keys(dirtyFields).forEach((field) => trigger(field as keyof Inputs));
     }
   }, [lang, dirtyFields, isDirty, trigger]);
+
+  // Global message block
+  useEffect(() => {
+    const loginErrorMessage: IGlobalMessage = {
+      type: 'error',
+      text: !isLogin ? t.globalMessage.error.login : t.globalMessage.error.registration,
+      isShown: true,
+    };
+
+    if (isError) {
+      dispatch(setMessage(loginErrorMessage));
+      setIsError(false);
+    }
+  }, [isError, dispatch, isLogin, t.globalMessage.error.login, t.globalMessage.error.registration]);
 
   return (
     <section
@@ -200,16 +226,6 @@ function SignUpForm({
         >
           {buttonValue}
         </button>
-
-        <div
-          className={cn(
-            'text-sm translate-x-96 ml-5',
-            isError && 'transition delay-150 duration-500 ease-in-out translate-x-0 bg-red-500'
-          )}
-        >
-          {' '}
-          {t.errors.error} <span className="underline">{textForLink}</span>{' '}
-        </div>
       </form>
     </section>
   );

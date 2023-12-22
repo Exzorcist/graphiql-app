@@ -11,6 +11,8 @@ import SwitchLang from './Header/SwitchLang';
 
 import { cn } from '@/utils/cn';
 import Logo from '@/assets/logo-graphql.svg';
+import { IGlobalMessage } from '@/types/Message';
+import { setMessage } from '@/redux/reducers/GlobalMessageSlice';
 
 function Header() {
   const { t } = useLocalizationContext();
@@ -29,8 +31,15 @@ function Header() {
   };
 
   const handleLogout = () => {
+    const logoutSuccessMessage: IGlobalMessage = {
+      type: 'success',
+      text: t.globalMessage.success.logout,
+      isShown: true,
+    };
+
     signOut(getAuth());
     dispatch(removeUser());
+    dispatch(setMessage(logoutSuccessMessage));
   };
 
   useEffect(() => {

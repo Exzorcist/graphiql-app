@@ -12,10 +12,12 @@ import {
 import storage from 'redux-persist/lib/storage';
 import userReducer from './reducers/UserSlice';
 import LocalizationReducer from './reducers/LocalizationSlice';
+import GlobalMessageReducer from './reducers/GlobalMessageSlice';
 
 const rootReducer = combineReducers({
   userReducer,
   language: LocalizationReducer,
+  message: GlobalMessageReducer,
 });
 
 const persistConfig = {

@@ -90,15 +90,22 @@
     "confirmPassword": "confirm your password"
   },
 
-  "errors": {
-    "error": "Something went wrong! You need to "
-  },
-
   "header": {
     "links": {
       "about": "About us",
       "login": "Login",
       "logout": "Sign out"
+    }
+  },
+
+  "globalMessage": {
+    "error": {
+      "login": "This e-mail is not in the database",
+      "registration": "This e-mail has already been used"
+    },
+    "success": {
+      "login": "You have successfully logged in",
+      "logout": "You have successfully logged out"
     }
   }
 }
