@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [userSlice.reducerPath],
+  whitelist: [userSlice.reducerPath, graphqlSlice.reducerPath],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

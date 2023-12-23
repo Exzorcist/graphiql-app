@@ -1,12 +1,12 @@
 import { OperationTypeNode } from 'graphql';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
-import { selectGraphqlSchema } from '@/redux/graphqlSlice';
+import { selectGraphQLSchema } from '@/redux/graphqlSlice';
 import Separator from '@/components/ui/Separator';
 import RootEntry from './Entry/RootEntry';
 import { useDocsExplorer } from '../DocsExplorer';
 
 function RootTypeList() {
-  const graphqlSchema = useAppSelector(selectGraphqlSchema);
+  const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const { openEntry } = useDocsExplorer();
 
   return (

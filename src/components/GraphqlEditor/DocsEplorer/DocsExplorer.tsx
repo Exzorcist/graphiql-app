@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import * as GraphQL from 'graphql';
-import { selectGraphqlSchema } from '@/redux/graphqlSlice';
+import { selectGraphQLSchema } from '@/redux/graphqlSlice';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
 import RootTypeList from './components/RootTypeList';
 import { GraphQLDocsEntry } from '@/types/graphqlTypes';
@@ -19,13 +19,16 @@ type DocsExlorerContextType = {
 const DocsExplorerContext = createContext<DocsExlorerContextType | null>(null);
 
 function DocsExplorer({ className }: PropsWithClassName) {
-  const graphqlSchema = useAppSelector(selectGraphqlSchema);
+  const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const [navStack, setNavStack] = useState<GraphQLDocsEntry[]>([]);
   const prevSchema = useRef(graphqlSchema);
 
   if (prevSchema.current !== graphqlSchema) {
     prevSchema.current = graphqlSchema;
-    setNavStack([]);
+
+    if (navStack.length) {
+      setNavStack([]);
+    }
   }
 
   useEffect(() => {

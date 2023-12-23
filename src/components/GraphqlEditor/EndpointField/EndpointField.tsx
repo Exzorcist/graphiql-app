@@ -4,7 +4,8 @@ import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
-import { useLazyFetchIntrospectionQuery } from '@/redux/graphqlSlice';
+import { selectApiUrl, useLazyFetchIntrospectionQuery } from '@/redux/graphqlSlice';
+import { useAppSelector } from '@/utils/hooks/redux-hooks';
 
 export type EndpointFieldProps = {
   onSchemaClick?(): void;
@@ -13,6 +14,7 @@ export type EndpointFieldProps = {
 
 function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: EndpointFieldProps) {
   const { t } = useLocalizationContext();
+  const apiUrl = useAppSelector(selectApiUrl);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [fetchIntrospection] = useLazyFetchIntrospectionQuery();
 
@@ -36,6 +38,7 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
         <input
           className="w-full h-full bg-transparent outline-none pl-4"
           placeholder={t.page.editor['Enter URL']}
+          defaultValue={apiUrl}
           ref={inputRef}
         />
         <div className="bottom-0 right-4 h-full flex items-center pr-4 pl-4">

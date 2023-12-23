@@ -7,7 +7,6 @@ import {
 } from 'graphql';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { type RootState } from './store';
 
 const introspectionQuery = getIntrospectionQuery();
 
@@ -29,9 +28,10 @@ export const { useLazyFetchIntrospectionQuery } = graphqlApi;
 
 type SliceState = {
   introspection: IntrospectionQuery | null;
+  apiUrl: string;
 };
 
-const initialState: SliceState = { introspection: null };
+const initialState: SliceState = { introspection: null, apiUrl: '' };
 
 export const graphqlSlice = createSlice({
   name: 'graphql',
@@ -41,13 +41,17 @@ export const graphqlSlice = createSlice({
     builder.addMatcher(
       isAnyOf(graphqlApi.endpoints.fetchIntrospection.matchFulfilled),
       (state, action) => {
-        return { ...state, introspection: action.payload };
+        return { ...state, introspection: action.payload, apiUrl: action.meta.arg.originalArgs };
       }
     );
   },
+  selectors: {
+    selectApiUrl: (state) => state.apiUrl,
+    selectGraphQLSchema: createSelector(
+      (state: SliceState) => state.introspection,
+      (introspection) => introspection && buildSchema(printSchema(buildClientSchema(introspection)))
+    ),
+  },
 });
 
-export const selectGraphqlSchema = createSelector(
-  (state: RootState) => state.graphql.introspection,
-  (introspection) => introspection && buildSchema(printSchema(buildClientSchema(introspection)))
-);
+export const { selectGraphQLSchema, selectApiUrl } = graphqlSlice.selectors;
