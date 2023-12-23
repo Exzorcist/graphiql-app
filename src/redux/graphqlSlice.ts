@@ -20,13 +20,17 @@ export const graphqlApi = createApi({
 
 export const { useLazyFetchIntrospectionQuery } = graphqlApi;
 
-type SliceState = {
-  introspectionStatus: 'idle' | 'pending' | 'fullfilled' | 'rejected';
+export type GraphqlSliceState = {
+  introspectStatus: 'idle' | 'pending' | 'fullfilled' | 'rejected';
   introspection: IntrospectionQuery | null;
   apiUrl: string;
 };
 
-const initialState: SliceState = { introspectionStatus: 'idle', introspection: null, apiUrl: '' };
+const initialState: GraphqlSliceState = {
+  introspectStatus: 'idle',
+  introspection: null,
+  apiUrl: '',
+};
 
 export const graphqlSlice = createSlice({
   name: 'graphql',
@@ -35,25 +39,25 @@ export const graphqlSlice = createSlice({
   extraReducers(builder) {
     builder
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchPending, (state) => {
-        return { ...state, introspectionStatus: 'pending' };
+        return { ...state, introspectStatus: 'pending' };
       })
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchFulfilled, (state, action) => {
         return {
           ...state,
-          introspectionStatus: 'fullfilled',
+          introspectStatus: 'fullfilled',
           introspection: action.payload,
           apiUrl: action.meta.arg.originalArgs,
         };
       })
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchRejected, (state) => {
-        return { ...state, introspectionStatus: 'rejected', introspection: null };
+        return { ...state, introspectStatus: 'rejected', introspection: null };
       });
   },
   selectors: {
     selectApiUrl: (state) => state.apiUrl,
-    selectIntrospectStatus: (state) => state.introspectionStatus,
+    selectIntrospectStatus: (state) => state.introspectStatus,
     selectGraphQLSchema: createSelector(
-      (state: SliceState) => state.introspection,
+      (state: GraphqlSliceState) => state.introspection,
       (introspection) => introspection && buildClientSchema(introspection)
     ),
   },

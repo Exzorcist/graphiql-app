@@ -13,19 +13,25 @@ import storage from 'redux-persist/lib/storage';
 import userSlice from './userSlice';
 import { graphqlApi, graphqlSlice } from './graphqlSlice';
 
+const rootPersistConfig = {
+  key: 'root',
+  storage,
+  whitelist: [userSlice.reducerPath],
+};
+
+const graphqlSlicePersistConfig = {
+  key: graphqlSlice.reducerPath,
+  storage,
+  blacklist: ['introspectStatus'],
+};
+
 const rootReducer = combineReducers({
   [userSlice.reducerPath]: userSlice.reducer,
   [graphqlApi.reducerPath]: graphqlApi.reducer,
-  [graphqlSlice.reducerPath]: graphqlSlice.reducer,
+  [graphqlSlice.reducerPath]: persistReducer(graphqlSlicePersistConfig, graphqlSlice.reducer),
 });
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: [userSlice.reducerPath, graphqlSlice.reducerPath],
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 const setupStore = () => {
   return configureStore({

@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import * as GraphQL from 'graphql';
+import { createContext, useContext, useMemo, useRef, useState } from 'react';
 import { selectGraphQLSchema, selectIntrospectStatus } from '@/redux/graphqlSlice';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
 import RootTypeList from './components/RootTypeList';
@@ -32,15 +31,6 @@ function DocsExplorer({ className }: PropsWithClassName) {
       setNavStack([]);
     }
   }
-
-  useEffect(() => {
-    Object.assign(window, { GraphQL });
-    if (graphqlSchema) {
-      Object.assign(window, {
-        graphqlSchema,
-      });
-    }
-  }, [graphqlSchema]);
 
   const contextValue: DocsExlorerContextType = useMemo(() => {
     return {

@@ -3,6 +3,7 @@ import {
   GraphQLField,
   GraphQLInputObjectType,
   GraphQLInterfaceType,
+  GraphQLNamedType,
   GraphQLObjectType,
   GraphQLType,
 } from 'graphql';
@@ -19,4 +20,8 @@ export function isTypeWithFields(
 
 export function isGraphQLField(type: GraphQLDocsEntry): type is GraphQLAnyField {
   return 'args' in type;
+}
+
+export function isUtilType(type: GraphQLNamedType) {
+  return type.name.startsWith('_');
 }
