@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import * as GraphQL from 'graphql';
-import { selectGraphQLSchema } from '@/redux/graphqlSlice';
+import { selectGraphQLSchema, selectIntrospectStatus } from '@/redux/graphqlSlice';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
 import RootTypeList from './components/RootTypeList';
 import { GraphQLDocsEntry } from '@/types/graphqlTypes';
@@ -9,6 +9,7 @@ import { cn } from '@/utils/cn';
 import EntryScreen from './components/EntryScreen';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
 import DocsBreadcrumb from './components/DocsBreadcrumb';
+import Spinner from '@/components/ui/Spinner';
 
 type DocsExlorerContextType = {
   openEntry(entry: GraphQLDocsEntry): void;
@@ -20,6 +21,7 @@ const DocsExplorerContext = createContext<DocsExlorerContextType | null>(null);
 
 function DocsExplorer({ className }: PropsWithClassName) {
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
+  const introspectStatus = useAppSelector(selectIntrospectStatus);
   const [navStack, setNavStack] = useState<GraphQLDocsEntry[]>([]);
   const prevSchema = useRef(graphqlSchema);
 
@@ -56,10 +58,11 @@ function DocsExplorer({ className }: PropsWithClassName) {
 
   return (
     <DocsExplorerContext.Provider value={contextValue}>
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col relative">
         <div
           className={cn(
             'bg-editor-primary p-5 h-full w-full font-sans min-h-0 flex-[1_1_0px] overflow-auto fancy-scrollbar',
+            introspectStatus === 'pending' && 'opacity-50 pointer-events-none',
             className
           )}
         >
@@ -72,6 +75,7 @@ function DocsExplorer({ className }: PropsWithClassName) {
           />
           {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
         </div>
+        {introspectStatus === 'pending' && <Spinner className="absolute-center" withLabel />}
       </div>
     </DocsExplorerContext.Provider>
   );

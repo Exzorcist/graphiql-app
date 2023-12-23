@@ -1,12 +1,6 @@
-import {
-  getIntrospectionQuery,
-  IntrospectionQuery,
-  buildClientSchema,
-  buildSchema,
-  printSchema,
-} from 'graphql';
+import { getIntrospectionQuery, IntrospectionQuery, buildClientSchema } from 'graphql';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 const introspectionQuery = getIntrospectionQuery();
 
@@ -27,31 +21,42 @@ export const graphqlApi = createApi({
 export const { useLazyFetchIntrospectionQuery } = graphqlApi;
 
 type SliceState = {
+  introspectionStatus: 'idle' | 'pending' | 'fullfilled' | 'rejected';
   introspection: IntrospectionQuery | null;
   apiUrl: string;
 };
 
-const initialState: SliceState = { introspection: null, apiUrl: '' };
+const initialState: SliceState = { introspectionStatus: 'idle', introspection: null, apiUrl: '' };
 
 export const graphqlSlice = createSlice({
   name: 'graphql',
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addMatcher(
-      isAnyOf(graphqlApi.endpoints.fetchIntrospection.matchFulfilled),
-      (state, action) => {
-        return { ...state, introspection: action.payload, apiUrl: action.meta.arg.originalArgs };
-      }
-    );
+    builder
+      .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchPending, (state) => {
+        return { ...state, introspectionStatus: 'pending' };
+      })
+      .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchFulfilled, (state, action) => {
+        return {
+          ...state,
+          introspectionStatus: 'fullfilled',
+          introspection: action.payload,
+          apiUrl: action.meta.arg.originalArgs,
+        };
+      })
+      .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchRejected, (state) => {
+        return { ...state, introspectionStatus: 'rejected', introspection: null };
+      });
   },
   selectors: {
     selectApiUrl: (state) => state.apiUrl,
+    selectIntrospectStatus: (state) => state.introspectionStatus,
     selectGraphQLSchema: createSelector(
       (state: SliceState) => state.introspection,
-      (introspection) => introspection && buildSchema(printSchema(buildClientSchema(introspection)))
+      (introspection) => introspection && buildClientSchema(introspection)
     ),
   },
 });
 
-export const { selectGraphQLSchema, selectApiUrl } = graphqlSlice.selectors;
+export const { selectGraphQLSchema, selectApiUrl, selectIntrospectStatus } = graphqlSlice.selectors;
