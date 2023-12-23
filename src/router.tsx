@@ -10,7 +10,7 @@ import Registration from './pages/Registration';
 import Welcome from './pages/Welcome';
 
 interface IRouteRedirectProps {
-  element: React.ReactNode;
+  element: React.ReactElement;
   path: string;
 }
 
@@ -18,10 +18,10 @@ function RouteRedirect({ element, path }: IRouteRedirectProps): React.ReactEleme
   const isLoggedIn = useSelector(selectIsAuth);
 
   if (path !== '/') {
-    return isLoggedIn ? (element as React.ReactElement) : <Navigate to={path} />;
+    return isLoggedIn ? element : <Navigate to={path} />;
   }
 
-  return isLoggedIn ? <Navigate to={path} /> : (element as React.ReactElement);
+  return isLoggedIn ? <Navigate to={path} /> : element;
 }
 
 const routerConfig = createRoutesFromElements(
