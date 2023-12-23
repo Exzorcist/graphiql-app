@@ -6,11 +6,13 @@ import GlobalMessage from '@/components/ui/GlobalMessage';
 
 import ThemeProvider from '@/providers/ThemeProvider';
 import LocalizationProvider from '@/providers/LocalizationProvider';
+import Unsubscribe from '@/components/Common/Unsubscribe/Unsubscribe';
 
 function Root() {
   return (
     <ThemeProvider>
       <LocalizationProvider>
+        <Unsubscribe />
         <div className="min-h-screen flex flex-col">
           <Header />
           <div className="flex-grow grid">

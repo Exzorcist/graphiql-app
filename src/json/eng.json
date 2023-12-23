@@ -107,6 +107,9 @@
     "success": {
       "login": "You have successfully logged in",
       "logout": "You have successfully logged out"
+    },
+    "info": {
+      "tokenExpire": "Sorry, but your token has expired"
     }
   }
 }
