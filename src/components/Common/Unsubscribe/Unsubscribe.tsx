@@ -1,27 +1,42 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '@/firebase';
-import { removeUser } from '@/redux/reducers/UserSlice';
+
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import { setMessage } from '@/redux/reducers/GlobalMessageSlice';
+import { removeUser, selectIsAuth } from '@/redux/reducers/UserSlice';
+// import { IGlobalMessage } from '@/types/Message';
 
 function Unsubscribe() {
-  const navigate = useNavigate();
+  const { t } = useLocalizationContext();
   const dispatch = useDispatch();
+  const isLogin = useSelector(selectIsAuth);
+
+  const tokenExpireMessage = useMemo(
+    () => ({
+      type: 'info',
+      text: t.globalMessage.info.tokenExpire,
+      isShown: true,
+    }),
+    [t.globalMessage.info.tokenExpire]
+  );
 
   useEffect(() => {
     const unsubscribe = auth.onIdTokenChanged(async (user) => {
       if (user) {
         await user.getIdToken();
       } else {
-        console.log('время вашего токена истекло');
+        if (isLogin) {
+          dispatch(setMessage(tokenExpireMessage));
+        }
+
         dispatch(removeUser());
-        navigate('/welcome');
       }
     });
     return () => {
       unsubscribe();
     };
-  }, [navigate, dispatch]);
+  }, [dispatch, tokenExpireMessage]);
   return <div />;
 }
 
