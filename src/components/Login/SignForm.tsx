@@ -40,6 +40,17 @@ function SignUpForm({
 
   function handleRegister(emailUser: string, passwordUser: string) {
     const auth = getAuth();
+    const loginSuccessMessage: IGlobalMessage = {
+      type: 'success',
+      text: t.globalMessage.success.login,
+      isShown: true,
+    };
+    const loginErrorMessage: IGlobalMessage = {
+      type: 'error',
+      text: !isLogin ? t.globalMessage.error.login : t.globalMessage.error.registration,
+      isShown: true,
+    };
+
     functionForUserWithEmailAndPassword(auth, emailUser, passwordUser)
       .then(({ user }) => {
         setIsError(false);
@@ -52,9 +63,12 @@ function SignUpForm({
           })
         );
         navigate('/');
+        dispatch(setMessage(loginSuccessMessage));
       })
       .catch(() => {
         setIsError(true);
+        dispatch(setMessage(loginErrorMessage));
+        setIsError(false);
       });
   }
 
@@ -69,18 +83,7 @@ function SignUpForm({
   });
 
   const onSubmit: SubmitHandler<Inputs> = () => {
-    const delay = 1500;
-    const loginSuccessMessage: IGlobalMessage = {
-      type: 'success',
-      text: t.globalMessage.success.login,
-      isShown: true,
-    };
-
     handleRegister(email, password);
-
-    setTimeout(() => {
-      dispatch(setMessage(loginSuccessMessage));
-    }, delay);
   };
 
   useEffect(() => {
@@ -88,20 +91,6 @@ function SignUpForm({
       Object.keys(dirtyFields).forEach((field) => trigger(field as keyof Inputs));
     }
   }, [lang, dirtyFields, isDirty, trigger]);
-
-  // Global message block
-  useEffect(() => {
-    const loginErrorMessage: IGlobalMessage = {
-      type: 'error',
-      text: !isLogin ? t.globalMessage.error.login : t.globalMessage.error.registration,
-      isShown: true,
-    };
-
-    if (isError) {
-      dispatch(setMessage(loginErrorMessage));
-      setIsError(false);
-    }
-  }, [isError, dispatch, isLogin, t.globalMessage.error.login, t.globalMessage.error.registration]);
 
   return (
     <section
