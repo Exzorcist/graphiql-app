@@ -1,15 +1,16 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '@/firebase';
 
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import { setMessage } from '@/redux/reducers/GlobalMessageSlice';
 import { removeUser, selectIsAuth } from '@/redux/reducers/UserSlice';
-// import { IGlobalMessage } from '@/types/Message';
 
 function Unsubscribe() {
   const { t } = useLocalizationContext();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLogin = useSelector(selectIsAuth);
 
   const tokenExpireMessage = useMemo(
@@ -25,18 +26,16 @@ function Unsubscribe() {
     const unsubscribe = auth.onIdTokenChanged(async (user) => {
       if (user) {
         await user.getIdToken();
-      } else {
-        if (isLogin) {
-          dispatch(setMessage(tokenExpireMessage));
-        }
-
+      } else if (isLogin) {
+        dispatch(setMessage(tokenExpireMessage));
         dispatch(removeUser());
+        navigate('/welcome');
       }
     });
     return () => {
       unsubscribe();
     };
-  }, [dispatch, tokenExpireMessage]);
+  }, [dispatch, tokenExpireMessage, isLogin, navigate]);
   return <div />;
 }
 

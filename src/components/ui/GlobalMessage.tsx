@@ -22,7 +22,7 @@ function GlobalMessage() {
       data-element="global-message"
       className={cn(
         `fixed bottom-3 right-3 z-30 py-2 pr-5 pl-14 rounded-xl text-lg max-w-[280px] md:max-w-sm lg:max-w-lg
-         transition-transform duration-500 delay-500 translate-x-96 border`,
+         transition-transform duration-500 delay-500 translate-x-[120%] border`,
         message.isShown && 'translate-x-0',
         message.type === 'info' && 'bg-blue-100 text-blue-700 border-blue-700',
         message.type === 'success' && 'bg-green-100 text-green-700 border-green-700',
