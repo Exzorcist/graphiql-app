@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import Header from '@/components/Common/Header';
 import Footer from '@/components/Common/Footer';
+import GlobalMessage from '@/components/ui/GlobalMessage';
 
 import ThemeProvider from '@/providers/ThemeProvider';
 import LocalizationProvider from '@/providers/LocalizationProvider';
@@ -19,6 +20,8 @@ function Root() {
           </div>
           <Footer />
         </div>
+
+        <GlobalMessage />
       </LocalizationProvider>
     </ThemeProvider>
   );
