@@ -33,9 +33,10 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
-const setupStore = () => {
+export const setupStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: persistedReducer,
+    preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
