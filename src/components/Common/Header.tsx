@@ -1,27 +1,45 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOut, getAuth } from 'firebase/auth';
 
 import { Bars3BottomRightIcon } from '@heroicons/react/24/outline';
-import { cn } from '@/utils/cn';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import Logo from '@/assets/logo-graphql.svg';
+import { removeUser, selectIsAuth } from '@/redux/slices/userSlice';
 import SwitchLang from './Header/SwitchLang';
+
+import { cn } from '@/utils/cn';
+import Logo from '@/assets/logo-graphql.svg';
+import { IGlobalMessage } from '@/types/Message';
+import { setMessage } from '@/redux/slices/globalMessageSlice';
 
 function Header() {
   const { t } = useLocalizationContext();
+  const dispatch = useDispatch();
+  const isLogin = useSelector(selectIsAuth);
+
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [show, isShow] = useState<boolean>(false);
   const menu = useRef<HTMLDivElement | null>(null);
-
-  // TODO: waiting part with login & redux
-  const isLogin = false;
 
   const handleScroll = () => setScrolled(window.scrollY > 0);
   const handleClickOutside = (event: MouseEvent) => {
     if (menu.current && !menu.current.contains(event.target as Node)) {
       isShow(false);
     }
+  };
+
+  const handleLogout = () => {
+    const logoutSuccessMessage: IGlobalMessage = {
+      type: 'success',
+      text: t.globalMessage.success.logout,
+      isShown: true,
+    };
+
+    signOut(getAuth());
+    dispatch(removeUser());
+    dispatch(setMessage(logoutSuccessMessage));
   };
 
   useEffect(() => {
@@ -78,22 +96,14 @@ function Header() {
             </NavLink>
             <span className="hidden sm:block">|</span>
 
-            {!isLogin ? (
-              <NavLink
-                to="/login"
-                className="py-2 px-3.5 cursor-pointer transition-colors duration-300 hover:bg-main/10
-                           sm:p-0 sm:hover:bg-transparent sm:hover:text-orange-200"
-              >
-                {t.header.links.login}
-              </NavLink>
-            ) : (
-              <span
-                className="py-2 px-3.5 cursor-pointer transition-colors duration-300 hover:bg-main/10
-                           sm:p-0 sm:hover:bg-transparent sm:hover:text-orange-200"
-              >
-                {t.header.links.logout}
-              </span>
-            )}
+            <NavLink
+              to={isLogin ? '/welcome' : '/login'}
+              onClick={() => (isLogin ? handleLogout() : null)}
+              className="py-2 px-3.5 cursor-pointer transition-colors duration-300 hover:bg-main/10
+                         sm:p-0 sm:hover:bg-transparent sm:hover:text-orange-200"
+            >
+              {isLogin ? t.header.links.logout : t.header.links.login}
+            </NavLink>
           </div>
         </div>
       </div>

@@ -6,11 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { InfoForm, Inputs } from '@/types/Form';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
-import { setUser } from '@/redux/userSlice';
+import { setUser } from '@/redux/slices/userSlice';
+import { setMessage } from '@/redux/slices/globalMessageSlice';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import { signUpSchema } from '@/utils/schemas/signup-schema';
 import { signInSchema } from '@/utils/schemas/signin-schema';
 import { cn } from '@/utils/cn';
+import { IGlobalMessage } from '@/types/Message';
 
 function SignUpForm({
   questionForLink,
@@ -22,7 +24,6 @@ function SignUpForm({
   functionForUserWithEmailAndPassword,
 }: InfoForm) {
   const { t, lang } = useLocalizationContext();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false);
@@ -39,6 +40,17 @@ function SignUpForm({
 
   function handleRegister(emailUser: string, passwordUser: string) {
     const auth = getAuth();
+    const loginSuccessMessage: IGlobalMessage = {
+      type: 'success',
+      text: t.globalMessage.success.login,
+      isShown: true,
+    };
+    const loginErrorMessage: IGlobalMessage = {
+      type: 'error',
+      text: !isLogin ? t.globalMessage.error.login : t.globalMessage.error.registration,
+      isShown: true,
+    };
+
     functionForUserWithEmailAndPassword(auth, emailUser, passwordUser)
       .then(({ user }) => {
         setIsError(false);
@@ -46,13 +58,17 @@ function SignUpForm({
           setUser({
             email: user.email,
             id: user.uid,
+            token: user.refreshToken,
             isAuth: true,
           })
         );
         navigate('/');
+        dispatch(setMessage(loginSuccessMessage));
       })
       .catch(() => {
         setIsError(true);
+        dispatch(setMessage(loginErrorMessage));
+        setIsError(false);
       });
   }
 
@@ -199,16 +215,6 @@ function SignUpForm({
         >
           {buttonValue}
         </button>
-
-        <div
-          className={cn(
-            'text-sm translate-x-96 ml-5',
-            isError && 'transition delay-150 duration-500 ease-in-out translate-x-0 bg-red-500'
-          )}
-        >
-          {' '}
-          {t.errors.error} <span className="underline">{textForLink}</span>{' '}
-        </div>
       </form>
     </section>
   );

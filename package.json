@@ -33,6 +33,7 @@
     "cm6-graphql": "^0.0.12",
     "firebase": "^10.7.1",
     "graphql": "^16.8.1",
+    "firebase-admin": "^12.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-polymorphed": "^2.2.2",

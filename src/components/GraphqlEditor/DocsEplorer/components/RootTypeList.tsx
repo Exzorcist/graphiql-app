@@ -1,6 +1,6 @@
 import { OperationTypeNode } from 'graphql';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
-import { selectGraphQLSchema } from '@/redux/graphqlSlice';
+import { selectGraphQLSchema } from '@/redux/slices/graphqlSlice';
 import Separator from '@/components/ui/Separator';
 import RootEntry from './Entry/RootEntry';
 import { useDocsExplorer } from '../DocsExplorer';

@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import { setLocalization } from '@/redux/slices/localizationSlice';
 import { cn } from '@/utils/cn';
 import { Language } from '@/types/Provider';
 
 function SwitchLang() {
   const languages: string[] = ['English', 'Русский', 'Беларускі'];
   const codes: Language[] = ['eng', 'ru', 'by'];
+  const dispatch = useDispatch();
   const { setLang, lang } = useLocalizationContext();
   const [show, isShow] = useState<boolean>(false);
   const langBox = useRef<HTMLDivElement | null>(null);
@@ -49,6 +52,7 @@ function SwitchLang() {
             key={code}
             onClick={() => {
               setLang(code);
+              dispatch(setLocalization(code));
               isShow(false);
             }}
             aria-hidden

@@ -1,5 +1,6 @@
-import { screen, render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Footer from '@/components/Common/Footer';
+import { customRender as render } from '@/__tests__/test-utils';
 
 test('[ Footer ]: base test', async () => {
   render(<Footer />);

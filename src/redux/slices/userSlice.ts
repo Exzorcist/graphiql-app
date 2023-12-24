@@ -4,6 +4,7 @@ import { IUser } from '@/types/Form';
 const initialState: IUser = {
   email: '',
   id: '',
+  token: '',
   isAuth: false,
 };
 
@@ -18,8 +19,12 @@ const userSlice = createSlice({
       return { ...state, ...initialState };
     },
   },
+  selectors: {
+    selectIsAuth: (state) => state.isAuth,
+  },
 });
 
 export const { setUser, removeUser } = userSlice.actions;
+export const { selectIsAuth } = userSlice.selectors;
 
-export default userSlice;
+export default userSlice.reducer;

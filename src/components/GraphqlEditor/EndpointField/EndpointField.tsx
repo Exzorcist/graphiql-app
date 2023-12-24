@@ -4,7 +4,7 @@ import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
-import { selectApiUrl, useLazyFetchIntrospectionQuery } from '@/redux/graphqlSlice';
+import { selectApiUrl, useLazyFetchIntrospectionQuery } from '@/redux/slices/graphqlSlice';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
 
 export type EndpointFieldProps = {

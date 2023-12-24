@@ -32,7 +32,7 @@ const initialState: GraphqlSliceState = {
   apiUrl: '',
 };
 
-export const graphqlSlice = createSlice({
+const graphqlSlice = createSlice({
   name: 'graphql',
   initialState,
   reducers: {},
@@ -63,4 +63,5 @@ export const graphqlSlice = createSlice({
   },
 });
 
+export const graphqlReducer = graphqlSlice.reducer;
 export const { selectGraphQLSchema, selectApiUrl, selectIntrospectStatus } = graphqlSlice.selectors;

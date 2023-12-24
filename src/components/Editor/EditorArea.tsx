@@ -8,7 +8,7 @@ import { cn } from '@/utils/cn';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { Theme, useTheme } from '@/providers/ThemeProvider';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
-import { selectGraphQLSchema } from '@/redux/graphqlSlice';
+import { selectGraphQLSchema } from '@/redux/slices/graphqlSlice';
 
 type Props = {
   themeSettings?: Settings;
