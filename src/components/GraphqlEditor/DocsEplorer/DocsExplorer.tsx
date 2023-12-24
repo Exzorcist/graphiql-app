@@ -9,6 +9,7 @@ import EntryScreen from './components/EntryScreen';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
 import DocsBreadcrumb from './components/DocsBreadcrumb';
 import Spinner from '@/components/ui/Spinner';
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 type DocsExlorerContextType = {
   openEntry(entry: GraphQLDocsEntry): void;
@@ -19,6 +20,7 @@ type DocsExlorerContextType = {
 const DocsExplorerContext = createContext<DocsExlorerContextType | null>(null);
 
 function DocsExplorer({ className }: PropsWithClassName) {
+  const { t } = useLocalizationContext();
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const introspectStatus = useAppSelector(selectIntrospectStatus);
   const [navStack, setNavStack] = useState<GraphQLDocsEntry[]>([]);
@@ -56,7 +58,7 @@ function DocsExplorer({ className }: PropsWithClassName) {
             className
           )}
         >
-          <h3 className="text-lg font-semibold">Documentation</h3>
+          <h3 className="text-lg font-semibold">{t.page.editor.docs}</h3>
           <Separator className="mb-4" />
           <DocsBreadcrumb
             navStack={navStack}

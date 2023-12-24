@@ -44,7 +44,8 @@ exports[`DocsEplorer 1`] = `
           <h4
             class="text-lg font-semibold"
           >
-            Root types
+            Root 
+            Types
           </h4>
           <div
             class="shrink-0 bg-editor-border h-[1px] w-full my-2"

@@ -6,7 +6,7 @@ function SchemaButton(props: ButtonProps) {
 
   return (
     <Button variant="ghost-accented" {...props}>
-      {t.page.editor.Schema}
+      {t.page.editor.schema}
     </Button>
   );
 }

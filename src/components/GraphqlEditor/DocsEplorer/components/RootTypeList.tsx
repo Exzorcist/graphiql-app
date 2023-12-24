@@ -4,14 +4,16 @@ import { selectGraphQLSchema } from '@/redux/slices/graphqlSlice';
 import Separator from '@/components/ui/Separator';
 import RootEntry from './Entry/RootEntry';
 import { useDocsExplorer } from '../DocsExplorer';
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 function RootTypeList() {
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const { openEntry } = useDocsExplorer();
+  const { t } = useLocalizationContext();
 
   return (
     <div>
-      <h4 className="text-lg font-semibold">Root types</h4>
+      <h4 className="text-lg font-semibold">Root {t.page.editor.types}</h4>
       <Separator />
       {Object.values(OperationTypeNode).map((operationType) => {
         const type = graphqlSchema?.getRootType(operationType as OperationTypeNode);

@@ -37,7 +37,7 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
       <div className="w-full h-full flex ">
         <input
           className="w-full h-full bg-transparent outline-none pl-4"
-          placeholder={t.page.editor['Enter URL']}
+          placeholder={t.page.editor.enterURL}
           defaultValue={apiUrl}
           ref={inputRef}
         />

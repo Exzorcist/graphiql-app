@@ -10,10 +10,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import userReducer from './slices/userSlice';
 import { graphqlApi, graphqlReducer } from './slices/graphqlSlice';
-import localizationReducer from './slices/localizationSlice';
 import globalMessageReducer from './slices/globalMessageSlice';
+import localizationReducer from './slices/localizationSlice';
+import userReducer from './slices/userSlice';
 
 const rootPersistConfig = {
   key: 'root',

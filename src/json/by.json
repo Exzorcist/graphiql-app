@@ -39,11 +39,19 @@
     },
 
     "editor": {
-      "Variables": "Пераменныя",
-      "Headers": "Загалоўкі",
-      "Enter URL": "Увядзіце URL",
-      "Schema": "Схема",
-      "Send Request": "Aдправіць запыт"
+      "variables": "Пераменныя",
+      "headers": "Загалоўкі",
+      "enterURL": "Увядзіце URL",
+      "schema": "Схема",
+      "sendRequest": "Aдправіць запыт",
+      "docs": "Дакументацыя",
+      "types": "Тыпы",
+      "type": "Тыпа",
+      "fields": "Палі",
+      "inputFields": "Уваходныя Палі",
+      "args": "Аргументы",
+      "metadataFor": "Метаданыя для",
+      "values": "Значэння"
     },
 
     "registration": {

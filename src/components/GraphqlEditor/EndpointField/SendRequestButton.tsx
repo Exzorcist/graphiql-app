@@ -11,7 +11,7 @@ function SendRequestButton({ className }: PropsWithClassName) {
 
   return (
     <Button type="submit" variant="solid" className={cn('px-5 rounded-none rounded-r', className)}>
-      {isMobileL ? t.page.editor['Send Request'] : <PlayIcon className="w-6 h-6" />}
+      {isMobileL ? t.page.editor.sendRequest : <PlayIcon className="w-6 h-6" />}
     </Button>
   );
 }

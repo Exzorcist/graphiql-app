@@ -39,11 +39,19 @@
     },
 
     "editor": {
-      "Variables": "Variables",
-      "Headers": "Headers",
-      "Enter URL": "Enter URL",
-      "Schema": "Schema",
-      "Send Request": "Send request"
+      "variables": "Variables",
+      "headers": "Headers",
+      "enterURL": "Enter URL",
+      "schema": "Schema",
+      "sendRequest": "Send request",
+      "docs": "Documentation",
+      "types": "Types",
+      "type": "Type",
+      "fields": "Fields",
+      "inputFields": "Input Fields",
+      "args": "Arguments",
+      "metadataFor": "Metadata for",
+      "values": "Values"
     },
 
     "registration": {
