@@ -24,32 +24,41 @@ export function usePanelSizeState(panelGroupId: string, sizeInPixels: number) {
       );
     }
 
-    const resizeHandles = panelGroup.querySelectorAll<HTMLDivElement>(
+    /* const resizeHandles = panelGroup.querySelectorAll<HTMLDivElement>(
       `:scope > [data-resize-handle]`
-    );
+    ); */
 
-    const offsetProp = direction === 'vertical' ? 'offsetHeight' : 'offsetWidth';
+    const sizeProp = direction === 'vertical' ? 'height' : 'width';
 
-    const observer = new ResizeObserver(() => {
-      let space = panelGroup[offsetProp];
+    let prevSize: number;
 
-      resizeHandles.forEach((resizeHandle) => {
-        space -= resizeHandle[offsetProp];
+    const observer = new ResizeObserver((entries) => {
+      let currentSize = entries[0].contentRect[sizeProp];
+
+      if (currentSize === prevSize) {
+        return;
+      }
+
+      prevSize = currentSize;
+
+      // container size minus sizes of all resize handles
+      entries.slice(1).forEach((entry) => {
+        currentSize -= entry.contentRect[sizeProp];
       });
 
       /**
        * decimal count higher than 10 causes panel's onExpand and onCollapse handlers
        * to not be able to be envoked (library bug)
        */
-      const newSize = parseFloat(((sizeInPixels / space) * 100).toFixed(10));
+      const newSize = parseFloat(((sizeInPixels / currentSize) * 100).toFixed(10));
       setSize(newSize);
     });
 
     observer.observe(panelGroup);
 
-    resizeHandles.forEach((resizeHandle) => {
+    /* resizeHandles.forEach((resizeHandle) => {
       observer.observe(resizeHandle);
-    });
+    }); */
 
     return () => {
       observer.disconnect();
@@ -64,17 +73,15 @@ export function usePanelSizeState(panelGroupId: string, sizeInPixels: number) {
  */
 export function useKeepPanelCollapsed(
   panelRef: React.MutableRefObject<ImperativePanelHandle | null>,
-  panelMinSize: number,
+  shouldCollapse: boolean,
   sizeDeps: unknown[] = []
 ) {
   useEffect(() => {
-    const panelSize = panelRef.current?.getSize();
-
-    if (!panelSize || panelSize < panelMinSize) {
+    if (shouldCollapse) {
       panelRef.current?.collapse();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [panelMinSize, panelRef, ...sizeDeps]);
+  }, [panelRef, shouldCollapse, ...sizeDeps]);
 }
 
 /**
