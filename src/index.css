@@ -62,6 +62,10 @@
     .fancy-scrollbar::-webkit-scrollbar {
       width: 16px;
     }
+
+    .fancy-scrollbar::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
   }
 }
 
