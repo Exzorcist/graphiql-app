@@ -39,11 +39,19 @@
     },
 
     "editor": {
-      "Variables": "Переменные",
-      "Headers": "Заголовки",
-      "Enter URL": "Введите URL",
-      "Schema": "Схема",
-      "Send Request": "Отправить запрос"
+      "variables": "Переменные",
+      "headers": "Заголовки",
+      "enterURL": "Введите URL",
+      "schema": "Схема",
+      "sendRequest": "Отправить запрос",
+      "docs": "Документация",
+      "types": "Типы",
+      "type": "Типа",
+      "fields": "Поля",
+      "inputFields": "Входящие поля",
+      "args": "Аргументы",
+      "metadataFor": "Метаданные для",
+      "values": "Значения"
     },
 
     "registration": {

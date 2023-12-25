@@ -6,13 +6,13 @@ import { signOut, getAuth } from 'firebase/auth';
 
 import { Bars3BottomRightIcon } from '@heroicons/react/24/outline';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import { removeUser, selectIsAuth } from '@/redux/reducers/UserSlice';
+import { removeUser, selectIsAuth } from '@/redux/slices/userSlice';
 import SwitchLang from './Header/SwitchLang';
 
 import { cn } from '@/utils/cn';
 import Logo from '@/assets/logo-graphql.svg';
 import { IGlobalMessage } from '@/types/Message';
-import { setMessage } from '@/redux/reducers/GlobalMessageSlice';
+import { setMessage } from '@/redux/slices/globalMessageSlice';
 
 function Header() {
   const { t } = useLocalizationContext();

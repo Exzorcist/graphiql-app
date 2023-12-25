@@ -1,6 +1,6 @@
 import { createRoutesFromElements, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectIsAuth } from '@/redux/reducers/UserSlice';
+import { selectIsAuth } from '@/redux/slices/userSlice';
 
 import Root from '@/layout/Root';
 import GraphqlEditorPage from './pages/GraphqlEditorPage';

@@ -1,7 +1,7 @@
 import { CheckBadgeIcon, NoSymbolIcon, MegaphoneIcon } from '@heroicons/react/24/outline';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectMessage, hideMessage } from '@/redux/reducers/GlobalMessageSlice';
+import { selectMessage, hideMessage } from '@/redux/slices/globalMessageSlice';
 import { cn } from '@/utils/cn';
 
 function GlobalMessage() {

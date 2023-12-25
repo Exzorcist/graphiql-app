@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import { setLocalization } from '@/redux/reducers/LocalizationSlice';
+import { setLocalization } from '@/redux/slices/localizationSlice';
 import { cn } from '@/utils/cn';
 import { Language } from '@/types/Provider';
 

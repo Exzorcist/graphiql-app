@@ -23,7 +23,7 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
   const [toolsPanelCollapseSize] = usePanelSizeState(panelGroupId, DEFAULT_EDITOR_HEADER_HEIGHT);
   const toolsPanelRef = useRef<ImperativePanelHandle | null>(null);
 
-  useKeepPanelCollapsed(toolsPanelRef, TOOLS_PANEL_MIN_SIZE, [toolsPanelCollapseSize]);
+  useKeepPanelCollapsed(toolsPanelRef, !showTools, [toolsPanelCollapseSize]);
 
   const { collapse, expand, onCollapse, onExpand } = useDefaultExpandSize(
     toolsPanelRef,

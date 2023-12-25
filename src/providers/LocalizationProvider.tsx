@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 import { ILocalizationProvider, Language } from '@/types/Provider';
-import { selectLocalization } from '@/redux/reducers/LocalizationSlice';
+import { selectLocalization } from '@/redux/slices/localizationSlice';
 
 import EngJSON from '@/json/eng.json';
 import RuJSON from '@/json/ru.json';

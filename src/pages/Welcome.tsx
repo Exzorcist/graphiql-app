@@ -2,7 +2,7 @@ import { ReactSVG } from 'react-svg';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import { selectIsAuth } from '@/redux/reducers/UserSlice';
+import { selectIsAuth } from '@/redux/slices/userSlice';
 
 import IvanImage from '@/assets/team/Ivan.jpg';
 import PolinaImage from '@/assets/team/Polina.jpg';
@@ -50,7 +50,7 @@ function Welcome() {
       </h1>
 
       <div
-        className="text-center leading-8 text-neutral-700 italic border-2 border-main rounded-2xl 
+        className="text-center leading-8 text-neutral-700 italic border-2 border-main rounded-2xl
                    py-6 px-4 bg-main/10 mb-8"
       >
         {t.page.welcome.description.project}
@@ -92,7 +92,7 @@ function Welcome() {
       </div>
 
       <div
-        className="text-center leading-8 text-neutral-700 italic border-2 border-main rounded-2xl 
+        className="text-center leading-8 text-neutral-700 italic border-2 border-main rounded-2xl
                    py-6 px-4 bg-main/10 mb-8 mt-10"
       >
         {t.page.welcome.description.rsschool}

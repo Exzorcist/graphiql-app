@@ -5,31 +5,36 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ThemeProvider from '@/providers/ThemeProvider';
 import LocalizationProvider from '@/providers/LocalizationProvider';
-import { store } from '@/redux/store';
+import { RootState, setupStore } from '@/redux/store';
 
 export const user = userEvent.setup();
 
 interface ExtendedRenderOptions extends RenderOptions {
   initialEntries?: string[];
+  preloadedState?: Partial<RootState>;
 }
 
 export const customRender = (
   ui: ReactElement,
-  options?: Omit<ExtendedRenderOptions, 'wrapper'>
+  {
+    preloadedState = {},
+    initialEntries,
+    ...renderOptions
+  }: Omit<ExtendedRenderOptions, 'wrapper'> = {}
 ) => {
+  const store = setupStore(preloadedState);
+
   function Wrapper({ children }: { children: ReactNode }) {
     return (
       <Provider store={store}>
         <ThemeProvider>
           <LocalizationProvider>
-            <MemoryRouter initialEntries={options?.initialEntries ?? ['/']}>
-              {children}
-            </MemoryRouter>
+            <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
           </LocalizationProvider>
         </ThemeProvider>
       </Provider>
     );
   }
 
-  return render(ui, { wrapper: Wrapper, ...options });
+  return render(ui, { wrapper: Wrapper, ...renderOptions });
 };

@@ -23,8 +23,8 @@ function GraphqlToolsHeader({
 
   return (
     <div className={cn('flex gap-6 w-full', className)}>
-      <Button onClick={onVariablesClick}>{t.page.editor.Variables}</Button>
-      <Button onClick={onHeadersclick}>{t.page.editor.Headers}</Button>
+      <Button onClick={onVariablesClick}>{t.page.editor.variables}</Button>
+      <Button onClick={onHeadersclick}>{t.page.editor.headers}</Button>
       <Button className="ml-auto" onClick={onChevronClick}>
         <ChevronUpIcon className={cn('h-6 w-6', isOpen && 'rotate-180')} />
       </Button>

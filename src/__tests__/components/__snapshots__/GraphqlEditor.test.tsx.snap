@@ -21,6 +21,7 @@ exports[`GraphqlEditor 1`] = `
               <input
                 class="w-full h-full bg-transparent outline-none pl-4"
                 placeholder="Enter URL"
+                value=""
               />
               <div
                 class="bottom-0 right-4 h-full flex items-center pr-4 pl-4"
@@ -44,7 +45,6 @@ exports[`GraphqlEditor 1`] = `
               <svg
                 aria-hidden="true"
                 class="w-6 h-6"
-                data-slot="icon"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="1.5"
@@ -52,7 +52,7 @@ exports[`GraphqlEditor 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+                  d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
@@ -105,7 +105,7 @@ exports[`GraphqlEditor 1`] = `
                       >
                         <div
                           aria-live="polite"
-                          class="cm-announced"
+                          style="position: absolute; top: -10000px;"
                         />
                         <div
                           class="cm-scroller"
@@ -126,7 +126,7 @@ exports[`GraphqlEditor 1`] = `
                                 9
                               </div>
                               <div
-                                class="cm-gutterElement cm-activeLineGutter"
+                                class="cm-gutterElement"
                                 style="height: 14px;"
                               >
                                 1
@@ -145,10 +145,6 @@ exports[`GraphqlEditor 1`] = `
                                   ›
                                 </span>
                               </div>
-                              <div
-                                class="cm-gutterElement cm-activeLineGutter"
-                                style="height: 14px;"
-                              />
                             </div>
                           </div>
                           <div
@@ -160,24 +156,23 @@ exports[`GraphqlEditor 1`] = `
                             contenteditable="true"
                             role="textbox"
                             spellcheck="false"
-                            style="tab-size: 4;"
+                            style="tab-size: 4"
                             translate="no"
                           >
                             <div
-                              class="cm-activeLine cm-line"
+                              class="cm-line"
                             >
                               <br />
                             </div>
                           </div>
                           <div
                             aria-hidden="true"
-                            class="cm-layer cm-layer-above cm-cursorLayer"
-                            style="z-index: 150; animation-duration: 1200ms;"
+                            class="cm-selectionLayer"
                           />
                           <div
                             aria-hidden="true"
-                            class="cm-layer cm-selectionLayer"
-                            style="z-index: -2;"
+                            class="cm-cursorLayer"
+                            style="animation-duration: 1200ms;"
                           />
                         </div>
                       </div>
@@ -225,7 +220,7 @@ exports[`GraphqlEditor 1`] = `
                 >
                   <div
                     aria-live="polite"
-                    class="cm-announced"
+                    style="position: absolute; top: -10000px;"
                   />
                   <div
                     class="cm-scroller"
@@ -246,7 +241,7 @@ exports[`GraphqlEditor 1`] = `
                           9
                         </div>
                         <div
-                          class="cm-gutterElement cm-activeLineGutter"
+                          class="cm-gutterElement"
                           style="height: 14px;"
                         >
                           1
@@ -265,10 +260,6 @@ exports[`GraphqlEditor 1`] = `
                             ›
                           </span>
                         </div>
-                        <div
-                          class="cm-gutterElement cm-activeLineGutter"
-                          style="height: 14px;"
-                        />
                       </div>
                     </div>
                     <div
@@ -280,24 +271,23 @@ exports[`GraphqlEditor 1`] = `
                       contenteditable="true"
                       role="textbox"
                       spellcheck="false"
-                      style="tab-size: 4;"
+                      style="tab-size: 4"
                       translate="no"
                     >
                       <div
-                        class="cm-activeLine cm-line"
+                        class="cm-line"
                       >
                         <br />
                       </div>
                     </div>
                     <div
                       aria-hidden="true"
-                      class="cm-layer cm-layer-above cm-cursorLayer"
-                      style="z-index: 150; animation-duration: 1200ms;"
+                      class="cm-selectionLayer"
                     />
                     <div
                       aria-hidden="true"
-                      class="cm-layer cm-selectionLayer"
-                      style="z-index: -2;"
+                      class="cm-cursorLayer"
+                      style="animation-duration: 1200ms;"
                     />
                   </div>
                 </div>
@@ -369,14 +359,13 @@ exports[`GraphqlEditor 1`] = `
                       <svg
                         aria-hidden="true"
                         class="h-6 w-6"
-                        data-slot="icon"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
                           clip-rule="evenodd"
-                          d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
+                          d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z"
                           fill-rule="evenodd"
                         />
                       </svg>
@@ -393,7 +382,7 @@ exports[`GraphqlEditor 1`] = `
                   >
                     <div
                       aria-live="polite"
-                      class="cm-announced"
+                      style="position: absolute; top: -10000px;"
                     />
                     <div
                       class="cm-scroller"
@@ -414,7 +403,7 @@ exports[`GraphqlEditor 1`] = `
                             9
                           </div>
                           <div
-                            class="cm-gutterElement cm-activeLineGutter"
+                            class="cm-gutterElement"
                             style="height: 14px;"
                           >
                             1
@@ -433,10 +422,6 @@ exports[`GraphqlEditor 1`] = `
                               ›
                             </span>
                           </div>
-                          <div
-                            class="cm-gutterElement cm-activeLineGutter"
-                            style="height: 14px;"
-                          />
                         </div>
                       </div>
                       <div
@@ -448,24 +433,23 @@ exports[`GraphqlEditor 1`] = `
                         contenteditable="true"
                         role="textbox"
                         spellcheck="false"
-                        style="tab-size: 4;"
+                        style="tab-size: 4"
                         translate="no"
                       >
                         <div
-                          class="cm-activeLine cm-line"
+                          class="cm-line"
                         >
                           <br />
                         </div>
                       </div>
                       <div
                         aria-hidden="true"
-                        class="cm-layer cm-layer-above cm-cursorLayer"
-                        style="z-index: 150; animation-duration: 1200ms;"
+                        class="cm-selectionLayer"
                       />
                       <div
                         aria-hidden="true"
-                        class="cm-layer cm-selectionLayer"
-                        style="z-index: -2;"
+                        class="cm-cursorLayer"
+                        style="animation-duration: 1200ms;"
                       />
                     </div>
                   </div>

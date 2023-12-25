@@ -7,7 +7,7 @@ const initialState: IGlobalMessage = {
   isShown: false,
 };
 
-const GlobalMessageSlice = createSlice({
+const globalMessageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
@@ -20,7 +20,7 @@ const GlobalMessageSlice = createSlice({
   },
 });
 
-export const { setMessage, hideMessage } = GlobalMessageSlice.actions;
+export const { setMessage, hideMessage } = globalMessageSlice.actions;
 export const selectMessage = (state: { message: IGlobalMessage }) => state.message;
 
-export default GlobalMessageSlice.reducer;
+export default globalMessageSlice.reducer;

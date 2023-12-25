@@ -19,10 +19,10 @@
     "**/*.{tsx,ts,css,json,md}": "prettier --write"
   },
   "dependencies": {
-    "@codemirror/lang-javascript": "^6.2.1",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-separator": "^1.0.3",
     "@reduxjs/toolkit": "^2.0.1",
     "@uiw/codemirror-theme-dracula": "^4.21.21",
     "@uiw/codemirror-theme-material": "^4.21.21",
@@ -30,7 +30,9 @@
     "@uiw/react-codemirror": "^4.21.21",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "cm6-graphql": "^0.0.12",
     "firebase": "^10.7.1",
+    "graphql": "^16.8.1",
     "firebase-admin": "^12.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

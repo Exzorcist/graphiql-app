@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import SwipeableDrawer, { SwipableDrawerProps } from '@/components/ui/SwipeableDrawer';
-import SchemaDocs from './SchemaDocs';
+import DocsExplorer from './DocsExplorer';
 
-function SchemaDocsDrawer(props: SwipableDrawerProps) {
+function DocsExplorerDrawer(props: SwipableDrawerProps) {
   return (
     <SwipeableDrawer {...props}>
-      <SchemaDocs />
+      <DocsExplorer />
     </SwipeableDrawer>
   );
 }
 
-export default memo(SchemaDocsDrawer);
+export default memo(DocsExplorerDrawer);

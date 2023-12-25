@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '@/firebase';
 
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import { setMessage } from '@/redux/reducers/GlobalMessageSlice';
-import { removeUser, selectIsAuth } from '@/redux/reducers/UserSlice';
+import { setMessage } from '@/redux/slices/globalMessageSlice';
+import { removeUser, selectIsAuth } from '@/redux/slices/userSlice';
 
 function Unsubscribe() {
   const { t } = useLocalizationContext();
