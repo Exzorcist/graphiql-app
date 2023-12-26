@@ -6,6 +6,7 @@ import { requestPanelThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Editor } from '@/components/Editor';
 import { cn } from '@/utils/cn';
+import RequestEditor from './RequestEditor';
 
 const PANEL_GROUP_ID = 'request-panel-group';
 const QUERY_PANEL_MIN_SIZE = 20;
@@ -37,7 +38,7 @@ function RequestPanel() {
                   minSize={QUERY_PANEL_MIN_SIZE}
                   className={panelClassName}
                 >
-                  <Editor.Area />
+                  <RequestEditor />
                 </Panel>
                 {isLaptop && (
                   <GraphqlToolsPanel

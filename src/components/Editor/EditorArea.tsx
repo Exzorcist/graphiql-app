@@ -1,16 +1,18 @@
-import { ComponentPropsWithRef, forwardRef, memo, useImperativeHandle, useRef } from 'react';
-import CodeMirror, { EditorView, Extension, ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { ComponentPropsWithRef, forwardRef, memo, useMemo } from 'react';
+import CodeMirror, {
+  EditorView,
+  Extension,
+  ReactCodeMirrorRef,
+  BasicSetupOptions,
+} from '@uiw/react-codemirror';
+import { materialDarkInit, materialLightInit } from '@uiw/codemirror-theme-material';
 import { CreateThemeOptions, Settings } from '@uiw/codemirror-themes';
 import { draculaInit } from '@uiw/codemirror-theme-dracula';
-import { materialDarkInit, materialLightInit } from '@uiw/codemirror-theme-material';
-import { graphql, updateSchema } from 'cm6-graphql';
-import { cn } from '@/utils/cn';
 import { useEditorContext, useEditorContainerContext } from './hooks';
 import { Theme, useTheme } from '@/providers/ThemeProvider';
-import { useAppSelector } from '@/utils/hooks/redux-hooks';
-import { selectGraphQLSchema } from '@/redux/slices/graphqlSlice';
+import { cn } from '@/utils/cn';
 
-type Props = {
+export type EditorAreaProps = {
   themeSettings?: Settings;
 } & ComponentPropsWithRef<typeof CodeMirror>;
 
@@ -22,6 +24,7 @@ const styleOverrides = EditorView.theme({
   },
   '&.cm-editor.cm-focused': { outline: '2px solid transparent', outlineOffset: '2px' },
   '.cm-lineNumbers': { minWidth: '28px' },
+  '.cm-foldGutter': { minWidth: '11px' },
 });
 
 const themeInit: Record<Theme, (options?: Partial<CreateThemeOptions> | undefined) => Extension> = {
@@ -30,37 +33,39 @@ const themeInit: Record<Theme, (options?: Partial<CreateThemeOptions> | undefine
   light: materialLightInit,
 };
 
-const basicSetup = {
+const basicSetup: BasicSetupOptions = {
   tabSize: 4,
   highlightActiveLine: false,
   highlightActiveLineGutter: false,
   autocompletion: true,
 };
 
-const EditorArea = forwardRef<ReactCodeMirrorRef, Props>(
-  ({ className, themeSettings, ...rest }, ref) => {
+const EditorArea = forwardRef<ReactCodeMirrorRef, EditorAreaProps>(
+  ({ extensions = [], className, themeSettings, ...rest }, ref) => {
     const themeSettingsContext = useEditorContext();
     const { header } = useEditorContainerContext();
-    const codeMirrorRef = useRef<ReactCodeMirrorRef | null>(null);
-    const graphqlSchema = useAppSelector(selectGraphQLSchema);
-    const prevSchema = useRef(graphqlSchema);
     const [theme] = useTheme();
 
-    useImperativeHandle(ref, () => codeMirrorRef.current as ReactCodeMirrorRef);
+    const themeProp = useMemo(
+      () => themeInit[theme]({ settings: themeSettings ?? themeSettingsContext }),
+      [theme, themeSettings, themeSettingsContext]
+    );
 
-    if (prevSchema.current !== graphqlSchema) {
-      prevSchema.current = graphqlSchema;
-      updateSchema(codeMirrorRef.current!.view!, graphqlSchema ?? undefined);
-    }
+    const extensionsMemo = useMemo(() => [styleOverrides, ...extensions], [extensions]);
+
+    const style = useMemo(
+      () => ({ paddingTop: header.visible ? header.height : undefined }),
+      [header]
+    );
 
     return (
       <CodeMirror
-        ref={codeMirrorRef}
-        theme={themeInit[theme]({ settings: themeSettings ?? themeSettingsContext })}
+        ref={ref}
+        theme={themeProp}
         height="100%"
         className={cn('h-full flex flex-col', className)}
-        extensions={[styleOverrides, graphql(graphqlSchema ?? undefined)]}
-        style={{ paddingTop: header.visible ? header.height : undefined }}
+        extensions={extensionsMemo}
+        style={style}
         data-testid="editor-area"
         basicSetup={basicSetup}
         {...rest}

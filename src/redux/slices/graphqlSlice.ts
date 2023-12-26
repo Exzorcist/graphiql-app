@@ -1,6 +1,13 @@
 import { getIntrospectionQuery, IntrospectionQuery, buildClientSchema } from 'graphql';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import {
+  FetchBaseQueryError,
+  FetchBaseQueryMeta,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
+import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+import { type RootState } from '../store';
 
 const introspectionQuery = getIntrospectionQuery();
 
@@ -8,34 +15,63 @@ export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
   baseQuery: fetchBaseQuery({ baseUrl: '', method: 'POST' }),
   endpoints: (builder) => ({
+    initRequest: builder.query<string, string>({
+      queryFn: async (url, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
+        const { graphql } = getState() as RootState;
+
+        if (
+          !graphql.introspection.value ||
+          graphql.introspection.endpoint !== graphql.endpointValue
+        ) {
+          dispatch(graphqlApi.endpoints.fetchIntrospection.initiate(url, { forceRefetch: true }));
+        }
+
+        const requestValue = graphql.requestValue.trim();
+
+        const response = await fetchWithBQ({ url, body: { query: requestValue } });
+        return response as QueryReturnValue<string, FetchBaseQueryError, FetchBaseQueryMeta>;
+      },
+    }),
+
     fetchIntrospection: builder.query<IntrospectionQuery, string>({
       query: (url) => ({
         url,
         body: { query: introspectionQuery },
       }),
-      transformResponse: (res: { data: IntrospectionQuery }) => res.data,
+      transformResponse: (res: { data: IntrospectionQuery }) => {
+        return res.data;
+      },
     }),
   }),
 });
 
-export const { useLazyFetchIntrospectionQuery } = graphqlApi;
+export const { useLazyFetchIntrospectionQuery, useLazyInitRequestQuery } = graphqlApi;
 
 export type GraphqlSliceState = {
   introspectStatus: 'idle' | 'pending' | 'fullfilled' | 'rejected';
-  introspection: IntrospectionQuery | null;
-  apiUrl: string;
+  introspection: { value: IntrospectionQuery | null; endpoint: string };
+  requestValue: string;
+  endpointValue: string;
 };
 
 const initialState: GraphqlSliceState = {
   introspectStatus: 'idle',
-  introspection: null,
-  apiUrl: '',
+  introspection: { value: null, endpoint: '' },
+  requestValue: '',
+  endpointValue: '',
 };
 
 const graphqlSlice = createSlice({
   name: 'graphql',
   initialState,
-  reducers: {},
+  reducers: {
+    changeRequestValue(state, action: PayloadAction<string>) {
+      return { ...state, requestValue: action.payload };
+    },
+    changeEndpointValue(state, action: PayloadAction<string>) {
+      return { ...state, endpointValue: action.payload };
+    },
+  },
   extraReducers(builder) {
     builder
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchPending, (state) => {
@@ -45,23 +81,27 @@ const graphqlSlice = createSlice({
         return {
           ...state,
           introspectStatus: 'fullfilled',
-          introspection: action.payload,
-          apiUrl: action.meta.arg.originalArgs,
+          introspection: { value: action.payload, endpoint: action.meta.arg.originalArgs },
         };
       })
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchRejected, (state) => {
-        return { ...state, introspectStatus: 'rejected', introspection: null };
+        return {
+          ...state,
+          introspectStatus: 'rejected',
+          introspection: { value: null, endpoint: '' },
+        };
       });
   },
   selectors: {
-    selectApiUrl: (state) => state.apiUrl,
+    selectApiUrl: (state) => state.introspection.endpoint,
     selectIntrospectStatus: (state) => state.introspectStatus,
     selectGraphQLSchema: createSelector(
-      (state: GraphqlSliceState) => state.introspection,
-      (introspection) => introspection && buildClientSchema(introspection)
+      (state: GraphqlSliceState) => state.introspection.value,
+      (introspection) => (introspection ? buildClientSchema(introspection) : undefined)
     ),
   },
 });
 
 export const graphqlReducer = graphqlSlice.reducer;
+export const { changeRequestValue, changeEndpointValue } = graphqlSlice.actions;
 export const { selectGraphQLSchema, selectApiUrl, selectIntrospectStatus } = graphqlSlice.selectors;
