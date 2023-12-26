@@ -1,7 +1,6 @@
 import { Panel, PanelGroup } from 'react-resizable-panels';
 import { Transition } from 'react-transition-group';
 import { memo, useRef, useState } from 'react';
-import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle';
 import GraphqlToolsPanel from '../GraphqlToolsPanel/GraphqlToolsPanel';
 import { requestPanelThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
@@ -26,7 +25,12 @@ function RequestPanel() {
         return (
           <div className="w-full h-full" ref={nodeRef}>
             <Editor themeSettings={requestPanelThemeSettings}>
-              <PanelGroup id={PANEL_GROUP_ID} autoSaveId={PANEL_GROUP_ID} direction="vertical">
+              <PanelGroup
+                id={PANEL_GROUP_ID}
+                autoSaveId={PANEL_GROUP_ID}
+                direction="vertical"
+                className="relative"
+              >
                 <Panel
                   id="queryPanel"
                   order={1}
@@ -36,16 +40,13 @@ function RequestPanel() {
                   <Editor.Area />
                 </Panel>
                 {isLaptop && (
-                  <>
-                    <PanelResizeHandle />
-                    <GraphqlToolsPanel
-                      id="toolsPanel"
-                      order={2}
-                      panelGroupId={PANEL_GROUP_ID}
-                      onShowChange={setShowTools}
-                      className={panelClassName}
-                    />
-                  </>
+                  <GraphqlToolsPanel
+                    id="toolsPanel"
+                    order={2}
+                    panelGroupId={PANEL_GROUP_ID}
+                    onShowChange={setShowTools}
+                    panelClassName={panelClassName}
+                  />
                 )}
               </PanelGroup>
             </Editor>

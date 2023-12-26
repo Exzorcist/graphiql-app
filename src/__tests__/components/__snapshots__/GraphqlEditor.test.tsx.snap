@@ -64,7 +64,7 @@ exports[`GraphqlEditor 1`] = `
           class="w-full h-full"
         >
           <div
-            class=""
+            class="relative"
             data-panel-group=""
             data-panel-group-direction="vertical"
             data-panel-group-id="graphql-editor-panel-group"
@@ -82,7 +82,7 @@ exports[`GraphqlEditor 1`] = `
                 class="w-full h-full"
               >
                 <div
-                  class=""
+                  class="relative"
                   data-panel-group=""
                   data-panel-group-direction="vertical"
                   data-panel-group-id="request-panel-group"

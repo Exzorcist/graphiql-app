@@ -41,13 +41,16 @@ function GraphqlEditor() {
             );
 
             const currentPanel = isLaptop ? (
-              <DocsExplorerPanel
-                id="docsPanel"
-                order={3}
-                show={showDocs}
-                onShowChange={setShowDocs}
-                panelClassName={panelClassName}
-              />
+              <>
+                <PanelResizeHandle />
+                <DocsExplorerPanel
+                  id="docsPanel"
+                  order={3}
+                  show={showDocs}
+                  onShowChange={setShowDocs}
+                  panelClassName={panelClassName}
+                />
+              </>
             ) : (
               <GraphqlToolsPanel
                 id="toolsPanel"
@@ -64,6 +67,7 @@ function GraphqlEditor() {
                   id={PANEL_GROUP_ID}
                   autoSaveId={PANEL_GROUP_ID}
                   direction={isLaptop ? 'horizontal' : 'vertical'}
+                  className="relative"
                 >
                   <Panel
                     id="requestPanel"
@@ -82,7 +86,6 @@ function GraphqlEditor() {
                   >
                     <ResponsePanel />
                   </Panel>
-                  <PanelResizeHandle />
                   {currentPanel}
                 </PanelGroup>
               </div>
