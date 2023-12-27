@@ -86,3 +86,7 @@
 .cm-scroller {
   @apply fancy-scrollbar;
 }
+
+.ͼ3 .cm-tooltip-autocomplete-disabled ul li[aria-selected] {
+  background: #347;
+}

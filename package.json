@@ -19,6 +19,7 @@
     "**/*.{tsx,ts,css,json,md}": "prettier --write"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.11.1",
     "@codemirror/lang-javascript": "^6.2.1",
     "@codemirror/lang-json": "^6.0.1",
     "@heroicons/react": "^2.1.1",
@@ -32,7 +33,7 @@
     "@uiw/react-codemirror": "^4.21.21",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "cm6-graphql": "^0.0.12",
+    "cm6-graphql": "0.0.9",
     "firebase": "^10.7.1",
     "firebase-admin": "^12.0.0",
     "graphql": "^16.8.1",
