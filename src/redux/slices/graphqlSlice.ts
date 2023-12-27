@@ -5,18 +5,18 @@ import {
   createApi,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
-import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { type RootState } from '../store';
 import { AsyncStatus } from '@/types/AsyncStatus';
-
-const introspectionQuery = getIntrospectionQuery();
+import { setMessage } from './globalMessageSlice';
+import { isFetchBaseQueryError, isErrorWithMessage } from '@/utils/type-guards';
 
 export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
   baseQuery: fetchBaseQuery({ baseUrl: '', method: 'POST' }),
   endpoints: (builder) => ({
-    initRequest: builder.mutation<string, string>({
+    initRequest: builder.mutation<unknown, string>({
       queryFn: async (url, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
         const { graphql } = getState() as RootState;
 
@@ -24,20 +24,38 @@ export const graphqlApi = createApi({
           !graphql.introspection.value ||
           graphql.introspection.endpoint !== graphql.endpointValue
         ) {
-          dispatch(graphqlApi.endpoints.fetchIntrospection.initiate(url, { forceRefetch: true }));
+          dispatch(graphqlApi.endpoints.fetchIntrospection.initiate(url));
         }
 
         const requestValue = graphql.requestValue.trim();
 
         const response = await fetchWithBQ({ url, body: { query: requestValue } });
+
+        if (response.error) {
+          if (response.error.data) {
+            return { data: response.error.data };
+          }
+
+          if (isFetchBaseQueryError(response.error)) {
+            const errMsg =
+              'error' in response.error
+                ? response.error.error
+                : JSON.stringify(response.error.data);
+
+            dispatch(setMessage({ type: 'error', isShown: true, text: errMsg }));
+          } else if (isErrorWithMessage(response.error)) {
+            dispatch(setMessage({ type: 'error', isShown: true, text: response.error }));
+          }
+        }
+
         return response as QueryReturnValue<string, FetchBaseQueryError, FetchBaseQueryMeta>;
       },
     }),
 
-    fetchIntrospection: builder.query<IntrospectionQuery, string>({
+    fetchIntrospection: builder.mutation<IntrospectionQuery, string>({
       query: (url) => ({
         url,
-        body: { query: introspectionQuery },
+        body: { query: getIntrospectionQuery() },
       }),
       transformResponse: (res: { data: IntrospectionQuery }) => {
         return res.data;
@@ -46,7 +64,7 @@ export const graphqlApi = createApi({
   }),
 });
 
-export const { useLazyFetchIntrospectionQuery, useInitRequestMutation } = graphqlApi;
+export const { useFetchIntrospectionMutation, useInitRequestMutation } = graphqlApi;
 
 export type GraphqlSliceState = {
   introspectStatus: AsyncStatus;

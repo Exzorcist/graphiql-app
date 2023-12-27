@@ -22,10 +22,12 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
   const apiUrl = useAppSelector(selectApiUrl);
   const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = useState(apiUrl);
-  const [initRequest] = useInitRequestMutation();
+  const [initRequest, result] = useInitRequestMutation();
   const dispatchDebounced = useDebouncedCallback((value: string) => {
     dispatch(changeEndpointValue(value));
   }, 500);
+
+  console.log(result);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
