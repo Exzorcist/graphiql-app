@@ -8,7 +8,7 @@ import { PropsWithClassName } from '@/types/PropsWithClassName';
 import {
   changeEndpointValue,
   selectApiUrl,
-  useLazyInitRequestQuery,
+  useInitRequestMutation,
 } from '@/redux/slices/graphqlSlice';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 
@@ -22,7 +22,7 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
   const apiUrl = useAppSelector(selectApiUrl);
   const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = useState(apiUrl);
-  const [initRequest] = useLazyInitRequestQuery();
+  const [initRequest] = useInitRequestMutation();
   const dispatchDebounced = useDebouncedCallback((value: string) => {
     dispatch(changeEndpointValue(value));
   }, 500);

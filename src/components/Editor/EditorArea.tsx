@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, forwardRef, memo, useMemo } from 'react';
+import { ComponentPropsWithRef, forwardRef, memo } from 'react';
 import CodeMirror, {
   EditorView,
   Extension,
@@ -46,26 +46,14 @@ const EditorArea = forwardRef<ReactCodeMirrorRef, EditorAreaProps>(
     const { header } = useEditorContainerContext();
     const [theme] = useTheme();
 
-    const themeProp = useMemo(
-      () => themeInit[theme]({ settings: themeSettings ?? themeSettingsContext }),
-      [theme, themeSettings, themeSettingsContext]
-    );
-
-    const extensionsMemo = useMemo(() => [styleOverrides, ...extensions], [extensions]);
-
-    const style = useMemo(
-      () => ({ paddingTop: header.visible ? header.height : undefined }),
-      [header]
-    );
-
     return (
       <CodeMirror
         ref={ref}
-        theme={themeProp}
+        theme={themeInit[theme]({ settings: themeSettings ?? themeSettingsContext })}
         height="100%"
         className={cn('h-full flex flex-col', className)}
-        extensions={extensionsMemo}
-        style={style}
+        extensions={[styleOverrides, ...extensions]}
+        style={{ paddingTop: header.visible ? header.height : undefined }}
         data-testid="editor-area"
         basicSetup={basicSetup}
         {...rest}

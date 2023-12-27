@@ -4,7 +4,7 @@ exports[`GraphqlEditor 1`] = `
 <body>
   <div>
     <div
-      class="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family"
+      class="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family selection:bg-editor-code-selection"
     >
       <div
         class="h-full flex w-full flex-col"
@@ -102,7 +102,7 @@ exports[`GraphqlEditor 1`] = `
                       data-testid="editor-area"
                     >
                       <div
-                        class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5o ͼ4r ͼ42 ͼ4q"
+                        class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5y ͼ4r ͼ42 ͼ4q"
                       >
                         <div
                           aria-live="polite"
@@ -218,7 +218,7 @@ exports[`GraphqlEditor 1`] = `
                 data-testid="editor-area"
               >
                 <div
-                  class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5p ͼ51 ͼ42"
+                  class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5z ͼ52 ͼ42 ͼ51"
                 >
                   <div
                     aria-live="polite"
@@ -383,7 +383,7 @@ exports[`GraphqlEditor 1`] = `
                   style="padding-top: 50px;"
                 >
                   <div
-                    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5q ͼ5b ͼ42"
+                    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ60 ͼ5o ͼ42"
                   >
                     <div
                       aria-live="polite"

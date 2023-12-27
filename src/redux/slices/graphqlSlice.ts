@@ -8,6 +8,7 @@ import {
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { type RootState } from '../store';
+import { AsyncStatus } from '@/types/AsyncStatus';
 
 const introspectionQuery = getIntrospectionQuery();
 
@@ -15,7 +16,7 @@ export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
   baseQuery: fetchBaseQuery({ baseUrl: '', method: 'POST' }),
   endpoints: (builder) => ({
-    initRequest: builder.query<string, string>({
+    initRequest: builder.mutation<string, string>({
       queryFn: async (url, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
         const { graphql } = getState() as RootState;
 
@@ -45,10 +46,10 @@ export const graphqlApi = createApi({
   }),
 });
 
-export const { useLazyFetchIntrospectionQuery, useLazyInitRequestQuery } = graphqlApi;
+export const { useLazyFetchIntrospectionQuery, useInitRequestMutation } = graphqlApi;
 
 export type GraphqlSliceState = {
-  introspectStatus: 'idle' | 'pending' | 'fullfilled' | 'rejected';
+  introspectStatus: AsyncStatus;
   introspection: { value: IntrospectionQuery | null; endpoint: string };
   requestValue: string;
   endpointValue: string;
@@ -95,6 +96,7 @@ const graphqlSlice = createSlice({
   selectors: {
     selectApiUrl: (state) => state.introspection.endpoint,
     selectIntrospectStatus: (state) => state.introspectStatus,
+    selectRequestValue: (state) => state.requestValue,
     selectGraphQLSchema: createSelector(
       (state: GraphqlSliceState) => state.introspection.value,
       (introspection) => (introspection ? buildClientSchema(introspection) : undefined)
@@ -104,4 +106,5 @@ const graphqlSlice = createSlice({
 
 export const graphqlReducer = graphqlSlice.reducer;
 export const { changeRequestValue, changeEndpointValue } = graphqlSlice.actions;
-export const { selectGraphQLSchema, selectApiUrl, selectIntrospectStatus } = graphqlSlice.selectors;
+export const { selectGraphQLSchema, selectApiUrl, selectRequestValue, selectIntrospectStatus } =
+  graphqlSlice.selectors;

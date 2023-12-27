@@ -21,7 +21,8 @@
       'Lucida Sans Typewriter', Monaco, monospace;
     --font-sans: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --editor-code-font-size: 16px;
-    --editor-code-selection-color: 215 212 240;
+    /* --editor-code-selection-color: 215 212 240; */
+    --editor-code-selection-color: 82 83 92;
     --editor-ring: 203 213 225;
     --splitter-hover-color: rgb(var(--editor-accent-color));
   }
