@@ -2,7 +2,7 @@ import { Panel, PanelGroup } from 'react-resizable-panels';
 import { useCallback, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import PanelResizeHandle from '../PanelResizeHandle/PanelResizeHandle';
-import GraphqlToolsPanel from './GraphqlToolsPanel/GraphqlToolsPanel';
+import GraphqlToolsPanel from './GraphqlTools/GraphqlToolsPanel';
 import DocsExplorerDrawer from './DocsEplorer/DocsExplorerDrawer';
 import DocsExplorerPanel from './DocsEplorer/DocsExplorerPanel';
 import EndpointField from './EndpointField/EndpointField';

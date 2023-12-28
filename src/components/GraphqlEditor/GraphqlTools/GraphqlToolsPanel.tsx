@@ -7,7 +7,6 @@ import {
   usePanelSizeState,
 } from '@/hooks/panel-resize-hooks';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from '@/components/Editor';
-import { requestPanelThemeSettings } from '../themeSettings';
 import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle';
 import { cn } from '@/utils/cn';
 
@@ -33,7 +32,7 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
     TOOLS_PANEL_DEFAULT_SIZE
   );
 
-  const handleChevronClick = useCallback(() => {
+  const toggleTools = useCallback(() => {
     if (showTools) {
       collapse();
     } else {
@@ -72,8 +71,9 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
       >
         <GraphqlTools
           isOpen={showTools}
-          onChevronClick={handleChevronClick}
-          themeSettings={requestPanelThemeSettings}
+          onChevronClick={toggleTools}
+          onHeadersclick={toggleTools}
+          onVariablesClick={toggleTools}
         />
       </Panel>
     </>

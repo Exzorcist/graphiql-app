@@ -1,7 +1,7 @@
 import { Panel, PanelGroup } from 'react-resizable-panels';
 import { Transition } from 'react-transition-group';
 import { memo, useRef, useState } from 'react';
-import GraphqlToolsPanel from '../GraphqlToolsPanel/GraphqlToolsPanel';
+import GraphqlToolsPanel from '../GraphqlTools/GraphqlToolsPanel';
 import { requestPanelThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Editor } from '@/components/Editor';

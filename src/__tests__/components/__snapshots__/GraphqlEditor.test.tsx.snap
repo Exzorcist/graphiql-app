@@ -102,7 +102,7 @@ exports[`GraphqlEditor 1`] = `
                       data-testid="editor-area"
                     >
                       <div
-                        class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5y ͼ4r ͼ42 ͼ4q"
+                        class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5p ͼ4r ͼ42 ͼ4q"
                       >
                         <div
                           aria-live="polite"
@@ -218,7 +218,7 @@ exports[`GraphqlEditor 1`] = `
                 data-testid="editor-area"
               >
                 <div
-                  class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5z ͼ52 ͼ42 ͼ51"
+                  class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5q ͼ52 ͼ42 ͼ51"
                 >
                   <div
                     aria-live="polite"
@@ -332,131 +332,129 @@ exports[`GraphqlEditor 1`] = `
                 class="h-full relative"
               >
                 <div
-                  class="w-full absolute top-0 left-0 px-4 flex items-center"
-                  style="height: 50px;"
+                  class="gap-6 w-full absolute top-0 left-0 px-4 flex items-center h-[50px]"
                 >
-                  <div
-                    class="flex gap-6 w-full"
+                  <button
+                    class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+                    role="button"
+                    tabindex="0"
+                    type="button"
                   >
-                    <button
-                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
-                      role="button"
-                      tabindex="0"
-                      type="button"
+                    Variables
+                  </button>
+                  <button
+                    class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+                    role="button"
+                    tabindex="0"
+                    type="button"
+                  >
+                    Headers
+                  </button>
+                  <button
+                    class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent ml-auto"
+                    role="button"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="h-6 w-6"
+                      data-slot="icon"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      Variables
-                    </button>
-                    <button
-                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
-                      role="button"
-                      tabindex="0"
-                      type="button"
-                    >
-                      Headers
-                    </button>
-                    <button
-                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent ml-auto"
-                      role="button"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="h-6 w-6"
-                        data-slot="icon"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          clip-rule="evenodd"
-                          d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
-                          fill-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
+                      <path
+                        clip-rule="evenodd"
+                        d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
                 </div>
                 <div
-                  class="cm-theme h-full flex flex-col"
-                  data-testid="editor-area"
-                  style="padding-top: 50px;"
+                  class="h-full pt-[50px]"
                 >
                   <div
-                    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ60 ͼ5o ͼ42"
+                    class="cm-theme h-full flex flex-col"
+                    data-testid="editor-area"
                   >
                     <div
-                      aria-live="polite"
-                      class="cm-announced"
-                    />
-                    <div
-                      class="cm-scroller"
-                      tabindex="-1"
+                      class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5r ͼ5c ͼ42"
                     >
                       <div
-                        aria-hidden="true"
-                        class="cm-gutters"
-                        style="min-height: 14px; position: sticky;"
+                        aria-live="polite"
+                        class="cm-announced"
+                      />
+                      <div
+                        class="cm-scroller"
+                        tabindex="-1"
                       >
                         <div
-                          class="cm-gutter cm-lineNumbers"
+                          aria-hidden="true"
+                          class="cm-gutters"
+                          style="min-height: 14px; position: sticky;"
                         >
                           <div
-                            class="cm-gutterElement"
-                            style="height: 0px; visibility: hidden; pointer-events: none;"
+                            class="cm-gutter cm-lineNumbers"
                           >
-                            9
-                          </div>
-                          <div
-                            class="cm-gutterElement"
-                            style="height: 14px;"
-                          >
-                            1
-                          </div>
-                        </div>
-                        <div
-                          class="cm-gutter cm-foldGutter"
-                        >
-                          <div
-                            class="cm-gutterElement"
-                            style="height: 0px; visibility: hidden; pointer-events: none;"
-                          >
-                            <span
-                              title="Unfold line"
+                            <div
+                              class="cm-gutterElement"
+                              style="height: 0px; visibility: hidden; pointer-events: none;"
                             >
-                              ›
-                            </span>
+                              9
+                            </div>
+                            <div
+                              class="cm-gutterElement"
+                              style="height: 14px;"
+                            >
+                              1
+                            </div>
+                          </div>
+                          <div
+                            class="cm-gutter cm-foldGutter"
+                          >
+                            <div
+                              class="cm-gutterElement"
+                              style="height: 0px; visibility: hidden; pointer-events: none;"
+                            >
+                              <span
+                                title="Unfold line"
+                              >
+                                ›
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div
-                        aria-autocomplete="list"
-                        aria-multiline="true"
-                        autocapitalize="off"
-                        autocorrect="off"
-                        class="cm-content"
-                        contenteditable="true"
-                        role="textbox"
-                        spellcheck="false"
-                        style="tab-size: 4;"
-                        translate="no"
-                      >
                         <div
-                          class="cm-line"
+                          aria-autocomplete="list"
+                          aria-multiline="true"
+                          autocapitalize="off"
+                          autocorrect="off"
+                          class="cm-content"
+                          contenteditable="true"
+                          role="textbox"
+                          spellcheck="false"
+                          style="tab-size: 4;"
+                          translate="no"
                         >
-                          <br />
+                          <div
+                            class="cm-line"
+                          >
+                            <br />
+                          </div>
                         </div>
+                        <div
+                          aria-hidden="true"
+                          class="cm-layer cm-layer-above cm-cursorLayer"
+                          style="z-index: 150; animation-duration: 1200ms;"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="cm-layer cm-selectionLayer"
+                          style="z-index: -2;"
+                        />
                       </div>
-                      <div
-                        aria-hidden="true"
-                        class="cm-layer cm-layer-above cm-cursorLayer"
-                        style="z-index: 150; animation-duration: 1200ms;"
-                      />
-                      <div
-                        aria-hidden="true"
-                        class="cm-layer cm-selectionLayer"
-                        style="z-index: -2;"
-                      />
                     </div>
                   </div>
                 </div>
