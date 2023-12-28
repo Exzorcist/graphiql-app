@@ -15,6 +15,11 @@ vi.mock('cm6-graphql', async (importOriginal) => {
   };
 });
 
+vi.mock('@codemirror/lang-json', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@codemirror/lang-json')>();
+  return { ...mod, json: vi.fn(() => EditorView.theme({})) };
+});
+
 vi.mock('@/hooks/panel-resize-hooks', async (importOriginal) => {
   const mod = await importOriginal<typeof import('@/hooks/panel-resize-hooks')>();
   return { ...mod, useKeepPanelCollapsed: vi.fn() };

@@ -11,6 +11,16 @@ import { type RootState } from '../store';
 import { AsyncStatus } from '@/types/AsyncStatus';
 import { setMessage } from './globalMessageSlice';
 import { isFetchBaseQueryError, isErrorWithMessage } from '@/utils/type-guards';
+import { Language } from '@/types/Provider';
+import { locale } from '@/locale/locale';
+
+function getFetchErrorMsg(err: FetchBaseQueryError, lang: Language) {
+  if (err.status === 'FETCH_ERROR' || !err.data) {
+    return locale[lang].globalMessage.error.serverUnreachable;
+  }
+
+  return 'error' in err ? err.error : JSON.stringify(err.data);
+}
 
 export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
@@ -18,7 +28,7 @@ export const graphqlApi = createApi({
   endpoints: (builder) => ({
     initRequest: builder.mutation<unknown, string>({
       queryFn: async (url, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
-        const { graphql } = getState() as RootState;
+        const { graphql, localization } = getState() as RootState;
 
         if (
           !graphql.introspection.value ||
@@ -27,28 +37,28 @@ export const graphqlApi = createApi({
           dispatch(graphqlApi.endpoints.fetchIntrospection.initiate(url));
         }
 
-        const requestValue = graphql.requestValue.trim();
+        const response = await fetchWithBQ({ url, body: { query: graphql.requestValue } });
+        const err = response.error;
 
-        const response = await fetchWithBQ({ url, body: { query: requestValue } });
-
-        if (response.error) {
-          if (response.error.data) {
-            return { data: response.error.data };
+        if (err) {
+          if (err.data) {
+            return { data: err.data };
           }
 
-          if (isFetchBaseQueryError(response.error)) {
-            const errMsg =
-              'error' in response.error
-                ? response.error.error
-                : JSON.stringify(response.error.data);
-
-            dispatch(setMessage({ type: 'error', isShown: true, text: errMsg }));
-          } else if (isErrorWithMessage(response.error)) {
-            dispatch(setMessage({ type: 'error', isShown: true, text: response.error }));
+          if (isFetchBaseQueryError(err as unknown)) {
+            dispatch(
+              setMessage({
+                type: 'error',
+                isShown: true,
+                text: getFetchErrorMsg(err, localization),
+              })
+            );
+          } else if (isErrorWithMessage(err)) {
+            dispatch(setMessage({ type: 'error', isShown: true, text: err.message }));
           }
         }
 
-        return response as QueryReturnValue<string, FetchBaseQueryError, FetchBaseQueryMeta>;
+        return response as QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>;
       },
     }),
 
@@ -71,6 +81,7 @@ export type GraphqlSliceState = {
   introspection: { value: IntrospectionQuery | null; endpoint: string };
   requestValue: string;
   endpointValue: string;
+  responseValue: unknown;
 };
 
 const initialState: GraphqlSliceState = {
@@ -78,6 +89,7 @@ const initialState: GraphqlSliceState = {
   introspection: { value: null, endpoint: '' },
   requestValue: '',
   endpointValue: '',
+  responseValue: '',
 };
 
 const graphqlSlice = createSlice({
@@ -109,12 +121,17 @@ const graphqlSlice = createSlice({
           introspectStatus: 'rejected',
           introspection: { value: null, endpoint: '' },
         };
+      })
+      .addMatcher(graphqlApi.endpoints.initRequest.matchFulfilled, (state, action) => {
+        return { ...state, responseValue: action.payload };
       });
   },
   selectors: {
-    selectApiUrl: (state) => state.introspection.endpoint,
+    selectIntrospectEndpoint: (state) => state.introspection.endpoint,
     selectIntrospectStatus: (state) => state.introspectStatus,
     selectRequestValue: (state) => state.requestValue,
+    selectEndpointValue: (state) => state.endpointValue,
+    selectResponseValue: (state) => state.responseValue,
     selectGraphQLSchema: createSelector(
       (state: GraphqlSliceState) => state.introspection.value,
       (introspection) => (introspection ? buildClientSchema(introspection) : undefined)
@@ -124,5 +141,11 @@ const graphqlSlice = createSlice({
 
 export const graphqlReducer = graphqlSlice.reducer;
 export const { changeRequestValue, changeEndpointValue } = graphqlSlice.actions;
-export const { selectGraphQLSchema, selectApiUrl, selectRequestValue, selectIntrospectStatus } =
-  graphqlSlice.selectors;
+export const {
+  selectGraphQLSchema,
+  selectEndpointValue,
+  selectRequestValue,
+  selectResponseValue,
+  selectIntrospectStatus,
+  selectIntrospectEndpoint,
+} = graphqlSlice.selectors;

@@ -15,13 +15,10 @@
     --editor-gutter-color: 44 46 59;
     --editor-scroll-thumb-color: 235 235 235 / 20%;
     --editor-scroll-thumb-hover-color: 153, 153, 153;
-    --editor-font-family: 'Roboto', sans-serif;
-    --editor-code-font-family: 'Fira Code', monospace;
     --font-mono: 'Source Code Pro', 'Andale Mono WT', 'Andale Mono', Menlo, 'Lucida Console',
       'Lucida Sans Typewriter', Monaco, monospace;
     --font-sans: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --editor-code-font-size: 16px;
-    /* --editor-code-selection-color: 215 212 240; */
     --editor-code-selection-color: 82 83 92;
     --editor-ring: 203 213 225;
     --splitter-hover-color: rgb(var(--editor-accent-color));

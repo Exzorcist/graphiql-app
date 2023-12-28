@@ -27,7 +27,7 @@ function GraphqlEditor() {
   }, []);
 
   return (
-    <div className="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family selection:bg-editor-code-selection">
+    <div className="flex h-full w-full text-editor-text-color bg-editor-primary font-sans selection:bg-editor-code-selection">
       {isLaptop && <SideBar />}
       {!isLaptop && <DocsExplorerDrawer open={showDocs} onOpenChange={setShowDocs} />}
       <div className="h-full flex w-full flex-col">

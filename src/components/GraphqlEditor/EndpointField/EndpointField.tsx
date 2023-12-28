@@ -7,7 +7,7 @@ import SchemaButton from './SchemaButton';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
 import {
   changeEndpointValue,
-  selectApiUrl,
+  selectEndpointValue,
   useInitRequestMutation,
 } from '@/redux/slices/graphqlSlice';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
@@ -19,15 +19,13 @@ export type EndpointFieldProps = {
 
 function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: EndpointFieldProps) {
   const { t } = useLocalizationContext();
-  const apiUrl = useAppSelector(selectApiUrl);
+  const apiUrl = useAppSelector(selectEndpointValue);
   const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = useState(apiUrl);
-  const [initRequest, result] = useInitRequestMutation();
+  const [initRequest] = useInitRequestMutation();
   const dispatchDebounced = useDebouncedCallback((value: string) => {
     dispatch(changeEndpointValue(value));
   }, 500);
-
-  console.log(result);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

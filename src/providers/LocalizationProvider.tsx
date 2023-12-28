@@ -2,18 +2,9 @@ import { useSelector } from 'react-redux';
 import { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 import { ILocalizationProvider, Language } from '@/types/Provider';
 import { selectLocalization } from '@/redux/slices/localizationSlice';
-
-import EngJSON from '@/json/eng.json';
-import RuJSON from '@/json/ru.json';
-import ByJSON from '@/json/by.json';
+import { locale } from '@/locale/locale';
 
 const LocalizationContext = createContext<ILocalizationProvider | null>(null);
-
-const translations = {
-  eng: EngJSON,
-  ru: RuJSON,
-  by: ByJSON,
-};
 
 function LocalizationProvider({ children }: PropsWithChildren) {
   const [lang, setLang] = useState<Language>(useSelector(selectLocalization));
@@ -23,7 +14,7 @@ function LocalizationProvider({ children }: PropsWithChildren) {
       lang,
       setLang,
       get t() {
-        return translations[lang];
+        return locale[lang];
       },
     };
   }, [lang]);

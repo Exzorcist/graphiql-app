@@ -34,7 +34,7 @@ const themeInit: Record<Theme, (options?: Partial<CreateThemeOptions> | undefine
 };
 
 const basicSetup: BasicSetupOptions = {
-  tabSize: 4,
+  tabSize: 2,
   highlightActiveLine: false,
   highlightActiveLineGutter: false,
   autocompletion: true,

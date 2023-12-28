@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Language } from '@/types/Provider';
 
 const localizationSlice = createSlice({
   name: 'localization',
   initialState: 'eng' as Language,
   reducers: {
-    setLocalization(_, action) {
+    setLocalization(_, action: PayloadAction<Language>) {
       return action.payload;
     },
   },
