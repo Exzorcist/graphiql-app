@@ -14,6 +14,7 @@ import { graphqlApi, graphqlReducer } from './slices/graphqlSlice';
 import globalMessageReducer from './slices/globalMessageSlice';
 import localizationReducer from './slices/localizationSlice';
 import userReducer from './slices/userSlice';
+import headersReducer from './slices/headersSlice';
 
 const rootPersistConfig = {
   key: 'root',
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   graphqlApi: graphqlApi.reducer,
   graphql: persistReducer(graphqlSlicePersistConfig, graphqlReducer),
+  headers: headersReducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

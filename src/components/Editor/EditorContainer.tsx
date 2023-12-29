@@ -39,7 +39,7 @@ function EditorContainer({ children, className }: Props) {
 
   return (
     <EditorContainerContext.Provider value={value}>
-      <div className={cn('h-full relative', className)}>{children}</div>
+      <div className={cn('h-full relative overflow-auto', className)}>{children}</div>
     </EditorContainerContext.Provider>
   );
 }
