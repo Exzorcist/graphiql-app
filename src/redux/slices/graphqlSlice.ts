@@ -82,6 +82,7 @@ export type GraphqlSliceState = {
   requestValue: string;
   endpointValue: string;
   responseValue: unknown;
+  variablesValue: string;
 };
 
 const initialState: GraphqlSliceState = {
@@ -90,6 +91,7 @@ const initialState: GraphqlSliceState = {
   requestValue: '',
   endpointValue: '',
   responseValue: '',
+  variablesValue: '{}',
 };
 
 const graphqlSlice = createSlice({
@@ -101,6 +103,9 @@ const graphqlSlice = createSlice({
     },
     changeEndpointValue(state, action: PayloadAction<string>) {
       return { ...state, endpointValue: action.payload };
+    },
+    changeVariablesValue(state, action: PayloadAction<string>) {
+      return { ...state, variablesValue: action.payload };
     },
   },
   extraReducers(builder) {
@@ -132,6 +137,7 @@ const graphqlSlice = createSlice({
     selectRequestValue: (state) => state.requestValue,
     selectEndpointValue: (state) => state.endpointValue,
     selectResponseValue: (state) => state.responseValue,
+    selectVariablesValue: (state) => state.variablesValue,
     selectGraphQLSchema: createSelector(
       (state: GraphqlSliceState) => state.introspection.value,
       (introspection) => (introspection ? buildClientSchema(introspection) : undefined)
@@ -140,12 +146,14 @@ const graphqlSlice = createSlice({
 });
 
 export const graphqlReducer = graphqlSlice.reducer;
-export const { changeRequestValue, changeEndpointValue } = graphqlSlice.actions;
+export const { changeRequestValue, changeEndpointValue, changeVariablesValue } =
+  graphqlSlice.actions;
 export const {
   selectGraphQLSchema,
   selectEndpointValue,
   selectRequestValue,
   selectResponseValue,
+  selectVariablesValue,
   selectIntrospectStatus,
   selectIntrospectEndpoint,
 } = graphqlSlice.selectors;
