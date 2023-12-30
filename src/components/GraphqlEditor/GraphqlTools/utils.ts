@@ -1,12 +1,20 @@
-import { GraphQLSchema, parse } from 'graphql';
+import { GraphQLError, GraphQLSchema, parse } from 'graphql';
 import { JSONSchema7 } from 'json-schema';
 import { collectVariables, getVariablesJSONSchema } from 'graphql-language-service';
 import { EditorView } from '@codemirror/view';
 import { jsonParseLinter } from '@codemirror/lang-json';
 
 export function buildVariablesJSONSchema(schema: GraphQLSchema, queryValue: string) {
-  const variablesToType = collectVariables(schema, parse(queryValue));
-  return getVariablesJSONSchema(variablesToType) as JSONSchema7;
+  try {
+    const variablesToType = collectVariables(schema, parse(queryValue));
+    return getVariablesJSONSchema(variablesToType) as JSONSchema7;
+  } catch (err) {
+    if (err instanceof GraphQLError) {
+      return undefined;
+    }
+
+    throw err;
+  }
 }
 
 const jsonLinter = jsonParseLinter();
