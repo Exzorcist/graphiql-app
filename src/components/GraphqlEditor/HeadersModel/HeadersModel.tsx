@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { useEditorContainerContext } from '@/components/Editor/hooks';
-import InputTodo from './InputTodo';
+import HeaderItem from './HeaderItem';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { removeHeadersValue } from '@/redux/slices/headersSlice';
 
@@ -44,7 +44,13 @@ function HeadersModel() {
         data-testid="editor-area"
       >
         {tasks.map((el) => (
-          <InputTodo todo={todo} setTodo={setTodo} key={el.id} id={el.id} deleteTodo={deleteTodo} />
+          <HeaderItem
+            todo={todo}
+            setTodo={setTodo}
+            key={el.id}
+            id={el.id}
+            deleteTodo={deleteTodo}
+          />
         ))}
         <button
           type="button"

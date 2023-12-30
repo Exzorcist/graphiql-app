@@ -16,7 +16,7 @@ type Props = {
   setTodo: (el: Todo) => void;
 };
 
-function InputTodo({ todo, setTodo, deleteTodo, id }: Props) {
+function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
   const dispatch = useAppDispatch();
   const [headerValue, setHeaderValue] = useState(todo.header);
   const [currentValue, setCurrentValue] = useState(todo.value);
@@ -33,27 +33,27 @@ function InputTodo({ todo, setTodo, deleteTodo, id }: Props) {
   }
 
   return (
-    <div className="flex flex-wrap gap-3 mb-5 text-slate-950">
+    <div className="flex w-full flex-wrap gap-3 mb-5 text-slate-950">
       <Autocomplete />
       <input
         type="text"
         list="headers"
-        className="pl-1 rounded-sm"
+        className="pl-2 rounded-md w-2/5 -ml-4 h-7"
         placeholder="header key"
         onChange={onHeadersChange}
       />
       <input
         type="text"
-        className="pl-1 rounded-sm"
+        className="pl-2 rounded-md w-2/5 h-7"
         placeholder="value"
         name="text"
         onChange={onValueChange}
       />
       <button type="button" aria-label="delete-button" onClick={() => deleteTodo(id)}>
         {' '}
-        <TrashIcon className="w-4 text-gray-50 hover:bg-editor-secondary hover:stroke-red-500" />
+        <TrashIcon className="w-5 text-gray-50 hover:bg-editor-secondary hover:stroke-red-500" />
       </button>
     </div>
   );
 }
-export default InputTodo;
+export default HeaderItem;
