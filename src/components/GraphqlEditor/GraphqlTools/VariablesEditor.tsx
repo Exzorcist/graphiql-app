@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import { diagnosticCount } from '@codemirror/lint';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import { buildVariablesJSONSchema, variablesJsonSchema } from './utils';
-import { requestPanelThemeSettings } from '../themeSettings';
+import { primaryEditorThemeSettings } from '../themeSettings';
 import { Editor } from '@/components/Editor';
 import {
   changeVariablesValue,
@@ -41,7 +41,7 @@ function VariablesEditor() {
         value={storeValue}
         onChange={handleChange}
         ref={editorRef}
-        themeSettings={requestPanelThemeSettings}
+        themeSettings={primaryEditorThemeSettings}
         extensions={variablesJsonSchema(graphqlSchema, requestValue)}
       />
     </Editor>

@@ -2,7 +2,7 @@ import { Panel, PanelGroup } from 'react-resizable-panels';
 import { Transition } from 'react-transition-group';
 import { memo, useRef, useState } from 'react';
 import GraphqlToolsPanel from '../GraphqlTools/GraphqlToolsPanel';
-import { requestPanelThemeSettings } from '../themeSettings';
+import { primaryEditorThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Editor } from '@/components/Editor';
 import { cn } from '@/utils/cn';
@@ -25,7 +25,7 @@ function RequestPanel() {
 
         return (
           <div className="w-full h-full" ref={nodeRef}>
-            <Editor themeSettings={requestPanelThemeSettings}>
+            <Editor themeSettings={primaryEditorThemeSettings}>
               <PanelGroup
                 id={PANEL_GROUP_ID}
                 autoSaveId={PANEL_GROUP_ID}
