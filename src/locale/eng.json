@@ -112,7 +112,7 @@
       "login": "This e-mail is not in the database",
       "registration": "This e-mail has already been used",
       "serverUnreachable": "Unable to reach the server",
-      "prettifying": "This -;@ symbols are not allowed"
+      "prettifying": "This -;@' symbols are not allowed"
     },
     "success": {
       "login": "You have successfully logged in",

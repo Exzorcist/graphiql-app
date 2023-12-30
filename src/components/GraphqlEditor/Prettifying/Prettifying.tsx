@@ -17,6 +17,10 @@ import {
   addExtraArgumentSpace,
   correctComma,
   setPadding,
+  addExtraShapedBraketSpace,
+  addExtraShapedBraket2Space,
+  getRowsGivenObject,
+  addExtraShapedBraket3Space,
 } from './PrettifyingRules';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
@@ -28,7 +32,7 @@ function Prettifying() {
   const hanldePrettifying = () => {
     let newQuery: string | string[] = '';
 
-    if (query.includes(';') || query.includes('-') || query.includes('@')) {
+    if (query.includes(';') || query.includes('-') || query.includes('@') || query.includes("'")) {
       const wrongSymbolMessage: IGlobalMessage = {
         type: 'error',
         text: t.globalMessage.error.prettifying,
@@ -48,10 +52,15 @@ function Prettifying() {
       if (Array.isArray(newQuery)) {
         newQuery = arrayStringMutation(newQuery, trimSpaces);
         newQuery = arrayStringMutation(newQuery, removeDuplicatedSpaces);
+        newQuery = getRowsGivenObject(newQuery);
         newQuery = arrayStringMutation(newQuery, removeBraketSpace);
         newQuery = arrayStringMutation(newQuery, addExtraBraketSpace);
         newQuery = arrayStringMutation(newQuery, addExtraArgumentSpace);
+        newQuery = arrayStringMutation(newQuery, addExtraShapedBraketSpace);
+        newQuery = arrayStringMutation(newQuery, addExtraShapedBraket2Space);
+        newQuery = arrayStringMutation(newQuery, addExtraShapedBraket3Space);
         newQuery = arrayStringMutation(newQuery, correctComma);
+        newQuery = arrayStringMutation(newQuery, trimSpaces);
         newQuery = setFieldLine(newQuery);
         newQuery = setPadding(newQuery);
         newQuery = arrayStringMutation(newQuery, setLineBreak);

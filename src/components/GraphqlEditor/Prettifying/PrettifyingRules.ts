@@ -16,6 +16,15 @@ export const addExtraBraketSpace = (str: string): string => str.replace('){', ')
 // [Help]: Add space if need bettween ':' and argument type
 export const addExtraArgumentSpace = (str: string): string => str.replace(/:\s*/g, ': ');
 
+// [Help]: Add space if need bettween '{' and line
+export const addExtraShapedBraketSpace = (str: string): string => str.replace(/\s*{/g, ' {');
+
+// [Help]: Add space if need bettween '}' and line
+export const addExtraShapedBraket2Space = (str: string): string => str.replace(/\s*}/g, ' }');
+
+// [Help]: Add space if need bettween '}' and line
+export const addExtraShapedBraket3Space = (str: string): string => str.replace(/{\s*/g, '{ ');
+
 // [Help]: Add space if need bettween ',' and argument type alse remove where needed
 export const correctComma = (str: string): string => {
   if (str.includes('(')) {
@@ -38,12 +47,31 @@ export const setFieldLine = (array: string[]): string[] => {
   let newArray: string[] = [];
 
   array.forEach((str) => {
-    if (str.includes('}')) {
-      newArray = [...newArray, ...str.split(' ')];
+    if (
+      !str.includes('query') &&
+      !str.includes('subscription') &&
+      !str.includes('mutation') &&
+      !str.includes('fragment')
+    ) {
+      if (str.includes('}') && !str.includes('(')) {
+        newArray = [...newArray, ...str.split(' ')];
+      }
+
+      if (str.includes('{') && !str.includes('(')) {
+        const splitArray = str.split(' ').slice(0, -1);
+        splitArray[splitArray.length - 1] = `${splitArray[splitArray.length - 1]} {`;
+        newArray = [...newArray, ...splitArray];
+      }
+
+      if (str.includes('{') && str.includes('(')) {
+        newArray.push(str);
+      }
     } else {
       newArray.push(str);
     }
   });
+
+  // console.log(newArray);
 
   return newArray;
 };
@@ -60,6 +88,35 @@ export const getRows = (str: string): string[] | string => {
   return str;
 };
 
+export const getRowsGivenObject = (array: string[]): string[] => {
+  const str = array.join('');
+  const strWithLeftPart = str.replace(/\(([^)]*)\)/g, (match, group) => {
+    const replacedGroup = group.replace(/\{/g, '<');
+    return `(${replacedGroup})`;
+  });
+  const strWithRightPart = strWithLeftPart.replace(/\(([^)]*)\)/g, (match, group) => {
+    const replacedGroup = group.replace(/\}/g, '>');
+    return `(${replacedGroup})`;
+  });
+
+  const newArray = getRows(strWithRightPart);
+
+  const newArray2 = (newArray as string[]).map((str2) => {
+    const strWithLeftPart2 = str2.replace(/\(([^)]*)\)/g, (match, group) => {
+      const replacedGroup = group.replace(/</g, '{');
+      return `(${replacedGroup})`;
+    });
+    const strWithRightPart2 = strWithLeftPart2.replace(/\(([^)]*)\)/g, (match, group) => {
+      const replacedGroup = group.replace(/>/g, '}');
+      return `(${replacedGroup})`;
+    });
+
+    return strWithRightPart2;
+  });
+
+  return newArray2;
+};
+
 export const setPadding = (array: string[]): string[] => {
   const newArray: string[] = [];
   let multiplier = 0;
@@ -74,7 +131,7 @@ export const setPadding = (array: string[]): string[] => {
       newArray.push(`${'  '.repeat(multiplier)}${str}`);
     }
 
-    if (str.includes('}')) {
+    if (str.includes('}') && !str.includes('(')) {
       multiplier -= 1;
       newArray.push(`${'  '.repeat(multiplier)}${str}`);
     }
@@ -85,7 +142,7 @@ export const setPadding = (array: string[]): string[] => {
 
 // final step: combine rows
 export const combineRows = (rows: string[] | string): string => {
-  // console.log(rows);
+  console.log(rows);
   if (Array.isArray(rows)) {
     return rows.join('');
   }
