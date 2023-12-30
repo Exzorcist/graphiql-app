@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`prettifying > should format the query string 1`] = `
+"subscription Sub {
+  users {
+    id
+  }
+}
+mutation Mut {
+  delete_users(where: { id: { _eq: "df" } }) {
+    ...someFragmant
+  }
+}
+fragment someFragmant on users_mutation_response {
+  affected_rows
+  returning {
+    id
+  }
+}
+"
+`;

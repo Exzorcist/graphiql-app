@@ -4,7 +4,7 @@ import { selectRequestValue, changeRequestValue } from '@/redux/slices/graphqlSl
 import { IGlobalMessage } from '@/types/Message';
 import { setMessage } from '@/redux/slices/globalMessageSlice';
 
-import { prettifying } from './PrettifyingRules';
+import { prettifying } from '@/components/GraphqlEditor/Prettifying/PrettifyingRules';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 function Prettifying() {
