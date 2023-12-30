@@ -1,24 +1,21 @@
-import { useEffect, useRef } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { useDebouncedCallback } from 'use-debounce';
 import { updateSchema } from 'cm6-graphql';
+import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
+import EditorArea from '@/components/Editor/EditorArea';
 import {
   changeRequestValue,
   selectGraphQLSchema,
   selectRequestValue,
 } from '@/redux/slices/graphqlSlice';
-import EditorArea from '@/components/Editor/EditorArea';
 import { graphql } from './utils';
 
 function RequestEditor() {
-  const editorAreaRef = useRef<ReactCodeMirrorRef | null>(null);
-  const graphqlSchema = useAppSelector(selectGraphQLSchema);
-  const storeValue = useAppSelector(selectRequestValue);
   const dispatch = useAppDispatch();
-  const dispatchDebounced = useDebouncedCallback((value: string) => {
-    dispatch(changeRequestValue(value));
-  }, 500);
+  const storeValue = useAppSelector(selectRequestValue);
+  const graphqlSchema = useAppSelector(selectGraphQLSchema);
+  const editorAreaRef = useRef<ReactCodeMirrorRef | null>(null);
 
   useEffect(() => {
     if (editorAreaRef.current?.view) {
@@ -26,12 +23,16 @@ function RequestEditor() {
     }
   }, [graphqlSchema]);
 
+  const handleChange = useDebouncedCallback((value: string) => {
+    dispatch(changeRequestValue(value));
+  }, 500);
+
   return (
     <EditorArea
       value={storeValue}
-      onChange={dispatchDebounced}
+      onChange={handleChange}
       ref={editorAreaRef}
-      extensions={[graphql(graphqlSchema)]}
+      extensions={graphql(graphqlSchema)}
     />
   );
 }
