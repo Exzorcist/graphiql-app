@@ -1,6 +1,6 @@
 import { linter } from '@codemirror/lint';
 import { hoverTooltip } from '@codemirror/view';
-import { json, jsonParseLinter, jsonLanguage } from '@codemirror/lang-json';
+import { json, jsonLanguage } from '@codemirror/lang-json';
 import {
   jsonSchemaLinter,
   jsonSchemaHover,
@@ -8,7 +8,7 @@ import {
   stateExtensions,
   updateSchema,
 } from 'codemirror-json-schema';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { useDebouncedCallback } from 'use-debounce';
 import { Editor } from '@/components/Editor';
@@ -20,7 +20,7 @@ import {
   selectRequestValue,
   selectVariablesValue,
 } from '@/redux/slices/graphqlSlice';
-import { buildVariablesJSONSchema } from './utils';
+import { buildVariablesJSONSchema, customJsonParseLinter } from './utils';
 
 function VariablesEditor() {
   const dispatch = useAppDispatch();
@@ -38,15 +38,10 @@ function VariablesEditor() {
     }
   }, [graphqlSchema, requestValue]);
 
-  const handleChange = useCallback((value: string) => {
-    dispatchDebounced(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const extensions = useMemo(
     () => [
       json(),
-      linter(jsonParseLinter(), {
+      linter(customJsonParseLinter(), {
         delay: 300,
       }),
       linter(jsonSchemaLinter()),
@@ -68,7 +63,7 @@ function VariablesEditor() {
     <Editor>
       <Editor.Area
         value={storeValue}
-        onChange={handleChange}
+        onChange={dispatchDebounced}
         ref={editorRef}
         themeSettings={requestPanelThemeSettings}
         extensions={extensions}
