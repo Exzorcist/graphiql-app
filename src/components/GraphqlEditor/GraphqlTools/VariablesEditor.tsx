@@ -1,8 +1,7 @@
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { updateSchema } from 'codemirror-json-schema';
 import { useDebouncedCallback } from 'use-debounce';
-import { useEffect, useRef } from 'react';
-import { diagnosticCount } from '@codemirror/lint';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import { buildVariablesJSONSchema, variablesJsonSchema } from './utils';
 import { primaryEditorThemeSettings } from '../themeSettings';
@@ -20,6 +19,17 @@ function VariablesEditor() {
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const storeValue = useAppSelector(selectVariablesValue);
   const editorRef = useRef<ReactCodeMirrorRef | null>(null);
+  const [editorValue, setEditorValue] = useState(storeValue);
+
+  const updateStoreValue = useDebouncedCallback((value: string) => {
+    dispatch(changeVariablesValue(value));
+  }, 500);
+
+  const handleChange = useCallback((value: string) => {
+    setEditorValue(value);
+    updateStoreValue(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (editorRef.current?.view) {
@@ -27,22 +37,27 @@ function VariablesEditor() {
     }
   }, [graphqlSchema, requestValue]);
 
-  const handleChange = useDebouncedCallback((value: string) => {
-    const state = editorRef.current?.view?.state;
-
-    if (state && !diagnosticCount(state)) {
-      dispatch(changeVariablesValue(value));
+  useEffect(() => {
+    if (editorValue.trim() === '') {
+      const value = '{\n\n}';
+      handleChange(value);
     }
-  }, 500);
+  }, [editorValue, handleChange]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const extension = useMemo(
+    () => variablesJsonSchema(graphqlSchema, requestValue),
+    [graphqlSchema, requestValue]
+  );
 
   return (
     <Editor>
       <Editor.Area
-        value={storeValue}
+        value={editorValue}
         onChange={handleChange}
         ref={editorRef}
         themeSettings={primaryEditorThemeSettings}
-        extensions={variablesJsonSchema(graphqlSchema, requestValue)}
+        extensions={extension}
       />
     </Editor>
   );

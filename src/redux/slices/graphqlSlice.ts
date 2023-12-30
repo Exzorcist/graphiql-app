@@ -91,7 +91,7 @@ const initialState: GraphqlSliceState = {
   requestValue: '',
   endpointValue: '',
   responseValue: '',
-  variablesValue: '{}',
+  variablesValue: '{\n\n}',
 };
 
 const graphqlSlice = createSlice({

@@ -1,4 +1,9 @@
-import { jsonSchemaHover, jsonCompletion, stateExtensions } from 'codemirror-json-schema';
+import {
+  jsonSchemaHover,
+  jsonCompletion,
+  jsonSchemaLinter,
+  stateExtensions,
+} from 'codemirror-json-schema';
 import { collectVariables, getVariablesJSONSchema } from 'graphql-language-service';
 import { json, jsonLanguage, jsonParseLinter } from '@codemirror/lang-json';
 import { GraphQLError, GraphQLSchema, parse } from 'graphql';
@@ -25,22 +30,28 @@ export function buildVariablesJSONSchema(schema: GraphQLSchema | undefined, quer
   }
 }
 
-const jsonLinter = jsonParseLinter();
+const lintJson = jsonParseLinter();
+const lintJsonSchema = jsonSchemaLinter();
 
-export function customJsonParseLinter() {
+export function customJsonLinter() {
   return (view: EditorView) => {
     if (view.state.doc.toString().trim() === '') {
       return [];
     }
 
-    return jsonLinter(view);
+    const parseErrors = lintJson(view);
+    const schemaErrors = lintJsonSchema(view).filter(
+      (d) => d.from !== undefined && d.to !== undefined
+    );
+
+    return [...schemaErrors, ...parseErrors];
   };
 }
 
 export function variablesJsonSchema(...params: Parameters<typeof buildVariablesJSONSchema>) {
   return [
     json(),
-    linter(customJsonParseLinter(), {
+    linter(customJsonLinter(), {
       delay: 300,
     }),
     jsonLanguage.data.of({
