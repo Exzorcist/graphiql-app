@@ -15,6 +15,34 @@ vi.mock('cm6-graphql', async (importOriginal) => {
   };
 });
 
+vi.mock('codemirror-json-schema', () => {
+  return {
+    updateSchema: vi.fn(),
+    jsonSchemaLinter: vi.fn(),
+    jsonCompletion: vi.fn(),
+    jsonSchemaHover: vi.fn(),
+    stateExtensions: vi.fn(),
+  };
+});
+
+vi.mock('@/components/GraphqlEditor/GraphqlTools/utils', async (importOriginal) => {
+  const mod =
+    await importOriginal<typeof import('@/components/GraphqlEditor/GraphqlTools/utils')>();
+  return {
+    ...mod,
+    variablesJsonSchema: vi.fn(() => dummyCMExtension),
+  };
+});
+
+vi.mock('@/components/GraphqlEditor/RequestPanel/utils', async (importOriginal) => {
+  const mod =
+    await importOriginal<typeof import('@/components/GraphqlEditor/RequestPanel/utils')>();
+  return {
+    ...mod,
+    graphql: vi.fn(() => dummyCMExtension),
+  };
+});
+
 vi.mock('@codemirror/lang-json', async (importOriginal) => {
   const mod = await importOriginal<typeof import('@codemirror/lang-json')>();
   return { ...mod, json: vi.fn(() => dummyCMExtension) };

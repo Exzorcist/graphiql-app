@@ -15,6 +15,8 @@ test('DocsEplorer', async () => {
         introspectStatus: 'fullfilled',
         requestValue: '',
         endpointValue: '',
+        responseValue: '',
+        variablesValue: {},
         _persist: { version: -1, rehydrated: true },
       },
     },
