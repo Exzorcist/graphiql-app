@@ -64,6 +64,14 @@
     .fancy-scrollbar::-webkit-scrollbar-corner {
       background-color: transparent;
     }
+
+    .fancy-scrollbar-horizontal-gutter::-webkit-scrollbar-track:horizontal {
+      background: linear-gradient(
+        90deg,
+        rgb(var(--editor-gutter-color)) 56px,
+        rgb(var(--editor-primary-color)) 0%
+      );
+    }
   }
 }
 
@@ -82,7 +90,11 @@
 }
 
 .cm-scroller {
-  @apply fancy-scrollbar;
+  @apply fancy-scrollbar outline-none;
+}
+
+.cm-theme[data-scrollbar-gutter] .cm-scroller {
+  @apply fancy-scrollbar-horizontal-gutter;
 }
 
 .ͼ3 .cm-tooltip-autocomplete-disabled ul li[aria-selected] {

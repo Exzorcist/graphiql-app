@@ -33,6 +33,7 @@ function RequestEditor() {
       onChange={handleChange}
       ref={editorAreaRef}
       extensions={graphql(graphqlSchema)}
+      data-scrollbar-gutter
     />
   );
 }

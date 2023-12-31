@@ -48,6 +48,11 @@ vi.mock('@codemirror/lang-json', async (importOriginal) => {
   return { ...mod, json: vi.fn(() => dummyCMExtension) };
 });
 
+vi.mock('@codemirror/language', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@codemirror/language')>();
+  return { ...mod, foldGutter: vi.fn(() => dummyCMExtension) };
+});
+
 vi.mock('@/hooks/panel-resize-hooks', async (importOriginal) => {
   const mod = await importOriginal<typeof import('@/hooks/panel-resize-hooks')>();
   return { ...mod, useKeepPanelCollapsed: vi.fn() };

@@ -99,6 +99,7 @@ exports[`GraphqlEditor 1`] = `
                   >
                     <div
                       class="cm-theme h-full flex flex-col"
+                      data-scrollbar-gutter="true"
                       data-testid="editor-area"
                     >
                       <div
@@ -131,20 +132,6 @@ exports[`GraphqlEditor 1`] = `
                                 style="height: 14px;"
                               >
                                 1
-                              </div>
-                            </div>
-                            <div
-                              class="cm-gutter cm-foldGutter"
-                            >
-                              <div
-                                class="cm-gutterElement"
-                                style="height: 0px; visibility: hidden; pointer-events: none;"
-                              >
-                                <span
-                                  title="Unfold line"
-                                >
-                                  ›
-                                </span>
                               </div>
                             </div>
                           </div>
@@ -247,20 +234,6 @@ exports[`GraphqlEditor 1`] = `
                           style="height: 14px;"
                         >
                           1
-                        </div>
-                      </div>
-                      <div
-                        class="cm-gutter cm-foldGutter"
-                      >
-                        <div
-                          class="cm-gutterElement"
-                          style="height: 0px; visibility: hidden; pointer-events: none;"
-                        >
-                          <span
-                            title="Unfold line"
-                          >
-                            ›
-                          </span>
                         </div>
                       </div>
                     </div>
@@ -377,6 +350,7 @@ exports[`GraphqlEditor 1`] = `
                 >
                   <div
                     class="cm-theme h-full flex flex-col"
+                    data-scrollbar-gutter="true"
                     data-testid="editor-area"
                   >
                     <div
@@ -421,20 +395,6 @@ exports[`GraphqlEditor 1`] = `
                               style="height: 14px;"
                             >
                               3
-                            </div>
-                          </div>
-                          <div
-                            class="cm-gutter cm-foldGutter"
-                          >
-                            <div
-                              class="cm-gutterElement"
-                              style="height: 0px; visibility: hidden; pointer-events: none;"
-                            >
-                              <span
-                                title="Unfold line"
-                              >
-                                ›
-                              </span>
                             </div>
                           </div>
                         </div>

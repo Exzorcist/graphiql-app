@@ -67,6 +67,7 @@ function VariablesEditor() {
         ref={editorRef}
         themeSettings={primaryEditorThemeSettings}
         extensions={extension}
+        data-scrollbar-gutter
       />
     </Editor>
   );
