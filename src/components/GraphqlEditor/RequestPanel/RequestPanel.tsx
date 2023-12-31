@@ -1,12 +1,12 @@
 import { Panel, PanelGroup } from 'react-resizable-panels';
 import { Transition } from 'react-transition-group';
 import { memo, useRef, useState } from 'react';
-import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle';
 import GraphqlToolsPanel from '../GraphqlToolsPanel/GraphqlToolsPanel';
 import { requestPanelThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Editor } from '@/components/Editor';
 import { cn } from '@/utils/cn';
+import RequestEditor from './RequestEditor';
 
 const PANEL_GROUP_ID = 'request-panel-group';
 const QUERY_PANEL_MIN_SIZE = 20;
@@ -26,26 +26,28 @@ function RequestPanel() {
         return (
           <div className="w-full h-full" ref={nodeRef}>
             <Editor themeSettings={requestPanelThemeSettings}>
-              <PanelGroup id={PANEL_GROUP_ID} autoSaveId={PANEL_GROUP_ID} direction="vertical">
+              <PanelGroup
+                id={PANEL_GROUP_ID}
+                autoSaveId={PANEL_GROUP_ID}
+                direction="vertical"
+                className="relative"
+              >
                 <Panel
                   id="queryPanel"
                   order={1}
                   minSize={QUERY_PANEL_MIN_SIZE}
                   className={panelClassName}
                 >
-                  <Editor.Area />
+                  <RequestEditor />
                 </Panel>
                 {isLaptop && (
-                  <>
-                    <PanelResizeHandle />
-                    <GraphqlToolsPanel
-                      id="toolsPanel"
-                      order={2}
-                      panelGroupId={PANEL_GROUP_ID}
-                      onShowChange={setShowTools}
-                      className={panelClassName}
-                    />
-                  </>
+                  <GraphqlToolsPanel
+                    id="toolsPanel"
+                    order={2}
+                    panelGroupId={PANEL_GROUP_ID}
+                    onShowChange={setShowTools}
+                    panelClassName={panelClassName}
+                  />
                 )}
               </PanelGroup>
             </Editor>

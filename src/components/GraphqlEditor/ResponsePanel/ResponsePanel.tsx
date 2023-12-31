@@ -1,9 +1,30 @@
 import { memo } from 'react';
-import { Editor } from '@/components/Editor';
+import { json } from '@codemirror/lang-json';
 import { responsePanelThemeSettings } from '../themeSettings';
+import { useAppSelector } from '@/utils/hooks/redux-hooks';
+import { selectResponseValue } from '@/redux/slices/graphqlSlice';
+import { Editor } from '@/components/Editor';
 
 function ResponsePanel() {
-  return <Editor themeSettings={responsePanelThemeSettings} />;
-}
+  const responseValue = useAppSelector(selectResponseValue);
 
+  let value;
+
+  if (responseValue === '') {
+    value = responseValue;
+  } else if (responseValue && typeof responseValue === 'object') {
+    value = JSON.stringify({ ...responseValue }, null, 2);
+  } else {
+    value = JSON.stringify(responseValue);
+  }
+
+  return (
+    <Editor
+      value={value}
+      themeSettings={responsePanelThemeSettings}
+      extensions={[json()]}
+      readOnly
+    />
+  );
+}
 export default memo(ResponsePanel);

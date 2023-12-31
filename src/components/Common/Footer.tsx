@@ -8,7 +8,7 @@ function Footer() {
   return (
     <footer>
       <div className="bg-main text-white">
-        <div className="flex gap-5 py-3 px-5 justify-between items-center max-w-7xl mx-auto md:py-5">
+        <div className="flex gap-5 py-2 px-5 justify-between items-center max-w-7xl mx-auto">
           <div className="flex gap-4 items-center">
             <a
               className="flex items-center gap-2 transition-colors duration-300 hover:text-orange-200"

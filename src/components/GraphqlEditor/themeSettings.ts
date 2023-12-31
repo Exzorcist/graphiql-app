@@ -1,5 +1,5 @@
 const commmonThemeSettings = {
-  fontFamily: 'rgb(var(--editor-code-font-family))',
+  fontFamily: 'var(--font-mono)',
   gutterForeground: 'rgb(var(--editor-line-numbers-color))',
   selection: 'rgb(var(--editor-code-selection-color))',
 };

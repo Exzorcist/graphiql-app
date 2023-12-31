@@ -11,6 +11,7 @@ import RequestPanel from './RequestPanel/RequestPanel';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import SideBar from './SideBar';
 import { cn } from '@/utils/cn';
+import Prettifying from '@/components/GraphqlEditor/Prettifying/Prettifying';
 
 const PANEL_GROUP_ID = 'graphql-editor-panel-group';
 const QUERY_EDITOR_PANEL_MIN_SIZE = 20;
@@ -27,12 +28,18 @@ function GraphqlEditor() {
   }, []);
 
   return (
-    <div className="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family">
+    <div className="flex h-full w-full max-w-[100vw] text-editor-text-color bg-editor-primary font-sans selection:bg-editor-code-selection">
       {isLaptop && <SideBar />}
       {!isLaptop && <DocsExplorerDrawer open={showDocs} onOpenChange={setShowDocs} />}
       <div className="h-full flex w-full flex-col">
-        <div className="bg-editor-primary px-4 py-5 border-editor-border border-b">
+        <div
+          className="bg-editor-primary px-4 py-5 border-editor-border border-b
+                      sm:flex sm:items-center sm:gap-5 lg:block"
+        >
           <EndpointField onSchemaClick={handleDocsClick} isSchemaOpen={showDocs} />
+          <span className="hidden sm:block lg:hidden">
+            <Prettifying />
+          </span>
         </div>
         <Transition in={isLaptop ? showDocs : showTools} timeout={150} nodeRef={nodeRef}>
           {(state) => {
@@ -41,13 +48,16 @@ function GraphqlEditor() {
             );
 
             const currentPanel = isLaptop ? (
-              <DocsExplorerPanel
-                id="docsPanel"
-                order={3}
-                show={showDocs}
-                onShowChange={setShowDocs}
-                panelClassName={panelClassName}
-              />
+              <>
+                <PanelResizeHandle />
+                <DocsExplorerPanel
+                  id="docsPanel"
+                  order={3}
+                  show={showDocs}
+                  onShowChange={setShowDocs}
+                  panelClassName={panelClassName}
+                />
+              </>
             ) : (
               <GraphqlToolsPanel
                 id="toolsPanel"
@@ -64,6 +74,7 @@ function GraphqlEditor() {
                   id={PANEL_GROUP_ID}
                   autoSaveId={PANEL_GROUP_ID}
                   direction={isLaptop ? 'horizontal' : 'vertical'}
+                  className="relative"
                 >
                   <Panel
                     id="requestPanel"
@@ -82,7 +93,6 @@ function GraphqlEditor() {
                   >
                     <ResponsePanel />
                   </Panel>
-                  <PanelResizeHandle />
                   {currentPanel}
                 </PanelGroup>
               </div>
