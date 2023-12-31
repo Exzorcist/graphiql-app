@@ -10,19 +10,28 @@ import {
   changeVariablesValue,
   selectGraphQLSchema,
   selectRequestValue,
-  selectVariablesValue,
 } from '@/redux/slices/graphqlSlice';
+
+const storageKey = 'variablesValue';
+const defaultValue = '{\n\n}';
+const initialValue = localStorage.getItem(storageKey) ?? defaultValue;
 
 function VariablesEditor() {
   const dispatch = useAppDispatch();
   const requestValue = useAppSelector(selectRequestValue);
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
-  const storeValue = useAppSelector(selectVariablesValue);
   const editorRef = useRef<ReactCodeMirrorRef | null>(null);
-  const [editorValue, setEditorValue] = useState(storeValue);
+  const [editorValue, setEditorValue] = useState(initialValue);
 
   const updateStoreValue = useDebouncedCallback((value: string) => {
-    dispatch(changeVariablesValue(value));
+    localStorage.setItem(storageKey, value);
+
+    try {
+      const varObject = JSON.parse(value);
+      dispatch(changeVariablesValue(varObject));
+    } catch (error) {
+      dispatch(changeVariablesValue({}));
+    }
   }, 500);
 
   const handleChange = useCallback((value: string) => {
@@ -39,7 +48,7 @@ function VariablesEditor() {
 
   useEffect(() => {
     if (editorValue.trim() === '') {
-      const value = '{\n\n}';
+      const value = defaultValue;
       handleChange(value);
     }
   }, [editorValue, handleChange]);

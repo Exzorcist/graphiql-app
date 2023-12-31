@@ -37,7 +37,11 @@ export const graphqlApi = createApi({
           dispatch(graphqlApi.endpoints.fetchIntrospection.initiate(url));
         }
 
-        const response = await fetchWithBQ({ url, body: { query: graphql.requestValue } });
+        const response = await fetchWithBQ({
+          url,
+          body: { query: graphql.requestValue, variables: graphql.variablesValue },
+        });
+
         const err = response.error;
 
         if (err) {
@@ -82,7 +86,7 @@ export type GraphqlSliceState = {
   requestValue: string;
   endpointValue: string;
   responseValue: unknown;
-  variablesValue: string;
+  variablesValue: object;
 };
 
 const initialState: GraphqlSliceState = {
@@ -91,7 +95,7 @@ const initialState: GraphqlSliceState = {
   requestValue: '',
   endpointValue: '',
   responseValue: '',
-  variablesValue: '{\n\n}',
+  variablesValue: {},
 };
 
 const graphqlSlice = createSlice({
@@ -104,7 +108,7 @@ const graphqlSlice = createSlice({
     changeEndpointValue(state, action: PayloadAction<string>) {
       return { ...state, endpointValue: action.payload };
     },
-    changeVariablesValue(state, action: PayloadAction<string>) {
+    changeVariablesValue(state, action: PayloadAction<object>) {
       return { ...state, variablesValue: action.payload };
     },
   },
