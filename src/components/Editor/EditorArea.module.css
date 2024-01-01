@@ -1,0 +1,28 @@
+.FoldMarker {
+  position: relative;
+  bottom: 1.5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  user-select: none;
+}
+
+.FoldMarkerOpen {
+  transition: opacity 0.2s;
+}
+
+@media (hover: hover) {
+  .FoldMarkerOpen {
+    opacity: 0;
+  }
+}
+
+.FoldMarkerFolded {
+  opacity: 1;
+}
+
+:global(.cm-gutters):hover .FoldMarkerOpen {
+  opacity: 1;
+  transition-delay: 100ms;
+}

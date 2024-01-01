@@ -28,11 +28,10 @@ function Prettifying() {
 
   return (
     <span
-      onClick={() => hanldePrettifying()}
+      onClick={hanldePrettifying}
       title="Prettify"
       aria-hidden
-      className="cursor-pointer opacity-90 transition-colors duration-300 
-                 hover:text-editor-accent-light hover:opacity-100"
+      className="cursor-pointer opacity-90 transition-colors duration-300 hover:text-editor-accent-light hover:opacity-100"
     >
       <PuzzlePieceIcon className="w-7 h-7" />
     </span>

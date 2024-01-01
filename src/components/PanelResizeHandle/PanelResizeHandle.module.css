@@ -27,9 +27,9 @@
 }
 
 [data-panel-group-direction='vertical'] > .ResizeHandleGutter > .ResizeHandleHoverArea {
-  @apply w-full h-[2px];
+  @apply w-full h-[3px];
 }
 
 [data-panel-group-direction='horizontal'] > .ResizeHandleGutter > .ResizeHandleHoverArea {
-  @apply w-[2px] h-full;
+  @apply w-[3px] h-full;
 }

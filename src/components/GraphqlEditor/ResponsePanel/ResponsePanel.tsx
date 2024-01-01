@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { json } from '@codemirror/lang-json';
-import { responsePanelThemeSettings } from '../themeSettings';
+import { secondaryEditorThemeSettings } from '../themeSettings';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
 import { selectResponseValue } from '@/redux/slices/graphqlSlice';
 import { Editor } from '@/components/Editor';
@@ -21,7 +21,7 @@ function ResponsePanel() {
   return (
     <Editor
       value={value}
-      themeSettings={responsePanelThemeSettings}
+      themeSettings={secondaryEditorThemeSettings}
       extensions={[json()]}
       readOnly
     />
