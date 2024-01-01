@@ -16,13 +16,13 @@
           "name": "Ivan",
           "github": "https://github.com/Exzorcist",
           "position": "Team leader | Frontend developer",
-          "workOn": "He was involved in managing the team, creating navigation, basic elements and localization, and was on hand in difficult moments."
+          "workOn": "He was involved in managing the team, creating navigation, basic elements and localization, and was on hand in difficult moments. An algorithm was also developed to prettifying query."
         },
         {
           "name": "Polina",
           "github": "https://github.com/PolinaPolina94",
           "position": "Frontend developer | The soul of the team",
-          "workOn": "She was engaged in the development of login and registration pages, firebase integration into the project, form validation. She also became the inspiration for the design of the application."
+          "workOn": "She was engaged in the development of login and registration pages, firebase integration into the project, form validation. She also became the inspiration for the design of the application. Integrated logic for adding and autocompleting headers"
         },
         {
           "name": "Marat",
@@ -111,7 +111,8 @@
     "error": {
       "login": "This e-mail is not in the database",
       "registration": "This e-mail has already been used",
-      "serverUnreachable": "Unable to reach the server"
+      "serverUnreachable": "Unable to reach the server",
+      "prettifying": "This -;@' symbols are not allowed"
     },
     "success": {
       "login": "You have successfully logged in",
