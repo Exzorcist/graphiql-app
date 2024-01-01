@@ -1,7 +1,7 @@
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { useDebouncedCallback } from 'use-debounce';
 import { updateSchema } from 'cm6-graphql';
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useMemo, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import EditorArea from '@/components/Editor/EditorArea';
 import {
@@ -27,15 +27,19 @@ function RequestEditor() {
     dispatch(changeRequestValue(value));
   }, 500);
 
+  // no need to update hook, "updateSchema" function handles subsequent schema updates
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const extension = useMemo(() => graphql(graphqlSchema), []);
+
   return (
     <EditorArea
       value={storeValue}
       onChange={handleChange}
       ref={editorAreaRef}
-      extensions={graphql(graphqlSchema)}
+      extensions={extension}
       data-scrollbar-gutter
     />
   );
 }
 
-export default RequestEditor;
+export default memo(RequestEditor);
