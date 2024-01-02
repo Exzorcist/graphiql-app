@@ -37,7 +37,7 @@ function GraphqlEditor() {
       {isLaptop && <SideBar />}
       {!isLaptop && <DocsExplorerDrawer open={showDocsDrawer} onOpenChange={handleDocsClick} />}
       <div className="h-full flex w-full flex-col min-w-0">
-        <div className="bg-editor-primary px-4 py-5 border-editor-border border-b sm:flex sm:items-center sm:gap-5 lg:block">
+        <div className="bg-editor-primary px-4 pt-5  sm:flex sm:items-center sm:gap-5 lg:block">
           <EndpointField
             onSchemaClick={handleDocsClick}
             isSchemaOpen={isLaptop ? showDocsPanel : showDocsDrawer}

@@ -42,7 +42,7 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
   return (
     <form
       className={cn(
-        'h-[45px] flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent',
+        'h-10 flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent',
         className
       )}
       onSubmit={handleSubmit}

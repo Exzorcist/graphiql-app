@@ -21,12 +21,17 @@ function ResponsePanel() {
   }
 
   return (
-    <Editor
-      value={value}
-      themeSettings={secondaryEditorThemeSettings}
-      extensions={extension}
-      readOnly
-    />
+    <Editor>
+      <Editor.Container>
+        <Editor.Header size={35} className="border-b-editor-border border-b" />
+        <Editor.Area
+          value={value}
+          themeSettings={secondaryEditorThemeSettings}
+          extensions={extension}
+          readOnly
+        />
+      </Editor.Container>
+    </Editor>
   );
 }
 export default memo(ResponsePanel);

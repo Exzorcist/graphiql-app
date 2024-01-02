@@ -16,8 +16,8 @@ function EditorHeader({
   const { header } = useEditorContainerContext();
 
   useEffect(() => {
-    header.set(true);
-  }, [header]);
+    header.set(true, size);
+  }, [header, size]);
 
   return (
     <div
