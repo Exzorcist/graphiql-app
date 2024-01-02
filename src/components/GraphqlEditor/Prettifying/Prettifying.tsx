@@ -3,7 +3,7 @@ import {
   selectRequestValue,
   changeRequestValue,
   selectHasRequestEditorLintErrors,
-} from '@/redux/slices/graphqlSlice';
+} from '@/redux/slices/graphql/graphqlSlice';
 import { IGlobalMessage } from '@/types/Message';
 import { setMessage } from '@/redux/slices/globalMessageSlice';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';

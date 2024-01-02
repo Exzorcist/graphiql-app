@@ -9,7 +9,7 @@ import {
   changeEndpointValue,
   selectEndpointValue,
   useInitRequestMutation,
-} from '@/redux/slices/graphqlSlice';
+} from '@/redux/slices/graphql/graphqlSlice';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 
 export type EndpointFieldProps = {

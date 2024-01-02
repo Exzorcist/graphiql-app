@@ -9,15 +9,15 @@ test('DocsEplorer', async () => {
     preloadedState: {
       graphql: {
         introspection: {
-          value: introspectionResponse as unknown as IntrospectionQuery,
+          data: introspectionResponse as unknown as IntrospectionQuery,
           endpoint: 'https://spacex-production.up.railway.app/',
+          status: 'fullfilled',
         },
-        introspectStatus: 'fullfilled',
-        requestValue: '',
+        request: { value: '', status: 'idle' },
         endpointValue: '',
-        responseValue: '',
+        response: { data: null, time: 0, code: 0 },
         variablesValue: {},
-        _persist: { version: -1, rehydrated: true },
+        hasRequestEditorLintErrors: false,
       },
     },
   });

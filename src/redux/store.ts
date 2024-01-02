@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { graphqlApi, graphqlReducer } from './slices/graphqlSlice';
+import { graphqlApi, graphqlReducer } from './slices/graphql/graphqlSlice';
 import globalMessageReducer from './slices/globalMessageSlice';
 import localizationReducer from './slices/localizationSlice';
 import userReducer from './slices/userSlice';
@@ -18,13 +18,7 @@ import userReducer from './slices/userSlice';
 const rootPersistConfig = {
   key: 'root',
   storage,
-  blacklist: ['graphql', 'graphqlApi', 'message'],
-};
-
-const graphqlSlicePersistConfig = {
-  key: 'graphql',
-  storage,
-  blacklist: ['introspectStatus'],
+  blacklist: ['graphqlApi', 'message'],
 };
 
 const rootReducer = combineReducers({
@@ -32,7 +26,7 @@ const rootReducer = combineReducers({
   message: globalMessageReducer,
   user: userReducer,
   graphqlApi: graphqlApi.reducer,
-  graphql: persistReducer(graphqlSlicePersistConfig, graphqlReducer),
+  graphql: graphqlReducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

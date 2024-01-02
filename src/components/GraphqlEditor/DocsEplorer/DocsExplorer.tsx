@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useRef, useState } from 'react';
-import { selectGraphQLSchema, selectIntrospectStatus } from '@/redux/slices/graphqlSlice';
+import { selectGraphQLSchema, selectIntrospectStatus } from '@/redux/slices/graphql/graphqlSlice';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
 import RootTypeList from './components/RootTypeList';
 import { GraphQLDocsEntry } from '@/types/graphqlTypes';

@@ -10,7 +10,7 @@ import {
   selectGraphQLSchema,
   selectRequestValue,
   setHasRequestEditorLintErrors,
-} from '@/redux/slices/graphqlSlice';
+} from '@/redux/slices/graphql/graphqlSlice';
 import { graphql } from './utils';
 
 function RequestEditor() {

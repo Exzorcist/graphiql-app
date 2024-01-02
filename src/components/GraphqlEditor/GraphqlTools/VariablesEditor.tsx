@@ -10,7 +10,7 @@ import {
   changeVariablesValue,
   selectGraphQLSchema,
   selectRequestValue,
-} from '@/redux/slices/graphqlSlice';
+} from '@/redux/slices/graphql/graphqlSlice';
 
 const storageKey = 'variablesValue';
 const defaultValue = '{\n\n}';
