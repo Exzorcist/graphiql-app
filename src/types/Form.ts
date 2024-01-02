@@ -19,7 +19,6 @@ export type IUser = {
 };
 
 export type InfoForm = {
-  questionForLink: string;
   textForLink: string;
   title: string;
   buttonValue: string;

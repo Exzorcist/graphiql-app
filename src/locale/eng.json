@@ -69,7 +69,6 @@
       "text": "Login",
       "email": "email",
       "password": "password",
-      "questionForLink": "Don`t have an account? 👉",
       "textForLink": "Create an account"
     }
   },
@@ -94,9 +93,9 @@
   },
 
   "inputData": {
-    "email": "email",
-    "password": "password",
-    "confirmPassword": "confirm your password"
+    "email": "Type email",
+    "password": "Type password",
+    "confirmPassword": "Confirm your password"
   },
 
   "header": {
