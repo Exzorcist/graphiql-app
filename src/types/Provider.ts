@@ -1,13 +1,9 @@
-import engJson from '@/json/eng.json';
-import ruJson from '@/json/ru.json';
-import byJson from '@/json/by.json';
-
-export type Localization = typeof engJson | typeof ruJson | typeof byJson;
+import { Locale } from '@/locale/locale';
 
 export interface ILocalizationProvider {
   lang: Language;
   setLang: (lang: Language) => void;
-  get t(): Localization;
+  get t(): Locale;
 }
 
 export type Language = 'eng' | 'ru' | 'by';

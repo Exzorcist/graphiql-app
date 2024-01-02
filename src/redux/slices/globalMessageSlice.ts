@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IGlobalMessage } from '@/types/Message';
 
 const initialState: IGlobalMessage = {
@@ -11,7 +11,7 @@ const globalMessageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    setMessage(state, action) {
+    setMessage(state, action: PayloadAction<IGlobalMessage>) {
       return { ...state, ...action.payload };
     },
     hideMessage(state) {

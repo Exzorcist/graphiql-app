@@ -13,6 +13,7 @@ import { cn } from '@/utils/cn';
 import Logo from '@/assets/logo-graphql.svg';
 import { IGlobalMessage } from '@/types/Message';
 import { setMessage } from '@/redux/slices/globalMessageSlice';
+import Prettifying from '@/components/GraphqlEditor/Prettifying/Prettifying';
 
 function Header() {
   const { t } = useLocalizationContext();
@@ -65,6 +66,10 @@ function Header() {
         </NavLink>
 
         <div className="relative flex items-center gap-3">
+          <span className="sm:hidden">
+            <Prettifying />
+          </span>
+
           <span
             className="sm:hidden transition-colors duration-300 hover:text-orange-200 cursor-pointer"
             onClick={() => isShow(!show)}

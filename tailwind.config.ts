@@ -6,7 +6,6 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'editor-font-family': 'var(--editor-font-family)',
         mono: 'var(--font-mono)',
         sans: 'var(--font-sans)',
       },
@@ -22,6 +21,7 @@ export default {
         'editor-ring': 'rgb(var(--editor-ring) / <alpha-value>)',
         'editor-text-color': 'rgb(var(--editor-text-color) / <alpha-value>)',
         'editor-line-numbers-color': 'rgb(var(--editor-line-numbers-color) / <alpha-value>)',
+        'editor-code-selection': 'rgb(var(--editor-code-selection-color) / <alpha-value>)',
       },
     },
   },

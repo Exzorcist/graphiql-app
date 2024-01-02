@@ -7,7 +7,8 @@ import {
   usePanelSizeState,
 } from '@/hooks/panel-resize-hooks';
 import { DEFAULT_EDITOR_HEADER_HEIGHT } from '@/components/Editor';
-import { requestPanelThemeSettings } from '../themeSettings';
+import PanelResizeHandle from '@/components/PanelResizeHandle/PanelResizeHandle';
+import { cn } from '@/utils/cn';
 
 type Props = {
   panelGroupId: string;
@@ -22,15 +23,16 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
   const [showTools, setShowTools] = useState(false);
   const [toolsPanelCollapseSize] = usePanelSizeState(panelGroupId, DEFAULT_EDITOR_HEADER_HEIGHT);
   const toolsPanelRef = useRef<ImperativePanelHandle | null>(null);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-  useKeepPanelCollapsed(toolsPanelRef, !showTools, [toolsPanelCollapseSize]);
+  useKeepPanelCollapsed(toolsPanelRef, isCollapsed, [toolsPanelCollapseSize]);
 
   const { collapse, expand, onCollapse, onExpand } = useDefaultExpandSize(
     toolsPanelRef,
     TOOLS_PANEL_DEFAULT_SIZE
   );
 
-  const handleChevronClick = useCallback(() => {
+  const toggleTools = useCallback(() => {
     if (showTools) {
       collapse();
     } else {
@@ -39,35 +41,42 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
   }, [showTools, collapse, expand]);
 
   const handleCollapse = useCallback(() => {
+    setIsCollapsed(true);
     onCollapse();
     setShowTools(false);
     onShowChange?.(false);
   }, [onCollapse, onShowChange]);
 
   const handleExpand = useCallback(() => {
+    setIsCollapsed(false);
     onExpand();
     setShowTools(true);
     onShowChange?.(true);
   }, [onExpand, onShowChange]);
 
   return (
-    <Panel
-      ref={toolsPanelRef}
-      minSize={TOOLS_PANEL_MIN_SIZE}
-      defaultSize={toolsPanelCollapseSize}
-      collapsible
-      collapsedSize={toolsPanelCollapseSize}
-      onCollapse={handleCollapse}
-      onExpand={handleExpand}
-      className={panelClassName}
-      {...panelProps}
-    >
-      <GraphqlTools
-        isOpen={showTools}
-        onChevronClick={handleChevronClick}
-        themeSettings={requestPanelThemeSettings}
-      />
-    </Panel>
+    <>
+      <PanelResizeHandle className={cn(isCollapsed && !panelClassName && 'mb-[50px]')} />
+      <Panel
+        ref={toolsPanelRef}
+        minSize={TOOLS_PANEL_MIN_SIZE}
+        defaultSize={0}
+        collapsible
+        // collapsedSize should be equal to minSize on the first render
+        collapsedSize={toolsPanelCollapseSize || TOOLS_PANEL_MIN_SIZE}
+        onCollapse={handleCollapse}
+        onExpand={handleExpand}
+        className={cn(isCollapsed && !panelClassName && 'absolute bottom-0 w-full', panelClassName)}
+        {...panelProps}
+      >
+        <GraphqlTools
+          isOpen={showTools}
+          onChevronClick={toggleTools}
+          onHeadersclick={toggleTools}
+          onVariablesClick={toggleTools}
+        />
+      </Panel>
+    </>
   );
 }
 

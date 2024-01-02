@@ -1,8 +1,9 @@
 import { Panel, PanelGroup } from 'react-resizable-panels';
 import { useCallback, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
+import Prettifying from '@/components/GraphqlEditor/Prettifying/Prettifying';
 import PanelResizeHandle from '../PanelResizeHandle/PanelResizeHandle';
-import GraphqlToolsPanel from './GraphqlToolsPanel/GraphqlToolsPanel';
+import GraphqlToolsPanel from './GraphqlTools/GraphqlToolsPanel';
 import DocsExplorerDrawer from './DocsEplorer/DocsExplorerDrawer';
 import DocsExplorerPanel from './DocsEplorer/DocsExplorerPanel';
 import EndpointField from './EndpointField/EndpointField';
@@ -17,37 +18,51 @@ const QUERY_EDITOR_PANEL_MIN_SIZE = 20;
 const RESPONSE_PANEL_MIN_SIZE = 20;
 
 function GraphqlEditor() {
-  const [showDocs, setShowDocs] = useState(false);
+  const [showDocsPanel, setShowDocsPanel] = useState(false);
+  const [showDocsDrawer, setShowDocsDrawer] = useState(false);
   const [showTools, setShowTools] = useState(false);
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const isLaptop = useBreakpoint('min-laptop');
 
   const handleDocsClick = useCallback(() => {
-    setShowDocs((prev) => !prev);
-  }, []);
+    if (isLaptop) {
+      setShowDocsPanel((show) => !show);
+    } else {
+      setShowDocsDrawer((show) => !show);
+    }
+  }, [isLaptop]);
 
   return (
-    <div className="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family">
+    <div className="flex h-full w-full max-w-[100vw] text-editor-text-color bg-editor-primary font-sans selection:bg-editor-code-selection">
       {isLaptop && <SideBar />}
-      {!isLaptop && <DocsExplorerDrawer open={showDocs} onOpenChange={setShowDocs} />}
-      <div className="h-full flex w-full flex-col">
-        <div className="bg-editor-primary px-4 py-5 border-editor-border border-b">
-          <EndpointField onSchemaClick={handleDocsClick} isSchemaOpen={showDocs} />
+      {!isLaptop && <DocsExplorerDrawer open={showDocsDrawer} onOpenChange={handleDocsClick} />}
+      <div className="h-full flex w-full flex-col min-w-0">
+        <div className="bg-editor-primary px-4 py-5 border-editor-border border-b sm:flex sm:items-center sm:gap-5 lg:block">
+          <EndpointField
+            onSchemaClick={handleDocsClick}
+            isSchemaOpen={isLaptop ? showDocsPanel : showDocsDrawer}
+          />
+          <span className="hidden sm:block lg:hidden">
+            <Prettifying />
+          </span>
         </div>
-        <Transition in={isLaptop ? showDocs : showTools} timeout={150} nodeRef={nodeRef}>
+        <Transition in={isLaptop ? showDocsPanel : showTools} timeout={150} nodeRef={nodeRef}>
           {(state) => {
             const panelClassName = cn(
               (state === 'entering' || state === 'exiting') && 'animated-panel'
             );
 
             const currentPanel = isLaptop ? (
-              <DocsExplorerPanel
-                id="docsPanel"
-                order={3}
-                show={showDocs}
-                onShowChange={setShowDocs}
-                panelClassName={panelClassName}
-              />
+              <>
+                <PanelResizeHandle />
+                <DocsExplorerPanel
+                  id="docsPanel"
+                  order={3}
+                  show={showDocsPanel}
+                  onShowChange={setShowDocsPanel}
+                  panelClassName={panelClassName}
+                />
+              </>
             ) : (
               <GraphqlToolsPanel
                 id="toolsPanel"
@@ -64,6 +79,7 @@ function GraphqlEditor() {
                   id={PANEL_GROUP_ID}
                   autoSaveId={PANEL_GROUP_ID}
                   direction={isLaptop ? 'horizontal' : 'vertical'}
+                  className="relative"
                 >
                   <Panel
                     id="requestPanel"
@@ -82,7 +98,6 @@ function GraphqlEditor() {
                   >
                     <ResponsePanel />
                   </Panel>
-                  <PanelResizeHandle />
                   {currentPanel}
                 </PanelGroup>
               </div>

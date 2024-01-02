@@ -24,10 +24,6 @@ export function usePanelSizeState(panelGroupId: string, sizeInPixels: number) {
       );
     }
 
-    /* const resizeHandles = panelGroup.querySelectorAll<HTMLDivElement>(
-      `:scope > [data-resize-handle]`
-    ); */
-
     const sizeProp = direction === 'vertical' ? 'height' : 'width';
 
     let prevSize: number;
@@ -56,10 +52,6 @@ export function usePanelSizeState(panelGroupId: string, sizeInPixels: number) {
 
     observer.observe(panelGroup);
 
-    /* resizeHandles.forEach((resizeHandle) => {
-      observer.observe(resizeHandle);
-    }); */
-
     return () => {
       observer.disconnect();
     };
@@ -76,8 +68,8 @@ export function useKeepPanelCollapsed(
   shouldCollapse: boolean,
   sizeDeps: unknown[] = []
 ) {
-  useEffect(() => {
-    if (shouldCollapse) {
+  useLayoutEffect(() => {
+    if (shouldCollapse && !panelRef.current?.isCollapsed()) {
       panelRef.current?.collapse();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

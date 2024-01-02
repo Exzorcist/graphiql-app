@@ -4,13 +4,13 @@ exports[`GraphqlEditor 1`] = `
 <body>
   <div>
     <div
-      class="flex h-full w-full text-editor-text-color bg-editor-primary font-editor-font-family"
+      class="flex h-full w-full max-w-[100vw] text-editor-text-color bg-editor-primary font-sans selection:bg-editor-code-selection"
     >
       <div
-        class="h-full flex w-full flex-col"
+        class="h-full flex w-full flex-col min-w-0"
       >
         <div
-          class="bg-editor-primary px-4 py-5 border-editor-border border-b"
+          class="bg-editor-primary px-4 py-5 border-editor-border border-b sm:flex sm:items-center sm:gap-5 lg:block"
         >
           <form
             class="h-[45px] flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent"
@@ -32,7 +32,27 @@ exports[`GraphqlEditor 1`] = `
                   tabindex="0"
                   type="button"
                 >
-                  Schema
+                  <span
+                    class="hidden lg:inline"
+                  >
+                    Schema
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="h-6 w-6 lg:hidden"
+                    data-slot="icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -45,6 +65,7 @@ exports[`GraphqlEditor 1`] = `
               <svg
                 aria-hidden="true"
                 class="w-6 h-6"
+                data-slot="icon"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="1.5"
@@ -52,19 +73,45 @@ exports[`GraphqlEditor 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                  d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
               </svg>
             </button>
           </form>
+          <span
+            class="hidden sm:block lg:hidden"
+          >
+            <span
+              aria-hidden="true"
+              class="cursor-pointer opacity-90 transition-colors duration-300 hover:text-editor-accent-light hover:opacity-100"
+              title="Prettify"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-7 h-7"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.39 48.39 0 0 1-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 0 1-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 0 0-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 0 1-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 0 0 .657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 0 0 5.427-.63 48.05 48.05 0 0 0 .582-4.717.532.532 0 0 0-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 0 0 .658-.663 48.422 48.422 0 0 0-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 0 1-.61-.58v0Z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </span>
         </div>
         <div
           class="w-full h-full"
         >
           <div
-            class=""
+            class="relative"
             data-panel-group=""
             data-panel-group-direction="vertical"
             data-panel-group-id="graphql-editor-panel-group"
@@ -82,7 +129,7 @@ exports[`GraphqlEditor 1`] = `
                 class="w-full h-full"
               >
                 <div
-                  class=""
+                  class="relative"
                   data-panel-group=""
                   data-panel-group-direction="vertical"
                   data-panel-group-id="request-panel-group"
@@ -98,14 +145,15 @@ exports[`GraphqlEditor 1`] = `
                   >
                     <div
                       class="cm-theme h-full flex flex-col"
+                      data-scrollbar-gutter="true"
                       data-testid="editor-area"
                     >
                       <div
-                        class="cm-editor ͼ1 ͼ3 ͼ4 ͼ60 ͼ4q ͼ4p ͼ4z"
+                        class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5o ͼ4r ͼ4q ͼ16"
                       >
                         <div
                           aria-live="polite"
-                          style="position: absolute; top: -10000px;"
+                          class="cm-announced"
                         />
                         <div
                           class="cm-scroller"
@@ -132,20 +180,6 @@ exports[`GraphqlEditor 1`] = `
                                 1
                               </div>
                             </div>
-                            <div
-                              class="cm-gutter cm-foldGutter"
-                            >
-                              <div
-                                class="cm-gutterElement"
-                                style="height: 0px; visibility: hidden; pointer-events: none;"
-                              >
-                                <span
-                                  title="Unfold line"
-                                >
-                                  ›
-                                </span>
-                              </div>
-                            </div>
                           </div>
                           <div
                             aria-autocomplete="list"
@@ -156,7 +190,7 @@ exports[`GraphqlEditor 1`] = `
                             contenteditable="true"
                             role="textbox"
                             spellcheck="false"
-                            style="tab-size: 4"
+                            style="tab-size: 4;"
                             translate="no"
                           >
                             <div
@@ -167,12 +201,13 @@ exports[`GraphqlEditor 1`] = `
                           </div>
                           <div
                             aria-hidden="true"
-                            class="cm-selectionLayer"
+                            class="cm-layer cm-layer-above cm-cursorLayer"
+                            style="z-index: 150; animation-duration: 1200ms;"
                           />
                           <div
                             aria-hidden="true"
-                            class="cm-cursorLayer"
-                            style="animation-duration: 1200ms;"
+                            class="cm-layer cm-selectionLayer"
+                            style="z-index: -2;"
                           />
                         </div>
                       </div>
@@ -216,11 +251,11 @@ exports[`GraphqlEditor 1`] = `
                 data-testid="editor-area"
               >
                 <div
-                  class="cm-editor ͼ1 ͼ3 ͼ4 ͼ61 ͼ51 ͼ4p ͼ5a"
+                  class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5p ͼ51 ͼ4q ͼ16"
                 >
                   <div
                     aria-live="polite"
-                    style="position: absolute; top: -10000px;"
+                    class="cm-announced"
                   />
                   <div
                     class="cm-scroller"
@@ -247,31 +282,18 @@ exports[`GraphqlEditor 1`] = `
                           1
                         </div>
                       </div>
-                      <div
-                        class="cm-gutter cm-foldGutter"
-                      >
-                        <div
-                          class="cm-gutterElement"
-                          style="height: 0px; visibility: hidden; pointer-events: none;"
-                        >
-                          <span
-                            title="Unfold line"
-                          >
-                            ›
-                          </span>
-                        </div>
-                      </div>
                     </div>
                     <div
                       aria-autocomplete="list"
                       aria-multiline="true"
+                      aria-readonly="true"
                       autocapitalize="off"
                       autocorrect="off"
                       class="cm-content"
                       contenteditable="true"
                       role="textbox"
                       spellcheck="false"
-                      style="tab-size: 4"
+                      style="tab-size: 4;"
                       translate="no"
                     >
                       <div
@@ -282,12 +304,13 @@ exports[`GraphqlEditor 1`] = `
                     </div>
                     <div
                       aria-hidden="true"
-                      class="cm-selectionLayer"
+                      class="cm-layer cm-layer-above cm-cursorLayer"
+                      style="z-index: 150; animation-duration: 1200ms;"
                     />
                     <div
                       aria-hidden="true"
-                      class="cm-cursorLayer"
-                      style="animation-duration: 1200ms;"
+                      class="cm-layer cm-selectionLayer"
+                      style="z-index: -2;"
                     />
                   </div>
                 </div>
@@ -321,136 +344,145 @@ exports[`GraphqlEditor 1`] = `
               data-panel-collapsible="true"
               data-panel-group-id="graphql-editor-panel-group"
               data-panel-id="toolsPanel"
-              data-panel-size="1.0"
-              style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
+              data-panel-size="0.0"
+              style="flex-basis: 0px; flex-grow: 0; flex-shrink: 1; overflow: hidden;"
             >
               <div
                 class="h-full relative"
               >
                 <div
-                  class="w-full absolute top-0 left-0 px-4 flex items-center"
-                  style="height: 50px;"
+                  class="gap-6 w-full absolute top-0 left-0 px-4 flex items-center h-[50px]"
                 >
-                  <div
-                    class="flex gap-6 w-full"
+                  <button
+                    class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+                    role="button"
+                    tabindex="0"
+                    type="button"
                   >
-                    <button
-                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
-                      role="button"
-                      tabindex="0"
-                      type="button"
+                    Variables
+                  </button>
+                  <button
+                    class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+                    role="button"
+                    tabindex="0"
+                    type="button"
+                  >
+                    Headers
+                  </button>
+                  <button
+                    class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent ml-auto"
+                    role="button"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="h-6 w-6"
+                      data-slot="icon"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      Variables
-                    </button>
-                    <button
-                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
-                      role="button"
-                      tabindex="0"
-                      type="button"
-                    >
-                      Headers
-                    </button>
-                    <button
-                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent ml-auto"
-                      role="button"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="h-6 w-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          clip-rule="evenodd"
-                          d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z"
-                          fill-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
+                      <path
+                        clip-rule="evenodd"
+                        d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
                 </div>
                 <div
-                  class="cm-theme h-full flex flex-col"
-                  data-testid="editor-area"
-                  style="padding-top: 50px;"
+                  class="h-full pt-[50px]"
                 >
                   <div
-                    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ62 ͼ5p ͼ4p ͼ5y"
+                    class="cm-theme h-full flex flex-col"
+                    data-scrollbar-gutter="true"
+                    data-testid="editor-area"
                   >
                     <div
-                      aria-live="polite"
-                      style="position: absolute; top: -10000px;"
-                    />
-                    <div
-                      class="cm-scroller"
-                      tabindex="-1"
+                      class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5q ͼ5b ͼ4q ͼ16"
                     >
                       <div
-                        aria-hidden="true"
-                        class="cm-gutters"
-                        style="min-height: 14px; position: sticky;"
+                        aria-live="polite"
+                        class="cm-announced"
+                      />
+                      <div
+                        class="cm-scroller"
+                        tabindex="-1"
                       >
                         <div
-                          class="cm-gutter cm-lineNumbers"
+                          aria-hidden="true"
+                          class="cm-gutters"
+                          style="min-height: 42px; position: sticky;"
                         >
                           <div
-                            class="cm-gutterElement"
-                            style="height: 0px; visibility: hidden; pointer-events: none;"
+                            class="cm-gutter cm-lineNumbers"
                           >
-                            9
-                          </div>
-                          <div
-                            class="cm-gutterElement"
-                            style="height: 14px;"
-                          >
-                            1
-                          </div>
-                        </div>
-                        <div
-                          class="cm-gutter cm-foldGutter"
-                        >
-                          <div
-                            class="cm-gutterElement"
-                            style="height: 0px; visibility: hidden; pointer-events: none;"
-                          >
-                            <span
-                              title="Unfold line"
+                            <div
+                              class="cm-gutterElement"
+                              style="height: 0px; visibility: hidden; pointer-events: none;"
                             >
-                              ›
-                            </span>
+                              9
+                            </div>
+                            <div
+                              class="cm-gutterElement"
+                              style="height: 14px;"
+                            >
+                              1
+                            </div>
+                            <div
+                              class="cm-gutterElement"
+                              style="height: 14px;"
+                            >
+                              2
+                            </div>
+                            <div
+                              class="cm-gutterElement"
+                              style="height: 14px;"
+                            >
+                              3
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div
-                        aria-autocomplete="list"
-                        aria-multiline="true"
-                        autocapitalize="off"
-                        autocorrect="off"
-                        class="cm-content"
-                        contenteditable="true"
-                        role="textbox"
-                        spellcheck="false"
-                        style="tab-size: 4"
-                        translate="no"
-                      >
                         <div
-                          class="cm-line"
+                          aria-autocomplete="list"
+                          aria-multiline="true"
+                          autocapitalize="off"
+                          autocorrect="off"
+                          class="cm-content"
+                          contenteditable="true"
+                          role="textbox"
+                          spellcheck="false"
+                          style="tab-size: 4;"
+                          translate="no"
                         >
-                          <br />
+                          <div
+                            class="cm-line"
+                          >
+                            {
+                          </div>
+                          <div
+                            class="cm-line"
+                          >
+                            <br />
+                          </div>
+                          <div
+                            class="cm-line"
+                          >
+                            }
+                          </div>
                         </div>
+                        <div
+                          aria-hidden="true"
+                          class="cm-layer cm-layer-above cm-cursorLayer"
+                          style="z-index: 150; animation-duration: 1200ms;"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="cm-layer cm-selectionLayer"
+                          style="z-index: -2;"
+                        />
                       </div>
-                      <div
-                        aria-hidden="true"
-                        class="cm-selectionLayer"
-                      />
-                      <div
-                        aria-hidden="true"
-                        class="cm-cursorLayer"
-                        style="animation-duration: 1200ms;"
-                      />
                     </div>
                   </div>
                 </div>
