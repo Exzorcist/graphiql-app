@@ -2,12 +2,14 @@ import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { useDebouncedCallback } from 'use-debounce';
 import { updateSchema } from 'cm6-graphql';
 import { memo, useEffect, useMemo, useRef } from 'react';
+import { diagnosticCount } from '@codemirror/lint';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import EditorArea from '@/components/Editor/EditorArea';
 import {
   changeRequestValue,
   selectGraphQLSchema,
   selectRequestValue,
+  setHasRequestEditorLintErrors,
 } from '@/redux/slices/graphqlSlice';
 import { graphql } from './utils';
 
@@ -24,12 +26,18 @@ function RequestEditor() {
   }, [graphqlSchema]);
 
   const handleChange = useDebouncedCallback((value: string) => {
-    dispatch(changeRequestValue(value));
-  }, 500);
+    const editorState = editorAreaRef.current?.view?.state;
 
-  // no need to update hook, "updateSchema" function handles subsequent schema updates
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const extension = useMemo(() => graphql(graphqlSchema), []);
+    if (editorState) {
+      const isError = !!diagnosticCount(editorState);
+      dispatch(setHasRequestEditorLintErrors(isError));
+    }
+
+    dispatch(changeRequestValue(value));
+    // should be atleast a lint delay
+  }, 310);
+
+  const extension = useMemo(() => graphql(graphqlSchema), [graphqlSchema]);
 
   return (
     <EditorArea
