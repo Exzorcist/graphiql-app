@@ -65,10 +65,14 @@ const rules: IRules = {
           array = [...array, ...str.split(' ')];
         }
 
-        if (str.includes('{') && !str.includes('(')) {
+        if (str.includes('{') && !str.includes('(') && str.length > 1) {
           const splitArray = str.split(' ').slice(0, -1);
           splitArray[splitArray.length - 1] = `${splitArray[splitArray.length - 1]} {`;
           array = [...array, ...splitArray];
+        }
+
+        if (str.includes('{') && str.length === 1) {
+          array.push(str);
         }
 
         if (str.includes('{') && str.includes('(')) {
