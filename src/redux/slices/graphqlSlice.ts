@@ -7,12 +7,13 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
-import { type RootState } from '../store';
+import { isFetchBaseQueryError, isErrorWithMessage } from '@/utils/type-guards';
+import { emptySchema } from '@/utils/emptyGraphqlSchema';
 import { AsyncStatus } from '@/types/AsyncStatus';
 import { setMessage } from './globalMessageSlice';
-import { isFetchBaseQueryError, isErrorWithMessage } from '@/utils/type-guards';
 import { Language } from '@/types/Provider';
 import { locale } from '@/locale/locale';
+import { type RootState } from '../store';
 
 function getFetchErrorMsg(err: FetchBaseQueryError, lang: Language) {
   if (err.status === 'FETCH_ERROR' || !err.data) {
@@ -87,6 +88,7 @@ export type GraphqlSliceState = {
   endpointValue: string;
   responseValue: unknown;
   variablesValue: object;
+  hasRequestEditorLintErrors: boolean;
 };
 
 const initialState: GraphqlSliceState = {
@@ -96,6 +98,7 @@ const initialState: GraphqlSliceState = {
   endpointValue: '',
   responseValue: '',
   variablesValue: {},
+  hasRequestEditorLintErrors: false,
 };
 
 const graphqlSlice = createSlice({
@@ -103,19 +106,23 @@ const graphqlSlice = createSlice({
   initialState,
   reducers: {
     changeRequestValue(state, action: PayloadAction<string>) {
-      return { ...state, requestValue: action.payload };
+      state.requestValue = action.payload;
     },
     changeEndpointValue(state, action: PayloadAction<string>) {
-      return { ...state, endpointValue: action.payload };
+      state.endpointValue = action.payload;
     },
     changeVariablesValue(state, action: PayloadAction<object>) {
-      return { ...state, variablesValue: action.payload };
+      state.variablesValue = action.payload;
+    },
+    setHasRequestEditorLintErrors(state, action: PayloadAction<boolean>) {
+      state.hasRequestEditorLintErrors = action.payload;
     },
   },
+
   extraReducers(builder) {
     builder
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchPending, (state) => {
-        return { ...state, introspectStatus: 'pending' };
+        state.introspectStatus = 'pending';
       })
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchFulfilled, (state, action) => {
         return {
@@ -125,34 +132,40 @@ const graphqlSlice = createSlice({
         };
       })
       .addMatcher(graphqlApi.endpoints.fetchIntrospection.matchRejected, (state) => {
-        return {
-          ...state,
-          introspectStatus: 'rejected',
-          introspection: { value: null, endpoint: '' },
-        };
+        state.introspectStatus = 'rejected';
+        state.introspection = { value: null, endpoint: '' };
       })
       .addMatcher(graphqlApi.endpoints.initRequest.matchFulfilled, (state, action) => {
-        return { ...state, responseValue: action.payload };
+        state.responseValue = action.payload;
       });
   },
+
   selectors: {
-    selectIntrospectEndpoint: (state) => state.introspection.endpoint,
-    selectIntrospectStatus: (state) => state.introspectStatus,
     selectRequestValue: (state) => state.requestValue,
     selectEndpointValue: (state) => state.endpointValue,
     selectResponseValue: (state) => state.responseValue,
     selectVariablesValue: (state) => state.variablesValue,
+    selectHasRequestEditorLintErrors: (state) => state.hasRequestEditorLintErrors,
+    selectIntrospectStatus: (state) => state.introspectStatus,
+    selectIntrospectEndpoint: (state) => state.introspection.endpoint,
     selectGraphQLSchema: createSelector(
       (state: GraphqlSliceState) => state.introspection.value,
-      (introspection) => (introspection ? buildClientSchema(introspection) : undefined)
+      (introspection) => (introspection ? buildClientSchema(introspection) : emptySchema)
     ),
   },
 });
 
 export const graphqlReducer = graphqlSlice.reducer;
-export const { changeRequestValue, changeEndpointValue, changeVariablesValue } =
-  graphqlSlice.actions;
+
 export const {
+  changeRequestValue,
+  changeEndpointValue,
+  changeVariablesValue,
+  setHasRequestEditorLintErrors,
+} = graphqlSlice.actions;
+
+export const {
+  selectHasRequestEditorLintErrors,
   selectGraphQLSchema,
   selectEndpointValue,
   selectRequestValue,
