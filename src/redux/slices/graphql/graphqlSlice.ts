@@ -69,7 +69,11 @@ export const { useFetchIntrospectionMutation, useInitRequestMutation } = graphql
 
 export type GraphqlSliceState = {
   introspection: { data: IntrospectionQuery | null; endpoint: string; status: AsyncStatus };
-  response: { data: unknown | null; time: number; code: number | undefined } | null;
+  response: {
+    data: unknown;
+    statusCode?: number;
+    responseTime?: number;
+  } | null;
   request: { value: string; status: AsyncStatus };
   endpointValue: string;
   variablesValue: object;
@@ -122,11 +126,12 @@ const graphqlSlice = createSlice({
         state.introspection = { data: null, endpoint: '', status: 'rejected' };
       })
       .addMatcher(graphqlApi.endpoints.initRequest.matchFulfilled, (state, action) => {
-        const { responseTime, responseStatusCode } = action.meta
-          .baseQueryMeta as CustomBaseQueryMeta;
+        const meta = action.meta.baseQueryMeta as CustomBaseQueryMeta | undefined;
+        const responseTime = meta?.responseTime;
+        const statusCode = meta?.response?.status;
 
         state.request.status = 'fullfilled';
-        state.response = { data: action.payload, code: responseStatusCode, time: responseTime };
+        state.response = { data: action.payload, statusCode, responseTime };
       })
       .addMatcher(graphqlApi.endpoints.initRequest.matchPending, (state) => {
         state.request.status = 'pending';
@@ -137,6 +142,8 @@ const graphqlSlice = createSlice({
   },
 
   selectors: {
+    selectResponse: (state) => state.response,
+    selectRequestStatus: (state) => state.request.status,
     selectRequestValue: (state) => state.request.value,
     selectEndpointValue: (state) => state.endpointValue,
     selectResponseValue: (state) => state.response?.data,
@@ -163,8 +170,10 @@ export const {
 export const {
   selectHasRequestEditorLintErrors,
   selectGraphQLSchema,
+  selectRequestStatus,
   selectEndpointValue,
   selectRequestValue,
+  selectResponse,
   selectResponseValue,
   selectVariablesValue,
   selectIntrospectStatus,

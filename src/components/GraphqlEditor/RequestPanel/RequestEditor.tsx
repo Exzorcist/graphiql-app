@@ -13,6 +13,7 @@ import {
 } from '@/redux/slices/graphql/graphqlSlice';
 import { Editor } from '@/components/Editor';
 import { graphql } from './utils';
+import RequestEditorHeader from './RequestEditorHeader';
 
 function RequestEditor() {
   const dispatch = useAppDispatch();
@@ -43,7 +44,9 @@ function RequestEditor() {
   return (
     <Editor>
       <Editor.Container>
-        <Editor.Header className="border-b-editor-border border-b" size={35} />
+        <Editor.Header className="border-b-editor-border border-b">
+          <RequestEditorHeader />
+        </Editor.Header>
         <Editor.Area
           value={storeValue}
           onChange={handleChange}

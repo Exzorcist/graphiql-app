@@ -51,7 +51,11 @@
       "inputFields": "Уваходныя Палі",
       "args": "Аргументы",
       "metadataFor": "Метаданыя для",
-      "values": "Значэння"
+      "values": "Значэння",
+      "response": "Адказ",
+      "request": "Запыт",
+      "status": "Статус",
+      "prettify": "Фарматаваць"
     },
 
     "registration": {

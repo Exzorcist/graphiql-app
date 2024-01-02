@@ -51,7 +51,11 @@
       "inputFields": "Input Fields",
       "args": "Arguments",
       "metadataFor": "Metadata for",
-      "values": "Values"
+      "values": "Values",
+      "response": "Response",
+      "request": "Request",
+      "status": "Status",
+      "prettify": "Prettify"
     },
 
     "registration": {

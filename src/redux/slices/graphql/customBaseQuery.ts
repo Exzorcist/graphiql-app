@@ -8,7 +8,6 @@ import {
 
 export type Meta = {
   responseTime: number;
-  responseStatusCode: number | undefined;
 };
 
 export type CustomBaseQueryMeta = Meta & FetchBaseQueryMeta;
@@ -25,10 +24,9 @@ export const customBaseQuery: BaseQueryFn<
   const timestampBefore = Date.now();
   const baseResult = await fetchWithBQ(args, api, extraOptions);
   const responseTime = Date.now() - timestampBefore;
-  const responseStatusCode = baseResult.meta?.response?.status;
 
   return {
     ...baseResult,
-    meta: baseResult.meta && { ...baseResult.meta, responseTime, responseStatusCode },
+    meta: baseResult.meta && { ...baseResult.meta, responseTime },
   };
 };

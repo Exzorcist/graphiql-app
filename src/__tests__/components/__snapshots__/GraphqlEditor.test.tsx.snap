@@ -148,13 +148,22 @@ exports[`GraphqlEditor 1`] = `
                     >
                       <div
                         class="w-full absolute top-0 left-0 px-4 flex items-center border-b-editor-border border-b"
-                        style="height: 35px;"
-                      />
+                        style="height: 50px;"
+                      >
+                        <button
+                          class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent text-editor-accent bg-editor-secondary"
+                          role="button"
+                          tabindex="0"
+                          type="button"
+                        >
+                          Request
+                        </button>
+                      </div>
                       <div
                         class="cm-theme h-full flex flex-col"
                         data-scrollbar-gutter="true"
                         data-testid="editor-area"
-                        style="padding-top: 35px;"
+                        style="padding-top: 50px;"
                       >
                         <div
                           class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5o ͼ4r ͼ4q ͼ16"
@@ -260,12 +269,25 @@ exports[`GraphqlEditor 1`] = `
               >
                 <div
                   class="w-full absolute top-0 left-0 px-4 flex items-center border-b-editor-border border-b"
-                  style="height: 35px;"
-                />
+                  style="height: 50px;"
+                >
+                  <div
+                    class="flex h-full py-3 gap-3 items-center"
+                  >
+                    <button
+                      class="py-[5px] px-2 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent text-editor-accent bg-editor-secondary mr-5"
+                      role="button"
+                      tabindex="0"
+                      type="button"
+                    >
+                      Response
+                    </button>
+                  </div>
+                </div>
                 <div
-                  class="cm-theme h-full flex flex-col"
+                  class="cm-theme h-full flex flex-col transition-opacity"
                   data-testid="editor-area"
-                  style="padding-top: 35px;"
+                  style="padding-top: 50px;"
                 >
                   <div
                     class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5p ͼ51 ͼ4q ͼ16"

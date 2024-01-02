@@ -1,7 +1,6 @@
 import { Panel, PanelGroup } from 'react-resizable-panels';
 import { useCallback, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import Prettifying from '@/components/GraphqlEditor/Prettifying/Prettifying';
 import PanelResizeHandle from '../PanelResizeHandle/PanelResizeHandle';
 import GraphqlToolsPanel from './GraphqlTools/GraphqlToolsPanel';
 import DocsExplorerDrawer from './DocsEplorer/DocsExplorerDrawer';
@@ -42,9 +41,6 @@ function GraphqlEditor() {
             onSchemaClick={handleDocsClick}
             isSchemaOpen={isLaptop ? showDocsPanel : showDocsDrawer}
           />
-          <span className="hidden sm:block lg:hidden">
-            <Prettifying />
-          </span>
         </div>
         <Transition in={isLaptop ? showDocsPanel : showTools} timeout={150} nodeRef={nodeRef}>
           {(state) => {

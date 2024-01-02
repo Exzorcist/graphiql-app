@@ -51,7 +51,11 @@
       "inputFields": "Входящие поля",
       "args": "Аргументы",
       "metadataFor": "Метаданные для",
-      "values": "Значения"
+      "values": "Значения",
+      "response": "Ответ",
+      "request": "Запрос",
+      "status": "Статус",
+      "prettify": "Форматировать"
     },
 
     "registration": {
