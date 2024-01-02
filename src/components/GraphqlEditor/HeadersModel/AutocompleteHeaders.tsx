@@ -1,42 +1,18 @@
-function Autocomplete() {
-  return (
-    <datalist id="headers" className="bg-slate-600">
-      <option value="WWW-Authenticate">WWW-Authenticate</option>
-      <option value="Authorization">Authorization</option>
-      <option value="Cache-Control">Cache-Control</option>
-      <option value="Connection">Connection</option>
-      <option value="Keep-Alive">Keep-Alive</option>
-      <option value="Access-Control-Allow-Origin">Access-Control-Allow-Origin</option>
-      <option value="Access-Control-Allow-Credentials">Access-Control-Allow-Credentials</option>
-      <option value="Access-Control-Allow-Headers">Access-Control-Allow-Headers</option>
-      <option value="Access-Control-Allow-Methods">Access-Control-Allow-Methods</option>
-      <option value="Access-Control-Expose-Headers">Access-Control-Expose-Headers</option>
-      <option value="Access-Control-Max-Age">Access-Control-Max-Age</option>
-      <option value="Access-Control-Request-Headers">Access-Control-Request-Headers</option>
-      <option value="Access-Control-Request-Methods">Access-Control-Request-Methods</option>
-      <option value="apollo-federation-include-trace">apollo-federation-include-trace</option>
-      <option value="apollographql-client-name">apollographql-client-name</option>
-      <option value="apollographql-client-version">apollographql-client-version</option>
-    </datalist>
-  );
-}
-export default Autocomplete;
-
 export const headersdata = [
-  'WWW-Authenticate',
-  'Authorization',
-  'Cache-Control',
-  'Connection',
-  'Keep-Alive',
-  'Access-Control-Allow-Origin',
-  'Access-Control-Allow-Credentials',
-  'Access-Control-Allow-Headers',
-  'Access-Control-Allow-Methods',
-  'Access-Control-Expose-Headers',
-  'Access-Control-Max-Age',
-  'Access-Control-Request-Headers',
-  'Access-Control-Request-Methods',
-  'apollo-federation-include-trace',
-  'apollographql-client-name',
-  'apollographql-client-version',
+  { id: 1, name: 'WWW-Authenticate' },
+  { id: 2, name: 'Authorization' },
+  { id: 3, name: 'Cache-Control' },
+  { id: 4, name: 'Connection' },
+  { id: 5, name: 'Keep-Alive' },
+  { id: 6, name: 'Access-Control-Allow-Origin' },
+  { id: 7, name: 'Access-Control-Allow-Credentials' },
+  { id: 8, name: 'Access-Control-Allow-Headers' },
+  { id: 9, name: 'Access-Control-Allow-Methods' },
+  { id: 10, name: 'Access-Control-Expose-Headers' },
+  { id: 11, name: 'Access-Control-Max-Age' },
+  { id: 12, name: 'Access-Control-Request-Headers' },
+  { id: 13, name: 'Access-Control-Request-Methods' },
+  { id: 14, name: 'apollo-federation-include-trace' },
+  { id: 15, name: 'apollographql-client-name' },
+  { id: 16, name: 'apollographql-client-version' },
 ];

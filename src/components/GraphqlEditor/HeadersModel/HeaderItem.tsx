@@ -1,9 +1,9 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { useState, ChangeEvent } from 'react';
-// import Autocomplete from './AutocompleteHeaders';
+import AutoSuggest from 'react-autosuggest';
 import { setHeader, setValue } from '@/redux/slices/headersSlice';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
-import { cn } from '@/utils/cn';
+import { headersdata } from './AutocompleteHeaders';
 
 type Todo = {
   header: string;
@@ -21,12 +21,11 @@ function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
   const dispatch = useAppDispatch();
   const [headerValue, setHeaderValue] = useState(todo.header);
   const [currentValue, setCurrentValue] = useState(todo.value);
-  const [isShow, setIsShow] = useState(false);
 
   function onHeadersChange(e: ChangeEvent<HTMLInputElement>) {
-    setHeaderValue(e.target.value);
-    setTodo({ header: e.target.value, value: currentValue });
-    dispatch(setHeader(e.target.value));
+    setHeaderValue(e.currentTarget.value);
+    setTodo({ header: e.currentTarget.value, value: currentValue });
+    dispatch(setHeader(e.currentTarget.value));
   }
   function onValueChange(e: ChangeEvent<HTMLInputElement>) {
     setCurrentValue(e.target.value);
@@ -34,59 +33,67 @@ function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
     dispatch(setValue(e.target.value));
   }
 
-  function showHeaders() {
-    if (!isShow) {
-      setIsShow(true);
-    } else {
-      setIsShow(false);
-    }
+  const lowerCasedHeaders = headersdata.map((el) => {
+    return {
+      id: el.id,
+      name: el.name,
+    };
+  });
+
+  type ISuggest = {
+    id: number;
+    name: string;
+  };
+
+  const [suggestions, setSuggestions] = useState<ISuggest[]>([]);
+
+  function getSuggestions(value: string) {
+    return lowerCasedHeaders.filter((el) => el.name.includes(value.trim()));
   }
 
   return (
     <div className="flex w-full flex-wrap gap-3 mb-5 text-slate-950">
-      {/* <Autocomplete /> */}
-      <input
-        type="text"
-        list="headers"
-        className="pl-2 rounded-md w-2/5 -ml-4 h-7"
-        placeholder="header key"
-        onChange={onHeadersChange}
-        onClick={showHeaders}
+      <AutoSuggest
+        suggestions={suggestions}
+        onSuggestionsClearRequested={() => setSuggestions([])}
+        onSuggestionsFetchRequested={({ value }) => {
+          setHeaderValue(value);
+          setSuggestions(getSuggestions(value));
+        }}
+        onSuggestionSelected={(_, { suggestion }) => dispatch(setHeader(suggestion.name))}
+        getSuggestionValue={(suggestion) => suggestion.name}
+        renderSuggestion={(suggestion) => <span>{suggestion.name}</span>}
+        inputProps={{
+          placeholder: 'header value',
+          value: headerValue,
+          onChange: (e) => {
+            onHeadersChange(e as ChangeEvent<HTMLInputElement>);
+          },
+        }}
+        theme={{
+          container: 'w-2/5 relative',
+          input: 'pl-2 rounded-md w-full h-7',
+          containerOpen: 'bg-editor-secondary rounded-md cursor-pointer ',
+          suggestionsContainerOpen:
+            'absolute top-full w-full z-20 bg-editor-secondary max-h-24 overflow-auto fancy-scrollbar',
+          suggestion: 'hover:bg-main pl-2 text-white',
+        }}
+        alwaysRenderSuggestions
+        // highlightFirstSuggestion
       />
-      <div
-        className={cn(
-          'absolute top-20 flex flex-col bg-slate-100 w-2/5 -ml-4 pl-2 rounded-md invisible',
-          isShow && 'absolute top-20 flex flex-col bg-slate-100 w-2/5 -ml-4 pl-2 rounded-md visible'
-        )}
-      >
-        <span>WWW-Authenticate</span>
-        <span>Authorization</span>
-        <span>Cache-Control</span>
-        <span>Connection</span>
-        <span>Keep-Alive</span>
-        <span>Access-Control-Allow-Origin</span>
-        <span>Access-Control-Allow-Credentials</span>
-        <span>Access-Control-Allow-Headers</span>
-        <span>Access-Control-Allow-Methods</span>
-        <span>Access-Control-Expose-Headers</span>
-        <span>Access-Control-Max-Age</span>
-        <span>Access-Control-Request-Headers</span>
-        <span>Access-Control-Request-Methods</span>
-        <span>apollo-federation-include-trace</span>
-        <span>apollographql-client-name</span>
-        <span>apollographql-client-version</span>
-      </div>
       <input
         type="text"
-        className="pl-2 rounded-md w-2/5 h-7"
+        className="pl-2 rounded-md w-2/5 h-7 last:mb-40"
         placeholder="value"
         name="text"
         onChange={onValueChange}
       />
-      <button type="button" aria-label="delete-button" onClick={() => deleteTodo(id)}>
-        {' '}
-        <TrashIcon className="w-5 text-gray-50 hover:bg-editor-secondary hover:stroke-red-500" />
-      </button>
+      <div className="mt-1">
+        <button type="button" aria-label="delete-button" onClick={() => deleteTodo(id)}>
+          {' '}
+          <TrashIcon className="w-5 text-gray-50 hover:bg-editor-secondary hover:stroke-red-500" />
+        </button>
+      </div>
     </div>
   );
 }

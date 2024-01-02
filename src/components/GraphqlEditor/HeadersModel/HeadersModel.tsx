@@ -4,7 +4,7 @@ import HeaderItem from './HeaderItem';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { removeHeadersValue } from '@/redux/slices/headersSlice';
 
-type ITask = {
+export type ITask = {
   id: string;
 };
 
@@ -39,7 +39,7 @@ function HeadersModel() {
   return (
     <div>
       <div
-        className="flex flex-col ml-10 text-sm"
+        className="flex flex-col ml-6 text-sm mb-2"
         style={{ paddingTop: header.visible ? header.height : undefined }}
         data-testid="editor-area"
       >
@@ -52,9 +52,11 @@ function HeadersModel() {
             deleteTodo={deleteTodo}
           />
         ))}
+      </div>
+      <div>
         <button
           type="button"
-          className="w-40 pl-0 mt-3 mb-5 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+          className="w-40 pl-0 mt-3 ml-2 mb-5 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
           onClick={() => addTodo()}
         >
           {' '}
