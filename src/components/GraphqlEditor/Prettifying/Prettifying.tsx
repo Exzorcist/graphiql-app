@@ -1,19 +1,23 @@
 import { PuzzlePieceIcon } from '@heroicons/react/24/outline';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectRequestValue, changeRequestValue } from '@/redux/slices/graphqlSlice';
+import {
+  selectRequestValue,
+  changeRequestValue,
+  selectHasRequestEditorLintErrors,
+} from '@/redux/slices/graphqlSlice';
 import { IGlobalMessage } from '@/types/Message';
 import { setMessage } from '@/redux/slices/globalMessageSlice';
-
+import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import { prettifying } from '@/components/GraphqlEditor/Prettifying/PrettifyingRules';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 function Prettifying() {
   const { t } = useLocalizationContext();
-  const dispatch = useDispatch();
-  const query = useSelector(selectRequestValue);
+  const dispatch = useAppDispatch();
+  const query = useAppSelector(selectRequestValue);
+  const hasLintErrors = useAppSelector(selectHasRequestEditorLintErrors);
 
   const hanldePrettifying = () => {
-    if (query.includes(';') || query.includes('-') || query.includes('@') || query.includes("'")) {
+    if (hasLintErrors) {
       const wrongSymbolMessage: IGlobalMessage = {
         type: 'error',
         text: t.globalMessage.error.prettifying,

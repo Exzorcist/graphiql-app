@@ -18,7 +18,7 @@ import userReducer from './slices/userSlice';
 const rootPersistConfig = {
   key: 'root',
   storage,
-  blacklist: ['graphql', 'graphqlApi'],
+  blacklist: ['graphql', 'graphqlApi', 'message'],
 };
 
 const graphqlSlicePersistConfig = {
