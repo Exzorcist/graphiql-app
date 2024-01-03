@@ -16,7 +16,6 @@ test('[ Registration ]: base test', () => {
     </MemoryRouter>
   );
   expect(screen.getByText('SignUp')).toBeInTheDocument();
-  expect(screen.getByText('Do you have an account? 👉')).toBeInTheDocument();
   expect(screen.getByLabelText('buttonLink')).toBeInTheDocument();
   expect(screen.getAllByLabelText('buttonEye')[0]).toBeInTheDocument();
   expect(screen.getByLabelText('emailIput')).toBeInTheDocument();

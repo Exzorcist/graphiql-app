@@ -7,7 +7,6 @@ function SignUp() {
 
   return (
     <SignForm
-      questionForLink={t.page.registration.questionForLink}
       textForLink={t.page.registration.textForLink}
       title={t.page.registration.article}
       buttonValue={t.page.registration.text}
