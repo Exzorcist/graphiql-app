@@ -52,6 +52,7 @@
       "args": "Arguments",
       "metadataFor": "Metadata for",
       "values": "Values",
+      "schemaNotLoaded": "Schema is not loaded",
       "response": "Response",
       "request": "Request",
       "status": "Status",
@@ -120,7 +121,8 @@
     },
     "success": {
       "login": "You have successfully logged in",
-      "logout": "You have successfully logged out"
+      "logout": "You have successfully logged out",
+      "schemaReloaded": "Schema successfully reloaded"
     },
     "info": {
       "tokenExpire": "Sorry, but your token has expired"

@@ -5,11 +5,8 @@ import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
-import {
-  changeEndpointValue,
-  selectEndpointValue,
-  useInitRequestMutation,
-} from '@/redux/slices/graphql/graphqlSlice';
+import { changeEndpointValue, selectEndpointValue } from '@/redux/slices/graphql/graphqlSlice';
+import { useInitRequestMutation } from '@/redux/slices/graphql/graphqlApi';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 
 export type EndpointFieldProps = {

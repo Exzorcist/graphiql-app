@@ -9,3 +9,7 @@ export function getFetchErrorMsg(err: FetchBaseQueryError, lang: Language) {
 
   return 'error' in err ? err.error : JSON.stringify(err.data);
 }
+
+export function getSchemaReloadMsg(lang: Language) {
+  return locale[lang].globalMessage.success.schemaReloaded;
+}

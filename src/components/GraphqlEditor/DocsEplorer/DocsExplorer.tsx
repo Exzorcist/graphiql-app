@@ -1,15 +1,16 @@
 import { createContext, useContext, useMemo, useRef, useState } from 'react';
 import { selectGraphQLSchema, selectIntrospectStatus } from '@/redux/slices/graphql/graphqlSlice';
-import { useAppSelector } from '@/utils/hooks/redux-hooks';
-import RootTypeList from './components/RootTypeList';
-import { GraphQLDocsEntry } from '@/types/graphqlTypes';
-import Separator from '@/components/ui/Separator';
-import { cn } from '@/utils/cn';
-import EntryScreen from './components/EntryScreen';
-import { PropsWithClassName } from '@/types/PropsWithClassName';
-import DocsBreadcrumb from './components/DocsBreadcrumb';
-import Spinner from '@/components/ui/Spinner';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import { PropsWithClassName } from '@/types/PropsWithClassName';
+import { useAppSelector } from '@/utils/hooks/redux-hooks';
+import DocsBreadcrumb from './components/DocsBreadcrumb';
+import { emptySchema } from '@/utils/emptyGraphqlSchema';
+import { GraphQLDocsEntry } from '@/types/graphqlTypes';
+import RootTypeList from './components/RootTypeList';
+import EntryScreen from './components/EntryScreen';
+import Separator from '@/components/ui/Separator';
+import Spinner from '@/components/ui/Spinner';
+import { cn } from '@/utils/cn';
 
 type DocsExlorerContextType = {
   openEntry(entry: GraphQLDocsEntry): void;
@@ -60,12 +61,18 @@ function DocsExplorer({ className }: PropsWithClassName) {
         >
           <h3 className="text-lg font-semibold">{t.page.editor.docs}</h3>
           <Separator className="mb-4" />
-          <DocsBreadcrumb
-            navStack={navStack}
-            onItemClick={contextValue.goToIndex}
-            className="mb-4"
-          />
-          {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
+          {graphqlSchema === emptySchema ? (
+            <h4>{t.page.editor.schemaNotLoaded}</h4>
+          ) : (
+            <>
+              <DocsBreadcrumb
+                navStack={navStack}
+                onItemClick={contextValue.goToIndex}
+                className="mb-4"
+              />
+              {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
+            </>
+          )}
         </div>
         {introspectStatus === 'pending' && <Spinner className="absolute-center" withLabel />}
       </div>

@@ -1,7 +1,7 @@
 import * as yup from 'yup';
-import { Localization } from '@/types/Provider';
+import { Locale } from '@/locale/locale';
 
-export const signInSchema = (t: Localization) => {
+export const signInSchema = (t: Locale) => {
   return yup.object().shape({
     email: yup.string().email(t.validation.email.format).required(t.validation.email.required),
 

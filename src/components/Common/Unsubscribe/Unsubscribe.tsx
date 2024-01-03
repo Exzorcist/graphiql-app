@@ -14,11 +14,12 @@ function Unsubscribe() {
   const isLogin = useSelector(selectIsAuth);
 
   const tokenExpireMessage = useMemo(
-    () => ({
-      type: 'info',
-      text: t.globalMessage.info.tokenExpire,
-      isShown: true,
-    }),
+    () =>
+      ({
+        type: 'info',
+        text: t.globalMessage.info.tokenExpire,
+        isShown: true,
+      }) as const,
     [t.globalMessage.info.tokenExpire]
   );
 
