@@ -177,7 +177,7 @@ exports[`GraphqlEditor 1`] = `
                         style="padding-top: 50px;"
                       >
                         <div
-                          class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5o ͼ4r ͼ4q ͼ16"
+                          class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5p ͼ4s ͼ4q ͼ16"
                         >
                           <div
                             aria-live="polite"
@@ -299,12 +299,12 @@ exports[`GraphqlEditor 1`] = `
                   </div>
                 </div>
                 <div
-                  class="cm-theme h-full flex flex-col transition-opacity"
+                  class="cm-theme h-full flex flex-col"
                   data-testid="editor-area"
                   style="padding-top: 50px;"
                 >
                   <div
-                    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5p ͼ51 ͼ4q ͼ16"
+                    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5q ͼ52 ͼ4q ͼ16"
                   >
                     <div
                       aria-live="polite"
@@ -454,7 +454,7 @@ exports[`GraphqlEditor 1`] = `
                     data-testid="editor-area"
                   >
                     <div
-                      class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5q ͼ5b ͼ4q ͼ16"
+                      class="cm-editor ͼ1 ͼ3 ͼ4 ͼ5r ͼ5c ͼ4q ͼ16"
                     >
                       <div
                         aria-live="polite"

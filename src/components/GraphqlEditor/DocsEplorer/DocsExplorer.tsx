@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 import { selectGraphQLSchema, selectIntrospectStatus } from '@/redux/slices/graphql/graphqlSlice';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
@@ -25,6 +26,7 @@ function DocsExplorer({ className }: PropsWithClassName) {
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const introspectStatus = useAppSelector(selectIntrospectStatus);
   const [navStack, setNavStack] = useState<GraphQLDocsEntry[]>([]);
+  const [debounceIntrospectStatus] = useDebounce(introspectStatus, 100);
   const prevSchema = useRef(graphqlSchema);
 
   if (prevSchema.current !== graphqlSchema) {
@@ -55,7 +57,7 @@ function DocsExplorer({ className }: PropsWithClassName) {
         <div
           className={cn(
             'bg-editor-primary p-5 h-full w-full font-sans min-h-0 flex-[1_1_0px] overflow-auto fancy-scrollbar',
-            introspectStatus === 'pending' && 'opacity-50 pointer-events-none',
+            debounceIntrospectStatus === 'pending' && 'opacity-50 pointer-events-none',
             className
           )}
         >
@@ -74,7 +76,9 @@ function DocsExplorer({ className }: PropsWithClassName) {
             </>
           )}
         </div>
-        {introspectStatus === 'pending' && <Spinner className="absolute-center" withLabel />}
+        {debounceIntrospectStatus === 'pending' && (
+          <Spinner className="absolute-center" withLabel />
+        )}
       </div>
     </DocsExplorerContext.Provider>
   );

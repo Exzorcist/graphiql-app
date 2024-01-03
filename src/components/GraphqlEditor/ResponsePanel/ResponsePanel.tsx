@@ -1,13 +1,14 @@
 import { memo } from 'react';
 import { json } from '@codemirror/lang-json';
+import { EditorView } from '@codemirror/view';
 import { secondaryEditorThemeSettings } from '../themeSettings';
 import { useAppSelector } from '@/utils/hooks/redux-hooks';
 import { selectRequestStatus, selectResponseValue } from '@/redux/slices/graphql/graphqlSlice';
 import { Editor } from '@/components/Editor';
 import ResponseStatusBar from './ResponseStatusBar';
-import { cn } from '@/utils/cn';
 
 const extension = [json()];
+const opacityStyles = EditorView.theme({ '.cm-content': { opacity: '50%' } });
 
 function ResponsePanel() {
   const responseValue = useAppSelector(selectResponseValue);
@@ -32,8 +33,7 @@ function ResponsePanel() {
         <Editor.Area
           value={value}
           themeSettings={secondaryEditorThemeSettings}
-          extensions={extension}
-          className={cn('transition-opacity', requestStatus === 'pending' && 'opacity-50')}
+          extensions={requestStatus === 'pending' ? [...extension, opacityStyles] : extension}
           readOnly
         />
       </Editor.Container>

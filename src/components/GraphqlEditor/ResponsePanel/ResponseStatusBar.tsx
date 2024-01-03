@@ -18,9 +18,9 @@ function getStatusColor(code: number) {
 }
 
 function ResponseStatusBar() {
+  const { t } = useLocalizationContext();
   const response = useAppSelector(selectResponse);
   const requestStatus = useAppSelector(selectRequestStatus);
-  const { t } = useLocalizationContext();
 
   return (
     <div className="flex h-full items-center w-full">
