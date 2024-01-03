@@ -7,7 +7,6 @@ function SignIn() {
 
   return (
     <SignForm
-      questionForLink={t.page.login.questionForLink}
       textForLink={t.page.login.textForLink}
       title={t.page.login.article}
       buttonValue={t.page.login.text}

@@ -8,10 +8,10 @@ export const signInSchema = (t: Locale) => {
     password: yup
       .string()
       .required(t.validation.password.required)
-      .matches(/\d/, t.validation.password.number)
-      .matches(/[A-ZА-Я]/, t.validation.password.uppercase)
-      .matches(/[a-zа-я]/, t.validation.password.lowercase)
-      .matches(/[.:,;?!@#$%^&*_\-+=]/, t.validation.password.special)
+      .matches(/(?=\p{N})/gu, t.validation.password.number)
+      .matches(/(?=\p{Lu})/gu, t.validation.password.uppercase)
+      .matches(/(?=\p{Ll})/gu, t.validation.password.lowercase)
+      .matches(/(?=[\p{S}\p{P}])/gu, t.validation.password.special)
       .min(8, t.validation.password.minlength),
   });
 };
