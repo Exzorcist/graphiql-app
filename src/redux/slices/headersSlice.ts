@@ -8,11 +8,13 @@ type IHeaderValue = {
 type IHeader = {
   headerValue: IHeaderValue;
   isHeader: boolean;
+  headers: { [key: string]: string };
 };
 
 const initialState: IHeader = {
   headerValue: { header: '', value: '' },
   isHeader: false,
+  headers: {},
 };
 
 const headersSlice = createSlice({
@@ -37,6 +39,31 @@ const headersSlice = createSlice({
         },
       };
     },
+    setHeadersObj(state, action) {
+      return {
+        ...state,
+        headers: {
+          ...state.headers,
+          ...action.payload,
+        },
+      };
+    },
+    setClearHeaders(state, action) {
+      return {
+        ...state,
+        headers: {
+          ...action.payload,
+        },
+      };
+    },
+    updateHeadersObj(state, action) {
+      return {
+        ...state,
+        headers: {
+          ...action.payload,
+        },
+      };
+    },
     removeHeadersValue(state, action) {
       return {
         ...state,
@@ -52,6 +79,14 @@ const headersSlice = createSlice({
   },
 });
 
-export const { setHeader, setValue, removeHeadersValue, setHeaderOpen } = headersSlice.actions;
+export const {
+  setHeader,
+  setValue,
+  removeHeadersValue,
+  setHeaderOpen,
+  setHeadersObj,
+  setClearHeaders,
+  updateHeadersObj,
+} = headersSlice.actions;
 
 export default headersSlice.reducer;

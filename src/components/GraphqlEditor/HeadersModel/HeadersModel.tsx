@@ -1,8 +1,8 @@
 import { memo, useEffect, useState } from 'react';
 import { useEditorContainerContext } from '@/components/Editor/hooks';
 import HeaderItem from './HeaderItem';
-import { useAppDispatch } from '@/utils/hooks/redux-hooks';
-import { removeHeadersValue } from '@/redux/slices/headersSlice';
+import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
+import { removeHeadersValue, setClearHeaders, updateHeadersObj } from '@/redux/slices/headersSlice';
 
 export type ITask = {
   id: string;
@@ -13,11 +13,12 @@ function HeadersModel() {
   const [todo, setTodo] = useState({ header: '', value: '' });
   const [tasks, setTasks] = useState<ITask[]>([]);
   const dispatch = useAppDispatch();
+  const headersForShow = useAppSelector((state) => state.headers.headers);
 
   const addTodo = () => {
     const taskTodo = {
       id: Math.random(),
-      value: todo,
+      value: { header: todo.header, value: todo.value },
       status: false,
     };
     const newTask = [...tasks, taskTodo];
@@ -25,16 +26,21 @@ function HeadersModel() {
     setTodo({ header: '', value: '' });
   };
 
-  const deleteTodo = (id: string) => {
+  const deleteTodo = (id: string, headerValue: string) => {
     const del = tasks.filter((el) => el.id !== id);
     setTasks(del);
+    const newObj = Object.fromEntries(
+      Object.entries(headersForShow).filter(([k]) => k !== headerValue)
+    );
+    dispatch(updateHeadersObj(newObj));
   };
-
   useEffect(() => {
     if (!tasks.length) {
       dispatch(removeHeadersValue({ header: '', value: '' }));
+      const objClear = {} as { [key: string]: string };
+      dispatch(setClearHeaders(objClear));
     }
-  }, [dispatch, tasks]);
+  }, [dispatch, tasks, todo.header, todo.value]);
 
   return (
     <div>

@@ -1,9 +1,10 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import AutoSuggest from 'react-autosuggest';
-import { setHeader, setValue } from '@/redux/slices/headersSlice';
+import { setHeader, setHeadersObj, setValue } from '@/redux/slices/headersSlice';
 import { useAppDispatch } from '@/utils/hooks/redux-hooks';
 import { headersdata } from './AutocompleteHeaders';
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 type Todo = {
   header: string;
@@ -13,11 +14,13 @@ type Todo = {
 type Props = {
   id: string;
   todo: Todo;
-  deleteTodo: (id: string) => void;
+  deleteTodo: (id: string, headerValue: string) => void;
   setTodo: (el: Todo) => void;
 };
 
 function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
+  const { t } = useLocalizationContext();
+
   const dispatch = useAppDispatch();
   const [headerValue, setHeaderValue] = useState(todo.header);
   const [currentValue, setCurrentValue] = useState(todo.value);
@@ -51,6 +54,14 @@ function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
     return lowerCasedHeaders.filter((el) => el.name.includes(value.trim()));
   }
 
+  useEffect(() => {
+    if (headerValue && currentValue) {
+      const obj = {} as { [key: string]: string };
+      obj[headerValue] = currentValue;
+      dispatch(setHeadersObj(obj));
+    }
+  }, [headerValue, currentValue, dispatch]);
+
   return (
     <div className="flex w-full flex-wrap gap-3 mb-5 text-slate-950">
       <AutoSuggest
@@ -64,7 +75,7 @@ function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
         getSuggestionValue={(suggestion) => suggestion.name}
         renderSuggestion={(suggestion) => <span>{suggestion.name}</span>}
         inputProps={{
-          placeholder: 'header value',
+          placeholder: t.headers.placeholder.key,
           value: headerValue,
           onChange: (e) => {
             onHeadersChange(e as ChangeEvent<HTMLInputElement>);
@@ -79,17 +90,21 @@ function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
           suggestion: 'hover:bg-main pl-2 text-white',
         }}
         alwaysRenderSuggestions
-        // highlightFirstSuggestion
+        highlightFirstSuggestion
       />
       <input
         type="text"
-        className="pl-2 rounded-md w-2/5 h-7 last:mb-40"
-        placeholder="value"
+        className="pl-2 rounded-md w-2/5 h-7 ml-4 last:mb-40"
+        placeholder={t.headers.placeholder.value}
         name="text"
         onChange={onValueChange}
       />
       <div className="mt-1">
-        <button type="button" aria-label="delete-button" onClick={() => deleteTodo(id)}>
+        <button
+          type="button"
+          aria-label="delete-button"
+          onClick={() => deleteTodo(id, headerValue)}
+        >
           {' '}
           <TrashIcon className="w-5 text-gray-50 hover:bg-editor-secondary hover:stroke-red-500" />
         </button>
