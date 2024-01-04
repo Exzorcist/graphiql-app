@@ -5,11 +5,8 @@ import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
-import {
-  changeEndpointValue,
-  selectEndpointValue,
-  useInitRequestMutation,
-} from '@/redux/slices/graphqlSlice';
+import { changeEndpointValue, selectEndpointValue } from '@/redux/slices/graphql/graphqlSlice';
+import { useInitRequestMutation } from '@/redux/slices/graphql/graphqlApi';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 
 export type EndpointFieldProps = {
@@ -42,7 +39,7 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
   return (
     <form
       className={cn(
-        'h-[45px] flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent',
+        'h-10 flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent',
         className
       )}
       onSubmit={handleSubmit}

@@ -3,18 +3,20 @@ import {
   selectRequestValue,
   changeRequestValue,
   selectHasRequestEditorLintErrors,
-} from '@/redux/slices/graphqlSlice';
+} from '@/redux/slices/graphql/graphqlSlice';
 import { IGlobalMessage } from '@/types/Message';
 import { setMessage } from '@/redux/slices/globalMessageSlice';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import { prettifying } from '@/components/GraphqlEditor/Prettifying/PrettifyingRules';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import Button from '@/components/ui/Button';
+import { PropsWithClassName } from '@/types/PropsWithClassName';
 
-function Prettifying() {
+function Prettifying({ className }: PropsWithClassName) {
+  const hasLintErrors = useAppSelector(selectHasRequestEditorLintErrors);
+  const query = useAppSelector(selectRequestValue);
   const { t } = useLocalizationContext();
   const dispatch = useAppDispatch();
-  const query = useAppSelector(selectRequestValue);
-  const hasLintErrors = useAppSelector(selectHasRequestEditorLintErrors);
 
   const hanldePrettifying = () => {
     if (hasLintErrors) {
@@ -31,14 +33,12 @@ function Prettifying() {
   };
 
   return (
-    <span
-      onClick={hanldePrettifying}
-      title="Prettify"
-      aria-hidden
-      className="cursor-pointer opacity-90 transition-colors duration-300 hover:text-editor-accent-light hover:opacity-100"
-    >
-      <PuzzlePieceIcon className="w-7 h-7" />
-    </span>
+    <Button onClick={hanldePrettifying} title="Prettify" className={className}>
+      <div className="flex items-center gap-2">
+        <span className="hidden sm:inline">{t.page.editor.prettify}</span>
+        <PuzzlePieceIcon className="w-7 h-7" />
+      </div>
+    </Button>
   );
 }
 

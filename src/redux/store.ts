@@ -10,7 +10,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { graphqlApi, graphqlReducer } from './slices/graphqlSlice';
+import { graphqlReducer } from './slices/graphql/graphqlSlice';
+import { graphqlApi } from './slices/graphql/graphqlApi';
 import globalMessageReducer from './slices/globalMessageSlice';
 import localizationReducer from './slices/localizationSlice';
 import userReducer from './slices/userSlice';
@@ -18,13 +19,13 @@ import userReducer from './slices/userSlice';
 const rootPersistConfig = {
   key: 'root',
   storage,
-  blacklist: ['graphql', 'graphqlApi', 'message'],
+  blacklist: ['graphqlApi', 'graphql', 'message'],
 };
 
-const graphqlSlicePersistConfig = {
+const graphqlPersistConfig = {
   key: 'graphql',
   storage,
-  blacklist: ['introspectStatus'],
+  blacklist: ['schema'],
 };
 
 const rootReducer = combineReducers({
@@ -32,7 +33,7 @@ const rootReducer = combineReducers({
   message: globalMessageReducer,
   user: userReducer,
   graphqlApi: graphqlApi.reducer,
-  graphql: persistReducer(graphqlSlicePersistConfig, graphqlReducer),
+  graphql: persistReducer(graphqlPersistConfig, graphqlReducer),
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
@@ -44,7 +45,19 @@ export const setupStore = (preloadedState?: Partial<RootState>) => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          ignoredActions: [
+            FLUSH,
+            REHYDRATE,
+            PAUSE,
+            PERSIST,
+            PURGE,
+            REGISTER,
+            'graphql/setGraphqlSchema',
+          ],
+          ignoredPaths: ['graphql.schema'],
+        },
+        immutableCheck: {
+          ignoredPaths: ['graphql.schema', 'graphql.introspection.data'],
         },
       }).concat(graphqlApi.middleware),
   });

@@ -1,23 +1,25 @@
-import { IntrospectionQuery } from 'graphql';
+import { IntrospectionQuery, buildClientSchema } from 'graphql';
 import { screen } from '@testing-library/react';
 import DocsExplorer from '@/components/GraphqlEditor/DocsEplorer/DocsExplorer';
 import introspectionResponse from '../fixtures/introspectionResponse.json';
 import { customRender as render, user } from '../test-utils';
+import { initialState } from '@/redux/slices/graphql/graphqlSlice';
 
 test('DocsEplorer', async () => {
   render(<DocsExplorer />, {
     preloadedState: {
       graphql: {
+        ...initialState,
+        schema: buildClientSchema(introspectionResponse as unknown as IntrospectionQuery),
         introspection: {
-          value: introspectionResponse as unknown as IntrospectionQuery,
+          data: introspectionResponse as unknown as IntrospectionQuery,
           endpoint: 'https://spacex-production.up.railway.app/',
+          status: 'fullfilled',
         },
-        introspectStatus: 'fullfilled',
-        requestValue: '',
-        endpointValue: '',
-        responseValue: '',
-        variablesValue: {},
-        _persist: { version: -1, rehydrated: true },
+        _persist: {
+          version: 1,
+          rehydrated: true,
+        },
       },
     },
   });

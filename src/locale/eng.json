@@ -51,7 +51,12 @@
       "inputFields": "Input Fields",
       "args": "Arguments",
       "metadataFor": "Metadata for",
-      "values": "Values"
+      "values": "Values",
+      "schemaNotLoaded": "Schema is not loaded",
+      "response": "Response",
+      "request": "Request",
+      "status": "Status",
+      "prettify": "Prettify"
     },
 
     "registration": {
@@ -115,7 +120,8 @@
     },
     "success": {
       "login": "You have successfully logged in",
-      "logout": "You have successfully logged out"
+      "logout": "You have successfully logged out",
+      "schemaReloaded": "Schema successfully reloaded"
     },
     "info": {
       "tokenExpire": "Sorry, but your token has expired"

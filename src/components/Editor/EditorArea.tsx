@@ -30,6 +30,7 @@ const styleOverrides = EditorView.theme({
   '.cm-lineNumbers': { minWidth: '37px' },
   '.cm-foldGutter': { minWidth: '15px' },
   '.cm-gutters': { paddingRight: '4px', maxWidth: '56px' },
+  '.cm-content': { transition: 'opacity 0.1s' },
 });
 
 const themeInit: Record<Theme, (options?: Partial<CreateThemeOptions> | undefined) => Extension> = {
