@@ -41,11 +41,10 @@ function HeadersModel() {
       dispatch(setClearHeaders(objClear));
     }
   }, [dispatch, tasks, todo.header, todo.value]);
-
   return (
-    <div>
+    <div className="h-full overflow-auto relative" data-testid="headers-area">
       <div
-        className="flex flex-col ml-6 text-sm mb-2"
+        className="flex flex-col text-sm max-h-52 overflow-auto fancy-scrollbar absolute left-6 right-6"
         style={{ paddingTop: header.visible ? header.height : undefined }}
         data-testid="editor-area"
       >
@@ -59,12 +58,8 @@ function HeadersModel() {
           />
         ))}
       </div>
-      <div>
-        <button
-          type="button"
-          className="w-40 pl-0 mt-3 ml-2 mb-5 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
-          onClick={() => addTodo()}
-        >
+      <div className="absolute bottom-4 left-6 rounded cursor-pointer hover:bg-editor-secondary hover:text-editor-accent transition-all duration-300">
+        <button type="button" onClick={() => addTodo()}>
           {' '}
           ➕ Add new header
         </button>

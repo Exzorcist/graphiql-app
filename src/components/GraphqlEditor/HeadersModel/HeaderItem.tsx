@@ -63,38 +63,40 @@ function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
   }, [headerValue, currentValue, dispatch]);
 
   return (
-    <div className="flex w-full flex-wrap gap-3 mb-5 text-slate-950">
-      <AutoSuggest
-        suggestions={suggestions}
-        onSuggestionsClearRequested={() => setSuggestions([])}
-        onSuggestionsFetchRequested={({ value }) => {
-          setHeaderValue(value);
-          setSuggestions(getSuggestions(value));
-        }}
-        onSuggestionSelected={(_, { suggestion }) => dispatch(setHeader(suggestion.name))}
-        getSuggestionValue={(suggestion) => suggestion.name}
-        renderSuggestion={(suggestion) => <span>{suggestion.name}</span>}
-        inputProps={{
-          placeholder: t.headers.placeholder.key,
-          value: headerValue,
-          onChange: (e) => {
-            onHeadersChange(e as ChangeEvent<HTMLInputElement>);
-          },
-        }}
-        theme={{
-          container: 'w-2/5 relative',
-          input: 'pl-2 rounded-md w-full h-7',
-          containerOpen: 'bg-editor-secondary rounded-md cursor-pointer ',
-          suggestionsContainerOpen:
-            'absolute top-full w-full z-20 bg-editor-secondary max-h-24 overflow-auto fancy-scrollbar',
-          suggestion: 'hover:bg-main pl-2 text-white',
-        }}
-        alwaysRenderSuggestions
-        highlightFirstSuggestion
-      />
+    <div className="flex gap-4 mb-5 text-slate-950 w-full">
+      <div className="w-3/5 text-base">
+        <AutoSuggest
+          suggestions={suggestions}
+          onSuggestionsClearRequested={() => setSuggestions([])}
+          onSuggestionsFetchRequested={({ value }) => {
+            setHeaderValue(value);
+            setSuggestions(getSuggestions(value));
+          }}
+          onSuggestionSelected={(_, { suggestion }) => dispatch(setHeader(suggestion.name))}
+          getSuggestionValue={(suggestion) => suggestion.name}
+          renderSuggestion={(suggestion) => <span>{suggestion.name}</span>}
+          inputProps={{
+            placeholder: t.headers.placeholder.key,
+            value: headerValue,
+            onChange: (e) => {
+              onHeadersChange(e as ChangeEvent<HTMLInputElement>);
+            },
+          }}
+          theme={{
+            container: 'relative',
+            input: 'pl-2 rounded-md w-full h-7',
+            containerOpen: 'bg-editor-secondary rounded-md cursor-pointer',
+            suggestionsContainerOpen:
+              'absolute top-full w-full z-20 bg-editor-secondary max-h-24 overflow-auto fancy-scrollbar',
+            suggestion: 'hover:bg-main pl-2 text-white transition duration-200',
+          }}
+          alwaysRenderSuggestions
+          highlightFirstSuggestion
+        />
+      </div>
       <input
         type="text"
-        className="pl-2 rounded-md w-2/5 h-7 ml-4 last:mb-40"
+        className="pl-2 rounded-md w-2/5 h-7 last:mb-40 text-base"
         placeholder={t.headers.placeholder.value}
         name="text"
         onChange={onValueChange}
@@ -106,7 +108,7 @@ function HeaderItem({ todo, setTodo, deleteTodo, id }: Props) {
           onClick={() => deleteTodo(id, headerValue)}
         >
           {' '}
-          <TrashIcon className="w-5 text-gray-50 hover:bg-editor-secondary hover:stroke-red-500" />
+          <TrashIcon className="w-5 text-gray-50 hover:bg-editor-secondary hover:stroke-red-500 transition-all duration-300" />
         </button>
       </div>
     </div>

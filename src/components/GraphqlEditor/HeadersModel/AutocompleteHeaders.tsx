@@ -12,7 +12,4 @@ export const headersdata = [
   { id: 11, name: 'Access-Control-Max-Age' },
   { id: 12, name: 'Access-Control-Request-Headers' },
   { id: 13, name: 'Access-Control-Request-Methods' },
-  { id: 14, name: 'apollo-federation-include-trace' },
-  { id: 15, name: 'apollographql-client-name' },
-  { id: 16, name: 'apollographql-client-version' },
 ];
