@@ -1,17 +1,9 @@
-import { createContext, useContext, useMemo, useRef, useState } from 'react';
-import { useDebounce } from 'use-debounce';
-import { selectGraphQLSchema, selectIntrospectStatus } from '@/redux/slices/graphql/graphqlSlice';
-import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import { PropsWithClassName } from '@/types/PropsWithClassName';
-import { useAppSelector } from '@/utils/hooks/redux-hooks';
-import DocsBreadcrumb from './components/DocsBreadcrumb';
-import { emptySchema } from '@/utils/emptyGraphqlSchema';
+import { GraphQLSchema } from 'graphql';
+import { createContext, memo, useContext, useMemo, useRef, useState } from 'react';
 import { GraphQLDocsEntry } from '@/types/graphqlTypes';
-import RootTypeList from './components/RootTypeList';
+import DocsBreadcrumb from './components/DocsBreadcrumb';
 import EntryScreen from './components/EntryScreen';
-import Separator from '@/components/ui/Separator';
-import Spinner from '@/components/ui/Spinner';
-import { cn } from '@/utils/cn';
+import RootTypeList from './components/RootTypeList';
 
 type DocsExlorerContextType = {
   openEntry(entry: GraphQLDocsEntry): void;
@@ -21,12 +13,12 @@ type DocsExlorerContextType = {
 
 const DocsExplorerContext = createContext<DocsExlorerContextType | null>(null);
 
-function DocsExplorer({ className }: PropsWithClassName) {
-  const { t } = useLocalizationContext();
-  const graphqlSchema = useAppSelector(selectGraphQLSchema);
-  const introspectStatus = useAppSelector(selectIntrospectStatus);
+type DocsExplorerProps = {
+  graphqlSchema: GraphQLSchema;
+};
+
+function DocsExplorer({ graphqlSchema }: DocsExplorerProps) {
   const [navStack, setNavStack] = useState<GraphQLDocsEntry[]>([]);
-  const [debounceIntrospectStatus] = useDebounce(introspectStatus, 100);
   const prevSchema = useRef(graphqlSchema);
 
   if (prevSchema.current !== graphqlSchema) {
@@ -53,36 +45,13 @@ function DocsExplorer({ className }: PropsWithClassName) {
 
   return (
     <DocsExplorerContext.Provider value={contextValue}>
-      <div className="h-full flex flex-col relative">
-        <div
-          className={cn(
-            'bg-editor-primary p-5 h-full w-full font-sans min-h-0 flex-[1_1_0px] overflow-auto fancy-scrollbar',
-            debounceIntrospectStatus === 'pending' && 'opacity-50 pointer-events-none',
-            className
-          )}
-        >
-          <h3 className="text-lg font-semibold">{t.page.editor.docs}</h3>
-          <Separator className="mb-4" />
-          {graphqlSchema === emptySchema ? (
-            <h4>{t.page.editor.schemaNotLoaded}</h4>
-          ) : (
-            <>
-              <DocsBreadcrumb
-                navStack={navStack}
-                onItemClick={contextValue.goToIndex}
-                className="mb-4"
-              />
-              {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
-            </>
-          )}
-        </div>
-        {debounceIntrospectStatus === 'pending' && (
-          <Spinner className="absolute-center" withLabel />
-        )}
-      </div>
+      <DocsBreadcrumb navStack={navStack} onItemClick={contextValue.goToIndex} className="mb-4" />
+      {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
     </DocsExplorerContext.Provider>
   );
 }
+
+export default memo(DocsExplorer);
 
 export function useDocsExplorer() {
   const value = useContext(DocsExplorerContext);
@@ -93,5 +62,3 @@ export function useDocsExplorer() {
 
   return value;
 }
-
-export default DocsExplorer;

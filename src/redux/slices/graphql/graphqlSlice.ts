@@ -96,6 +96,7 @@ export const graphqlSlice = createSlice({
   selectors: {
     selectResponse: (state) => state.response,
     selectGraphQLSchema: (state) => state.schema,
+    selectGraphQLDocsSchema: (state) => (state.schema === emptySchema ? null : state.schema),
     selectRequestValue: (state) => state.request.value,
     selectEndpointValue: (state) => state.endpointValue,
     selectRequestStatus: (state) => state.request.status,
@@ -117,6 +118,7 @@ export const {
 } = graphqlSlice.actions;
 
 export const {
+  selectGraphQLDocsSchema,
   selectHasRequestEditorLintErrors,
   selectGraphQLSchema,
   selectRequestStatus,

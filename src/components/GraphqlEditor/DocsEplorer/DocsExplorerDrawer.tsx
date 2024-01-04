@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import SwipeableDrawer, { SwipableDrawerProps } from '@/components/ui/SwipeableDrawer';
-import DocsExplorer from './DocsExplorer';
+import DocsExplorerContainer from './DocsExplorerContainer';
 
 function DocsExplorerDrawer(props: SwipableDrawerProps) {
   return (
     <SwipeableDrawer {...props}>
-      <DocsExplorer />
+      <DocsExplorerContainer />
     </SwipeableDrawer>
   );
 }
