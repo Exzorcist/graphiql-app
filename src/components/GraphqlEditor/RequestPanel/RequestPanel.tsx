@@ -2,9 +2,7 @@ import { Panel, PanelGroup } from 'react-resizable-panels';
 import { Transition } from 'react-transition-group';
 import { memo, useRef, useState } from 'react';
 import GraphqlToolsPanel from '../GraphqlTools/GraphqlToolsPanel';
-import { primaryEditorThemeSettings } from '../themeSettings';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import { Editor } from '@/components/Editor';
 import { cn } from '@/utils/cn';
 import RequestEditor from './RequestEditor';
 
@@ -25,32 +23,30 @@ function RequestPanel() {
 
         return (
           <div className="w-full h-full" ref={nodeRef}>
-            <Editor themeSettings={primaryEditorThemeSettings}>
-              <PanelGroup
-                id={PANEL_GROUP_ID}
-                autoSaveId={PANEL_GROUP_ID}
-                direction="vertical"
-                className="relative"
+            <PanelGroup
+              id={PANEL_GROUP_ID}
+              autoSaveId={PANEL_GROUP_ID}
+              direction="vertical"
+              className="relative"
+            >
+              <Panel
+                id="queryPanel"
+                order={1}
+                minSize={QUERY_PANEL_MIN_SIZE}
+                className={panelClassName}
               >
-                <Panel
-                  id="queryPanel"
-                  order={1}
-                  minSize={QUERY_PANEL_MIN_SIZE}
-                  className={panelClassName}
-                >
-                  <RequestEditor />
-                </Panel>
-                {isLaptop && (
-                  <GraphqlToolsPanel
-                    id="toolsPanel"
-                    order={2}
-                    panelGroupId={PANEL_GROUP_ID}
-                    onShowChange={setShowTools}
-                    panelClassName={panelClassName}
-                  />
-                )}
-              </PanelGroup>
-            </Editor>
+                <RequestEditor />
+              </Panel>
+              {isLaptop && (
+                <GraphqlToolsPanel
+                  id="toolsPanel"
+                  order={2}
+                  panelGroupId={PANEL_GROUP_ID}
+                  onShowChange={setShowTools}
+                  panelClassName={panelClassName}
+                />
+              )}
+            </PanelGroup>
           </div>
         );
       }}

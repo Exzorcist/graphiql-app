@@ -1,8 +1,8 @@
 import * as yup from 'yup';
-import { Localization } from '@/types/Provider';
+import { Locale } from '@/locale/locale';
 import { signInSchema } from './signin-schema';
 
-export const signUpSchema = (t: Localization) => {
+export const signUpSchema = (t: Locale) => {
   return signInSchema(t).shape({
     confirmPassword: yup
       .string()

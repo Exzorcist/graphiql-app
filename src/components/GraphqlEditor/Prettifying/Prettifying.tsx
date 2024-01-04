@@ -1,19 +1,25 @@
 import { PuzzlePieceIcon } from '@heroicons/react/24/outline';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectRequestValue, changeRequestValue } from '@/redux/slices/graphqlSlice';
+import {
+  selectRequestValue,
+  changeRequestValue,
+  selectHasRequestEditorLintErrors,
+} from '@/redux/slices/graphql/graphqlSlice';
 import { IGlobalMessage } from '@/types/Message';
 import { setMessage } from '@/redux/slices/globalMessageSlice';
-
+import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import { prettifying } from '@/components/GraphqlEditor/Prettifying/PrettifyingRules';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
+import Button from '@/components/ui/Button';
+import { PropsWithClassName } from '@/types/PropsWithClassName';
 
-function Prettifying() {
+function Prettifying({ className }: PropsWithClassName) {
+  const hasLintErrors = useAppSelector(selectHasRequestEditorLintErrors);
+  const query = useAppSelector(selectRequestValue);
   const { t } = useLocalizationContext();
-  const dispatch = useDispatch();
-  const query = useSelector(selectRequestValue);
+  const dispatch = useAppDispatch();
 
   const hanldePrettifying = () => {
-    if (query.includes(';') || query.includes('-') || query.includes('@') || query.includes("'")) {
+    if (hasLintErrors) {
       const wrongSymbolMessage: IGlobalMessage = {
         type: 'error',
         text: t.globalMessage.error.prettifying,
@@ -27,14 +33,12 @@ function Prettifying() {
   };
 
   return (
-    <span
-      onClick={hanldePrettifying}
-      title="Prettify"
-      aria-hidden
-      className="cursor-pointer opacity-90 transition-colors duration-300 hover:text-editor-accent-light hover:opacity-100"
-    >
-      <PuzzlePieceIcon className="w-7 h-7" />
-    </span>
+    <Button onClick={hanldePrettifying} title="Prettify" className={className}>
+      <div className="flex items-center gap-2">
+        <span className="hidden sm:inline">{t.page.editor.prettify}</span>
+        <PuzzlePieceIcon className="w-7 h-7" />
+      </div>
+    </Button>
   );
 }
 

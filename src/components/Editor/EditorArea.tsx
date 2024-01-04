@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, forwardRef, memo } from 'react';
+import { ComponentPropsWithRef, forwardRef, memo, useMemo } from 'react';
 import CodeMirror, {
   EditorView,
   Extension,
@@ -30,6 +30,7 @@ const styleOverrides = EditorView.theme({
   '.cm-lineNumbers': { minWidth: '37px' },
   '.cm-foldGutter': { minWidth: '15px' },
   '.cm-gutters': { paddingRight: '4px', maxWidth: '56px' },
+  '.cm-content': { transition: 'opacity 0.1s' },
 });
 
 const themeInit: Record<Theme, (options?: Partial<CreateThemeOptions> | undefined) => Extension> = {
@@ -54,19 +55,32 @@ function markerDOM(open: boolean) {
   return span;
 }
 
+const foldGutterExtension = foldGutter({ markerDOM });
+const defaultExtensionsProp: Extension[] = [];
+
 const EditorArea = forwardRef<ReactCodeMirrorRef, EditorAreaProps>(
-  ({ extensions = [], className, themeSettings, ...rest }, ref) => {
+  ({ extensions = defaultExtensionsProp, className, themeSettings, ...rest }, ref) => {
     const themeSettingsContext = useEditorContext();
     const { header } = useEditorContainerContext();
     const [theme] = useTheme();
 
+    const themeMemo = useMemo(
+      () => themeInit[theme]({ settings: themeSettings ?? themeSettingsContext }),
+      [theme, themeSettings, themeSettingsContext]
+    );
+
+    const extensionsMemo = useMemo(
+      () => [styleOverrides, foldGutterExtension, ...extensions],
+      [extensions]
+    );
+
     return (
       <CodeMirror
         ref={ref}
-        theme={themeInit[theme]({ settings: themeSettings ?? themeSettingsContext })}
+        theme={themeMemo}
         height="100%"
         className={cn('h-full flex flex-col', className)}
-        extensions={[styleOverrides, foldGutter({ markerDOM }), ...extensions]}
+        extensions={extensionsMemo}
         style={{ paddingTop: header.visible ? header.height : undefined }}
         data-testid="editor-area"
         basicSetup={basicSetup}
