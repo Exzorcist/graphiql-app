@@ -3,37 +3,37 @@ import { memo } from 'react';
 import Button from '@/components/ui/Button';
 import { cn } from '@/utils/cn';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-import { useAppDispatch } from '@/utils/hooks/redux-hooks';
-import { setHeaderOpen } from '@/redux/slices/headersSlice';
+import { GraphqlTool } from './GraphqlTools';
 
 export type GraphqlToolsHeaderProps = {
+  onVariablesClick?(): void;
   onChevronClick?(): void;
-  isOpen?: boolean;
+  onHeadersClick?(): void;
+  activeTool?: GraphqlTool | null;
   className?: string;
+  open?: boolean;
 };
 
 function GraphqlToolsHeader({
-  isOpen = false,
+  open = false,
+  activeTool,
   onChevronClick,
+  onHeadersClick,
+  onVariablesClick,
   className,
 }: GraphqlToolsHeaderProps) {
   const { t } = useLocalizationContext();
 
-  const dispatch = useAppDispatch();
-
-  function onHeadersclick() {
-    dispatch(setHeaderOpen({ isHeader: true }));
-  }
-  function onVariablesClick() {
-    dispatch(setHeaderOpen({ isHeader: false }));
-  }
-
   return (
     <div className={cn('flex gap-6 w-full', className)}>
-      <Button onClick={() => onVariablesClick()}>{t.page.editor.variables}</Button>
-      <Button onClick={() => onHeadersclick()}>{t.page.editor.headers}</Button>
+      <Button onClick={onVariablesClick} active={activeTool === 'variables'}>
+        {t.page.editor.variables}
+      </Button>
+      <Button onClick={onHeadersClick} active={activeTool === 'headers'}>
+        {t.page.editor.headers}
+      </Button>
       <Button className="ml-auto" onClick={onChevronClick}>
-        <ChevronUpIcon className={cn('h-6 w-6', isOpen && 'rotate-180')} />
+        <ChevronUpIcon className={cn('h-6 w-6', open && 'rotate-180')} />
       </Button>
     </div>
   );

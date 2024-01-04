@@ -25,7 +25,7 @@ test('DocsEplorer', async () => {
   });
 
   expect(screen.getByText('Documentation')).toBeInTheDocument();
-  // expect(document.body).toMatchSnapshot();
+  expect(document.body).toMatchSnapshot();
 
   await user.click(screen.getByText('Query'));
 

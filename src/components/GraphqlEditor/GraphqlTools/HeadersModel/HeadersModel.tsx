@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from 'react';
-import { useEditorContainerContext } from '@/components/Editor/hooks';
 import HeaderItem from './HeaderItem';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import { removeHeadersValue, setClearHeaders, updateHeadersObj } from '@/redux/slices/headersSlice';
@@ -9,7 +8,6 @@ export type ITask = {
 };
 
 function HeadersModel() {
-  const { header } = useEditorContainerContext();
   const [todo, setTodo] = useState({ header: '', value: '' });
   const [tasks, setTasks] = useState<ITask[]>([]);
   const dispatch = useAppDispatch();
@@ -34,6 +32,7 @@ function HeadersModel() {
     );
     dispatch(updateHeadersObj(newObj));
   };
+
   useEffect(() => {
     if (!tasks.length) {
       dispatch(removeHeadersValue({ header: '', value: '' }));
@@ -42,12 +41,8 @@ function HeadersModel() {
     }
   }, [dispatch, tasks, todo.header, todo.value]);
   return (
-    <div className="h-full overflow-auto relative" data-testid="headers-area">
-      <div
-        className="flex flex-col text-sm max-h-52 overflow-auto fancy-scrollbar absolute left-6 right-6"
-        style={{ paddingTop: header.visible ? header.height : undefined }}
-        data-testid="editor-area"
-      >
+    <div className="h-full flex-grow basis-0 min-h-0 flex flex-col">
+      <div className="flex h-full flex-col ml-6 text-sm mb-2 overflow-auto fancy-scrollbar [scrollbar-gutter:stable]">
         {tasks.map((el) => (
           <HeaderItem
             todo={todo}
@@ -58,8 +53,12 @@ function HeadersModel() {
           />
         ))}
       </div>
-      <div className="absolute bottom-4 left-6 rounded cursor-pointer hover:bg-editor-secondary hover:text-editor-accent transition-all duration-300">
-        <button type="button" onClick={() => addTodo()}>
+      <div>
+        <button
+          type="button"
+          className="w-40 bottom-0 pl-0 mt-auto ml-2 mb-5 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
+          onClick={addTodo}
+        >
           {' '}
           ➕ Add new header
         </button>

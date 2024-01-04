@@ -7,13 +7,11 @@ type IHeaderValue = {
 
 type IHeader = {
   headerValue: IHeaderValue;
-  isHeader: boolean;
   headers: { [key: string]: string };
 };
 
 const initialState: IHeader = {
   headerValue: { header: '', value: '' },
-  isHeader: false,
   headers: {},
 };
 
@@ -73,9 +71,6 @@ const headersSlice = createSlice({
         },
       };
     },
-    setHeaderOpen(state, action) {
-      return { ...state, ...action.payload };
-    },
   },
 });
 
@@ -83,7 +78,6 @@ export const {
   setHeader,
   setValue,
   removeHeadersValue,
-  setHeaderOpen,
   setHeadersObj,
   setClearHeaders,
   updateHeadersObj,

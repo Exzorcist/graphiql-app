@@ -11,7 +11,6 @@ import {
   selectGraphQLSchema,
   selectRequestValue,
 } from '@/redux/slices/graphql/graphqlSlice';
-import HeadersModel from '../HeadersModel/HeadersModel';
 
 const storageKey = 'variablesValue';
 const defaultValue = '{\n\n}';
@@ -59,21 +58,17 @@ function VariablesEditor() {
     () => variablesJsonSchema(graphqlSchema, requestValue),
     [graphqlSchema, requestValue]
   );
-  const isHeader = useAppSelector((state) => state.headers.isHeader);
 
   return (
     <Editor>
-      {!isHeader && (
-        <Editor.Area
-          value={editorValue}
-          onChange={handleChange}
-          ref={editorRef}
-          themeSettings={primaryEditorThemeSettings}
-          extensions={extension}
-          data-scrollbar-gutter
-        />
-      )}
-      {isHeader && <HeadersModel />}
+      <Editor.Area
+        ref={editorRef}
+        value={editorValue}
+        data-scrollbar-gutter
+        extensions={extension}
+        onChange={handleChange}
+        themeSettings={primaryEditorThemeSettings}
+      />
     </Editor>
   );
 }
