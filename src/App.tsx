@@ -9,7 +9,7 @@ const router = createBrowserRouter(routerConfig);
 function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+      <PersistGate persistor={persistor}>
         <RouterProvider router={router} />
       </PersistGate>
     </Provider>

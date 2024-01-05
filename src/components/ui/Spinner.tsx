@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn';
 
-type SpinnerProps = {
+export type SpinnerProps = {
   className?: string;
   svgClassName?: string;
   withLabel?: boolean;

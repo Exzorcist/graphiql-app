@@ -1,5 +1,5 @@
 import { IntrospectionQuery, buildClientSchema } from 'graphql';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import introspectionResponse from '../fixtures/introspectionResponse.json';
 import { customRender as render, user } from '../test-utils';
 import { initialState } from '@/redux/slices/graphql/graphqlSlice';
@@ -27,7 +27,14 @@ test('DocsEplorer', async () => {
   expect(screen.getByText('Documentation')).toBeInTheDocument();
   expect(document.body).toMatchSnapshot();
 
-  await user.click(await screen.findByText('Query'));
+  await waitFor(
+    () => {
+      expect(screen.getByText('Query')).toBeInTheDocument();
+    },
+    { timeout: 10000 }
+  );
+
+  await user.click(screen.getByText('Query'));
 
   expect(screen.getByText('Fields')).toBeInTheDocument();
   const capsuleField = screen.getAllByRole('button', { name: /capsule/ })[0];
