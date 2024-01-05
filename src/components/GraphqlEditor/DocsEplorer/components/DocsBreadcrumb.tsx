@@ -1,3 +1,4 @@
+import { HomeIcon } from '@heroicons/react/24/outline';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Button from '@/components/ui/Button';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
@@ -11,7 +12,7 @@ type Props = {
 
 function DocsBreadcrumb({ navStack, onItemClick, className }: Props) {
   return (
-    <Breadcrumb className={cn('text-sm', className)} separatorClassName="w-[0.7em] h-[0.7em]">
+    <Breadcrumb className={cn('', className)} separatorClassName="w-[0.7em] h-[0.7em]">
       {['Root', ...navStack].map((item, index) => {
         let label;
 
@@ -30,11 +31,20 @@ function DocsBreadcrumb({ navStack, onItemClick, className }: Props) {
             <Button
               onClick={() => onItemClick?.(index - 1)}
               className={cn(
-                'text-sm py-[2px] px-[3px] hover:bg-transparent hover:text-editor-text-color hover:underline',
+                'py-[2px] px-[3px] hover:bg-transparent hover:text-editor-text-color hover:underline',
                 isActive && 'font-semibold'
               )}
             >
-              {label}
+              {label === 'Root' ? (
+                <span
+                  className="relative before:absolute before:-top-1 before:-right-1 before:-bottom-1 before:-left-1
+                            before:bg-white/15 before:rounded flex"
+                >
+                  <HomeIcon className="w-5 h-5" />
+                </span>
+              ) : (
+                label
+              )}
             </Button>
           </Breadcrumb.Item>
         );

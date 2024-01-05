@@ -33,7 +33,10 @@ function ResponseStatusBar() {
           <>
             <div>{t.page.editor.status}: </div>
             <div
-              className={cn('text-sm py-1 flex px-2 rounded', getStatusColor(response.statusCode))}
+              className={cn(
+                'text-sm py-0.5 flex px-1.5 rounded',
+                getStatusColor(response.statusCode)
+              )}
             >
               {response.statusCode}
             </div>
