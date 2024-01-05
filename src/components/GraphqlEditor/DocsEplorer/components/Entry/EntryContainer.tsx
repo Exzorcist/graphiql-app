@@ -9,7 +9,7 @@ function EntryContainer({ children, className, ...delegated }: EntryContainerPro
   return (
     <Button
       className={cn(
-        'flex items-center w-full group text-sm hover:text-editor-text-color transition-none',
+        'flex items-center w-full group hover:text-editor-text-color transition-none',
         className
       )}
       {...delegated}

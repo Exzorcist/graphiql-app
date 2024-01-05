@@ -156,7 +156,7 @@ exports[`GraphqlEditor 1`] = `
                               </span>
                               <svg
                                 aria-hidden="true"
-                                class="w-7 h-7"
+                                class="w-6 h-6 opacity-90"
                                 data-slot="icon"
                                 fill="none"
                                 stroke="currentColor"

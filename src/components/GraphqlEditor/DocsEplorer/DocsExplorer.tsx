@@ -45,7 +45,7 @@ function DocsExplorer({ graphqlSchema }: DocsExplorerProps) {
 
   return (
     <DocsExplorerContext.Provider value={contextValue}>
-      <DocsBreadcrumb navStack={navStack} onItemClick={contextValue.goToIndex} className="mb-4" />
+      <DocsBreadcrumb navStack={navStack} onItemClick={contextValue.goToIndex} className="mb-10" />
       {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
     </DocsExplorerContext.Provider>
   );

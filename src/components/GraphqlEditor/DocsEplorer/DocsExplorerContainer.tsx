@@ -28,7 +28,7 @@ function DocsExplorerContainer({ className }: PropsWithClassName) {
           className
         )}
       >
-        <h3 className="text-lg font-semibold">{t.page.editor.docs}</h3>
+        <h3 className="text-2xl font-semibold">{t.page.editor.docs}</h3>
         <Separator className="mb-4" />
         {graphqlSchema ? (
           <Suspense fallback={<Spinner className="absolute-center" withLabel />}>
