@@ -9,11 +9,11 @@ import { useLocalizationContext } from '@/providers/LocalizationProvider';
 function getStatusColor(code: number) {
   switch (true) {
     case code >= 200 && code <= 299:
-      return 'bg-editor-accent';
+      return 'bg-green-500';
     case code >= 300:
-      return 'bg-red-400';
+      return 'bg-red-500';
     default:
-      return 'bg-blue-400';
+      return 'bg-blue-500';
   }
 }
 

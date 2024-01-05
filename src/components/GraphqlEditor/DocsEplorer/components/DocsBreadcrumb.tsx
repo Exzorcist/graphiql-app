@@ -21,7 +21,7 @@ function DocsBreadcrumb({ navStack, onItemClick, className }: Props) {
         let label;
 
         if (item === NAV_ROOT) {
-          label = item;
+          label = <HomeIcon className="w-5 h-5" />;
         } else if (isGraphQLField(item) || isTypeWithFields(item)) {
           label = item.name;
         } else {
@@ -35,12 +35,13 @@ function DocsBreadcrumb({ navStack, onItemClick, className }: Props) {
             <Button
               onClick={() => onItemClick?.(index - 1)}
               className={cn(
-                label !== NAV_ROOT &&
+                item === NAV_ROOT && '-ml-1 -mr-1',
+                item !== NAV_ROOT &&
                   'py-[2px] px-[3px] hover:bg-transparent hover:text-editor-text-color hover:underline',
                 isActive && 'font-semibold'
               )}
             >
-              {label === NAV_ROOT ? <HomeIcon className="w-5 h-5" /> : label}
+              {label}
             </Button>
           </Breadcrumb.Item>
         );
