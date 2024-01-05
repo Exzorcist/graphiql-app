@@ -36,7 +36,7 @@ function Prettifying({ className }: PropsWithClassName) {
     <Button onClick={hanldePrettifying} title="Prettify" className={className}>
       <div className="flex items-center gap-2">
         <span className="hidden sm:inline">{t.page.editor.prettify}</span>
-        <PuzzlePieceIcon className="w-7 h-7" />
+        <PuzzlePieceIcon className="w-6 h-6 opacity-90" />
       </div>
     </Button>
   );

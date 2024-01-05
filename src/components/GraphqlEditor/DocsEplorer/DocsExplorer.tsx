@@ -61,7 +61,7 @@ function DocsExplorer({ className }: PropsWithClassName) {
             className
           )}
         >
-          <h3 className="text-lg font-semibold">{t.page.editor.docs}</h3>
+          <h3 className="text-2xl font-semibold">{t.page.editor.docs}</h3>
           <Separator className="mb-4" />
           {graphqlSchema === emptySchema ? (
             <h4>{t.page.editor.schemaNotLoaded}</h4>
@@ -70,7 +70,7 @@ function DocsExplorer({ className }: PropsWithClassName) {
               <DocsBreadcrumb
                 navStack={navStack}
                 onItemClick={contextValue.goToIndex}
-                className="mb-4"
+                className="mb-10"
               />
               {navStack.length ? <EntryScreen entry={navStack.at(-1)!} /> : <RootTypeList />}
             </>

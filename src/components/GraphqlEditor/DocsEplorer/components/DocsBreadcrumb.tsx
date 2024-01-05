@@ -1,3 +1,4 @@
+import { HomeIcon } from '@heroicons/react/24/outline';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Button from '@/components/ui/Button';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
@@ -9,13 +10,17 @@ type Props = {
   onItemClick?(index: number): void;
 } & PropsWithClassName;
 
+const NAV_ROOT = 'Root';
+
 function DocsBreadcrumb({ navStack, onItemClick, className }: Props) {
+  const navItems = [NAV_ROOT, ...navStack] as const;
+
   return (
-    <Breadcrumb className={cn('text-sm', className)} separatorClassName="w-[0.7em] h-[0.7em]">
-      {['Root', ...navStack].map((item, index) => {
+    <Breadcrumb className={cn('', className)} separatorClassName="w-[0.7em] h-[0.7em]">
+      {navItems.map((item, index) => {
         let label;
 
-        if (typeof item === 'string') {
+        if (item === NAV_ROOT) {
           label = item;
         } else if (isGraphQLField(item) || isTypeWithFields(item)) {
           label = item.name;
@@ -26,15 +31,16 @@ function DocsBreadcrumb({ navStack, onItemClick, className }: Props) {
         const isActive = navStack.length === index;
 
         return (
-          <Breadcrumb.Item key={typeof item === 'string' ? item : `${item.name}_${index}`}>
+          <Breadcrumb.Item key={item === NAV_ROOT ? item : `${item.name}_${index}`}>
             <Button
               onClick={() => onItemClick?.(index - 1)}
               className={cn(
-                'text-sm py-[2px] px-[3px] hover:bg-transparent hover:text-editor-text-color hover:underline',
+                label !== NAV_ROOT &&
+                  'py-[2px] px-[3px] hover:bg-transparent hover:text-editor-text-color hover:underline',
                 isActive && 'font-semibold'
               )}
             >
-              {label}
+              {label === NAV_ROOT ? <HomeIcon className="w-5 h-5" /> : label}
             </Button>
           </Breadcrumb.Item>
         );

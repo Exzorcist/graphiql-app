@@ -9,7 +9,6 @@ import EndpointField from './EndpointField/EndpointField';
 import ResponsePanel from './ResponsePanel/ResponsePanel';
 import RequestPanel from './RequestPanel/RequestPanel';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import SideBar from './SideBar';
 import { cn } from '@/utils/cn';
 
 const PANEL_GROUP_ID = 'graphql-editor-panel-group';
@@ -33,7 +32,6 @@ function GraphqlEditor() {
 
   return (
     <div className="flex h-full w-full max-w-[100vw] text-editor-text-color bg-editor-primary font-sans selection:bg-editor-code-selection">
-      {isLaptop && <SideBar />}
       {!isLaptop && <DocsExplorerDrawer open={showDocsDrawer} onOpenChange={handleDocsClick} />}
       <div className="h-full flex w-full flex-col min-w-0">
         <div className="bg-editor-primary px-4 pt-5  sm:flex sm:items-center sm:gap-5 lg:block">
