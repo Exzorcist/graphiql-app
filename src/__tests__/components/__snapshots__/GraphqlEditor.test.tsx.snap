@@ -12,7 +12,7 @@ exports[`GraphqlEditor 1`] = `
         <div
           class="bg-editor-primary px-4 pt-5  sm:flex sm:items-center sm:gap-5 lg:block"
         >
-          <form
+          <div
             class="h-10 flex w-full bg-editor-secondary border-editor-border border rounded [&:has(input:focus)]:border-editor-accent"
           >
             <div
@@ -61,10 +61,10 @@ exports[`GraphqlEditor 1`] = `
               </div>
             </div>
             <button
-              class="py-[5px] transition min-w-fit cursor-pointer bg-editor-accent hover:bg-editor-accent-light text-white px-5 rounded-none rounded-r"
+              class="py-[5px] transition min-w-fit cursor-pointer bg-editor-accent hover:bg-editor-accent-light text-white px-5 rounded-none rounded-r outline-none"
               role="button"
               tabindex="0"
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -83,7 +83,7 @@ exports[`GraphqlEditor 1`] = `
                 />
               </svg>
             </button>
-          </form>
+          </div>
         </div>
         <div
           class="w-full h-full"
