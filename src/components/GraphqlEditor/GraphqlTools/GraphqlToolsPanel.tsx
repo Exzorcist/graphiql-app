@@ -60,7 +60,7 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
       <Panel
         ref={toolsPanelRef}
         minSize={TOOLS_PANEL_MIN_SIZE}
-        defaultSize={0}
+        defaultSize={TOOLS_PANEL_MIN_SIZE}
         collapsible
         // collapsedSize should be equal to minSize on the first render
         collapsedSize={toolsPanelCollapseSize || TOOLS_PANEL_MIN_SIZE}

@@ -50,7 +50,7 @@ function DocsExplorerPanel({
       collapsible
       collapsedSize={DOCS_PANEL_COLLAPSE_SIZE}
       minSize={DOCS_PANEL_MIN_SIZE}
-      defaultSize={DOCS_PANEL_COLLAPSE_SIZE}
+      defaultSize={DOCS_PANEL_MIN_SIZE}
       onCollapse={handleDocsCollapse}
       onExpand={handleDocsExpand}
       className={panelClassName}

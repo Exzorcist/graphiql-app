@@ -402,8 +402,8 @@ exports[`GraphqlEditor 1`] = `
               data-panel-collapsible="true"
               data-panel-group-id="graphql-editor-panel-group"
               data-panel-id="toolsPanel"
-              data-panel-size="0.0"
-              style="flex-basis: 0px; flex-grow: 0; flex-shrink: 1; overflow: hidden;"
+              data-panel-size="20.0"
+              style="flex-basis: 0px; flex-grow: 20; flex-shrink: 1; overflow: hidden;"
             >
               <div
                 class="h-full relative"
