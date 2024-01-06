@@ -10,20 +10,27 @@ import {
   useInitRequestMutation,
 } from '@/redux/slices/graphql/graphqlApi';
 import SchemaIndicator from './SchemaIndicator';
+import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
+import { changeEndpointValue, selectEndpointValue } from '@/redux/slices/graphql/graphqlSlice';
 
 export type EndpointFieldProps = {
   onSchemaClick?(): void;
   isSchemaOpen?: boolean;
 } & PropsWithClassName;
 
-const storageKey = 'endpointFieldValue';
-
 function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: EndpointFieldProps) {
   const { t } = useLocalizationContext();
-  const [inputValue, setInputValue] = useState(() => localStorage.getItem(storageKey) ?? '');
+  const dispatch = useAppDispatch();
+  const apiUrl = useAppSelector(selectEndpointValue);
+  const [inputValue, setInputValue] = useState(apiUrl);
   const [initRequest] = useInitRequestMutation();
   const [fetchIntrospection] = useFetchIntrospectionMutation();
+
   const debouncedFetchIntrospection = useDebouncedCallback(fetchIntrospection, 300);
+  const debouncedDispatchEndpointValue = useDebouncedCallback(
+    (value: string) => dispatch(changeEndpointValue(value)),
+    300
+  );
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,7 +41,7 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
     const { value } = e.currentTarget;
     setInputValue(value);
     debouncedFetchIntrospection(value);
-    localStorage.setItem(storageKey, value);
+    debouncedDispatchEndpointValue(value);
   };
 
   return (
