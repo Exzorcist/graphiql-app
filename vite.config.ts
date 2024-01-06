@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig, configDefaults } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
@@ -10,17 +10,6 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/**'],
-      exclude: [
-        ...configDefaults.exclude,
-        'src/types/**',
-        // 'src/main.tsx',
-        // 'src/firebase.ts',
-        // 'src/router.tsx',
-        // 'src/vite-env.d.ts',
-        // 'src/redux/slices/graphql/types.ts',
-        // 'src/redux/slices/graphql/graphqlSlice.ts',
-        // 'src/redux/slices/graphql/graphqlApi.ts',
-      ],
     },
     globals: true,
     environment: 'jsdom',
