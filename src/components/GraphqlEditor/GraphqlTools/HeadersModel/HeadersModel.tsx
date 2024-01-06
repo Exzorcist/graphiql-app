@@ -15,7 +15,7 @@ interface IHeadersArray {
 
 type KeyData = 'header' | 'value';
 
-const testArray = [
+const headersArray = [
   'WWW-Authenticate',
   'Authorization',
   'Cache-Control',
@@ -61,7 +61,7 @@ function HeadersModel() {
   const getSuggestions = (value: string | undefined) => {
     if (!value) return [];
 
-    return testArray.filter((el) =>
+    return headersArray.filter((el) =>
       el.toLocaleLowerCase().includes(value.trim().toLocaleLowerCase())
     );
   };
@@ -78,47 +78,59 @@ function HeadersModel() {
 
   return (
     <div className="h-full flex-grow basis-0 min-h-0 flex flex-col justify-between gap-3">
-      <div className="flex flex-col gap-3 overflow-auto fancy-scrollbar w-full">
+      <div className="flex flex-col gap-3 flex-grow overflow-auto fancy-scrollbar w-full">
         {headers &&
           headers.map((item) => (
             <div key={item.id} className="grid gap-3 pr-8 grid-cols-2 first:mt-3 relative">
-              <AutoSuggest
-                suggestions={suggestions}
-                onSuggestionsClearRequested={() => setSuggestions([])}
-                onSuggestionsFetchRequested={({ value }) => {
-                  updateHeadersData(item.id, value, 'header');
-                  setSuggestions(getSuggestions(value));
-                }}
-                onSuggestionSelected={(_, { suggestion }) => {
-                  updateHeadersData(item.id, suggestion, 'header');
-                }}
-                getSuggestionValue={(option) => option}
-                renderSuggestion={(option) => <span>{option}</span>}
-                inputProps={{
-                  placeholder: t.headers.placeholder.key,
-                  value: item.header,
-                  onChange: (e) => {
-                    updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'header');
-                  },
-                }}
-                theme={{
-                  container: 'relative',
-                  input: 'px-2.5 py-1 rounded-md w-full text-slate-700 outline-0',
-                  suggestionsContainerOpen:
-                    'absolute top-full w-full z-20 bg-editor-secondary max-h-24 overflow-auto fancy-scrollbar',
-                  suggestion: 'hover:bg-main pl-2 text-white transition duration-200',
-                }}
-              />
+              <div
+                className="bg-editor-secondary rounded-md border border-editor-border
+                           [&:has(input:focus)]:border-editor-accent transition-colors duration-300"
+              >
+                <AutoSuggest
+                  suggestions={suggestions}
+                  onSuggestionsClearRequested={() => setSuggestions([])}
+                  onSuggestionsFetchRequested={({ value }) => {
+                    updateHeadersData(item.id, value, 'header');
+                    setSuggestions(getSuggestions(value));
+                  }}
+                  onSuggestionSelected={(_, { suggestion }) => {
+                    updateHeadersData(item.id, suggestion, 'header');
+                  }}
+                  getSuggestionValue={(option) => option}
+                  renderSuggestion={(option) => <span>{option}</span>}
+                  inputProps={{
+                    placeholder: t.headers.placeholder.key,
+                    value: item.header,
+                    onChange: (e) => {
+                      updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'header');
+                    },
+                  }}
+                  theme={{
+                    container: 'relative',
+                    input: 'px-2.5 py-1 rounded-md w-full bg-transparent outline-0',
+                    suggestionsContainerOpen: `absolute top-9 w-full z-20 bg-editor-secondary 
+                                               border border-editor-border max-h-24 overflow-auto fancy-scrollbar
+                                               [&_ul]:grid [&_ul]:gap-1.5 py-2 px-1`,
+                    suggestion:
+                      'hover:bg-main pl-2 text-white transition duration-300 cursor-pointer',
+                  }}
+                />
+              </div>
 
-              <input
-                type="text"
-                placeholder={t.headers.placeholder.value}
-                className="px-2.5 py-1 rounded-md w-full text-slate-700 outline-0"
-                value={item.value}
-                onChange={(e) =>
-                  updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'value')
-                }
-              />
+              <div
+                className="bg-editor-secondary rounded-md border border-editor-border
+                           [&:has(input:focus)]:border-editor-accent transition-colors duration-300"
+              >
+                <input
+                  type="text"
+                  placeholder={t.headers.placeholder.value}
+                  className="px-2.5 py-1 rounded-md w-full outline-0 bg-transparent"
+                  value={item.value}
+                  onChange={(e) =>
+                    updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'value')
+                  }
+                />
+              </div>
 
               <span
                 onClick={() => removeHeadersLine(item.id)}
@@ -127,7 +139,7 @@ function HeadersModel() {
                 className="absolute top-1.5 right-0"
               >
                 <TrashIcon
-                  className="w-5 h-5 text-gray-50 hover:stroke-red-500 cursor-pointer 
+                  className="w-5 h-5 text-gray-50 hover:stroke-red-400 cursor-pointer 
                            transition-all duration-300"
                 />
               </span>
