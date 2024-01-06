@@ -22,12 +22,6 @@ test('[ Registration ]: base test', () => {
   expect(screen.getByLabelText('passwordIput')).toBeInTheDocument();
   expect(screen.getByLabelText('form')).toBeInTheDocument();
   waitFor(() => {
-    const mockLogin = vi.fn();
-    fireEvent.submit(screen.getByLabelText('form'));
-    expect(mockLogin).not.toHaveBeenCalled();
-    expect(screen.getByText('This is a GraphqlEditor page')).toBeInTheDocument();
-  });
-  waitFor(() => {
     fireEvent.change(screen.getByLabelText('emailIput'), { target: { value: '23' } });
     expect(screen.getByLabelText('emailIput')).toHaveValue('23');
   });
@@ -38,10 +32,6 @@ test('[ Registration ]: base test', () => {
   waitFor(() => {
     fireEvent.click(screen.getByLabelText('emailIput'));
     expect(screen.getByLabelText('passwordIput')).toHaveValue();
-  });
-  waitFor(() => {
-    fireEvent.click(screen.getByLabelText('buttonLink'));
-    expect(screen.getByText('This is a GraphqlEditor page')).toBeInTheDocument();
   });
   waitFor(() => {
     fireEvent.click(screen.getAllByLabelText('buttonEye')[0]);

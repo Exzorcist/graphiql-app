@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`GraphqlEditor 1`] = `
+exports[`Error Messages with no entering url are rendered 1`] = `
 <body>
   <div>
     <div
@@ -100,8 +100,8 @@ exports[`GraphqlEditor 1`] = `
               data-panel=""
               data-panel-group-id="graphql-editor-panel-group"
               data-panel-id="requestPanel"
-              data-panel-size="50.0"
-              style="flex-basis: 0px; flex-grow: 50; flex-shrink: 1; overflow: hidden;"
+              data-panel-size="1.0"
+              style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
             >
               <div
                 class="w-full h-full"
@@ -276,8 +276,8 @@ exports[`GraphqlEditor 1`] = `
               data-panel=""
               data-panel-group-id="graphql-editor-panel-group"
               data-panel-id="responsePanel"
-              data-panel-size="50.0"
-              style="flex-basis: 0px; flex-grow: 50; flex-shrink: 1; overflow: hidden;"
+              data-panel-size="1.0"
+              style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
             >
               <div
                 class="h-full relative"
@@ -402,8 +402,8 @@ exports[`GraphqlEditor 1`] = `
               data-panel-collapsible="true"
               data-panel-group-id="graphql-editor-panel-group"
               data-panel-id="toolsPanel"
-              data-panel-size="20.0"
-              style="flex-basis: 0px; flex-grow: 20; flex-shrink: 1; overflow: hidden;"
+              data-panel-size="0.0"
+              style="flex-basis: 0px; flex-grow: 0; flex-shrink: 1; overflow: hidden;"
             >
               <div
                 class="h-full relative"
