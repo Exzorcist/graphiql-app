@@ -16,13 +16,6 @@ export const graphqlApi = createApi({
       queryFn: async (url, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
         const { graphql, localization } = getState() as RootState;
 
-        if (
-          !graphql.introspection.data ||
-          graphql.introspection.endpoint !== graphql.endpointValue
-        ) {
-          dispatch(graphqlApi.endpoints.fetchIntrospection.initiate(url));
-        }
-
         const response = await fetchWithBQ({
           url,
           body: { query: graphql.request.value, variables: graphql.variablesValue },

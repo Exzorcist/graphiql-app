@@ -13,6 +13,7 @@ import { signUpSchema } from '@/utils/schemas/signup-schema';
 import { signInSchema } from '@/utils/schemas/signin-schema';
 import { cn } from '@/utils/cn';
 import { IGlobalMessage } from '@/types/Message';
+import Spinner from '../ui/Spinner';
 
 function SignUpForm({
   textForLink,
@@ -36,6 +37,7 @@ function SignUpForm({
   const doToggleConfirmPassword = () => {
     setShowConfirmPassword({ isToggle: !showConfirmPassword.isToggle });
   };
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleRegister(emailUser: string, passwordUser: string) {
     const auth = getAuth();
@@ -49,6 +51,8 @@ function SignUpForm({
       text: !isLogin ? t.globalMessage.error.login : t.globalMessage.error.registration,
       isShown: true,
     };
+
+    setIsLoading(true);
 
     functionForUserWithEmailAndPassword(auth, emailUser, passwordUser)
       .then(({ user }) => {
@@ -68,6 +72,9 @@ function SignUpForm({
         setIsError(true);
         dispatch(setMessage(loginErrorMessage));
         setIsError(false);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -214,11 +221,11 @@ function SignUpForm({
             className={cn(
               `focus:outline-none disabled:bg-slate-300text-white bg-main hover:bg-main/80
               focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-lg px-7 py-1.5 text-white
-              transition-all duration-300 cursor-pointer w-full max-w-80`,
+              transition-all duration-300 cursor-pointer w-full max-w-80 min-h-10 flex justify-center items-center`,
               !isValid && 'opacity-50 pointer-events-none'
             )}
           >
-            {buttonValue}
+            {isLoading ? <Spinner svgClassName="fill-white" /> : buttonValue}
           </button>
 
           <Link

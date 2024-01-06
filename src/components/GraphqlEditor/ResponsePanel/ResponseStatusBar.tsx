@@ -9,11 +9,11 @@ import { useLocalizationContext } from '@/providers/LocalizationProvider';
 function getStatusColor(code: number) {
   switch (true) {
     case code >= 200 && code <= 299:
-      return 'bg-editor-accent';
+      return 'bg-green-500';
     case code >= 300:
-      return 'bg-red-400';
+      return 'bg-red-500';
     default:
-      return 'bg-blue-400';
+      return 'bg-blue-500';
   }
 }
 
@@ -33,7 +33,10 @@ function ResponseStatusBar() {
           <>
             <div>{t.page.editor.status}: </div>
             <div
-              className={cn('text-sm py-1 flex px-2 rounded', getStatusColor(response.statusCode))}
+              className={cn(
+                'text-sm py-0.5 flex px-1.5 rounded',
+                getStatusColor(response.statusCode)
+              )}
             >
               {response.statusCode}
             </div>
