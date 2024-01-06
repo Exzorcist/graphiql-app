@@ -43,7 +43,7 @@ function GraphqlTools({ onOpenChange, onToolChange, open }: Props) {
         onChevronClick={onOpenChange}
         open={open}
       />
-      <div className="h-full flex flex-col pt-[50px]">
+      <div className="h-full flex flex-col pt-[50px] mx-5">
         <ToolComponent />
       </div>
     </div>

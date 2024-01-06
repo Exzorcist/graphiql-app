@@ -1,12 +1,11 @@
 import { memo, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import HeaderItem from './HeaderItem';
-import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
-import { removeHeadersValue, setClearHeaders, updateHeadersObj } from '@/redux/slices/headersSlice';
+import AutoSuggest from 'react-autosuggest';
 
-export type ITask = {
-  id: string;
-};
+import { TrashIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { setReduxHeaders } from '@/redux/slices/headersSlice';
+import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
 interface IHeadersArray {
   id: string;
@@ -16,13 +15,28 @@ interface IHeadersArray {
 
 type KeyData = 'header' | 'value';
 
+const testArray = [
+  'WWW-Authenticate',
+  'Authorization',
+  'Cache-Control',
+  'Connection',
+  'Keep-Alive',
+  'Access-Control-Allow-Origin',
+  'Access-Control-Allow-Credentials',
+  'Access-Control-Allow-Headers',
+  'Access-Control-Allow-Methods',
+  'Access-Control-Expose-Headers',
+  'Access-Control-Max-Age',
+  'Access-Control-Request-Headers',
+  'Access-Control-Request-Methods',
+];
+
 function HeadersModel() {
-  // const [todo, setTodo] = useState({ header: '', value: '' });
-  // const [tasks, setTasks] = useState<ITask[]>([]);
-  // const dispatch = useAppDispatch();
-  // const headersForShow = useAppSelector((state) => state.headers.headers);
+  const dispatch = useDispatch();
+  const { t } = useLocalizationContext();
 
   const [headers, setHeaders] = useState<IHeadersArray[]>([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const addHeadersLine = () => {
     const newHeader: IHeadersArray = {
@@ -44,6 +58,14 @@ function HeadersModel() {
     );
   };
 
+  const getSuggestions = (value: string | undefined) => {
+    if (!value) return [];
+
+    return testArray.filter((el) =>
+      el.toLocaleLowerCase().includes(value.trim().toLocaleLowerCase())
+    );
+  };
+
   useEffect(() => {
     const headersObect: Record<string, string> = {};
 
@@ -51,97 +73,78 @@ function HeadersModel() {
       headersObect[item.header] = item.value;
     });
 
-    console.log(headersObect);
-  }, [headers]);
-
-  // const addTodo = () => {
-  //   const taskTodo = {
-  //     id: Math.random(),
-  //     value: { header: todo.header, value: todo.value },
-  //     status: false,
-  //   };
-  //   const newTask = [...tasks, taskTodo];
-  //   setTasks(newTask as never);
-  //   setTodo({ header: '', value: '' });
-  // };
-
-  // const deleteTodo = (id: string, headerValue: string) => {
-  //   const del = tasks.filter((el) => el.id !== id);
-  //   setTasks(del);
-  //   const newObj = Object.fromEntries(
-  //     Object.entries(headersForShow).filter(([k]) => k !== headerValue)
-  //   );
-  //   dispatch(updateHeadersObj(newObj));
-  // };
-
-  // useEffect(() => {
-  //   console.log(tasks);
-
-  //   if (!tasks.length) {
-  //     dispatch(removeHeadersValue({ header: '', value: '' }));
-  //     const objClear = {} as { [key: string]: string };
-  //     dispatch(setClearHeaders(objClear));
-  //   }
-  // }, [dispatch, tasks, todo.header, todo.value]);
+    dispatch(setReduxHeaders(headersObect));
+  }, [headers, dispatch]);
 
   return (
-    <div className="h-full flex-grow basis-0 min-h-0 flex flex-col gap-2">
-      {headers &&
-        headers.map((item) => (
-          <div key={item.id} className="flex gap-2">
-            <input
-              type="text"
-              className="text-slate-950"
-              value={item.header}
-              onChange={(e) =>
-                updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'header')
-              }
-            />
-            <input
-              type="text"
-              className="text-slate-950"
-              value={item.value}
-              onChange={(e) =>
-                updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'value')
-              }
-            />
-            <button type="button" onClick={() => removeHeadersLine(item.id)}>
-              remove
-            </button>
-          </div>
-        ))}
+    <div className="h-full flex-grow basis-0 min-h-0 flex flex-col justify-between gap-3">
+      <div className="flex flex-col gap-3 overflow-auto fancy-scrollbar w-full">
+        {headers &&
+          headers.map((item) => (
+            <div key={item.id} className="grid gap-3 pr-8 grid-cols-2 first:mt-3 relative">
+              <AutoSuggest
+                suggestions={suggestions}
+                onSuggestionsClearRequested={() => setSuggestions([])}
+                onSuggestionsFetchRequested={({ value }) => {
+                  updateHeadersData(item.id, value, 'header');
+                  setSuggestions(getSuggestions(value));
+                }}
+                onSuggestionSelected={(_, { suggestion }) => {
+                  updateHeadersData(item.id, suggestion, 'header');
+                }}
+                getSuggestionValue={(option) => option}
+                renderSuggestion={(option) => <span>{option}</span>}
+                inputProps={{
+                  placeholder: t.headers.placeholder.key,
+                  value: item.header,
+                  onChange: (e) => {
+                    updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'header');
+                  },
+                }}
+                theme={{
+                  container: 'relative',
+                  input: 'px-2.5 py-1 rounded-md w-full text-slate-700 outline-0',
+                  suggestionsContainerOpen:
+                    'absolute top-full w-full z-20 bg-editor-secondary max-h-24 overflow-auto fancy-scrollbar',
+                  suggestion: 'hover:bg-main pl-2 text-white transition duration-200',
+                }}
+              />
 
-      <div>
+              <input
+                type="text"
+                placeholder={t.headers.placeholder.value}
+                className="px-2.5 py-1 rounded-md w-full text-slate-700 outline-0"
+                value={item.value}
+                onChange={(e) =>
+                  updateHeadersData(item.id, (e.target as HTMLInputElement).value, 'value')
+                }
+              />
+
+              <span
+                onClick={() => removeHeadersLine(item.id)}
+                aria-label="delete-button"
+                aria-hidden
+                className="absolute top-1.5 right-0"
+              >
+                <TrashIcon
+                  className="w-5 h-5 text-gray-50 hover:stroke-red-500 cursor-pointer 
+                           transition-all duration-300"
+                />
+              </span>
+            </div>
+          ))}
+      </div>
+      <div className="bg-editor-primary py-2">
         <button
           type="button"
-          className="w-40 bottom-0 pl-0 mt-auto ml-2 mb-5 transition rounded min-w-fit cursor-pointer 
-                     hover:bg-editor-secondary hover:text-editor-accent"
+          className="inline-flex gap-2 py-1 px-2.5 transition rounded min-w-fit cursor-pointer 
+                     hover:bg-editor-secondary hover:text-editor-accent items-center"
           onClick={addHeadersLine}
         >
-          ➕ Add new header
+          <PlusIcon className="w-5 h-5" />
+          {t.headers.addButton}
         </button>
       </div>
-      {/* <div className="flex h-full flex-col ml-6 text-sm mb-2 overflow-auto fancy-scrollbar [scrollbar-gutter:stable]">
-        {tasks.map((el) => (
-          <HeaderItem
-            todo={todo}
-            setTodo={setTodo}
-            key={el.id}
-            id={el.id}
-            deleteTodo={deleteTodo}
-          />
-        ))}
-      </div>
-      <div>
-        <button
-          type="button"
-          className="w-40 bottom-0 pl-0 mt-auto ml-2 mb-5 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent"
-          onClick={addTodo}
-        >
-          {' '}
-          ➕ Add new header
-        </button>
-      </div> */}
     </div>
   );
 }
