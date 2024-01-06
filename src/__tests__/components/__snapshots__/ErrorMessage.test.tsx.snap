@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`GraphqlEditor 1`] = `
+exports[`Error Messages with no entering url are rendered 1`] = `
 <body>
   <div>
     <div

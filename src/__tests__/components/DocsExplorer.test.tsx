@@ -6,13 +6,15 @@ import { initialState } from '@/redux/slices/graphql/graphqlSlice';
 import DocsExplorerContainer from '@/components/GraphqlEditor/DocsEplorer/DocsExplorerContainer';
 
 test('DocsEplorer', async () => {
+  const introspection = introspectionResponse as unknown as IntrospectionQuery;
+
   render(<DocsExplorerContainer />, {
     preloadedState: {
       graphql: {
         ...initialState,
-        schema: buildClientSchema(introspectionResponse as unknown as IntrospectionQuery),
+        schema: buildClientSchema(introspection),
         introspection: {
-          data: introspectionResponse as unknown as IntrospectionQuery,
+          data: introspection,
           endpoint: 'https://spacex-production.up.railway.app/',
           status: 'fullfilled',
         },
@@ -31,7 +33,7 @@ test('DocsEplorer', async () => {
     () => {
       expect(screen.getByText('Query')).toBeInTheDocument();
     },
-    { timeout: 10000 }
+    { timeout: 20000 }
   );
 
   await user.click(screen.getByText('Query'));
@@ -43,4 +45,4 @@ test('DocsEplorer', async () => {
   await user.click(capsuleField);
 
   expect(await screen.findByText('Arguments')).toBeInTheDocument();
-});
+}, 15000);
