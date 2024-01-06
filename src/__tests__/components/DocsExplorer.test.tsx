@@ -1,12 +1,12 @@
 import { IntrospectionQuery, buildClientSchema } from 'graphql';
-import { screen } from '@testing-library/react';
-import DocsExplorer from '@/components/GraphqlEditor/DocsEplorer/DocsExplorer';
+import { screen, waitFor } from '@testing-library/react';
 import introspectionResponse from '../fixtures/introspectionResponse.json';
 import { customRender as render, user } from '../test-utils';
 import { initialState } from '@/redux/slices/graphql/graphqlSlice';
+import DocsExplorerContainer from '@/components/GraphqlEditor/DocsEplorer/DocsExplorerContainer';
 
 test('DocsEplorer', async () => {
-  render(<DocsExplorer />, {
+  render(<DocsExplorerContainer />, {
     preloadedState: {
       graphql: {
         ...initialState,
@@ -26,6 +26,13 @@ test('DocsEplorer', async () => {
 
   expect(screen.getByText('Documentation')).toBeInTheDocument();
   expect(document.body).toMatchSnapshot();
+
+  await waitFor(
+    () => {
+      expect(screen.getByText('Query')).toBeInTheDocument();
+    },
+    { timeout: 10000 }
+  );
 
   await user.click(screen.getByText('Query'));
 

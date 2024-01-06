@@ -1,7 +1,7 @@
 import { ComponentProps, useCallback, useEffect, useRef } from 'react';
 import { ImperativePanelHandle, Panel } from 'react-resizable-panels';
 import { useDefaultExpandSize } from '@/hooks/panel-resize-hooks';
-import DocsExplorer from './DocsExplorer';
+import DocsExplorerContainer from './DocsExplorerContainer';
 
 export type DocsExplorerPanelProps = {
   show?: boolean;
@@ -56,7 +56,7 @@ function DocsExplorerPanel({
       className={panelClassName}
       {...panelProps}
     >
-      <DocsExplorer />
+      <DocsExplorerContainer />
     </Panel>
   );
 }

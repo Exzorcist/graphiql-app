@@ -1,13 +1,10 @@
 import { createRoutesFromElements, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { lazy } from 'react-lazy-no-flicker';
 import { selectIsAuth } from '@/redux/slices/userSlice';
 
 import Root from '@/layout/Root';
 import GraphqlEditorPage from './pages/GraphqlEditorPage';
-import Login from './pages/Login';
-import NotFound from './pages/NotFound';
-import Registration from './pages/Registration';
-import Welcome from './pages/Welcome';
 
 interface IRouteRedirectProps {
   element: React.ReactElement;
@@ -23,6 +20,11 @@ function RouteRedirect({ element, path }: IRouteRedirectProps): React.ReactEleme
 
   return isLoggedIn ? <Navigate to={path} /> : element;
 }
+
+const Welcome = lazy(() => import('./pages/Welcome'));
+const Login = lazy(() => import('./pages/Login'));
+const Registration = lazy(() => import('./pages/Registration'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const routerConfig = createRoutesFromElements(
   <Route path="/" element={<Root />}>

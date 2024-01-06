@@ -1,40 +1,41 @@
-import { FormEvent, memo, useCallback, useState } from 'react';
+import { FormEvent, memo, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { cn } from '@/utils/cn';
 import SendRequestButton from './SendRequestButton';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 import SchemaButton from './SchemaButton';
 import { PropsWithClassName } from '@/types/PropsWithClassName';
-import { changeEndpointValue, selectEndpointValue } from '@/redux/slices/graphql/graphqlSlice';
-import { useInitRequestMutation } from '@/redux/slices/graphql/graphqlApi';
-import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
+import {
+  useFetchIntrospectionMutation,
+  useInitRequestMutation,
+} from '@/redux/slices/graphql/graphqlApi';
+import SchemaIndicator from './SchemaIndicator';
 
 export type EndpointFieldProps = {
   onSchemaClick?(): void;
   isSchemaOpen?: boolean;
 } & PropsWithClassName;
 
+const storageKey = 'endpointFieldValue';
+
 function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: EndpointFieldProps) {
   const { t } = useLocalizationContext();
-  const apiUrl = useAppSelector(selectEndpointValue);
-  const dispatch = useAppDispatch();
-  const [inputValue, setInputValue] = useState(apiUrl);
+  const [inputValue, setInputValue] = useState(() => localStorage.getItem(storageKey) ?? '');
   const [initRequest] = useInitRequestMutation();
-  const dispatchDebounced = useDebouncedCallback((value: string) => {
-    dispatch(changeEndpointValue(value));
-  }, 500);
+  const [fetchIntrospection] = useFetchIntrospectionMutation();
+  const debouncedFetchIntrospection = useDebouncedCallback(fetchIntrospection, 300);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     initRequest(inputValue);
   };
 
-  const handleChange = useCallback((e: FormEvent<HTMLInputElement>) => {
+  const handleChange = (e: FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setInputValue(value);
-    dispatchDebounced(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    debouncedFetchIntrospection(value);
+    localStorage.setItem(storageKey, value);
+  };
 
   return (
     <form
@@ -44,9 +45,10 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
       )}
       onSubmit={handleSubmit}
     >
-      <div className="w-full h-full flex ">
+      <div className="w-full h-full flex relative">
+        <SchemaIndicator className="absolute left-3 absolute-y-center" />
         <input
-          className="w-full h-full bg-transparent outline-none pl-4"
+          className="w-full h-full bg-transparent outline-none pl-10"
           placeholder={t.page.editor.enterURL}
           value={inputValue}
           onChange={handleChange}

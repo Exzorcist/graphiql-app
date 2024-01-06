@@ -13,7 +13,7 @@ function RootTypeList() {
 
   return (
     <div>
-      <h4 className="text-lg font-semibold">Root {t.page.editor.types}</h4>
+      <h4 className="text-2xl font-semibold">{t.page.editor.types}</h4>
       <Separator />
       {Object.values(OperationTypeNode).map((operationType) => {
         const type = graphqlSchema?.getRootType(operationType as OperationTypeNode);
