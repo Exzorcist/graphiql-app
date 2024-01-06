@@ -6,17 +6,20 @@ import {
 } from 'codemirror-json-schema';
 import { collectVariables, getVariablesJSONSchema } from 'graphql-language-service';
 import { json, jsonLanguage, jsonParseLinter } from '@codemirror/lang-json';
-import { GraphQLError, GraphQLSchema, parse } from 'graphql';
+import { DocumentNode, GraphQLError, GraphQLSchema } from 'graphql';
 import { hoverTooltip } from '@uiw/react-codemirror';
 import { EditorView } from '@codemirror/view';
 import { JSONSchema7 } from 'json-schema';
 import { linter } from '@codemirror/lint';
 
-export function buildVariablesJSONSchema(schema: GraphQLSchema | undefined, queryValue: string) {
-  if (!schema) return undefined;
+export function buildVariablesJSONSchema(
+  schema: GraphQLSchema | undefined,
+  documentAST: DocumentNode | null
+) {
+  if (!schema || !documentAST) return undefined;
 
   try {
-    const variablesToType = collectVariables(schema, parse(queryValue));
+    const variablesToType = collectVariables(schema, documentAST);
     const schemaJson = getVariablesJSONSchema(variablesToType);
     schemaJson.$schema = 'http://json-schema.org/draft-07/schema#';
     schemaJson.additionalProperties = false;
