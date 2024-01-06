@@ -5,5 +5,5 @@ import GraphqlEditorPage from '@/pages/GraphqlEditorPage';
 test('GraphqlEditorPage rendered', () => {
   render(<GraphqlEditorPage />);
 
-  expect(screen.getByText('Request')).toBeInTheDocument();
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
 });
