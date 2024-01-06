@@ -9,7 +9,7 @@ export type DocsExplorerPanelProps = {
   panelClassName?: string;
 } & ComponentProps<typeof Panel>;
 
-// const DOCS_PANEL_MIN_SIZE = 20;
+const DOCS_PANEL_MIN_SIZE = 20;
 const DOCS_PANEL_DEFAULT_SIZE = 25;
 const DOCS_PANEL_COLLAPSE_SIZE = 0;
 
@@ -49,8 +49,7 @@ function DocsExplorerPanel({
       ref={docsPanelRef}
       collapsible
       collapsedSize={DOCS_PANEL_COLLAPSE_SIZE}
-      minSize={DOCS_PANEL_COLLAPSE_SIZE}
-      defaultSize={DOCS_PANEL_COLLAPSE_SIZE}
+      minSize={DOCS_PANEL_MIN_SIZE}
       onCollapse={handleDocsCollapse}
       onExpand={handleDocsExpand}
       className={panelClassName}

@@ -80,6 +80,7 @@ function GraphqlEditor() {
                     order={1}
                     minSize={QUERY_EDITOR_PANEL_MIN_SIZE}
                     className={panelClassName}
+                    defaultSize={50}
                   >
                     <RequestPanel />
                   </Panel>
@@ -89,6 +90,7 @@ function GraphqlEditor() {
                     order={2}
                     minSize={RESPONSE_PANEL_MIN_SIZE}
                     className={panelClassName}
+                    defaultSize={50}
                   >
                     <ResponsePanel />
                   </Panel>
