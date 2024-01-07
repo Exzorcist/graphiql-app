@@ -1,7 +1,6 @@
 const commmonEditorThemeSettings = {
   fontFamily: 'var(--font-mono)',
   gutterForeground: 'rgb(var(--editor-line-numbers-color))',
-  selection: 'rgb(var(--editor-code-selection-color))',
 };
 
 export const primaryEditorThemeSettings = {

@@ -5,7 +5,7 @@ import CodeMirror, {
   ReactCodeMirrorRef,
   BasicSetupOptions,
 } from '@uiw/react-codemirror';
-import { materialDarkInit, materialLightInit } from '@uiw/codemirror-theme-material';
+import { githubLightInit } from '@uiw/codemirror-theme-github';
 import { CreateThemeOptions, Settings } from '@uiw/codemirror-themes';
 import { draculaInit } from '@uiw/codemirror-theme-dracula';
 import { foldGutter } from '@codemirror/language';
@@ -35,8 +35,7 @@ const styleOverrides = EditorView.theme({
 
 const themeInit: Record<Theme, (options?: Partial<CreateThemeOptions> | undefined) => Extension> = {
   dracula: draculaInit,
-  dark: materialDarkInit,
-  light: materialLightInit,
+  light: githubLightInit,
 };
 
 const basicSetup: BasicSetupOptions = {

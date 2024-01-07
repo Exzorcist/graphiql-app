@@ -31,6 +31,7 @@
     --editor-line-numbers-color: 108 108 108;
     --editor-gutter-color: 240 240 240;
     --editor-text-color: 0 0 0;
+    --editor-code-selection-color: 187 223 255;
   }
 
   [data-panel-group]:has(> [data-resize-handle-active]) > .animated-panel {
@@ -97,14 +98,14 @@
   @apply fancy-scrollbar-horizontal-gutter;
 }
 
-.ͼ3 .cm-tooltip {
+:is(.ͼ2, .ͼ3) .cm-tooltip {
   @apply bg-editor-primary border border-editor-border rounded text-editor-text-color;
 }
 
-.ͼ3 .cm-tooltip-autocomplete-disabled ul li[aria-selected] {
+:is(.ͼ3, .ͼ2) .cm-tooltip-autocomplete-disabled ul li[aria-selected] {
   @apply bg-editor-accent;
 }
 
-.ͼ3 .cm-tooltip-autocomplete ul li[aria-selected] {
+:is(.ͼ3, .ͼ2) .cm-tooltip-autocomplete ul li[aria-selected] {
   @apply bg-editor-accent;
 }

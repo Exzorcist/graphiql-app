@@ -13,6 +13,7 @@ import { cn } from '@/utils/cn';
 import Logo from '@/assets/logo-graphql.svg';
 import { IGlobalMessage } from '@/types/Message';
 import { setMessage } from '@/redux/slices/globalMessageSlice';
+import SwitchTheme from './Header/SwitchTheme';
 
 function Header() {
   const { t } = useLocalizationContext();
@@ -54,7 +55,7 @@ function Header() {
         scrolled && 'bg-purple-600'
       )}
     >
-      <div className="max-w-7xl mx-auto px-5 flex items-center justify-between gap-5">
+      <div className="max-w-7xl mx-auto px-5 flex items-center justify-between">
         <NavLink
           to="/"
           className="flex items-center gap-4 text-lg sm:text-xl font-medium tracking-wider transition-colors
@@ -73,6 +74,7 @@ function Header() {
           >
             <Bars3BottomRightIcon className="w-8 h-8" />
           </span>
+          <SwitchTheme />
           <SwitchLang />
 
           <div
