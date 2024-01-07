@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AutoSuggest from 'react-autosuggest';
 
 import { TrashIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { useDebouncedCallback } from 'use-debounce';
 import { setReduxHeaders } from '@/redux/slices/headersSlice';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
 
@@ -38,6 +39,21 @@ function HeadersModel() {
   const [headers, setHeaders] = useState<IHeadersArray[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
+  const debouncedDispatchHeaders = useDebouncedCallback(() => {
+    const headersObect: Record<string, string> = {};
+
+    headers.forEach((item) => {
+      headersObect[item.header] = item.value;
+    });
+
+    dispatch(setReduxHeaders(headersObect));
+  }, 300);
+
+  useEffect(() => {
+    debouncedDispatchHeaders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [headers, dispatch]);
+
   const addHeadersLine = () => {
     const newHeader: IHeadersArray = {
       id: uuidv4(),
@@ -65,16 +81,6 @@ function HeadersModel() {
       el.toLocaleLowerCase().includes(value.trim().toLocaleLowerCase())
     );
   };
-
-  useEffect(() => {
-    const headersObect: Record<string, string> = {};
-
-    headers.forEach((item) => {
-      headersObect[item.header] = item.value;
-    });
-
-    dispatch(setReduxHeaders(headersObect));
-  }, [headers, dispatch]);
 
   return (
     <div className="h-full flex-grow basis-0 min-h-0 flex flex-col justify-between gap-3 pl-5 pr-3">
