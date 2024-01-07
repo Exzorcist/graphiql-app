@@ -9,7 +9,7 @@ import { Editor } from '@/components/Editor';
 import {
   changeVariablesValue,
   selectGraphQLSchema,
-  selectRequestValue,
+  selectRequestAST,
 } from '@/redux/slices/graphql/graphqlSlice';
 
 const storageKey = 'variablesValue';
@@ -17,7 +17,7 @@ const defaultValue = '{\n\n}';
 
 function VariablesEditor() {
   const dispatch = useAppDispatch();
-  const requestValue = useAppSelector(selectRequestValue);
+  const requestAST = useAppSelector(selectRequestAST);
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const editorRef = useRef<ReactCodeMirrorRef | null>(null);
   const [editorValue, setEditorValue] = useState(
@@ -43,9 +43,9 @@ function VariablesEditor() {
 
   useEffect(() => {
     if (editorRef.current?.view) {
-      updateSchema(editorRef.current.view, buildVariablesJSONSchema(graphqlSchema, requestValue));
+      updateSchema(editorRef.current.view, buildVariablesJSONSchema(graphqlSchema, requestAST));
     }
-  }, [graphqlSchema, requestValue]);
+  }, [graphqlSchema, requestAST]);
 
   useEffect(() => {
     if (editorValue.trim() === '') {
@@ -55,8 +55,8 @@ function VariablesEditor() {
   }, [editorValue, handleChange]);
 
   const extension = useMemo(
-    () => variablesJsonSchema(graphqlSchema, requestValue),
-    [graphqlSchema, requestValue]
+    () => variablesJsonSchema(graphqlSchema, requestAST),
+    [graphqlSchema, requestAST]
   );
 
   return (

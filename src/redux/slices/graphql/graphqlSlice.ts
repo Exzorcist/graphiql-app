@@ -1,5 +1,5 @@
-import { Draft, PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { buildClientSchema, GraphQLSchema } from 'graphql';
+import { buildClientSchema, GraphQLSchema, parse } from 'graphql';
+import { Draft, PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 import { headersInitialState, headersAdapter } from './headersAdapter';
 import { emptySchema } from '@/utils/emptyGraphqlSchema';
@@ -138,3 +138,11 @@ export const {
   selectIntrospectStatus,
   selectIntrospectEndpoint,
 } = graphqlSlice.selectors;
+
+export const selectRequestAST = createSelector(selectRequestValue, (value) => {
+  try {
+    return parse(value);
+  } catch (error) {
+    return null;
+  }
+});
