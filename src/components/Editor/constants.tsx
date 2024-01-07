@@ -1,0 +1,1 @@
+export const DEFAULT_EDITOR_HEADER_HEIGHT = 50;

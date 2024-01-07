@@ -54,12 +54,22 @@ module.exports = {
       'error',
       'never',
       {
-        ts: 'always',
         json: 'always',
+        svg: 'always',
+        jpg: 'always',
       },
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/prefer-default-export': 'off',
+    'react/require-default-props': 'off',
+    'react/no-array-index-key': 'off',
+    'no-param-reassign': [
+      'error',
+      {
+        props: true,
+        ignorePropertyModificationsFor: ['state'],
+      },
+    ],
   },
   ignorePatterns: ['dist', 'vite.config.ts'],
 };

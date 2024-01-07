@@ -1,19 +1,18 @@
-import CodeMirror from '@uiw/react-codemirror';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { store, persistor } from './redux/store';
+import routerConfig from './router';
+
+const router = createBrowserRouter(routerConfig);
 
 function App() {
   return (
-    <>
-      <h1 className="block text-xl text-red-600">Empty base page</h1>
-      <div className="absolute bottom-40 left-20 right-20 top-20 text-left">
-        <CodeMirror
-          value="Test code mirror text"
-          onChange={() => {
-            // editor, data - these are function parameters
-            // console.log(editor, data);
-          }}
-        />
-      </div>
-    </>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
   );
 }
 

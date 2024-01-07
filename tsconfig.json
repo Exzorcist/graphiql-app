@@ -23,6 +23,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [".eslintrc.cjs", "src/**/*.ts", "src/**/*.tsx", "./setupTests.ts"],
+  "include": [
+    ".eslintrc.cjs",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/__tests__/setupTests.ts",
+    "./tailwind.config.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
