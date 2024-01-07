@@ -97,6 +97,14 @@
   @apply fancy-scrollbar-horizontal-gutter;
 }
 
+.ͼ3 .cm-tooltip {
+  @apply bg-editor-primary border border-editor-border rounded text-editor-text-color;
+}
+
 .ͼ3 .cm-tooltip-autocomplete-disabled ul li[aria-selected] {
-  background: #347;
+  @apply bg-editor-accent;
+}
+
+.ͼ3 .cm-tooltip-autocomplete ul li[aria-selected] {
+  @apply bg-editor-accent;
 }
