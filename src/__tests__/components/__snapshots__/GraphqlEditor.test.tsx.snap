@@ -450,7 +450,7 @@ exports[`GraphqlEditor 1`] = `
                   </button>
                 </div>
                 <div
-                  class="h-full flex flex-col pt-[50px] mx-5"
+                  class="h-full flex flex-col pt-[50px]"
                 >
                   <div
                     class="cm-theme h-full flex flex-col"

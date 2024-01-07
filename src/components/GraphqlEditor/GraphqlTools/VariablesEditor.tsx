@@ -14,14 +14,15 @@ import {
 
 const storageKey = 'variablesValue';
 const defaultValue = '{\n\n}';
-const initialValue = localStorage.getItem(storageKey) ?? defaultValue;
 
 function VariablesEditor() {
   const dispatch = useAppDispatch();
   const requestValue = useAppSelector(selectRequestValue);
   const graphqlSchema = useAppSelector(selectGraphQLSchema);
   const editorRef = useRef<ReactCodeMirrorRef | null>(null);
-  const [editorValue, setEditorValue] = useState(initialValue);
+  const [editorValue, setEditorValue] = useState(
+    () => localStorage.getItem(storageKey) ?? defaultValue
+  );
 
   const updateStoreValue = useDebouncedCallback((value: string) => {
     localStorage.setItem(storageKey, value);
@@ -32,7 +33,7 @@ function VariablesEditor() {
     } catch (error) {
       dispatch(changeVariablesValue({}));
     }
-  }, 500);
+  }, 300);
 
   const handleChange = useCallback((value: string) => {
     setEditorValue(value);
@@ -53,7 +54,6 @@ function VariablesEditor() {
     }
   }, [editorValue, handleChange]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const extension = useMemo(
     () => variablesJsonSchema(graphqlSchema, requestValue),
     [graphqlSchema, requestValue]
