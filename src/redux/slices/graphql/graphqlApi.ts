@@ -2,23 +2,23 @@ import { IntrospectionQuery, buildClientSchema, getIntrospectionQuery } from 'gr
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { isFetchBaseQueryError, isErrorWithMessage } from '@/utils/type-guards';
 import { setGraphqlSchema, setIntrospection } from './commonActions';
+import { getFetchErrorMsg, getSchemaReloadMsg } from './utils';
 import { emptySchema } from '@/utils/emptyGraphqlSchema';
 import { customBaseQuery } from './customBaseQuery';
 import { setMessage } from '../globalMessageSlice';
-import { getFetchErrorMsg, getSchemaReloadMsg } from './utils';
 import { RootState } from '@/redux/store';
 
 export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
   baseQuery: customBaseQuery,
   endpoints: (builder) => ({
-    initRequest: builder.mutation<unknown, string>({
-      queryFn: async (url, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
+    initRequest: builder.mutation<unknown, string | void>({
+      queryFn: async (operationName, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
         const { graphql, localization } = getState() as RootState;
 
         const response = await fetchWithBQ({
-          url,
-          body: { query: graphql.request.value, variables: graphql.variablesValue },
+          url: graphql.endpointValue,
+          body: { query: graphql.request.value, variables: graphql.variablesValue, operationName },
         });
 
         const err = response.error;

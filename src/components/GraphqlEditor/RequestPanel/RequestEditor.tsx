@@ -3,6 +3,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { updateSchema } from 'cm6-graphql';
 import { memo, useEffect, useMemo, useRef } from 'react';
 import { diagnosticCount } from '@codemirror/lint';
+import { parse } from 'graphql';
 import { useAppDispatch, useAppSelector } from '@/utils/hooks/redux-hooks';
 import { primaryEditorThemeSettings } from '../themeSettings';
 import {
@@ -29,6 +30,8 @@ function RequestEditor() {
 
   const handleChange = useDebouncedCallback((value: string) => {
     const editorState = editorAreaRef.current?.view?.state;
+
+    Object.assign(window, { ast: parse(value) });
 
     if (editorState) {
       const isError = !!diagnosticCount(editorState);
