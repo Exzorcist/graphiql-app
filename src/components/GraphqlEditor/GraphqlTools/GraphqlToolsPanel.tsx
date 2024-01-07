@@ -32,13 +32,19 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
     TOOLS_PANEL_DEFAULT_SIZE
   );
 
-  const toggleTools = useCallback(() => {
+  const handleToolsOpenChange = useCallback(() => {
     if (showTools) {
       collapse();
     } else {
       expand();
     }
   }, [showTools, collapse, expand]);
+
+  const handleToolChange = useCallback(() => {
+    if (!showTools) {
+      expand();
+    }
+  }, [expand, showTools]);
 
   const handleCollapse = useCallback(() => {
     setIsCollapsed(true);
@@ -70,10 +76,9 @@ function GraphqlToolsPanel({ panelGroupId, panelClassName, onShowChange, ...pane
         {...panelProps}
       >
         <GraphqlTools
-          isOpen={showTools}
-          onChevronClick={toggleTools}
-          onHeadersclick={toggleTools}
-          onVariablesClick={toggleTools}
+          open={showTools}
+          onOpenChange={handleToolsOpenChange}
+          onToolChange={handleToolChange}
         />
       </Panel>
     </>

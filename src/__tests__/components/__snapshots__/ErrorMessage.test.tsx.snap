@@ -122,7 +122,7 @@ exports[`Error Messages with no entering url are rendered 1`] = `
                     style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
                   >
                     <div
-                      class="h-full relative"
+                      class="h-full relative overflow-auto fancy-scrollbar"
                     >
                       <div
                         class="w-full absolute top-0 left-0 px-4 flex items-center border-b-editor-border border-b"
@@ -280,7 +280,7 @@ exports[`Error Messages with no entering url are rendered 1`] = `
               style="flex-basis: 0px; flex-grow: 1; flex-shrink: 1; overflow: hidden;"
             >
               <div
-                class="h-full relative"
+                class="h-full relative overflow-auto fancy-scrollbar"
               >
                 <div
                   class="w-full absolute top-0 left-0 px-4 flex items-center border-b-editor-border border-b"
@@ -450,7 +450,7 @@ exports[`Error Messages with no entering url are rendered 1`] = `
                   </button>
                 </div>
                 <div
-                  class="h-full pt-[50px]"
+                  class="h-full flex flex-col pt-[50px]"
                 >
                   <div
                     class="cm-theme h-full flex flex-col"

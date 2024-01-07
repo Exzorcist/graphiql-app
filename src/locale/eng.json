@@ -126,5 +126,13 @@
     "info": {
       "tokenExpire": "Sorry, but your token has expired"
     }
+  },
+
+  "headers": {
+    "placeholder": {
+      "key": "header key",
+      "value": "value"
+    },
+    "addButton": "Add new header"
   }
 }
