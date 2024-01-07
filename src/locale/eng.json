@@ -130,8 +130,8 @@
 
   "headers": {
     "placeholder": {
-      "key": "Type header",
-      "value": "Type value"
+      "key": "header key",
+      "value": "value"
     },
     "addButton": "Add new header"
   }

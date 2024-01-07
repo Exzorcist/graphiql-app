@@ -59,7 +59,7 @@ function HeadersModel() {
   };
 
   const getSuggestions = (value: string | undefined) => {
-    if (!value) return [];
+    if (!value) return headersArray;
 
     return headersArray.filter((el) =>
       el.toLocaleLowerCase().includes(value.trim().toLocaleLowerCase())
@@ -77,15 +77,12 @@ function HeadersModel() {
   }, [headers, dispatch]);
 
   return (
-    <div className="h-full flex-grow basis-0 min-h-0 flex flex-col justify-between gap-3">
-      <div className="flex flex-col gap-3 flex-grow overflow-auto fancy-scrollbar w-full">
+    <div className="h-full flex-grow basis-0 min-h-0 flex flex-col justify-between gap-3 pl-5 pr-3">
+      <div className="flex flex-col gap-3 flex-grow overflow-auto fancy-scrollbar w-full [scrollbar-gutter:stable]">
         {headers &&
           headers.map((item) => (
             <div key={item.id} className="grid gap-3 pr-8 grid-cols-2 first:mt-3 relative">
-              <div
-                className="bg-editor-secondary rounded-md border border-editor-border
-                           [&:has(input:focus)]:border-editor-accent transition-colors duration-300"
-              >
+              <div className="bg-editor-secondary rounded-md border border-editor-border [&:has(input:focus)]:border-editor-accent transition-colors duration-300">
                 <AutoSuggest
                   suggestions={suggestions}
                   onSuggestionsClearRequested={() => setSuggestions([])}
@@ -97,7 +94,7 @@ function HeadersModel() {
                     updateHeadersData(item.id, suggestion, 'header');
                   }}
                   getSuggestionValue={(option) => option}
-                  renderSuggestion={(option) => <span>{option}</span>}
+                  renderSuggestion={(option) => option}
                   inputProps={{
                     placeholder: t.headers.placeholder.key,
                     value: item.header,
@@ -108,19 +105,14 @@ function HeadersModel() {
                   theme={{
                     container: 'relative',
                     input: 'px-2.5 py-1 rounded-md w-full bg-transparent outline-0',
-                    suggestionsContainerOpen: `absolute top-9 w-full z-20 bg-editor-secondary 
-                                               border border-editor-border max-h-24 overflow-auto fancy-scrollbar
-                                               [&_ul]:grid [&_ul]:gap-1.5 py-2 px-1`,
-                    suggestion:
-                      'hover:bg-main pl-2 text-white transition duration-300 cursor-pointer',
+                    suggestionsContainerOpen: `absolute top-9 w-full z-20 bg-editor-primary border border-editor-border max-h-32 overflow-auto fancy-scrollbar py-2 px-1`,
+                    suggestion: 'py-1 hover:bg-editor-secondary pl-2 text-white cursor-pointer',
                   }}
+                  shouldRenderSuggestions={() => true}
                 />
               </div>
 
-              <div
-                className="bg-editor-secondary rounded-md border border-editor-border
-                           [&:has(input:focus)]:border-editor-accent transition-colors duration-300"
-              >
+              <div className="bg-editor-secondary rounded-md border border-editor-border [&:has(input:focus)]:border-editor-accent transition-colors duration-300">
                 <input
                   type="text"
                   placeholder={t.headers.placeholder.value}
@@ -138,10 +130,7 @@ function HeadersModel() {
                 aria-hidden
                 className="absolute top-1.5 right-0"
               >
-                <TrashIcon
-                  className="w-5 h-5 text-gray-50 hover:stroke-red-400 cursor-pointer 
-                           transition-all duration-300"
-                />
+                <TrashIcon className="w-5 h-5 text-gray-50 hover:stroke-red-400 cursor-pointer transition-all duration-300" />
               </span>
             </div>
           ))}
@@ -149,8 +138,7 @@ function HeadersModel() {
       <div className="bg-editor-primary py-2">
         <button
           type="button"
-          className="inline-flex gap-2 py-1 px-2.5 transition rounded min-w-fit cursor-pointer 
-                     hover:bg-editor-secondary hover:text-editor-accent items-center"
+          className="inline-flex gap-2 py-1 px-2.5 transition rounded min-w-fit cursor-pointer hover:bg-editor-secondary hover:text-editor-accent items-center"
           onClick={addHeadersLine}
         >
           <PlusIcon className="w-5 h-5" />
