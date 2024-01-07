@@ -10,10 +10,6 @@ function ThemeProvider({ children }: PropsWithChildren) {
   const [theme, setTheme] = useState<Theme>('dracula');
 
   useEffect(() => {
-    Object.assign(window, { setTheme });
-  }, []);
-
-  useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
