@@ -1,0 +1,138 @@
+{
+  "page": {
+    "notfound": {
+      "text": "Sorry, page not found!"
+    },
+
+    "welcome": {
+      "title": "Welcome to the GraphQL sandbox!",
+      "description": {
+        "project": "No matter if you are an experienced developer or just starting out, our application will not leave you indifferent. Intuitive interface, localization and navigation, everything is done in the best traditions of React. Our application allows you to make GraphQL queries for any API. But before you start, don't forget to register. Also, for your convenience, we have added support for three languages: English, Belarusian, and Russian.",
+        "rsschool": "This application was created as part of the RS School React course. These are free online courses where everyone can learn and comprehend new technologies, regardless of age, professional employment and place of residence, everything is in your hands. You can find a link to the course below.",
+        "team": "'Just Do It' is not just a team, it is a call to action that forms our own coding path."
+      },
+      "teams": [
+        {
+          "name": "Ivan",
+          "github": "https://github.com/Exzorcist",
+          "position": "Team leader | Frontend developer",
+          "workOn": "He was involved in managing the team, creating navigation, basic elements and localization, and was on hand in difficult moments. An algorithm was also developed to prettifying query."
+        },
+        {
+          "name": "Polina",
+          "github": "https://github.com/PolinaPolina94",
+          "position": "Frontend developer | The soul of the team",
+          "workOn": "She was engaged in the development of login and registration pages, firebase integration into the project, form validation. She also became the inspiration for the design of the application. Integrated logic for adding and autocompleting headers"
+        },
+        {
+          "name": "Marat",
+          "github": "https://github.com/nowaylifer",
+          "position": "Frontend developer | The main sage of the team",
+          "workOn": "Took responsibility for the most difficult part, namely GraphQL Editor. He helped to implement many useful and interesting solutions for simplifying life on the project."
+        }
+      ],
+      "button": {
+        "login": "Sign In",
+        "registration": "Sign Up",
+        "toMainPage": "To main page"
+      }
+    },
+
+    "editor": {
+      "variables": "Variables",
+      "headers": "Headers",
+      "enterURL": "Enter URL",
+      "schema": "Schema",
+      "sendRequest": "Send request",
+      "docs": "Documentation",
+      "types": "Types",
+      "type": "Type",
+      "fields": "Fields",
+      "inputFields": "Input Fields",
+      "args": "Arguments",
+      "metadataFor": "Metadata for",
+      "values": "Values",
+      "schemaNotLoaded": "Schema is not loaded",
+      "response": "Response",
+      "request": "Request",
+      "status": "Status",
+      "prettify": "Prettify"
+    },
+
+    "registration": {
+      "article": "SignUp",
+      "text": "Create an account",
+      "email": "email",
+      "password": "password",
+      "confirm": "Confirm password",
+      "questionForLink": "Do you have an account? 👉",
+      "textForLink": "Sign In"
+    },
+
+    "login": {
+      "article": "SignIn",
+      "text": "Login",
+      "email": "email",
+      "password": "password",
+      "textForLink": "Create an account"
+    }
+  },
+
+  "validation": {
+    "email": {
+      "format": "Invalid email format",
+      "required": "This field is required"
+    },
+    "password": {
+      "required": "This field is required",
+      "number": "Password must contain at least 1 number",
+      "uppercase": "Password must contain at least 1 uppercase letter",
+      "lowercase": "Password must contain at least 1 lowercase letter",
+      "special": "Password must contain at least 1 special character",
+      "minlength": "Password must be at least 8 characters long"
+    },
+    "confirmPassword": {
+      "required": "Please confirm your password",
+      "match": "Passwords must match"
+    }
+  },
+
+  "inputData": {
+    "email": "Type email",
+    "password": "Type password",
+    "confirmPassword": "Confirm your password"
+  },
+
+  "header": {
+    "links": {
+      "about": "About us",
+      "login": "Login",
+      "logout": "Sign out"
+    }
+  },
+
+  "globalMessage": {
+    "error": {
+      "login": "This e-mail is not in the database",
+      "registration": "This e-mail has already been used",
+      "serverUnreachable": "Unable to reach the server",
+      "prettifying": "Unable to prettify while there're any lint errors"
+    },
+    "success": {
+      "login": "You have successfully logged in",
+      "logout": "You have successfully logged out",
+      "schemaReloaded": "Schema successfully reloaded"
+    },
+    "info": {
+      "tokenExpire": "Sorry, but your token has expired"
+    }
+  },
+
+  "headers": {
+    "placeholder": {
+      "key": "header key",
+      "value": "value"
+    },
+    "addButton": "Add new header"
+  }
+}
