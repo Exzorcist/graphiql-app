@@ -126,6 +126,7 @@ function HeadersModel() {
                 aria-label="delete-button"
                 aria-hidden
                 className="absolute top-1.5 right-0"
+                data-testid="delete-header-button"
               >
                 <TrashIcon className="w-5 h-5 text-gray-50 hover:stroke-red-400 cursor-pointer transition-all duration-300" />
               </span>

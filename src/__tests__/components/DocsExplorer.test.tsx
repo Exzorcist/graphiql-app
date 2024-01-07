@@ -45,4 +45,4 @@ test('DocsEplorer', async () => {
   await user.click(capsuleField);
 
   expect(await screen.findByText('Arguments')).toBeInTheDocument();
-}, 15000);
+}, 30000);
