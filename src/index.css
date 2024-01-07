@@ -109,3 +109,7 @@
 :is(.ͼ3, .ͼ2) .cm-tooltip-autocomplete ul li[aria-selected] {
   @apply bg-editor-accent;
 }
+
+:is(.ͼ2, .ͼ3) .cm-tooltip ul {
+  @apply fancy-scrollbar;
+}

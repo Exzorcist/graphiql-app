@@ -75,6 +75,7 @@ function Header() {
             <Bars3BottomRightIcon className="w-8 h-8" />
           </span>
           <SwitchTheme />
+          <span className="hidden sm:block">|</span>
           <SwitchLang />
 
           <div
