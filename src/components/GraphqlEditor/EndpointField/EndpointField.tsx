@@ -29,8 +29,8 @@ function EndpointField({ onSchemaClick, isSchemaOpen = false, className }: Endpo
   );
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    setInputValue(value);
+    setInputValue(e.currentTarget.value);
+    const value = e.currentTarget.value.trim();
     debouncedFetchIntrospection(value);
     debouncedDispatchEndpointValue(value);
   };

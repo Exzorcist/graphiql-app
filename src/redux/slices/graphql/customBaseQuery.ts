@@ -5,6 +5,8 @@ import {
   FetchBaseQueryMeta,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query';
+import { selectHeaderMap } from './headersAdapter';
+import { RootState } from '@/redux/store';
 
 export type Meta = {
   responseTime: number;
@@ -21,8 +23,13 @@ export const customBaseQuery: BaseQueryFn<
   NonNullable<unknown>,
   CustomBaseQueryMeta
 > = async (args, api, extraOptions) => {
+  const state = api.getState() as RootState;
+  const headers = selectHeaderMap(state);
+
   const timestampBefore = Date.now();
-  const baseResult = await fetchWithBQ(args, api, extraOptions);
+
+  const baseResult = await fetchWithBQ({ headers, ...args }, api, extraOptions);
+
   const responseTime = Date.now() - timestampBefore;
 
   return {

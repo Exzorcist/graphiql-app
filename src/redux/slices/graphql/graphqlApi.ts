@@ -1,13 +1,12 @@
 import { IntrospectionQuery, buildClientSchema, getIntrospectionQuery } from 'graphql';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { isFetchBaseQueryError, isErrorWithMessage } from '@/utils/type-guards';
 import { setGraphqlSchema, setIntrospection } from './commonActions';
-import { getFetchErrorMsg, getSchemaReloadMsg } from './utils';
+import { handleFetchErrorThunk } from './handleRequestErrorThunk';
 import { emptySchema } from '@/utils/emptyGraphqlSchema';
 import { customBaseQuery } from './customBaseQuery';
 import { setMessage } from '../globalMessageSlice';
+import { getSchemaReloadMsg } from './utils';
 import { RootState } from '@/redux/store';
-import { selectHeaderMap } from './headersAdapter';
 
 export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
@@ -16,11 +15,10 @@ export const graphqlApi = createApi({
     initRequest: builder.mutation<unknown, string | void>({
       queryFn: async (operationName, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
         const state = getState() as RootState;
-        const { graphql, localization } = state;
+        const { graphql } = state;
 
         const response = await fetchWithBQ({
           url: graphql.endpointValue,
-          headers: selectHeaderMap(state),
           body: { query: graphql.request.value, variables: graphql.variablesValue, operationName },
         });
 
@@ -31,17 +29,7 @@ export const graphqlApi = createApi({
             return { ...response, data: err.data, error: undefined };
           }
 
-          if (isFetchBaseQueryError(err as unknown)) {
-            dispatch(
-              setMessage({
-                type: 'error',
-                isShown: true,
-                text: getFetchErrorMsg(err, localization),
-              })
-            );
-          } else if (isErrorWithMessage(err)) {
-            dispatch(setMessage({ type: 'error', isShown: true, text: err.message }));
-          }
+          dispatch(handleFetchErrorThunk(err));
         }
 
         return response;
@@ -67,9 +55,13 @@ export const graphqlApi = createApi({
           dispatch(
             setMessage({ text: getSchemaReloadMsg(localization), isShown: true, type: 'success' })
           );
-        } catch (error) {
+        } catch (err) {
           dispatch(setGraphqlSchema(emptySchema));
           dispatch(setIntrospection({ data: null, endpoint: '', status: 'rejected' }));
+
+          if (err && typeof err === 'object' && 'error' in err) {
+            dispatch(handleFetchErrorThunk(err.error));
+          }
         }
       },
     }),
