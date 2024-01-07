@@ -7,6 +7,7 @@ import { customBaseQuery } from './customBaseQuery';
 import { setMessage } from '../globalMessageSlice';
 import { getFetchErrorMsg, getSchemaReloadMsg } from './utils';
 import { RootState } from '@/redux/store';
+import { selectHeaderMap } from './headersAdapter';
 
 export const graphqlApi = createApi({
   reducerPath: 'graphqlApi',
@@ -14,10 +15,12 @@ export const graphqlApi = createApi({
   endpoints: (builder) => ({
     initRequest: builder.mutation<unknown, string>({
       queryFn: async (url, { getState, dispatch }, _extraOptions, fetchWithBQ) => {
-        const { graphql, localization } = getState() as RootState;
+        const state = getState() as RootState;
+        const { graphql, localization } = state;
 
         const response = await fetchWithBQ({
           url,
+          headers: selectHeaderMap(state),
           body: { query: graphql.request.value, variables: graphql.variablesValue },
         });
 

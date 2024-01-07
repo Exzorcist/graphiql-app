@@ -1,11 +1,13 @@
-import { buildClientSchema, GraphQLSchema } from 'graphql';
 import { Draft, PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { buildClientSchema, GraphQLSchema } from 'graphql';
 import { REHYDRATE } from 'redux-persist';
+import { headersInitialState, headersAdapter } from './headersAdapter';
 import { emptySchema } from '@/utils/emptyGraphqlSchema';
 import { CustomBaseQueryMeta } from './customBaseQuery';
 import { AsyncStatus } from '@/types/AsyncStatus';
-import { graphqlApi } from './graphqlApi';
+import { HttpHeader } from '@/types/HttpHeader';
 import { IntrospectionState } from './types';
+import { graphqlApi } from './graphqlApi';
 
 export type GraphqlSliceState = {
   request: { value: string; status: AsyncStatus };
@@ -19,6 +21,7 @@ export type GraphqlSliceState = {
   } | null;
   endpointValue: string;
   variablesValue: object;
+  headers: typeof headersInitialState;
 };
 
 export const initialState: GraphqlSliceState = {
@@ -26,6 +29,7 @@ export const initialState: GraphqlSliceState = {
   request: { value: '', status: 'idle' },
   hasRequestEditorLintErrors: false,
   variablesValue: {},
+  headers: headersInitialState,
   endpointValue: '',
   response: null,
   schema: emptySchema,
@@ -43,6 +47,9 @@ export const graphqlSlice = createSlice({
     },
     changeVariablesValue(state, action: PayloadAction<object>) {
       state.variablesValue = action.payload;
+    },
+    setHeaders(state, action: PayloadAction<HttpHeader[]>) {
+      headersAdapter.setAll(state.headers, action.payload);
     },
     setHasRequestEditorLintErrors(state, action: PayloadAction<boolean>) {
       state.hasRequestEditorLintErrors = action.payload;
@@ -114,6 +121,7 @@ export const {
   changeRequestValue,
   changeEndpointValue,
   changeVariablesValue,
+  setHeaders,
   setHasRequestEditorLintErrors,
 } = graphqlSlice.actions;
 

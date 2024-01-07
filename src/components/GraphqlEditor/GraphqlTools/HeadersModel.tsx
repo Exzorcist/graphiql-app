@@ -5,14 +5,11 @@ import AutoSuggest from 'react-autosuggest';
 
 import { TrashIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { useDebouncedCallback } from 'use-debounce';
-import { setReduxHeaders } from '@/redux/slices/headersSlice';
 import { useLocalizationContext } from '@/providers/LocalizationProvider';
-
-interface IHeadersArray {
-  id: string;
-  header: string;
-  value: string;
-}
+import { setHeaders as setReduxHeaders } from '@/redux/slices/graphql/graphqlSlice';
+import { useAppSelector } from '@/utils/hooks/redux-hooks';
+import { selectHeaders } from '@/redux/slices/graphql/headersAdapter';
+import { HttpHeader } from '@/types/HttpHeader';
 
 type KeyData = 'header' | 'value';
 
@@ -35,18 +32,12 @@ const headersArray = [
 function HeadersModel() {
   const dispatch = useDispatch();
   const { t } = useLocalizationContext();
-
-  const [headers, setHeaders] = useState<IHeadersArray[]>([]);
+  const reduxHeaders = useAppSelector(selectHeaders);
+  const [headers, setHeaders] = useState<HttpHeader[]>(reduxHeaders);
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const debouncedDispatchHeaders = useDebouncedCallback(() => {
-    const headersObect: Record<string, string> = {};
-
-    headers.forEach((item) => {
-      headersObect[item.header] = item.value;
-    });
-
-    dispatch(setReduxHeaders(headersObect));
+    dispatch(setReduxHeaders(headers));
   }, 300);
 
   useEffect(() => {
@@ -55,7 +46,7 @@ function HeadersModel() {
   }, [headers, dispatch]);
 
   const addHeadersLine = () => {
-    const newHeader: IHeadersArray = {
+    const newHeader: HttpHeader = {
       id: uuidv4(),
       header: '',
       value: '',

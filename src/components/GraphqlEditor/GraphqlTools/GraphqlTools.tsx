@@ -1,5 +1,5 @@
 import { ComponentType, memo, useState } from 'react';
-import HeadersModel from './HeadersModel/HeadersModel';
+import HeadersModel from './HeadersModel';
 import GraphqlToolsHeader from './GraphqlToolsHeader';
 import VariablesEditor from './VariablesEditor';
 
